@@ -136,5 +136,5 @@ requires the pharmacy to ask the practice to revoke, because only the issuer can
 | External URL baked into generated config | The issuer metadata hashes the exact bytes of the Type Metadata; a templated URL would hash a document never served | Config must be regenerated per environment |
 | One credential per vaccination dose | Authorship stays with whoever administered; each issuer revokes only their own assertion | "Is the series complete?" spans several credentials |
 | Prescription revoked on dispensing | Single use without a central register of who was prescribed what | A window between presentation and revocation (F-05) |
-| Mock is not cryptographic | A mock that admits what it skips beats a convincing one | The mock proves nothing about conformance |
-| In-memory demo state | The demo is a demo | Restarting loses encounters; credentials survive, in the wallet |
+| Mock is not cryptographic | A mock that says which steps it skips beats a mock that looks real | The mock proves nothing about conformance |
+| In-memory demo state | The demo is a demo | Restarting loses the encounters; the credentials stay in the wallet |

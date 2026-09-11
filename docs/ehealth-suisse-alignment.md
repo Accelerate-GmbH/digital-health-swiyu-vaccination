@@ -101,8 +101,9 @@ stated purpose is "to identify the replaced/corrected entry in an other
 document", referencing both the entry and its containing composition.
 
 F-06 records that this project can revoke a credential but cannot say what
-replaced it. The CH VACD reference shape is the answer: a corrected credential
-names the one it supersedes, so a verifier holding both can tell which stands.
+replaced it. CH VACD already defines a shape for that: a corrected credential
+names the credential it supersedes, so a verifier holding both can tell which
+of the two stands.
 Modelled in the `correction` view; not yet implemented.
 
 ### Series reconciliation: `conflict`

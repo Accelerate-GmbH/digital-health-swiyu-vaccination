@@ -455,9 +455,9 @@
       switched off. Each of those removes access for every person at the same moment.
     </p>
     <div class="pull">
-      <p>The paper vaccination booklet has one property the platform never had: it survives the
-        organisation that issued it.</p>
-      <cite>The design constraint this project starts from</cite>
+      <p>If the practice that wrote in your paper booklet closes tomorrow, you still have the
+        booklet. When <code>meineimpfungen.ch</code> closed, everyone lost their record at once.</p>
+      <cite>Why the record here is held by the patient</cite>
     </div>
     <p>
       So the record here is a set of credentials in the patient's wallet. Each administered dose is
@@ -733,8 +733,8 @@
       a projection is <strong>derived and not authoritative</strong>. The signed credential remains
       the evidence. Second, a projection is <strong>legitimately partial</strong>. After selective
       disclosure a FHIR resource may carry findings and no patient name. Receiving systems therefore
-      have to treat a missing element as a valid outcome rather than an error. That second property is
-      the main integration cost of this approach.
+      have to treat a missing element as a valid outcome rather than an error. Handling those partial
+      resources is the main integration cost of this approach.
     </p>
 
     <div class="tablewrap">
@@ -914,10 +914,12 @@
       </div>
     </div>
     <p class="prose-note">
-      Of the eleven flows, this is the one where a credential presentation discloses less than the
-      procedure it would replace. The survey needs no identifying claim, because it drew the household
-      from the population register and therefore already holds the age band and the canton. Consent
-      adds no new step either: households are invited by letter today and may decline today.
+      Today a family posts a photocopy of the child's vaccination booklet, which shows every dose,
+      every date, the vaccinating physician and usually the child's name. A presentation sends five
+      claims and no name. Of the eleven flows, this is the only one that sends the survey less than
+      it already receives. The survey needs no identifying claim, because it drew the household from
+      the population register and therefore already holds the age band and the canton. Consent adds
+      no new step either: households are invited by letter today and may decline today.
     </p>
     <p class="prose-note">
       <strong>One methodological constraint governs the whole design.</strong> The wallet is a response
@@ -1109,7 +1111,7 @@
     statistics: {
       purpose: 'National vaccination coverage monitoring. The EBPI survey drew this household from the population register, so it already holds the age band and the canton. It asks for neither.',
       claims: ['target_disease', 'occurrence_date', 'dose_number', 'doses_in_series', 'vaccine_code'],
-      foot: 'The procedure this replaces is a <strong>photocopied vaccination booklet sent by post</strong>, showing every dose, every date, the vaccinating physician and usually the child&rsquo;s name. This is the only role here that discloses less than the procedure it replaces.'
+      foot: 'Today the family posts a <strong>photocopy of the vaccination booklet</strong>, showing every dose, every date, the vaccinating physician and usually the child&rsquo;s name. Five coded claims and no name is less than that. This is the only role on this page that sends a verifier less than it already receives.'
     }
   };
 

@@ -67,8 +67,8 @@ What has to be built:
    the family holds, by asking for a photocopy. Replacing that photocopy with a
    presentation discloses less, arrives structured and signed and needs no
    identifying claim, because the sampling frame already carries the age and the
-   canton. It is the least costly pilot in this list, because the procedure it
-   would replace is a photocopy sent by post.
+   canton. It is the least costly pilot in this list, because the survey already
+   collects this data by asking families to post a photocopy.
 7. **Composition with the openEHR/HL7 blueprint.** The joint working group of
    openEHR Switzerland and HL7 Switzerland is turning the other 2026 showcase,
    FHIR intake into an openEHR clinical data repository, into a reusable
@@ -82,8 +82,8 @@ What has to be built:
    is unconscious cannot consent and any break-glass mechanism reintroduces a
    party that can read the record without them.
 
-Prerequisite from step 1: F-06 supersession, so that a corrected result can
-reference what it replaces.
+Prerequisite from step 1: F-06 supersession, so that a corrected result can name
+the result it corrects.
 
 ## Step 3 · Swiss Health App (2028)
 

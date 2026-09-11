@@ -124,9 +124,8 @@ directions:
 **Repository → wallet.** A CDR holding a patient's immunisations can issue any
 one of them as a credential, because the credential's claims are already
 archetype-bound. The patient gains a presentable artefact; the CDR keeps the
-longitudinal record. This is the case this repository's F-02 already models. It
-simply assumes the issuer is a practice and nothing in the flow depends on
-that.
+longitudinal record. F-02 already models this exchange. It simply assumes the
+issuer is a practice. Nothing in the flow depends on that.
 
 **Wallet → repository.** A presented credential projects to a CH VACD
 `Immunization` that a FHIR façade accepts and FHIRconnect maps to a COMPOSITION.

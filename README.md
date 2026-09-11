@@ -63,9 +63,9 @@ careful engineering does not remove, because the database can be breached,
 defunded or switched off. Each of those removes access for every person at the
 same moment.
 
-Here the record is a set of credentials in the patient's wallet. It survives its
-issuers: a practice that closes, a platform that is wound up, a decision to
-switch a registry off.
+Here the record is a set of credentials in the patient's wallet. The patient
+keeps them when the practice that issued them closes, when a platform is wound
+up and when someone decides to switch a registry off.
 
 ## Reusing the models without the repository
 
