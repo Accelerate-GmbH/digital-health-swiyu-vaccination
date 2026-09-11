@@ -1,0 +1,126 @@
+# Publishes site/ as the repository's showcase portal.
+#
+# The page is a static explainer of the immunization showcase. It is checked in
+# so that it versions with the credential definitions and the flows it
+# describes and so the prose can be reviewed in a pull request like any other
+# part of the repository.
+#
+# One-time setup, which only a repository admin can do: Settings → Pages →
+# Source: GitHub Actions. The workflow token can read whether Pages is
+# configured but cannot create the site. Creating one needs admin rights that
+# the `permissions:` block below cannot grant. Until someone does it, the
+# publish steps are skipped and this workflow reports success, so a setting
+# nobody has flipped yet does not show up as a broken build on main.
+name: portal
+
+on:
+  push:
+    branches: [main]
+    paths: ['site/**', 'flows/likec4/**', '.github/workflows/pages.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # Two things have to be true and only one of them is obvious.
+      #
+      # Pages has to exist and its build type has to be `workflow`. With the
+      # other build type, `legacy`, GitHub runs its own Jekyll pipeline over
+      # the repository root on every push and deploys that. So `/` serves a
+      # rendered README, `site/index.html` never becomes the root page, and
+      # `site/flows/` is absent because it is built here rather than committed.
+      # This job's own deploy still reports success and is then overwritten,
+      # which is how the portal served the wrong thing while CI stayed green.
+      # Fail loudly instead.
+      - id: pages_site
+        name: Check that Pages is configured to deploy from this workflow
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          body=$(mktemp)
+          status=$(curl -sS -o "$body" -w '%{http_code}' \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/pages")
+
+          if [ "$status" != "200" ]; then
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            {
+              echo "### Portal not published"
+              echo
+              echo "GitHub Pages is not enabled for this repository (the Pages API returned $status)."
+              echo "A repository admin enables it once under **Settings → Pages**, with the source"
+              echo "set to **GitHub Actions**. The next push that touches \`site/\` then publishes."
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          build_type=$(jq -r '.build_type // "unknown"' "$body")
+          if [ "$build_type" != "workflow" ]; then
+            branch=$(jq -r '.source.branch // "?"' "$body")
+            path=$(jq -r '.source.path // "?"' "$body")
+            {
+              echo "### Portal is being published from the wrong source"
+              echo
+              echo "The Pages build type is \`$build_type\`, deploying from branch"
+              echo "\`$branch\` path \`$path\`. GitHub therefore builds the repository root"
+              echo "with Jekyll and serves that, so:"
+              echo
+              echo "- \`/\` renders \`README.md\` instead of the showcase in \`site/index.html\`"
+              echo "- \`/flows/\` does not exist, because the diagrams are built by this"
+              echo "  workflow rather than committed"
+              echo
+              echo "Whatever this job deploys is overwritten by that build."
+              echo
+              echo "**Fix:** Settings → Pages → Build and deployment → Source: **GitHub Actions**."
+              echo "Only a repository admin can change it; the workflow token cannot."
+            } >> "$GITHUB_STEP_SUMMARY"
+            echo "::error::Pages build type is '$build_type'; this workflow needs 'workflow'. Set Settings → Pages → Source to GitHub Actions."
+            exit 1
+          fi
+
+          echo "configured=true" >> "$GITHUB_OUTPUT"
+
+      # The interactive flow diagrams are built at publish time so the
+      # generated bundle never lands in git. site/flows/ is ignored for the
+      # same reason.
+      - if: steps.pages_site.outputs.configured == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - if: steps.pages_site.outputs.configured == 'true'
+        run: npm ci
+
+      - if: steps.pages_site.outputs.configured == 'true'
+        name: Build the LikeC4 flow diagrams into site/flows
+        run: npm run flows:build
+
+      - if: steps.pages_site.outputs.configured == 'true'
+        uses: actions/configure-pages@v5
+
+      - if: steps.pages_site.outputs.configured == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - if: steps.pages_site.outputs.configured == 'true'
+        id: deployment
+        uses: actions/deploy-pages@v4
