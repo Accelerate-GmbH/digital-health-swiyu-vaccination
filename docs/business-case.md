@@ -14,11 +14,11 @@ The consequences are ordinary and expensive:
   travel clinic each hold part of a patient's vaccination history. Asked "are
   you covered for tetanus?", most people guess. The clinical response to a guess
   is to vaccinate again.
-- **Paper survives where platforms do not.** `meineimpfungen.ch` held the
+- **A booklet in a drawer outlasts a platform.** `meineimpfungen.ch` held the
   national electronic vaccination record until 2021, when it was shut down after
   serious security failures and several hundred thousand people lost access to
-  their own history at once. The yellow booklet in a drawer is still the most
-  reliable vaccination record in the country.
+  their own history at once. Nobody lost a yellow booklet that day, which is why
+  it is still the most reliable vaccination record in the country.
 - **Every organisation re-collects the same data.** Name, date of birth,
   insurance cover and AHV number are re-keyed at every reception desk, from a
   plastic card that proves nothing.

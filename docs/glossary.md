@@ -80,7 +80,8 @@ claims it wants. The list in a DCQL query *is* the minimisation decision.
 **JAR.** JWT-Secured Authorization Request. The verifier signs its request, so
 a wallet can tell who is asking before showing a consent screen.
 
-**DPoP.** Proves the party using an access token is the one it was issued to.
+**DPoP.** Proves that the party using an access token is the party it was
+issued to.
 Mandatory throughout issuance in the Swiss Profile.
 
 **`direct_post.jwt`.** The response mode the profile requires: the presentation
@@ -174,8 +175,8 @@ allergies, medication, problems, immunizations. Roadmap step 2.
 **LOINC.** Codes for laboratory analytes. **SNOMED CT.** Clinical concepts
 including vaccines and diseases. **UCUM.** Units. **GTIN.** Medication packs.
 
-**CDR.** Clinical data repository. The thing this project deliberately does not
-build.
+**CDR.** Clinical data repository. This project deliberately does not build
+one.
 
 ## This project
 
