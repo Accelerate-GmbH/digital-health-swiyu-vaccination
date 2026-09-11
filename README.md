@@ -218,7 +218,7 @@ the basis it builds on.
 | [GovTech Hackathon 2026, project 28](https://govtech.digisus-lab.ch/project/28), "Showcase Impf-Modul" | Brought by openEHR Switzerland with a DIDAS contribution. It supplied the clinical model side: CH VACD profiling, terminology binding and openEHR persistence. This project reuses that work without adopting the central repository. See [`docs/positioning.md`](docs/positioning.md). |
 
 The implementation in this repository was written and contributed by
-[accelerate.swiss]
+[accelerate.swiss](https://www.accelerate.swiss/).
 
 ## Licence
 
