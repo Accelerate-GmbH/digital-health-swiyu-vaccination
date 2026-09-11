@@ -412,7 +412,7 @@
           <tr><td>Issuer</td><td>The organisation that signs and hands over a credential. Here that is a practice, a pharmacy, an insurer or the Confederation.</td></tr>
           <tr><td>Verifier</td><td>The organisation that asks for claims. Here that is a travel clinic, a practice reception, a pharmacy or a survey.</td></tr>
           <tr><td>Selective disclosure</td><td>The property that a verifier receives only the claims it asked for and is entitled to. The rest stay on the phone.</td></tr>
-          <tr><td>Status list</td><td>A published list of bits, one pair per credential, saying whether it is still valid. It contains no patient data.</td></tr>
+          <tr><td>Status list</td><td>A published list with one entry per credential, saying whether it is still valid. Each credential carries the index that finds its own entry. Nothing else connects the two. The list contains no patient data.</td></tr>
         </tbody>
       </table>
     </div>

@@ -55,9 +55,12 @@ after the fact: undisclosed claims are never transmitted.
 **Key binding.** Proof that the wallet presenting a credential holds the key it
 was issued to. Without it a credential is a bearer token.
 
-**Status list / Token Status List.** A public bit array saying whether a
-credential is still valid. Two bits per credential support both revocation and
-suspension. Carries nothing else: no patient, no medication, no verifier.
+**Status list / Token Status List.** A published list with one entry per
+credential, saying whether it is still valid. A credential carries the index
+that finds its own entry. The entry is two bits wide, which is what supports
+both revocation and suspension. The list carries nothing else: no patient, no
+medication, no verifier and no cryptographic keys. Those live in the DID
+documents, which the Base Registry publishes separately.
 
 **`exp` vs `expiry_date`.** `exp` is absolute: past it a credential cannot be
 presented. `expiry_date` is a business fact that warns the holder and leaves the
