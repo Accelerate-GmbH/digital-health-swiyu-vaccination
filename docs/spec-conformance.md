@@ -8,6 +8,15 @@ request, ahead of a wallet that would silently refuse to connect.
 Profiles are pinned in `packages/swiyu/src/profile.ts`, one file to change when
 the profile moves.
 
+**On the section numbers.** Each profile states that its subsections "rely on the
+numbering from the original reference specification", and a profile embeds more
+than one specification. `swiss-profile-vc` alone contains Token Status List
+Draft 20, RFC 9901, SD-JWT VC Draft 15 and OCA 1.0, so a bare "§7.1" in it means
+*Status Types Values* under the status list and *Rendering Metadata* under
+SD-JWT VC — two different rules. Nine references in the table below were bare and
+therefore ambiguous. The Source column now names the embedded specification
+first, so each row resolves to one place.
+
 ## Cryptography · all profiles
 
 | Rule | Source | Status |
@@ -22,7 +31,7 @@ the profile moves.
 | Rule | Source | Status |
 | --- | --- | --- |
 | `profile_version` REQUIRED in metadata body and JWT headers | §12.2.4 | **checked** |
-| Only `dc+sd-jwt`; ISO mdoc and W3C VCDM NOT SUPPORTED | §3.3.1 | **checked** |
+| Only IETF SD-JWT VC is supported; the Credential Format Profiles "ISO mdoc" and "W3C VCDM" are NOT SUPPORTED | §3.3.1 | **checked** |
 | Pre-authorized code flow MUST be supported; authorization code flow NOT | §3.3.3, §3.4 | only flow used |
 | `authorization_details` and `scope` NOT SUPPORTED | §3.3.4, §12.2.4 | **checked** |
 | `nonce_endpoint` REQUIRED | §12.2.4 | **checked** |
@@ -36,7 +45,7 @@ the profile moves.
 | `claims[].mandatory` NOT SUPPORTED | §12.2.4 | **checked** |
 | `display[].background_image`, `text_color` NOT SUPPORTED | §12.2.4 | **checked** |
 | Signed metadata MUST be provided and used | §12.2.3 | generic issuer |
-| Token and credential requests MUST carry DPoP | §6, §8.2 | generic issuer |
+| Token and credential requests MUST carry DPoP | OID4VCI §6, §8.2 | generic issuer |
 | Key attestation for hardware-bound credentials | Appendix D | generic issuer |
 | Batch payload limit 20 MB | §8.3 | documented in `LIMITS` |
 
@@ -47,9 +56,9 @@ the profile moves.
 | `profile_version` REQUIRED in the JAR header | §5 | generic verifier |
 | Verifiers MUST send a signed JAR | §5 | **checked** |
 | `response_mode` MUST be `direct_post.jwt` | §5.2, §8 | **checked** |
-| `client_id` MUST be the verifier's DID, `decentralized_identifier:` prefix | §5.9 | generic verifier |
-| DCQL `multiple` NOT SUPPORTED | §6.1 | **checked** |
-| Trusted authorities MUST use the `did` type | §6.1.1 | **checked** |
+| Client Identifier Prefix `decentralized_identifier` MUST be supported and SHOULD be used; an absent or unknown prefix MUST be interpreted as it | §5.9.2, §5.9.3 | generic verifier |
+| DCQL `multiple` NOT SUPPORTED | OID4VP §6.1 | **checked** |
+| Trusted authorities MUST use the `did` type | OID4VP §6.1.1 | **checked** |
 | ISO mdoc claim semantics NOT SUPPORTED | §7.2 | **checked** via format |
 | `transaction_data` NOT SUPPORTED | §5.1, §8.4 | not used |
 | `request_uri_method` post NOT SUPPORTED | §5.10 | not used |
@@ -67,22 +76,22 @@ impossible.
 
 | Rule | Source | Status |
 | --- | --- | --- |
-| `profile_version` REQUIRED in VCT body and OCA bundle | §5, OCA | **checked** |
-| Media type MUST be `application/dc+sd-jwt` | §9.11 | constant |
-| An SD-JWT VC MUST only have selectively disclosable claims apart from the registered JWT claims of §3.2.2.2; other non-selectively-disclosable claims MUST NOT be supported and MUST be rejected | §3.2.2.4 | credential definitions |
-| `_sd_alg` MUST be sha-256; decoy digests NOT SUPPORTED | §4.1.1, §4.2.5 | generic issuer |
-| Array-element and recursive disclosures MUST be supported | §4.2.2, §4.2.6 | used for `medication`, `findings` |
-| Structured SD-JWT NOT SUPPORTED; flat and recursive only | §6.3 | credential definitions |
-| Status types limited to VALID, INVALID, SUSPENDED | §7.1 | `TOKEN_STATUS` |
-| CBOR/CWT/COSE status lists NOT SUPPORTED | §4.3, §5.2, §6.3 | JWT only |
-| Status list aggregation and historical resolution NOT SUPPORTED | §8.4, §9 | not used |
-| Status provider MUST be the FOITT registry | §12.1 | deployment |
-| Status list token > 200 bytes, ≤ 200 KB | §13 | `LIMITS`, enforced on create |
-| `exp` REQUIRED on the status list token; `iat` within 24 h | §13 | generic issuer |
-| `expiry_date` is a disclosure; `exp` MUST NOT be | §3.2.2.2 | credential definitions |
-| Type Metadata `extends` NOT SUPPORTED | §5.2 | generator emits none |
-| Rendering `simple` and `svg_templates` NOT SUPPORTED | §7.1.1 to 2 | OCA only |
-| Claim metadata NOT SUPPORTED | §8 | not emitted |
+| `profile_version` REQUIRED in the Status List Token JWT header, the SD-JWT VC header, the VCT body and the OCA bundle | TSL §5, SD-JWT VC §5, OCA | **checked** |
+| Media type MUST be `application/dc+sd-jwt` | RFC 9901 §9.11 | constant |
+| An SD-JWT VC MUST only have selectively disclosable claims apart from the registered JWT claims of §3.2.2.2; other non-selectively-disclosable claims MUST NOT be supported and MUST be rejected | SD-JWT VC §3.2.2.4 | credential definitions |
+| `_sd_alg` MUST be sha-256; decoy digests NOT SUPPORTED | RFC 9901 §4.1.1, §4.2.5 | generic issuer |
+| Array-element and recursive disclosures MUST be supported | RFC 9901 §4.2.2, §4.2.6 | used for `medication`, `findings` |
+| Structured SD-JWT NOT SUPPORTED; flat and recursive only | RFC 9901 §6.3 | credential definitions |
+| Status types limited to VALID, INVALID, SUSPENDED | TSL §7.1 | `TOKEN_STATUS` |
+| CBOR/CWT/COSE status lists NOT SUPPORTED | TSL §4.3, §5.2, §6.3 | JWT only |
+| Status list aggregation and historical resolution NOT SUPPORTED | TSL §8.4, §9 | not used |
+| Status provider MUST be the FOITT registry | TSL §12.1 | deployment |
+| Status list token > 200 bytes, ≤ 200 KB | TSL §13 | `LIMITS`, enforced on create |
+| `exp` REQUIRED on the status list token; `iat` within 24 h | TSL §13 | generic issuer |
+| `expiry_date` is a disclosure; `exp` MUST NOT be | SD-JWT VC §3.2.2.2 | credential definitions |
+| Type Metadata `extends` and `extends#integrity` NOT SUPPORTED | SD-JWT VC §5.2 | generator emits none |
+| Rendering `simple` and `svg_templates` NOT SUPPORTED | SD-JWT VC §7.1.1 to 2 | OCA only |
+| Claim metadata NOT SUPPORTED | SD-JWT VC §8 | not emitted |
 | OCA: exactly one root Capture Base | OCA, bundle | **checked** |
 | OCA: `classification`, `flagged_attributes` NOT SUPPORTED | OCA, Capture Base | **checked** |
 | OCA: overlay set limited to the profile's list | OCA, Overlays | **checked** |
