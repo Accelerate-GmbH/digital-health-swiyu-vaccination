@@ -63,10 +63,13 @@ made mandatory to release by the credential itself, and an ecosystem can refuse
 credentials that contain such claims.
 
 Which claims are requested is a verifier decision, and the credential format
-does not constrain it. Verifiers need their own governance for it: which claims
-they ask for, for what purpose, and in which process. A holder remains free to
-release more than was asked. Self-determination and data minimisation are
-governing principles of the Swiss ecosystem.
+does not constrain it. That decision is governed separately: a verifier publishes
+the scope, the purpose and the query it sends as a Verification Query Public
+Statement, see [governance framework](../governance-framework.md#transparency-the-vqps).
+What counts as a proportionate request differs by credential and by the process
+it sits in, and this repository does not yet state that per credential. A holder
+remains free to release more than was asked. Self-determination and data
+minimisation are governing principles of the Swiss ecosystem.
 
 | Claim | Label | Type | Constraint | Semantic binding | Notes |
 | --- | --- | --- | --- | --- | --- |
