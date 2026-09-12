@@ -55,21 +55,18 @@ representations locally from the claims the holder released, see
 
 ## Claims
 
-Every claim in this credential is individually disclosable. SD-JWT VC lets the
-holder answer a request with a subset: a verifier asking for four claims sees
-those four, and the values of the rest are not revealed. The Swiss Profile
-forbids non-disclosable business claims, so no claim in the table below can be
-made mandatory to release by the credential itself, and an ecosystem can refuse
-credentials that contain such claims.
+`swiss-profile-vc:1.0.0` §3.2.2.4: every business claim MUST be selectively
+disclosable. So the holder answers a presentation request with the claims it
+asks for and the values of the rest stay undisclosed, and no claim in the
+table below can be made mandatory to release by the credential itself.
 
-Which claims are requested is a verifier decision, and the credential format
-does not constrain it. That decision is governed separately: a verifier publishes
-the scope, the purpose and the query it sends as a Verification Query Public
-Statement, see [governance framework](../governance-framework.md#transparency-the-vqps).
-What counts as a proportionate request differs by credential and by the process
-it sits in, and this repository does not yet state that per credential. A holder
-remains free to release more than was asked. Self-determination and data
-minimisation are governing principles of the Swiss ecosystem.
+Which claims are asked for is the verifier's decision and the credential
+format does not constrain it. What this repository does about that is publish
+each query it sends, as a scope, a localised purpose and the DCQL query, to
+the Trust Registry: see
+[governance framework](../governance-framework.md#transparency-the-vqps).
+Whether a given request is proportionate is a separate question, answered per
+credential and per process, and this repository does not answer it here.
 
 | Claim | Label | Type | Constraint | Semantic binding | Notes |
 | --- | --- | --- | --- | --- | --- |

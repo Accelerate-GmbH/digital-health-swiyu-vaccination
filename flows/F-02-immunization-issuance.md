@@ -125,10 +125,9 @@ practice management system would place that burden on every vendor.
   wallet-initiated issuance are not supported; `authorization_details` and
   `scope` are not supported. The issuer links the credential to the wallet
   through the pre-authorized code alone.
-- **Every business claim is selectively disclosable.** The profile forbids
-  non-disclosable business claims outright, so the holder decides what to release
-  at presentation. F-03 shows a minimal-disclosure presentation of this
-  credential.
+- **Every business claim is selectively disclosable.** `swiss-profile-vc:1.0.0`
+  §3.2.2.4 requires it of all of them, so the holder decides what to release at
+  presentation. F-03 shows a minimal-disclosure presentation of this credential.
 - **Encryption is mandatory in both directions**, and
   `encryption_required` must be `true` in the metadata.
 - **Batch size ≥ 10** where batch issuance is used. It is a privacy floor and a

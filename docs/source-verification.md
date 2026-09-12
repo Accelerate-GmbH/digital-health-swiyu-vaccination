@@ -9,7 +9,8 @@ card under KVG/LAMal Art. 42a" is a legal statement that reads with the same
 confidence and has no such backing behind it. Setting both in the same typeface,
 in the same tables, without saying which is which, is itself a defect.
 
-Verification date: 2026-09-11.
+Verification date: 2026-09-11. Wording pass over the same material: 2026-09-12,
+recorded at the end of this document.
 
 ## Legend
 
@@ -240,3 +241,27 @@ settle them, because they are about this code:
   numbers, GTINs and LOINC codes in demo data are plausible and are not real. A
   deployment must take them from the terminology server. The schemas constrain
   their shape and can say nothing about their truth.
+
+## 2026-09-12 · wording pass
+
+Prose describing profile rules had drifted into paraphrase. A paraphrase of a
+MUST reads like the MUST and is not checkable against anything, so the rules are
+now quoted with the profile and section that states them.
+
+`swiyu-admin-ch.github.io` is still blocked at the egress gateway (403 to
+CONNECT) and the session still cannot attach a repository outside the
+`didas-swiss` owner, so the profile text was not re-read. The rule wording comes
+from [`spec-conformance.md`](spec-conformance.md), which was compared against the
+profile text on 2026-09-11 with zero mismatches.
+
+| Was | Is | Why |
+| --- | --- | --- |
+| "The Swiss Profile forbids non-disclosable business claims outright" | "`swiss-profile-vc:1.0.0` §3.2.2.4: every business claim MUST be selectively disclosable" | Same rule, stated as the profile states it and locatable in it |
+| "each verifier **publishes what it asks for**" | the fields a vqPS submission carries, and the endpoint it goes to | The old phrasing was this repository's, not the specification's |
+| "a four-claim presentation of an eighteen-claim credential" | no count | Copied into five pages; the counts are 5, 18, 11, 10 and 10 |
+| "Self-determination and data minimisation are governing principles of the Swiss ecosystem" | removed | No source available here states it. Minimisation is already principle 1 of the [governance framework](governance-framework.md) as something this project enforces, which is a claim about this project and is checkable |
+
+Not resolved by this pass: whether a verifier is *obliged* to publish a vqPS
+before verifying, and how the artefact relates to the Trust Protocol 2.0 trust
+markers. Both need `trust-protocol-v2-0.md`, which is unreachable here. The
+repository describes publishing as what it does, not as a duty it has verified.

@@ -26,6 +26,11 @@ Where something is *not* implemented, it says so.
 5. **Refusal is a first-class outcome.** A holder declining and a verifier
    being refused, are normal paths that the flow has to work through, not
    errors.
+6. **The holder decides what is released.** `swiss-profile-vc:1.0.0` §3.2.2.4
+   requires every business claim to be selectively disclosable, so no credential
+   in this project can make a claim mandatory to release. A verifier states in
+   advance what it will ask for; it cannot compel the answer, and a holder may
+   release more than was asked.
 
 ## Actors and roles
 
@@ -194,9 +199,17 @@ without the record becoming a shadow copy of the patient's data.
 
 ## Transparency: the vqPS
 
-Separately from entitlement, each verifier **publishes what it asks for**. A
-Verification Query Public Statement carries a scope, a localised purpose and the
-DCQL query itself, signed and published to the Trust Registry.
+Separately from entitlement, each verifier publishes its queries. A vqPS
+submission to the Trust Registry (`POST /api/v1/trust/vqps-submissions`) carries
+the scope, a `purpose_name` and `purpose_description` per locale, and the DCQL
+query itself. The Trust Registry caps `purpose_name` at 40 characters, tighter
+than the 50 the verifier management API accepts, so this project enforces 40.
+
+The expansion "Verification Query Public Statement" comes from the retail
+roundtable deck, not from a specification page. `trust-protocol-v2-0.md` is
+unreachable from this environment, so where this artefact sits in Trust Protocol
+2.0 is not asserted here; see
+[source verification](source-verification.md).
 
 This is self-service and available today. It is generated from the same objects
 the verifier sends (`scripts/vqps.ts`), because a published statement that has
