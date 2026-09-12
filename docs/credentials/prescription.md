@@ -38,7 +38,7 @@ This is a **governed** credential type: an actor must decline any interaction wh
 A request for any claim outside a role's entitlement is refused when the query is
 built, before it reaches the holder. See `reviewRequest()`.
 
-**Revocation.** The pharmacy that dispenses asks the issuing practice to revoke, which is what makes the prescription single-use: redemption is a status change on the public status list the patient cannot see.
+**Revocation.** The pharmacy that dispenses asks the issuing practice to revoke. This is how the prescription is kept single-use: redemption is a status change on the public status list the patient cannot see.
 
 **Retention.** A pharmacy keeps the dispensation record under HMG/LPTh; the credential itself is not retained beyond the dispensation.
 
@@ -56,8 +56,8 @@ representations locally from the claims the holder released, see
 ## Claims
 
 Every claim is selectively disclosable. The Swiss Profile forbids
-non-disclosable business claims outright, which is what makes a four-claim
-presentation of an eighteen-claim credential possible.
+non-disclosable business claims outright, so an eighteen-claim credential can be
+presented as four claims.
 
 | Claim | Label | Type | Constraint | Semantic binding | Notes |
 | --- | --- | --- | --- | --- | --- |

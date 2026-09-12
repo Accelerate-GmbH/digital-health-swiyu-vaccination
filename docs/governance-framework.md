@@ -161,14 +161,14 @@ Three operations share one mechanism and must not be confused:
 
 **The status list cannot distinguish motive.** "Recorded in error", "used up"
 and "we no longer recognise this" produce the same bit. Only the issuer's
-journal separates them, which is what makes the journal a governance control.
+journal separates them, so the journal serves as a governance control.
 
 Two rules follow, neither technically enforceable:
 
 - **An immunization credential may be revoked only to correct a recording
   error**, never to withdraw a vaccination that took place. Revoking does not
   undo the dose; it withdraws an assertion the issuer should not have made.
-- **A prescription is revoked on dispensing**, which is what makes it
+- **A prescription is revoked on dispensing**, which is how it is kept
   single-use. Only the issuer can revoke, so redemption is a request between two
   accountable parties.
 

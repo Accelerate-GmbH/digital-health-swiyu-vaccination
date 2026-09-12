@@ -42,8 +42,8 @@ the subject, presentable to a verifier without contacting the issuer.
 roles of the model. A practice is an issuer of prescriptions and a verifier of
 insurance cards.
 
-**SD-JWT VC.** The credential format. Each claim is individually disclosable,
-which is what makes a four-claim answer to an eighteen-claim credential possible.
+**SD-JWT VC.** The credential format. Each claim is individually disclosable, so
+an eighteen-claim credential can be answered with four claims.
 
 **`vct`.** Verifiable credential type. Identifies what a credential *is*. This
 project uses stable URNs (`urn:vct:ch.didas.health.immunization:1.0`) so issued

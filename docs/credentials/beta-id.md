@@ -30,8 +30,8 @@ not govern it. See the issuing authority.
 ## Claims
 
 Every claim is selectively disclosable. The Swiss Profile forbids
-non-disclosable business claims outright, which is what makes a four-claim
-presentation of an eighteen-claim credential possible.
+non-disclosable business claims outright, so an eighteen-claim credential can be
+presented as four claims.
 
 | Claim | Label | Type | Constraint | Semantic binding | Notes |
 | --- | --- | --- | --- | --- | --- |

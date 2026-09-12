@@ -570,8 +570,8 @@ views {
         prescribed what.
 
         Revocation here means "used up" and not "withdrawn". The status list
-        cannot tell the two apart. Only the issuer's journal separates them,
-        which is what makes the journal a governance control.
+        cannot tell the two apart. Only the issuer's journal separates them, so
+        the journal serves as a governance control.
       '''
     }
 

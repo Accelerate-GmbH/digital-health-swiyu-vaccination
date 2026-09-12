@@ -75,9 +75,9 @@ What has to be built:
    blueprint. Both directions of composition are already specified here (a
    repository issuing credentials from its own records; a presented credential
    projecting into the ingestion path that blueprint defines) and neither has
-   been built. This is the main item on this list, because it is what makes a
-   wallet credential useful to a longitudinal record instead of an alternative
-   to one. See [positioning](positioning.md).
+   been built. This is the main item on this list: without it a wallet
+   credential is an alternative to a longitudinal record rather than something
+   useful to one. See [positioning](positioning.md).
 8. **Emergency access.** The hardest question in the architecture: a patient who
    is unconscious cannot consent and any break-glass mechanism reintroduces a
    party that can read the record without them.
