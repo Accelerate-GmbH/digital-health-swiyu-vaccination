@@ -212,10 +212,10 @@ The scope, purpose and query are exactly the `verification_purpose` and
 `dcql_query` this project already builds, so the published statement and the
 running verifier cannot disagree.
 
-> **A limit that will bite you.** `purpose_name` may be **40 characters** per
-> locale here, while the generic verifier's own management API accepts 50. A
-> 45-character name passes locally and fails at publication. `conformance.ts`
-> enforces 40 for this reason.
+> **A limit that will bite you.** Trust Protocol 2.0 says a vqPS `purpose_name`
+> MUST NOT contain more than **40 characters** per locale, while the generic
+> verifier's own management API accepts 50. A 45-character name passes locally
+> and fails at publication. `conformance.ts` enforces 40 for this reason.
 
 ### What is still not possible
 

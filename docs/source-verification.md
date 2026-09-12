@@ -44,8 +44,10 @@ A checking script compared every pinned value in
 | **Mismatches** | **0** |
 
 Two limits differ between layers and the stricter one is enforced: the verifier
-management API accepts a `purpose_name` up to 50 characters, the Trust Registry
-caps the same field at 40 in a vqPS entry and this project enforces 40.
+management API accepts a `purpose_name` up to 50 characters, while a vqPS
+`purpose_name` MUST NOT exceed 40, and this project enforces 40. The 40 was
+attributed to the Trust Registry until the 2026-09-12 pass read it in Trust
+Protocol 2.0.
 
 ### openEHR archetypes
 

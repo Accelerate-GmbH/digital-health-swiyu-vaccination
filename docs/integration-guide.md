@@ -116,10 +116,10 @@ if (decision.outcome === 'allow') {
 
 ### Things that will bite you
 
-- **`purpose_name` is capped at 40 characters** by the Trust Registry when the
-  vqPS is published, but the verifier's own API accepts 50. A 45-character name
-  passes locally and fails at publication. `assertVerificationRequest` enforces
-  40.
+- **`purpose_name` is capped at 40 characters.** Trust Protocol 2.0 says a vqPS
+  `purpose_name` MUST NOT contain more than 40 per locale, while the verifier's
+  own management API accepts 50. A 45-character name passes locally and fails at
+  publication. `assertVerificationRequest` enforces 40.
 - **One credential per DCQL query.** `multiple` is not supported. Two
   credentials means two queries in one request, which works and is exactly
   what check-in does.
