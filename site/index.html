@@ -669,10 +669,14 @@
 
     <p style="margin-top:26px">
       Some of the Swiss Profile's trust rules are stated at <em>SHOULD</em> level and cannot be
-      satisfied in the Sandbox, because actors there have no identity onboarding. The Sandbox policy
-      <strong>records each such rule as waived</strong>. The journal then shows which rule was relaxed
-      and on what grounds. A demonstrator that deletes the rule instead reports the same success and
-      leaves no trace that anything was skipped.
+      satisfied in the Sandbox, because the Sandbox makes the official verification of an
+      organisation optional. The Sandbox policy <strong>records each such rule as waived</strong>.
+      The journal then shows which rule was relaxed and on what grounds. A demonstrator that deletes
+      the rule instead reports the same success and leaves no trace that anything was skipped. On
+      production swiyu the same code runs the strict policy, which requires the markers this one
+      waives. That is one environment variable. It is the smallest of the differences between
+      the two environments:
+      <a href="https://github.com/DIDAS-swiss/digital-health_swiyu/blob/main/docs/onboarding-sandbox.md#from-the-sandbox-to-production">what changes on production swiyu →</a>
     </p>
     <p>
       The journal holds claim <em>names</em> and no claim values. It therefore shows that an
@@ -985,9 +989,16 @@
           Nothing here deploys until some body can issue the trust statement that says "this DID is a
           practice authorised to vaccinate". The Confederation's onboarding verifies <em>who</em> an
           organisation is. It does not state what that organisation may do in healthcare. No
-          health-domain governance body exists to state it. The technology is therefore ready some
-          distance ahead of the institutional arrangements. That is the principal finding of step 1.
-          No amount of code changes it.
+          health-domain governance body exists to state it.
+        </p>
+        <p>
+          There is a second half to this, at the protocol layer. swiyu opens governed credential
+          types in stages, by ambition level. AN1 covers the e-ID. AN2 covers other authoritative
+          credentials from federal, cantonal or municipal authorities. AN3 is the open ecosystem
+          where private organisations issue on the same infrastructure. Governed issuance currently
+          reaches AN1 and AN2. A practice, a pharmacy and an insurer are private organisations, so
+          the health showcase sits in AN3. Going to production resolves neither half:
+          <a href="https://github.com/DIDAS-swiss/digital-health_swiyu/blob/main/docs/onboarding-sandbox.md#from-the-sandbox-to-production">what changes on production swiyu →</a>
         </p>
       </div>
       <div>
