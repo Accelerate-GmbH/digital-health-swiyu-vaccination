@@ -357,6 +357,18 @@ credential type** is sectoral and it is being opened in stages:
 | **AN2** | Other authoritative public issuer credentials, from federal, cantonal or municipal authorities |
 | **AN3** | The open ecosystem, where private and public issuers and verifiers meet and private organisations issue on the same infrastructure |
 
+The levels are not a swiyu invention. They come from the Federal Office of
+Justice discussion paper *Zielbild E-ID* of September 2021, chapter 4.2, and
+Switzerland picked one. Respondents to the public consultation argued that an
+ambition level 3 trust infrastructure was the one required. On 17 December 2021
+the Federal Council took the direction-setting decision that the
+infrastructure should carry more than the e-ID and should be open to cantonal
+authorities and to private entities. AN3 is therefore the stated national
+target rather than a stretch goal.
+
+That is worth holding next to the footnote above. The target is AN3. The
+delivered protocol reaches AN1 and AN2. This showcase needs AN3.
+
 Protected Issuance Trust List and Auth Trust Statements, the mechanism behind
 governed credential types, currently cover **AN1 and AN2**. Protected
 Verification Auth Trust Statements, the mechanism behind protected fields,

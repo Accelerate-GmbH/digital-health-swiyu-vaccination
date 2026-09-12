@@ -142,7 +142,9 @@ come from two places, neither of them a published specification page.
 | The onboarding steps that are optional in the test environment: payment at both registers, the QES-signed formal declaration, the official verification | Slide 28 of the deck below, where those boxes are dashed and the legend reads "optional in the test environment" |
 | Protected Issuance Trust List and Auth Trust Statements currently cover AN1 and AN2 | Slide 30 of the same deck, footnote |
 | Protected Verification Auth Trust Statements currently cover the AHV number only | Slide 30 of the same deck, footnote. Consistent with the protected-field rule this project already enforces against `swiss-profile-trust:1.0` |
-| AN1 is the e-ID. AN2 is other authoritative public issuer credentials from federal, cantonal or municipal authorities. AN3 is the open ecosystem where private organisations issue on the same infrastructure | Supplied by the project lead. Not found in a published source reachable from here |
+| AN1 is the e-ID. AN2 is other authoritative public issuer credentials from federal, cantonal or municipal authorities. AN3 is the open ecosystem where private organisations issue on the same infrastructure | Supplied by the project lead. The paper that defines them, *Zielbild E-ID*, is named below but could not be read from here |
+| The ambition levels originate in the Federal Office of Justice discussion paper *Zielbild E-ID*, September 2021, chapter 4.2 | `bj.admin.ch` and the `digitale-gesellschaft.ch` mirror are both blocked at the egress gateway. The chapter reference is quoted in the consultation report and in contemporaneous coverage, corroborated across more than one search summary |
+| Consultation respondents held that an ambition level 3 trust infrastructure was the one required. The Federal Council's direction-setting decision of 17 December 2021 opened the infrastructure beyond the e-ID to cantonal authorities and private entities | Same. `eid.admin.ch` carries the decision announcement and is also blocked here |
 
 The deck is `Retail_eCommerce_..._Moderation_V04`, by Vasily Suvorov, shown at
 the retail roundtable on 1 July 2026.
