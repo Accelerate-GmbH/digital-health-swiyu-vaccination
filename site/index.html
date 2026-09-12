@@ -641,12 +641,9 @@
 
   <section>
     <p class="kicker">Governance</p>
-    <h2>Three checks the code runs before health data moves</h2>
+    <h2>What happens before a clinical fact is accepted</h2>
     <p>
-      The technical profile answers whether a message is well formed and correctly signed. It does not
-      answer three further questions. Who is allowed to assert a clinical fact? Who is allowed to ask
-      for one? Should a particular presentation be accepted? Each question is a function. They run in
-      that order. Each records its reason whether it permits or refuses.
+      The technical profile confirms that a message is well formed and correctly signed, but that confirmation only concerns the shape of the message, not its content or its legitimacy. Three further questions have to be answered before any clinical fact can move. The first is whether the party issuing the assertion has the standing to make a clinical claim in the first place, since a signature proves who sent a message but says nothing about whether that sender was entitled to state what it stated. The second is whether the party requesting the data has the standing to ask for it, which is a separate question from whether the request is technically valid, because a well-formed request can still come from a party with no legitimate claim to the information. The third is whether the specific presentation in front of the system, with its particular scope and context, should be accepted on its own terms, since even a properly authorized sender and a properly authorized requester do not guarantee that this exact exchange should proceed. Each of these questions is implemented as its own function, the three run in a fixed sequence, and each one writes down its reasoning at the moment it decides, regardless of whether the outcome is a grant or a refusal.
     </p>
     <div class="gates">
       <div class="gate">
