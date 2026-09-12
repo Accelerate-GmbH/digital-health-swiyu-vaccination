@@ -78,7 +78,7 @@ impossible.
 | --- | --- | --- |
 | `profile_version` REQUIRED in the Status List Token JWT header, the SD-JWT VC header, the VCT body and the OCA bundle | TSL §5, SD-JWT VC §5, OCA | **checked** |
 | Media type MUST be `application/dc+sd-jwt` | RFC 9901 §9.11 | constant |
-| An SD-JWT VC MUST only have selectively disclosable claims apart from the registered JWT claims of §3.2.2.2; other non-selectively-disclosable claims MUST NOT be supported and MUST be rejected | SD-JWT VC §3.2.2.4 | credential definitions |
+| "An SD-JWT VC **MUST** only have selectively disclosable claims, apart form the claims listed in 3.2.2.2 Registered JWT Claims. Other non-selectively dislosable claims **MUST NOT** be supported and **MUST** be rejected." (quoted as written, two typos included) | SD-JWT VC §3.2.2.4 | credential definitions |
 | `_sd_alg` MUST be sha-256; decoy digests NOT SUPPORTED | RFC 9901 §4.1.1, §4.2.5 | generic issuer |
 | Array-element and recursive disclosures MUST be supported | RFC 9901 §4.2.2, §4.2.6 | used for `medication`, `findings` |
 | Structured SD-JWT NOT SUPPORTED; flat and recursive only | RFC 9901 §6.3 | credential definitions |

@@ -27,10 +27,11 @@ Where something is *not* implemented, it says so.
    being refused, are normal paths that the flow has to work through, not
    errors.
 6. **The holder decides what is released.** `swiss-profile-vc:1.0.0` §3.2.2.4
-   requires every business claim to be selectively disclosable, so no credential
-   in this project can make a claim mandatory to release. A verifier states in
-   advance what it will ask for; it cannot compel the answer, and a holder may
-   release more than was asked.
+   allows an SD-JWT VC only selectively disclosable claims, apart from the
+   registered JWT claims listed in §3.2.2.2, so no business claim in this
+   project can be made mandatory to release. A verifier states in advance what
+   it will ask for; it cannot compel the answer, and a holder may release more
+   than was asked.
 
 ## Actors and roles
 
@@ -99,7 +100,7 @@ issuer. The policy decides what to do with them.
 | `viTM` | Verified identity | Require | Waive and record the waiver |
 | `caTM` | Compliant actor | Require | Waive and record the waiver |
 
-The first row is a MUST in `swiss-profile-trust:1.0` and is not configurable.
+The first row is a MUST in `swiss-profile-trust:1.0` and is not configurable:
 it is refused under every policy, including the Sandbox one.
 
 `SANDBOX_HEALTH_POLICY` exists because Sandbox actors have not been through
@@ -221,9 +222,9 @@ Two rules follow, neither technically enforceable:
   single-use. Only the issuer can revoke, so redemption is a request between two
   accountable parties.
 
-Status list contents are **public**. A suspension is therefore a disclosure.
-a reason to prefer correction-by-revocation over suspension-on-suspicion for
-sensitive credential types.
+Status list contents are **public**, so a suspension is itself a disclosure.
+That is a reason to prefer correction-by-revocation over
+suspension-on-suspicion for sensitive credential types.
 
 ## The audit journal
 
@@ -253,14 +254,16 @@ query. This project submits those fields to
 `POST /api/v1/trust/vqps-submissions` and the Trust Registry signs and publishes
 the statement.
 
-Read what the matching trust marker claims, and what it does not. A verifier
-carrying the Transparent Verification Trust Marker is one whose "ongoing
-verification request is publicly transparent and can be reviewed by 3rd party
-actors"; the specification is explicit that "this does not mean the individual
-verification — neither what data is requested, nor what data is exposed to the
-verifier — is publicly available, only that the verifier made the type of
-verifications they are performing public for review". The vqPS publishes the
-query shape, not the transaction.
+Read what the matching trust marker claims, and what it does not. Trust
+Protocol 2.0 on the Transparent Verification Trust Marker, verbatim:
+
+> The presence of this marker indicates that the ongoing verification request is
+> publicly transparent and can be reviewed by 3rd party actors.
+> This does not mean the individual verification - neither what data is requested,
+> nor what data is exposed to the verifier - is publicly available, only that the
+> verifier made the type of verifications they are performing public for review.
+
+The vqPS publishes the query shape, not the transaction.
 
 `tvTM` is also the weakest of the markers in the profile's own terms: the wallet
 **MAY** decline a counterparty without it, and the profile names a
