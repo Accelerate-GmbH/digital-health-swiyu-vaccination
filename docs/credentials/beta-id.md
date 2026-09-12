@@ -29,9 +29,18 @@ not govern it. See the issuing authority.
 
 ## Claims
 
-Every claim is selectively disclosable. The Swiss Profile forbids
-non-disclosable business claims outright, so an eighteen-claim credential can be
-presented as four claims.
+Every claim in this credential is individually disclosable. SD-JWT VC lets the
+holder answer a request with a subset: a verifier asking for four claims sees
+those four, and the values of the rest are not revealed. The Swiss Profile
+forbids non-disclosable business claims, so no claim in the table below can be
+made mandatory to release by the credential itself, and an ecosystem can refuse
+credentials that contain such claims.
+
+Which claims are requested is a verifier decision, and the credential format
+does not constrain it. Verifiers need their own governance for it: which claims
+they ask for, for what purpose, and in which process. A holder remains free to
+release more than was asked. Self-determination and data minimisation are
+governing principles of the Swiss ecosystem.
 
 | Claim | Label | Type | Constraint | Semantic binding | Notes |
 | --- | --- | --- | --- | --- | --- |
