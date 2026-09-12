@@ -22,8 +22,10 @@ they are entitled to do, what they say they ask for.
 Confederation's reference implementations. Each actor runs its own instance.
 They carry the protocol so business applications don't have to.
 
-**Beta-ID.** The Sandbox stand-in for the e-ID, carrying the attribute set of
-Art. 15 BGEID. Free from the Beta Credential Service. Self-declared data.
+**Beta-ID.** The Sandbox stand-in for the e-ID, carrying four of the nine items
+of EID content listed in Art. 15 para. 1 BGEID - surname, given names, date of
+birth, AHV number - plus a derived `age_over_18`. Free from the Beta Credential
+Service. Self-declared data.
 
 **Swiss Profile.** The Confederation's narrowing of the international
 specifications. Four of them: `anchor` (identifiers), `issuance`, `verification`,

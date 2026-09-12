@@ -127,6 +127,50 @@ The entitlement is written into the credential definition precisely so it is
 reviewable. "Which of our partners can see the AHV number" should be a question
 answerable by reading one file.
 
+## What the E-ID Act does and does not decide
+
+The Federal Act on Electronic Proof of Identity of 20 December 2024 (E-ID-Gesetz,
+BGEID) governs the federal **trust infrastructure** and the **EID**. It does not
+govern a health credential's content, and it does not say what a practice or a
+pharmacy may ask for. Three of its provisions still set the frame this project
+works in.
+
+**Art. 1 para. 2 let. a** names the principles the technical and organisational
+measures must implement, and they are the reason the infrastructure has the shape
+it has: *Datenschutz durch Technik und datenschutzfreundliche Voreinstellungen*
+(privacy by design and by default), *Datensicherheit*, *Datensparsamkeit*,
+*dezentrale Datenspeicherung*, *Nachvollziehbarkeit und Wiederverwendbarkeit*,
+and the infrastructure remaining under state control.
+
+**Art. 10 para. 1** is the holder's control, stated as a requirement on the
+system rather than as an aspiration:
+
+> Beim Vorweisen eines elektronischen Nachweises muss die Inhaberin oder der
+> Inhaber bestimmen können, welche Bestandteile davon und welche davon
+> abgeleiteten Informationen an die Verifikatorin übermittelt werden.
+
+When an electronic credential is presented, the holder must be able to determine
+which parts of it, and which information *derived* from those parts, are
+transmitted to the verifier. Art. 10 para. 2 adds that presentation and
+verification happen without the issuer's knowledge. Note that the Act
+contemplates derived information; `swiss-profile-vc:1.0.0` has no mechanism for
+it, which is why over-18 is a claim the e-ID carries rather than a proof computed
+over a withheld date of birth.
+
+**Art. 23** is a proportionality test with teeth, and it applies **to the EID
+only**. A verifier may request the personal data the EID contains where
+verification of identity, or of a partial aspect of it, is provided for in
+legislation, or where it is strictly necessary for the reliability of the
+transaction, in particular to prevent misuse and identity theft. On a breach the
+BIT records that in the Trust Registry *visible to the holder during a
+transaction*, and may exclude the verifier from the register.
+
+There is no equivalent statutory test for the other credentials in this
+repository. A pharmacy asking a patient for their full vaccination history is not
+answerable to Art. 23; it is answerable to whatever the health domain decides,
+and the health domain has not decided. That is the same gap [the missing
+layer](#the-missing-layer) describes from the trust-marker side.
+
 ## Legal basis, by credential type
 
 | Credential | Issuer acts under |

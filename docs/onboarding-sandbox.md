@@ -272,8 +272,9 @@ SWIYU_MODE=sandbox npm start
 ```
 
 Get a Beta-ID from the [Beta Credential Service](https://www.bcs.admin.ch/bcs-web)
-It carries the Art. 15 BGEID attribute set, the same attributes the e-ID will
-have. Then walk the journey, scanning each QR code with the Sandbox Wallet.
+It carries a subset of the EID content of Art. 15 para. 1 BGEID plus a derived
+`age_over_18`. Then walk the journey, scanning each QR code with the Sandbox
+Wallet.
 
 ## Checks when something does not work
 
@@ -327,9 +328,12 @@ lives in, so that is the value to check first when something is refused.
 
 Today the patient holds a Beta-ID from the Beta Credential Service and its data
 is self-declared. In production the patient holds the e-ID and the
-Confederation has verified the person behind it. The Beta-ID already carries
-the attribute set of Article 15 BGEID, which is the set the e-ID carries, so
-F-04 keeps its shape. Only the issuer DID and the `vct` change.
+Confederation has verified the person behind it. The Beta-ID carries surname,
+given names, date of birth and the AHV number, four of the nine items of EID
+content listed in Article 15 paragraph 1 BGEID, plus the derived `age_over_18`.
+F-04 asks only for claims in that set, so it keeps its shape. Only the issuer
+DID and the `vct` change. A flow needing nationality, place of origin, place of
+birth, sex or the facial image has nothing to test against today.
 
 ### The trust policy becomes strict
 

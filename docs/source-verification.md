@@ -9,8 +9,9 @@ card under KVG/LAMal Art. 42a" is a legal statement that reads with the same
 confidence and has no such backing behind it. Setting both in the same typeface,
 in the same tables, without saying which is which, is itself a defect.
 
-Verification date: 2026-09-11. Wording pass over the same material: 2026-09-12,
-recorded at the end of this document.
+Verification date: 2026-09-11. A second pass on 2026-09-12 read the swiyu
+specification text and the E-ID Act; both are recorded at the end of this
+document, and they correct findings above.
 
 ## Legend
 
@@ -304,3 +305,49 @@ cookbook's), which was fetched to confirm it. No mismatches.
 
 Still not established here: nothing in this repository has run against the live
 Sandbox, which the section above already says and this pass does not change.
+
+## P · 2026-09-12 · the E-ID Act, read
+
+`fedlex.admin.ch` is blocked at this environment's egress gateway for both
+`www.fedlex.admin.ch` and `fedlex.data.admin.ch`, and so are `bj.admin.ch`,
+`eid.admin.ch` and `de.wikipedia.org`. The project lead supplied the Federal
+Gazette text directly: *Bundesgesetz über den elektronischen Identitätsnachweis
+und andere elektronische Nachweise (E-ID-Gesetz, BGEID)* of 20 December 2024,
+BBl 2025 20, referendum deadline 19 April 2025. It was read in full.
+
+**What the Act covers.** Art. 1 para. 1: the federal trust infrastructure, the
+roles and responsibilities in providing and using it, and the EID together with
+other electronic credentials. It is not a health-data statute and decides
+nothing about what a health verifier may request.
+
+| Statement | Where in the Act |
+| --- | --- |
+| Privacy by design and by default, data security, *Datensparsamkeit*, decentralised storage, traceability and reusability, state control | Art. 1 para. 2 let. a, as principles the technical and organisational measures must implement |
+| The holder must be able to determine which parts of a credential, and which information derived from them, reach the verifier | Art. 10 para. 1 |
+| Presentation and verification happen without the issuer's knowledge | Art. 10 para. 2 |
+| A verifier may request the EID's personal data only where legislation provides for the identity check, or where it is strictly necessary for the reliability of the transaction; a breach is recorded in the Trust Registry visible to the holder during a transaction, and can mean exclusion from the register | Art. 23, **for the EID only** |
+| The EID's content: official name, given names, date of birth, sex, place of origin, place of birth, nationality, facial image, AHV number, plus credential metadata and optional additions | Art. 15 paras. 1 to 3 |
+
+**One claim this corrected.** Five places said the Beta-ID "carries the Art. 15
+BGEID attribute set" and that the e-ID would replace it "with the same
+attributes". It does not. The Beta-ID carries four of the nine items in Art. 15
+para. 1 — surname, given names, date of birth, AHV number — and none of sex,
+place of origin, place of birth, nationality or facial image. It also carries
+`age_over_18`, which Art. 15 does not list at all: that is derived information of
+the kind Art. 10 para. 1 contemplates. The flows here use only claims in the
+subset, so they do keep their shape at go-live, but that is a narrower statement
+than the one that was being made, and a flow needing nationality or a facial
+image has nothing to test against today.
+
+**What the Act does not settle**, and what the earlier removal of "self-
+determination and data minimisation are governing principles of the Swiss
+ecosystem" was right to be cautious about: those principles are stated by this
+Act, for this infrastructure and this credential. Extending them to a health
+credential issued by a private practice is an argument, not a citation. The
+[governance framework](governance-framework.md#what-the-e-id-act-does-and-does-not-decide)
+now makes the argument explicitly and marks where it stops.
+
+The legal statements in the **U** section above are a different matter and are
+unchanged: KVG/LAMal Art. 42a, OR Art. 958f, MedBG/LPMéd, EpG/LEp and the KVG
+analysis list are other statutes and none of them was read here. Reading the
+E-ID Act moves nothing in that list.

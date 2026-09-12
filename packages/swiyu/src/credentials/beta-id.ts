@@ -2,10 +2,16 @@
  * The Beta-ID, described in the same shape as this project's own credential
  * types so it can be used in a DCQL query.
  *
- * It is the Sandbox stand-in for the e-ID and carries the attribute set of
- * Art. 15 BGEID; from go-live the e-ID replaces it with the same attributes,
- * so a flow written against this does not change shape in 2026. Only the
- * issuer DID and the `vct` do.
+ * It is the Sandbox stand-in for the e-ID. It carries a *subset* of the EID
+ * content of Art. 15 para. 1 BGEID - surname, given names, date of birth and
+ * the AHV number - and not the rest of that list (sex, place of origin, place
+ * of birth, nationality, facial image). `age_over_18` is not in Art. 15 at
+ * all: it is information derived from the date of birth, which Art. 10 para. 1
+ * contemplates the holder releasing in place of the underlying claim.
+ *
+ * The flows here use only claims in that subset, so they do not change shape
+ * when the e-ID replaces the Beta-ID. A flow needing nationality or a facial
+ * image cannot be written against the Beta-ID today.
  *
  * Two deliberate omissions. There is no `governance` block: the Confederation
  * governs this credential and writing rules for it here
@@ -23,8 +29,8 @@ export const BETA_ID_CREDENTIAL: CredentialDefinition = {
   name: 'Beta-ID',
   displayName: { 'de-CH': 'Beta-ID', 'fr-CH': 'Beta-ID', 'it-CH': 'Beta-ID', 'en-GB': 'Beta-ID' },
   description: {
-    'de-CH': 'Pseudo-Identitätsnachweis der Sandbox mit den Attributen der künftigen E-ID.',
-    'en-GB': 'Sandbox pseudo-identity credential carrying the attribute set of the future e-ID.',
+    'de-CH': 'Pseudo-Identitätsnachweis der Sandbox mit einem Teil der Attribute der künftigen E-ID.',
+    'en-GB': 'Sandbox pseudo-identity credential carrying part of the future e-ID attribute set.',
   },
   backgroundColor: '#8A1C21',
   claims: [

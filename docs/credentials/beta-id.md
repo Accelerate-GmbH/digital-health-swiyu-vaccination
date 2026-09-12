@@ -1,6 +1,6 @@
 # Beta-ID
 
-Sandbox pseudo-identity credential carrying the attribute set of the future e-ID.
+Sandbox pseudo-identity credential carrying part of the future e-ID attribute set.
 
 | | |
 | --- | --- |
@@ -15,10 +15,10 @@ Sandbox pseudo-identity credential carrying the attribute set of the future e-ID
 
 | Locale | Name | Description |
 | --- | --- | --- |
-| `de-CH` | Beta-ID | Pseudo-Identitätsnachweis der Sandbox mit den Attributen der künftigen E-ID. |
+| `de-CH` | Beta-ID | Pseudo-Identitätsnachweis der Sandbox mit einem Teil der Attribute der künftigen E-ID. |
 | `fr-CH` | Beta-ID | n/a |
 | `it-CH` | Beta-ID | n/a |
-| `en-GB` | Beta-ID | Sandbox pseudo-identity credential carrying the attribute set of the future e-ID. |
+| `en-GB` | Beta-ID | Sandbox pseudo-identity credential carrying part of the future e-ID attribute set. |
 
 ## Governance
 

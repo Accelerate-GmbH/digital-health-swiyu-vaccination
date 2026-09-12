@@ -101,8 +101,9 @@ export const SANDBOX_TRUST_ANCHOR = {
 } as const;
 
 /**
- * The Beta-ID: the Sandbox stand-in for the e-ID, carrying the attribute set of
- * Art. 15 BGEID. Issued by the Beta Credential Service, never by us.
+ * The Beta-ID: the Sandbox stand-in for the e-ID, carrying a subset of the EID
+ * content of Art. 15 para. 1 BGEID plus the derived `age_over_18`. Issued by
+ * the Beta Credential Service, never by us.
  */
 export const BETA_ID = {
   vct: 'betaid-sdjwt',

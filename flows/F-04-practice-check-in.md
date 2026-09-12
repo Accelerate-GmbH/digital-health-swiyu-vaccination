@@ -89,9 +89,10 @@ sequenceDiagram
 - `accepted_issuer_dids` is set per query, so the Beta-ID must come from the
   Beta Credential Service and the card from the patient's insurer. Without it the
   verifier would accept any issuer, which `checkVerificationRequest()` refuses.
-- Beta-ID carries the Art. 15 BGEID attribute set. The e-ID replaces it at
-  go-live with the same attributes, so this flow does not change in 2026. Only
-  the issuer DID and the `vct` do.
+- Beta-ID carries a subset of the EID content of Art. 15 para. 1 BGEID - surname,
+  given names, date of birth, AHV number - plus the derived `age_over_18`. This
+  flow uses only claims in that subset, so it does not change in 2026 when the
+  e-ID replaces the Beta-ID. Only the issuer DID and the `vct` do.
 - The insurance card models FHIR `Coverage`; there is no openEHR archetype for
   an insurance relationship and inventing one would be worse than pointing at
   the standard that already covers it.
