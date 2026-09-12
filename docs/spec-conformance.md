@@ -69,7 +69,7 @@ impossible.
 | --- | --- | --- |
 | `profile_version` REQUIRED in VCT body and OCA bundle | §5, OCA | **checked** |
 | Media type MUST be `application/dc+sd-jwt` | §9.11 | constant |
-| Every business claim MUST be selectively disclosable | §3.2.2.4 | credential definitions |
+| An SD-JWT VC MUST only have selectively disclosable claims apart from the registered JWT claims of §3.2.2.2; other non-selectively-disclosable claims MUST NOT be supported and MUST be rejected | §3.2.2.4 | credential definitions |
 | `_sd_alg` MUST be sha-256; decoy digests NOT SUPPORTED | §4.1.1, §4.2.5 | generic issuer |
 | Array-element and recursive disclosures MUST be supported | §4.2.2, §4.2.6 | used for `medication`, `findings` |
 | Structured SD-JWT NOT SUPPORTED; flat and recursive only | §6.3 | credential definitions |
@@ -105,10 +105,23 @@ impossible.
 
 | Rule | Source | Status |
 | --- | --- | --- |
-| MUST decline `gucTM` without `gucaTM` | Trust requirements | enforced under every policy |
-| SHOULD decline without `viTM` | Trust requirements | strict policy; waiver recorded under sandbox |
-| MAY decline without `caTM` / `tvTM` | Trust requirements | strict policy |
-| `personal_administrative_number` is a protected field | Protected fields | enforced at query construction; refuses without entitlement |
+| An actor MUST decline a trust relationship with `gucTM` but without `gucaTM` | Trust requirements | enforced under every policy |
+| An actor SHOULD decline one without `viTM` | Trust requirements | strict policy; waiver recorded under sandbox |
+| The wallet MAY decline one without `caTM`, and one without `tvTM` | Trust requirements | strict policy |
+| `personal_administrative_number` (AHV number) is the one protected field; it needs special permission to verify regardless of the VCT carrying it | Protected fields | enforced at query construction; refuses without entitlement |
+| vqPS `purpose_name` MUST NOT exceed 40 characters; `purpose_description` MUST NOT exceed 1000 | TP 2.0, vqPS | **checked**; `scripts/vqps.ts` refuses to emit past either |
+| Each DCQL Credential Query MUST carry a `meta` object with a non-empty `vct_values` | TP 2.0, Verification Type: DCQL | query construction |
+| A verifier MUST provide the relevant vqPS to the wallet and MUST link its `scope` claim via the request's `scope` parameter | TP 2.0, Verification | generic verifier |
+
+The signed vqPS is not assembled here. `scripts/vqps.ts` submits `sub`,
+`purpose_name`, `purpose_description`, `scope` and `query` to
+`POST /api/v1/trust/vqps-submissions`, and the Trust Registry signs and
+publishes the statement: it is the registry that produces the
+`swiyu-verification-query-public-statement+jwt` header, wraps `scope` and
+`query` into the `request` object with `"type": "DCQL"`, and flattens the
+localised maps into `purpose_name#<lang>` claims. The submission shape is the
+one the onboarding cookbook documents, which is why it differs from the
+statement shape in the protocol specification.
 
 ## Change dossiers tracked
 

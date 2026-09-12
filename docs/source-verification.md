@@ -158,13 +158,15 @@ about health specifically.
 The deck also uses a second vocabulary for the trust artefacts: Identity Trust
 Statement, Verification Query Public Statement, Protected Verification Auth TS,
 Protected Issuance TLS and Auth TS, Non-Compliance Trust List Statement. This
-repository uses the trust marker names of Trust Protocol 2.0 instead. The two
-look like the same artefacts under two vocabularies. This repository does
-**not** assert that mapping, because `trust-protocol-v2-0.md` is unreachable
-from this environment. The specification repository refuses an anonymous clone,
-`swiyu-admin-ch.github.io` is blocked at the egress gateway. The session
-cannot attach a repository outside the `didas-swiss` owner. Confirming the
-mapping needs someone who can read the specification.
+repository uses the trust marker names of Trust Protocol 2.0 alongside them.
+
+**Settled on 2026-09-12, see the last section.** There is no second vocabulary.
+Those are the specification's own names for its six statement types — idTS,
+vqPS, pvaTS, piaTS, piTLS, ncTLS — and the trust markers are a different thing
+from the statements, not another name for them: a marker is what an actor
+resolves a statement into. `trust-protocol-v2-0.md` was read directly. It is
+reachable from here after all, over `raw.githubusercontent.com`, even though the
+rendered site and `api.github.com` are both blocked at the egress gateway.
 
 The host separation, the Beta-ID attribute set and the two trust policies are
 **not** in this class. They are read from `profile.ts`, from CD-001 and from
@@ -242,26 +244,52 @@ settle them, because they are about this code:
   deployment must take them from the terminology server. The schemas constrain
   their shape and can say nothing about their truth.
 
-## 2026-09-12 · wording pass
+## 2026-09-12 · the specifications are readable, and a wording pass
 
-Prose describing profile rules had drifted into paraphrase. A paraphrase of a
-MUST reads like the MUST and is not checkable against anything, so the rules are
-now quoted with the profile and section that states them.
+**The reachability finding above is wrong and is corrected here.** The rendered
+site `swiyu-admin-ch.github.io` is blocked at this environment's egress gateway
+and so is `api.github.com`, but the markdown the site is built from is served by
+`raw.githubusercontent.com`, which is not blocked:
 
-`swiyu-admin-ch.github.io` is still blocked at the egress gateway (403 to
-CONNECT) and the session still cannot attach a repository outside the
-`didas-swiss` owner, so the profile text was not re-read. The rule wording comes
-from [`spec-conformance.md`](spec-conformance.md), which was compared against the
-profile text on 2026-09-11 with zero mismatches.
+```
+https://raw.githubusercontent.com/swiyu-admin-ch/swiyu-admin-ch.github.io/main/_specifications/<file>.md
+https://raw.githubusercontent.com/swiyu-admin-ch/swiyu-admin-ch.github.io/main/_cookbooks/<file>.md
+```
+
+Eight documents were fetched and read this way: the four Swiss Profiles,
+`trust-protocol-v2-0`, and the trust-protocol-2-0, generic-verifier and
+base-and-trust-registry cookbooks. The earlier passes reported the profile text
+as unreachable and reasoned from the secondary material instead; the right
+conclusion was that one channel had failed, not that every channel had.
+
+What the primary text settles that was open before:
+
+| Question | Answer from the specification |
+| --- | --- |
+| Where the artefact sits in Trust Protocol 2.0 | `trust-protocol-v2-0`, Statement types: the vqPS is one of six statement types, alongside idTS, pvaTS, piaTS, piTLS and ncTLS, and it is the statement behind the Transparent Verification Trust Marker |
+| Whether the deck's vocabulary maps to the specification's | It is the specification's vocabulary. "Verification Query Public Statement" is the specification's own term, not the deck's |
+| Whether publishing is a duty | The verifier **MUST** provide the relevant vqPS to the wallet and **MUST** link its `scope` claim from the request, for a verification that carries the tvTM. The wallet **MAY** decline a counterparty without that marker |
+| What the tvTM actually claims | The *type* of verification is public for third-party review. The specification says explicitly that the individual verification, what was requested and what was exposed, is not |
+| Where the 40-character `purpose_name` limit comes from | The protocol, not the registry: the vqPS table says `purpose_name` **MUST NOT** contain more than 40 characters, and `purpose_description` no more than 1000 |
+
+The rule wording that had drifted into paraphrase is now quoted with the profile
+and the section that states it. A paraphrase of a MUST reads like the MUST and
+cannot be checked against anything.
 
 | Was | Is | Why |
 | --- | --- | --- |
-| "The Swiss Profile forbids non-disclosable business claims outright" | "`swiss-profile-vc:1.0.0` §3.2.2.4: every business claim MUST be selectively disclosable" | Same rule, stated as the profile states it and locatable in it |
-| "each verifier **publishes what it asks for**" | the fields a vqPS submission carries, and the endpoint it goes to | The old phrasing was this repository's, not the specification's |
+| "The Swiss Profile forbids non-disclosable business claims outright" | §3.2.2.4 as written: an SD-JWT VC **MUST** only have selectively disclosable claims apart from the registered JWT claims of §3.2.2.2, and others **MUST NOT** be supported and **MUST** be rejected | The paraphrase lost the §3.2.2.2 exception entirely |
+| "each verifier **publishes what it asks for**" | the specification's sentence: the vqPS is "provided by verifiers to provide public transparency on their intended verification scope" | The old phrasing was this repository's, and it overstated: the transaction is not published, the query shape is |
 | "a four-claim presentation of an eighteen-claim credential" | no count | Copied into five pages; the counts are 5, 18, 11, 10 and 10 |
-| "Self-determination and data minimisation are governing principles of the Swiss ecosystem" | removed | No source available here states it. Minimisation is already principle 1 of the [governance framework](governance-framework.md) as something this project enforces, which is a claim about this project and is checkable |
+| "Self-determination and data minimisation are governing principles of the Swiss ecosystem" | removed | No source read here states it in those terms. Minimisation is already principle 1 of the [governance framework](governance-framework.md) as something this project enforces, which is a claim about this project and is checkable |
 
-Not resolved by this pass: whether a verifier is *obliged* to publish a vqPS
-before verifying, and how the artefact relates to the Trust Protocol 2.0 trust
-markers. Both need `trust-protocol-v2-0.md`, which is unreachable here. The
-repository describes publishing as what it does, not as a duty it has verified.
+One thing checked and found correct: `scripts/vqps.ts` submits `sub`,
+`purpose_name`, `purpose_description`, `scope` and `query` flat, while the signed
+statement in `trust-protocol-v2-0` nests `scope` and `query` inside a `request`
+object and flattens the localised maps into `purpose_name#<lang>` claims. That
+is not a divergence. The submission body is what the base-and-trust-registry
+cookbook documents for `POST /api/v1/trust/vqps-submissions`; the registry signs
+and publishes, and it is the registry that produces the statement shape.
+
+Still not established here: nothing in this repository has run against the live
+Sandbox, which the section above already says and this pass does not change.

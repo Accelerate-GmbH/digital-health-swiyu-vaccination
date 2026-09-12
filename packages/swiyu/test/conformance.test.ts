@@ -147,10 +147,10 @@ describe('verification requests', () => {
     expect(checkVerificationRequest(request).some((f) => f.rule.includes('swiss-profile-trust'))).toBe(true);
   });
 
-  it('rejects a purpose name longer than the Trust Registry allows', () => {
+  it('rejects a purpose name longer than the vqPS allows', () => {
     const request = base();
     // 45 characters passes the verifier's own validation and then fails at the
-    // vqPS submission, so the tighter registry limit is the one to enforce.
+    // vqPS submission, so the tighter protocol limit is the one to enforce.
     request.verification_purpose = {
       scope: 'ch.didas.health.dispense',
       purpose_name: { default: 'x'.repeat(45) },

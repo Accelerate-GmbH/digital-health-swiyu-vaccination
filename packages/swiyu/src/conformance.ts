@@ -197,18 +197,18 @@ export function checkVerificationRequest(request: CreateVerificationRequest): Fi
     }
     // Two different limits apply to the same string and the tighter one is
     // not the one the verifier enforces. The generic verifier's management API
-    // accepts a purpose_name up to 50 characters, but the Trust Registry's
-    // vqPS submission, where the purpose is actually published, caps it at
-    // 40 per locale. A 45-character name therefore passes locally and fails
-    // when the verifier registers the query, which is a miserable thing to
-    // debug live. Enforce the registry's limit.
+    // accepts a purpose_name up to 50 characters, but Trust Protocol 2.0 says
+    // the vqPS `purpose_name` MUST NOT contain more than 40, and the vqPS is
+    // where the purpose is actually published. A 45-character name therefore
+    // passes locally and fails when the verifier registers the query, which is
+    // a miserable thing to debug live. Enforce the 40.
     const nameLimit = 40;
     const descriptionLimit = 500;
     for (const [locale, text] of Object.entries(purpose.purpose_name ?? {})) {
       if (text.length > nameLimit) {
         add(
-          'swiyu Trust Registry, vqPS submission',
-          `verification_purpose.purpose_name[${locale}] exceeds ${nameLimit} characters, the limit the Trust Registry enforces when the query is published`,
+          'Trust Protocol 2.0, vqPS',
+          `verification_purpose.purpose_name[${locale}] exceeds ${nameLimit} characters, the limit the vqPS purpose_name MUST NOT exceed`,
         );
       }
     }

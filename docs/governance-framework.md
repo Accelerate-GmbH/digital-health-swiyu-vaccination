@@ -199,17 +199,28 @@ without the record becoming a shadow copy of the patient's data.
 
 ## Transparency: the vqPS
 
-Separately from entitlement, each verifier publishes its queries. A vqPS
-submission to the Trust Registry (`POST /api/v1/trust/vqps-submissions`) carries
-the scope, a `purpose_name` and `purpose_description` per locale, and the DCQL
-query itself. The Trust Registry caps `purpose_name` at 40 characters, tighter
-than the 50 the verifier management API accepts, so this project enforces 40.
+Separately from entitlement, each verifier publishes its queries. Trust Protocol
+2.0 defines the Verification Query Public Statement as a statement "provided by
+verifiers to provide public transparency on their intended verification scope",
+signed by a public transparency statement issuer. It carries a `purpose_name`
+(at most 40 characters), a `purpose_description` (at most 1000), both
+localisable, and a Verification Request Object holding the `scope` and the DCQL
+query. This project submits those fields to
+`POST /api/v1/trust/vqps-submissions` and the Trust Registry signs and publishes
+the statement.
 
-The expansion "Verification Query Public Statement" comes from the retail
-roundtable deck, not from a specification page. `trust-protocol-v2-0.md` is
-unreachable from this environment, so where this artefact sits in Trust Protocol
-2.0 is not asserted here; see
-[source verification](source-verification.md).
+Read what the matching trust marker claims, and what it does not. A verifier
+carrying the Transparent Verification Trust Marker is one whose "ongoing
+verification request is publicly transparent and can be reviewed by 3rd party
+actors"; the specification is explicit that "this does not mean the individual
+verification — neither what data is requested, nor what data is exposed to the
+verifier — is publicly available, only that the verifier made the type of
+verifications they are performing public for review". The vqPS publishes the
+query shape, not the transaction.
+
+`tvTM` is also the weakest of the markers in the profile's own terms: the wallet
+**MAY** decline a counterparty without it, and the profile names a
+holder-consented override as a good reason not to require it.
 
 This is self-service and available today. It is generated from the same objects
 the verifier sends (`scripts/vqps.ts`), because a published statement that has

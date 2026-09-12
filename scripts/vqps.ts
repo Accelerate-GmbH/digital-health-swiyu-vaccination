@@ -31,7 +31,7 @@ import {
   type VerificationQuerySpec,
 } from '@didas/swiyu';
 
-/** Trust Registry limits on the published statement. Tighter than the verifier's. */
+/** Trust Protocol 2.0 limits on the published statement. Tighter than the verifier's. */
 const PURPOSE_NAME_MAX = 40;
 const PURPOSE_DESCRIPTION_MAX = 1000;
 
@@ -73,7 +73,7 @@ function check(spec: VerificationQuerySpec): string[] {
   for (const [locale, text] of Object.entries(spec.purposeName)) {
     if (text.length > PURPOSE_NAME_MAX) {
       problems.push(
-        `purpose_name[${locale}] is ${text.length} characters; the Trust Registry allows ${PURPOSE_NAME_MAX}`,
+        `purpose_name[${locale}] is ${text.length} characters; a vqPS purpose_name MUST NOT exceed ${PURPOSE_NAME_MAX}`,
       );
     }
   }
