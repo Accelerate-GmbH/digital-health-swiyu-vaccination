@@ -293,3 +293,83 @@ the Confederation's own harnesses:
 
 - [swiyu-generic-application-test](https://github.com/swiyu-admin-ch/swiyu-generic-application-test)
 - [swiyu-generic-test-wallet](https://github.com/swiyu-admin-ch/swiyu-generic-test-wallet)
+
+## From the Sandbox to production
+
+The application code does not change. The environment, the onboarding and one
+environment variable do.
+
+### Onboarding stops being optional
+
+Both environments ask for the same two registrations. The Sandbox treats four
+of the steps inside them as optional. Production does not.
+
+| Register | Required in both | Required only in production |
+| --- | --- | --- |
+| Base Register | Profile creation, DID setup | Payment |
+| Trust Register | Additional data entry, proof of DID controllership | A formal declaration signed with a qualified electronic signature, payment, official verification of the organisation |
+
+The Identity Trust Statement a wallet checks before it shows a consent screen
+is worth something in production because a person at the Confederation verified
+the organisation behind it. In the Sandbox that verification is skipped, which
+is why this project runs the Sandbox trust policy described below.
+
+### The addresses change and the two environments do not mix
+
+Sandbox hosts carry a `swiyu-int` segment. Production uses the equivalent
+`swiyu` hosts. CD-001 forbids mixing them and the wallets enforce it: the
+Sandbox Wallet talks only to the Sandbox and the swiyu Wallet only to
+production. A credential issued in one environment cannot be presented in the
+other. The host in `identifierRegistryUrl` decides which environment a DID
+lives in, so that is the value to check first when something is refused.
+
+### The Beta-ID becomes the e-ID
+
+Today the patient holds a Beta-ID from the Beta Credential Service and its data
+is self-declared. In production the patient holds the e-ID and the
+Confederation has verified the person behind it. The Beta-ID already carries
+the attribute set of Article 15 BGEID, which is the set the e-ID carries, so
+F-04 keeps its shape. Only the issuer DID and the `vct` change.
+
+### The trust policy becomes strict
+
+```bash
+SWIYU_TRUST_POLICY=strict
+```
+
+The Sandbox policy keeps every MUST rule of the Swiss Profile and records the
+SHOULD rules as waived, writing the reason for each waiver into the journal.
+The strict policy requires a Verified Identity Trust Marker and a Compliant
+Actor Trust Marker as well. Both policies enforce the governed use case rule,
+which is a MUST and is not configurable.
+
+### Ambition levels and what they mean for health
+
+The swiyu Trust Protocol separates common trust building blocks from sectoral
+governance. Identity Trust Statements and the Verification Query Public
+Statement are common. Any onboarded actor gets them and they answer "who is
+this" and "what do they say they will ask for". The right to issue a **governed
+credential type** is sectoral and it is being opened in stages:
+
+| | Scope |
+| --- | --- |
+| **AN1** | The e-ID only |
+| **AN2** | Other authoritative public issuer credentials, from federal, cantonal or municipal authorities |
+| **AN3** | The open ecosystem, where private and public issuers and verifiers meet and private organisations issue on the same infrastructure |
+
+Protected Issuance Trust List and Auth Trust Statements, the mechanism behind
+governed credential types, currently cover **AN1 and AN2**. Protected
+Verification Auth Trust Statements, the mechanism behind protected fields,
+currently cover **the AHV number only**, which is exactly the one protected
+field this project handles.
+
+Most issuers in this showcase are private organisations: a practice, a
+pharmacy, an insurer. Governed issuance for them is an AN3 capability. A
+cantonal vaccination service would fall under AN2. So the gap this repository
+reports is two gaps stacked. No health-domain governance body has been stood up
+to grant the role. The protocol layer that such a body would grant it through is
+not yet open to private health issuers. Going to production does not resolve
+either one.
+
+swiyu's own position is that a sector brings its own governance. The
+infrastructure supports it. Health has not yet done it.
