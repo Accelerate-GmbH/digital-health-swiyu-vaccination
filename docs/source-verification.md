@@ -246,21 +246,23 @@ settle them, because they are about this code:
 
 ## 2026-09-12 · the specifications are readable, and a wording pass
 
-**The reachability finding above is wrong and is corrected here.** The rendered
-site `swiyu-admin-ch.github.io` is blocked at this environment's egress gateway
-and so is `api.github.com`, but the markdown the site is built from is served by
-`raw.githubusercontent.com`, which is not blocked:
+**One reachability finding above is wrong and is corrected here.** The four Swiss
+Profiles were genuinely read on 2026-09-11, as the P section says.
+`trust-protocol-v2-0.md` was recorded as unreachable, and the mapping question
+was left open on that basis. It is reachable. The rendered site
+`swiyu-admin-ch.github.io` is blocked at this environment's egress gateway and so
+is `api.github.com`, but the markdown the site is built from is served by
+`raw.githubusercontent.com`, which is not:
 
 ```
 https://raw.githubusercontent.com/swiyu-admin-ch/swiyu-admin-ch.github.io/main/_specifications/<file>.md
 https://raw.githubusercontent.com/swiyu-admin-ch/swiyu-admin-ch.github.io/main/_cookbooks/<file>.md
 ```
 
-Eight documents were fetched and read this way: the four Swiss Profiles,
+Eight documents were fetched this way: the four Swiss Profiles again,
 `trust-protocol-v2-0`, and the trust-protocol-2-0, generic-verifier and
-base-and-trust-registry cookbooks. The earlier passes reported the profile text
-as unreachable and reasoned from the secondary material instead; the right
-conclusion was that one channel had failed, not that every channel had.
+base-and-trust-registry cookbooks. Two channels had failed and the conclusion
+drawn was that every channel had.
 
 What the primary text settles that was open before:
 
@@ -290,6 +292,13 @@ object and flattens the localised maps into `purpose_name#<lang>` claims. That
 is not a divergence. The submission body is what the base-and-trust-registry
 cookbook documents for `POST /api/v1/trust/vqps-submissions`; the registry signs
 and publishes, and it is the registry that produces the statement shape.
+
+Every string constant in `packages/swiyu/src/profile.ts` was then checked against
+the fetched text mechanically rather than by eye: 33 literals, 32 of them present
+verbatim in the specification corpus. The one that is not,
+`https://status-reg-api.trust-infra.swiyu-int.admin.ch`, is documented in the
+generic-issuer cookbook as `SWIYU_STATUS_REGISTRPY_API_URL` (the typo is the
+cookbook's), which was fetched to confirm it. No mismatches.
 
 Still not established here: nothing in this repository has run against the live
 Sandbox, which the section above already says and this pass does not change.
