@@ -26,7 +26,7 @@ Electronic insurance card for Swiss mandatory health insurance.
 
 Modelled here on the basis of KVG/LAMal Art. 42a, under which the insurer issues the insurance card; legal review is required before deployment
 
-This is a **governed** credential type: an actor must decline any interaction where the counterparty carries the Governed Use Case Trust Marker without the matching authorization marker.
+This is a **governed** credential type: an actor must decline any interaction for which the Trust Protocol evaluation derives the Governed Use Case Trust Marker without the matching Governed Use Case Authorization Trust Marker.
 
 ### Who may request it
 

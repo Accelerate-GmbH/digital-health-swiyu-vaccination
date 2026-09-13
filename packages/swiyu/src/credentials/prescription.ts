@@ -68,8 +68,9 @@ export const PRESCRIPTION: CredentialDefinition = {
       'The authority to prescribe medicinal products results from the applicable ' +
       'professional-practice and therapeutic-products legislation, including MedBG/LPMéd, ' +
       'HMG/LPTh and cantonal law. The authorisation model should be verified for the ' +
-      'intended issuer population before deployment. The practice DID ' +
-      'must carry a Governed Use Case Authorization Trust Marker naming this credential type',
+      'intended issuer population before deployment. In a deployed ecosystem the governing actor ' +
+      'would publish an authorisation statement naming this credential type for the practice, ' +
+      'from which a verifier evaluation can derive the Governed Use Case Authorization Trust Marker',
     governed: true,
     revocation:
       'The pharmacy that dispenses asks the issuing practice to revoke, which is what makes ' +

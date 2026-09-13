@@ -15,7 +15,8 @@ only ever verifies. The Confederation issues it.
 ## Who may ask for what
 
 The whole governance model in one place. A request for a claim marked `·` is
-refused when the query is built, so the claim is never transmitted.
+rejected while the query is built, so no request for it is sent and the claim
+is not included in any presentation this policy layer produces.
 
 ### Immunization Record
 

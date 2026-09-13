@@ -1347,6 +1347,116 @@
    "risk": "trust-bare",
    "sentence": "| Concept | What it is | | --- | --- | | swiyu DID | Technical identifier within the Swiss trust infrastructure | | Swiss organisational identifier | The Swiss "
   },
+  "74649a2ca705d000": {
+   "file": "docs/credentials/README.md",
+   "risk": "verify-no-object,absolute",
+   "sentence": "| Credential | CODE | Issued by | Claims | | --- | --- | --- | --- | | Immunization Record | CODE | CODE | 18 | | Swiss Health Insurance Card | CODE | CODE | 11"
+  },
+  "455adaff1a1d440a": {
+   "file": "docs/credentials/README.md",
+   "risk": "verify-no-object,absolute",
+   "sentence": "A request for a claim marked CODE is rejected while the query is built, so no request for it is sent and the claim is not included in any presentation this poli"
+  },
+  "2d825010c27e4cd3": {
+   "file": "docs/credentials/beta-id.md",
+   "risk": "absolute",
+   "sentence": "See the issuing authority. ## Claims Under CODE §3.2.2.4 an SD-JWT VC may carry only selectively disclosable claims, apart from the registered JWT claims that §"
+  },
+  "377ec3d4e120d968": {
+   "file": "docs/credentials/beta-id.md",
+   "risk": "secure",
+   "sentence": "| Claim | Label | Type | Constraint | Semantic binding | Notes | | --- | --- | --- | --- | --- | --- | | CODE | Given name(s) | Text | string | n/a | n/a | | CO"
+  },
+  "2b2e74b1aeb8be9e": {
+   "file": "docs/credentials/immunization.md",
+   "risk": "prove",
+   "sentence": "# Immunization Record Proof of one administered vaccination, issued by the administering party."
+  },
+  "2a33a7f26249b17e": {
+   "file": "docs/credentials/immunization.md",
+   "risk": "prove",
+   "sentence": "| | CODE | Immunization | Proof of one administered vaccination, issued by the administering party."
+  },
+  "5ae6ce88c77e8296": {
+   "file": "docs/credentials/immunization.md",
+   "risk": "verify-no-object",
+   "sentence": "In a deployed ecosystem the governing actor would publish an authorisation statement naming this credential type, from which a verifier evaluation can derive th"
+  },
+  "bb5e6f7bde58bcb4": {
+   "file": "docs/credentials/immunization.md",
+   "risk": "trust-bare,consent",
+   "sentence": "This is a **governed** credential type: an actor must decline any interaction for which the Trust Protocol evaluation derives the Governed Use Case Trust Marker"
+  },
+  "405e571ac8cd3f21": {
+   "file": "docs/credentials/immunization.md",
+   "risk": "absolute",
+   "sentence": "**Revocation.** Only the issuer may revoke and only to correct a recording error, never to withdraw a vaccination that took place."
+  },
+  "1f024b5481451e31": {
+   "file": "docs/credentials/immunization.md",
+   "risk": "absolute",
+   "sentence": "| Standard | Type | Profile / archetype | | --- | --- | --- | | HL7 FHIR | CODE | CODE | | openEHR | CODE | CODE | ## Claims Under CODE §3.2.2.4 an SD-JWT VC ma"
+  },
+  "98ab8f46358ba47f": {
+   "file": "docs/credentials/immunization.md",
+   "risk": "protected",
+   "sentence": "| Claim | Label | Type | Constraint | Semantic binding | Notes | | --- | --- | --- | --- | --- | --- | | CODE | Record number | Text | string, ≤ 64 chars | FHIR"
+  },
+  "e27fb47695fc31b7": {
+   "file": "docs/credentials/insurance-card.md",
+   "risk": "trust-bare",
+   "sentence": "Modelled here on the basis of KVG/LAMal Art. 42a, under which the insurer issues the insurance card; legal review is required before deployment This is a **gove"
+  },
+  "5428311f2b3bc9c9": {
+   "file": "docs/credentials/insurance-card.md",
+   "risk": "absolute",
+   "sentence": "A pharmacy keeps it only for the duration of the dispensation. ## Clinical models The models are reused; the repository is not."
+  },
+  "8b82d6aa1bd8e7a8": {
+   "file": "docs/credentials/insurance-card.md",
+   "risk": "absolute",
+   "sentence": "| Standard | Type | Profile / archetype | | --- | --- | --- | | HL7 FHIR | CODE | CODE | ## Claims Under CODE §3.2.2.4 an SD-JWT VC may carry only selectively d"
+  },
+  "4ea1c0c95d08e4c6": {
+   "file": "docs/credentials/insurance-card.md",
+   "risk": "secure",
+   "sentence": "| Claim | Label | Type | Constraint | Semantic binding | Notes | | --- | --- | --- | --- | --- | --- | | CODE | Given name(s) | Text | string, ≤ 200 chars | n/a"
+  },
+  "0ff39c9334937b86": {
+   "file": "docs/credentials/lab-report.md",
+   "risk": "trust-bare,consent",
+   "sentence": "Legal review is required before deployment This is a **governed** credential type: an actor must decline any interaction for which the Trust Protocol evaluation"
+  },
+  "5424d753964da2da": {
+   "file": "docs/credentials/lab-report.md",
+   "risk": "verify-no-object",
+   "sentence": "The patient keeps the superseded credential in the wallet but it no longer verifies, which is the behaviour a corrected finding needs."
+  },
+  "c4d1fec2e55dbf9e": {
+   "file": "docs/credentials/lab-report.md",
+   "risk": "verify-no-object,absolute,consent",
+   "sentence": "**Retention.** A verifying practice may retain the findings in the treatment record; a research recipient may retain only what the consent covers and never the "
+  },
+  "28df7d6522628783": {
+   "file": "docs/credentials/lab-report.md",
+   "risk": "absolute",
+   "sentence": "| Standard | Type | Profile / archetype | | --- | --- | --- | | HL7 FHIR | CODE | CODE | | openEHR | CODE | CODE | ## Claims Under CODE §3.2.2.4 an SD-JWT VC ma"
+  },
+  "eb39b84027cdc3ad": {
+   "file": "docs/credentials/prescription.md",
+   "risk": "verify-no-object",
+   "sentence": "The authorisation model should be verified for the intended issuer population before deployment."
+  },
+  "aaa936ffcf56a79b": {
+   "file": "docs/credentials/prescription.md",
+   "risk": "trust-bare",
+   "sentence": "In a deployed ecosystem the governing actor would publish an authorisation statement naming this credential type for the practice, from which a verifier evaluat"
+  },
+  "b3a568fc07a46c47": {
+   "file": "docs/credentials/prescription.md",
+   "risk": "absolute",
+   "sentence": "| Standard | Type | Profile / archetype | | --- | --- | --- | | HL7 FHIR | CODE | CODE | | openEHR | CODE | CODE | ## Claims Under CODE §3.2.2.4 an SD-JWT VC ma"
+  },
   "fa24ba1b2af5b001": {
    "file": "flows/F-01-actor-onboarding.md",
    "risk": "verify-no-object",
