@@ -1405,7 +1405,7 @@ For comparison, the alternatives in routine use disclose differently: a paper bo
     travel: {
       purpose: 'Obtain evidence of doses administered against a specific disease, as input to travel advice. This role holds no entitlement to the vaccine brand, the batch number, the administering organisation or the patient name, so a query naming any of them is rejected by the policy layer before the request is sent.',
       claims: ['target_disease', 'occurrence_date', 'dose_number', 'doses_in_series'],
-      foot: 'The presentation request selects four claims. The remaining fourteen are <strong>not included in the presentation</strong>: the wallet opens the commitments for the claim paths the query names and leaves the others closed, so the excluded values are never transmitted.'
+      foot: 'The presentation request selects four claims. The remaining fourteen are <strong>not included in the presentation</strong>: the wallet opens the commitments for the claim paths the query names and leaves the others closed, so the values behind the closed commitments are not part of the response.'
     },
     pharmacy: {
       purpose: 'Establish the position in the dose series before administering the next dose. A pharmacy holding a vaccination permit needs the product and the position in the schedule.',
@@ -1413,12 +1413,12 @@ For comparison, the alternatives in routine use disclose differently: a paper bo
       foot: 'The same credential answers a different request. The identifying claims fall outside this role&rsquo;s entitlement, so <strong>a query naming them is rejected before the request is sent</strong>.'
     },
     practice: {
-      purpose: 'Establish the recorded vaccination history before advising or vaccinating. The treating practice is the only role whose entitlement covers all eighteen claims, and each presentation still requires a request naming the claims it needs.',
+      purpose: 'Establish the recorded vaccination history before advising or vaccinating. In this project’s policy configuration the treating practice is the one role whose entitlement covers all eighteen claims, and each presentation still requires a request naming the claims it needs.',
       claims: CLAIMS.slice(),
       foot: 'An entitlement covering all eighteen claims is not access to all eighteen. Each presentation is <strong>confirmed by the holder in the wallet</strong>, per request, and the holder may decline.'
     },
     research: {
-      purpose: 'Secondary use under an explicit, revocable research consent obtained separately from the wallet interaction. This demonstrator&rsquo;s policy configuration prevents the research role from requesting the identifying claims.',
+      purpose: 'Secondary use under an explicit, revocable research consent obtained separately from the wallet interaction. This demonstrator’s policy configuration prevents the research role from requesting the identifying claims.',
       claims: ['vaccine_code', 'target_disease', 'occurrence_date', 'dose_number'],
       foot: 'Four coded claims carrying dates are <strong>not anonymised data</strong>. Minimising which claims are disclosed is a different operation from removing the identifying power of the values disclosed, and the two should not be reported as if they were the same.'
     },

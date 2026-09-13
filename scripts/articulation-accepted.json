@@ -126,20 +126,10 @@
    "risk": "trust-bare",
    "sentence": "Implementation of hack.opendata.ch project 1103 , \"Digital Health mit der neuen E-ID Trust-Infrastruktur\", continued on the swiyu Trust Infrastructure."
   },
-  "07eb4d0d1ce5bcb0": {
-   "file": "site/index.html",
-   "risk": "absolute",
-   "sentence": "The remaining fourteen are not included in the presentation : the wallet opens the commitments for the claim paths the query names and leaves the others closed,"
-  },
-  "848a9ab7f3f51304": {
-   "file": "site/index.html",
-   "risk": "absolute",
-   "sentence": "The treating practice is the only role whose entitlement covers all eighteen claims, and each presentation still requires a request naming the claims it needs.'"
-  },
-  "ad8c0f8f3283ad31": {
+  "884254900b3b8bc6": {
    "file": "site/index.html",
    "risk": "anonymous",
-   "sentence": "This demonstrator&rsquo;s policy configuration prevents the research role from requesting the identifying claims.', claims: ['vaccine_code', 'target_disease', '"
+   "sentence": "Four coded claims carrying dates are not anonymised data ."
   },
   "ced5a6e2468d5775": {
    "file": "README.md",
