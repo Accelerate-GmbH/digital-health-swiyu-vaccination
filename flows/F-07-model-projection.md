@@ -57,11 +57,12 @@ flowchart LR
 
 ## Two properties to preserve
 
-- **A projection is derived, never authoritative.** The signed SD-JWT VC is the
-  evidence. The FHIR resource built from it carries no signature and proves
-  nothing on its own. A system that needs provenance must retain the
-  presentation. Most systems will retain the projection. That risk is worth
-  stating plainly.
+- **A projection is derived, not authoritative.** The signed SD-JWT VC is the
+  verifiable artefact. The FHIR resource built from it carries no signature, so
+  nothing about its provenance can be checked from the resource alone. A system
+  that needs to evidence provenance later has to retain the presentation
+  alongside the projection. A system that retains only the projection cannot
+  reconstruct it.
 - **A projection is legitimately partial.** After selective disclosure, a
   `DiagnosticReport` may have findings and no patient name. Receiving systems
   must tolerate that instead of treating a missing element as an error. This is

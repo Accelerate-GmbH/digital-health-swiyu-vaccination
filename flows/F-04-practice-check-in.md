@@ -24,15 +24,17 @@ produces:
 
 # F-04 · Check-in at the practice
 
-Reception, in one QR code: who are you and who is paying.
+Reception obtains, from one QR code, the identity attributes it needs to open a
+consultation record and the cover attributes it needs to bill for it.
 
 ## Two credentials, two issuers, one presentation
 
 Two credentials from two unrelated issuers arrive in a single presentation. The
-practice reads the patient's identity from the Confederation's credential and
-their insurance cover from the insurer's, and can compare the two: a mismatch
-between the name on the identity credential and the name on the insurance
-credential is visible, because each is attested by a different party.
+practice reads the identity attributes disclosed from the Confederation's
+credential and the cover attributes disclosed from the insurer's, and can
+compare the two. A difference between the name attested by the Confederation and
+the name attested by the insurer is visible to the practice, because each value
+is attested by a different party.
 
 *Not claimed:* that both credentials are bound to the same wallet key. Key
 binding is per credential — `swiss-profile-vc:1.0.0` §4.1.2 makes the `cnf`
@@ -64,7 +66,7 @@ sequenceDiagram
     R-->>W: One QR code
     W->>GV: Fetch and verify the signed JAR
     W->>TR: Check the verifier's trust statement
-    W-->>W: Holder sees both credentials and the purpose, consents
+    W-->>W: Holder sees both credentials and the purpose, confirms
     W->>GV: Encrypted response: Beta-ID claims + insurance card claims
     GV-->>R: SUCCESS + claims keyed by query id
     R->>R: reviewPresentation() per query
@@ -120,5 +122,5 @@ sequenceDiagram
 ## Implementation status
 
 `implemented`. `PraxisService.startCheckIn` / `completeCheckIn`; covered by
-`apps/demo/test/journey.test.ts`, including the declined-consent and
+`apps/demo/test/journey.test.ts`, including the declined-confirmation and
 missing-credential paths.

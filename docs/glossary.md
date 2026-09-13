@@ -77,14 +77,15 @@ was issued to. Without it a credential is a bearer token.
 **Status list / Token Status List.** A published list with one entry per
 credential, saying whether it is still valid. A credential carries the index
 that finds its own entry. The entry is two bits wide, which is what supports
-both revocation and suspension. The list carries nothing else: no patient, no
+both revocation and suspension. The representation carries no patient data, no
 medication, no verifier and no cryptographic keys. Those live in the DID
 documents, which the Base Registry publishes separately.
 
 **`exp` vs `expiry_date`.** `exp` is absolute: past it a credential cannot be
 presented. `expiry_date` is a business fact that warns the holder and leaves the
-decision to the verifier. An expired e-ID is still adequate proof of being over
-18; collapsing the two removes that judgement.
+decision to the verifier. An e-ID past its `expiry_date` still carries a birth
+date a verifier can evaluate against an age threshold; collapsing the two
+removes that judgement.
 
 ## Protocols
 
@@ -97,7 +98,8 @@ pre-authorized code flow: a QR code carries the offer.
 claims it wants. The list in a DCQL query *is* the minimisation decision.
 
 **JAR.** JWT-Secured Authorization Request. The verifier signs its request, so
-a wallet can tell who is asking before showing a consent screen.
+the wallet can establish which verifier is asking before it shows the request to
+the holder for confirmation.
 
 **DPoP.** Proves that the party using an access token is the party it was
 issued to.
@@ -117,17 +119,18 @@ its keys without a certificate authority.
 **DID log.** The append-only history of a DID document, each entry signed with
 the *update key*. Lose that key and the DID can never be changed again.
 
-**Proof of possession (PoP).** A JWT signed with a DID's private key proving
-control of it. How the Trust Registry verifies an onboarding.
+**Proof of possession (PoP).** A JWT signed with a DID's private key,
+demonstrating control of that key. This is what an actor presents to the Trust
+Registry during onboarding.
 
 **Trust marker.** A machine-readable statement about an actor:
 
 | Marker | Says |
 | --- | --- |
-| `viTM` | Verified Identity: the Confederation checked who this is |
-| `caTM` | Compliant Actor |
-| `gucTM` | This is a governed use case |
-| `gucaTM` | This actor is authorised for that governed use case |
+| `viTM` | Verified Identity: the governing actor validated the identity of this actor |
+| `caTM` | Compliant Actor: this actor was not identified as non-compliant in the ecosystem |
+| `gucTM` | Governed use case: this issuance or verification is protected and needs an authorisation |
+| `gucaTM` | Governed use case authorization: this actor holds the authorisation for that use case |
 
 **Protected field.** A claim requiring explicit authorisation to request,
 whatever credential carries it. In Switzerland: the AHV number.

@@ -61,7 +61,7 @@ that removes most of that work:
 | Handwriting, faded stamps, missing booklets | Structured claims, bound to CH VACD element paths |
 | No way to tell a transcription error from a real gap | The issuer signed it; provenance travels with the data |
 | Manual coding to SNOMED for analysis | Already coded: `vaccine_code` and `target_disease` are SNOMED CT |
-| Consent handled per study, on paper | Selective disclosure: the survey asks for the five claims it needs and gets nothing else |
+| Research consent handled per study, on paper | Selective disclosure: the presentation request selects the five claims the analysis needs, and the remaining claims are not included in the presentation |
 
 A survey participant presenting credentials would be releasing *less* than a
 photocopy of a booklet discloses today and the receiving analyst would get
@@ -148,7 +148,7 @@ recommendation service is the modelled answer and this project does not use it.
 
 F-09 states this. The reasoning is as follows.
 
-A consent-based contribution produces a **self-selected sample**. People who
+A contribution made under a research consent produces a **self-selected sample**. People who
 consent to share health data differ systematically from those who do not, in
 health literacy, in trust in institutions, in health status. For a prevalence
 estimate that bias is not noise to be averaged away; it moves the estimate in a
@@ -171,7 +171,7 @@ these to be settled and none of them are engineering:
    and whether the sample shifts.
 2. **Quantify the equity gap** before it is designed in. Who cannot hold a
    credential, how does that overlap with existing coverage gaps and what does
-   the fallback path have to guarantee.
+   the fallback path have to provide.
 3. **Put a number on the targeting loss.** What does outbreak response cost when
    the susceptible cannot be enumerated, compared with a canton that can
    enumerate them? The question is answerable empirically and the answer bears

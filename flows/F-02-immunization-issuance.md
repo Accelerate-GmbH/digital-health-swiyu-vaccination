@@ -24,8 +24,9 @@ produces:
 
 # F-02 · Recording an administered dose
 
-The showcase flow. A vaccination is administered; the vaccinator attests what
-they did; the attestation goes into the patient's wallet and stays there.
+The showcase flow. A vaccination is administered, the vaccinator issues a
+credential attesting the dose it administered, and the wallet stores that
+credential under its own storage and lifecycle model.
 
 The offer, the token exchange and the credential request are the `issuance` view
 of the reference model. Two things here depart from it, both because of the
@@ -117,9 +118,10 @@ practice management system would place that burden on every vendor.
   instrument and a patient's record would become contestable by any party that issued
   it. This is a governance rule with no technical enforcement: the status list
   cannot tell the two motives apart, so it has to be written down and audited.
-- **The patient is not asked to consent to issuance**, because they asked for
-  the vaccination. Consent attaches to *disclosure* (F-03), which is where the
-  patient actually has a choice to make.
+- **The patient is not asked to approve issuance in the wallet**, because the
+  vaccination itself was agreed in the consultation. The wallet confirmation
+  step attaches to *disclosure* (F-03), which is where the holder chooses what
+  leaves the wallet.
 - **The vaccinator keeps their own record.** The credential is not the practice's
   documentation; professional documentation duties are unaffected by it. What
   changes is that the patient's copy is no longer a printout.

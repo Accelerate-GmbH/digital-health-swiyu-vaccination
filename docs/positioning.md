@@ -21,8 +21,10 @@ the Swiss Health Data Space.
 forward onto the swiyu Trust Infrastructure. It reuses the same clinical models
 — the same archetypes, the same CH VACD element paths, the same terminology
 bindings — and adds a credential exchange layer over them. A vaccination is
-issued to the patient's wallet as an SD-JWT VC, held there, presented under the
-holder's control with selective disclosure, and verified by the relying party.
+issued to the patient's wallet as an SD-JWT VC and stored there. It is presented
+with selective disclosure after the holder confirms the request, and the relying
+party evaluates the issuer signature, the credential status and the holder
+binding.
 This demonstrator operates no clinical data repository of its own.
 
 The two projects address different layers of the same problem. Project 28
@@ -61,9 +63,9 @@ Three specific consequences follow, none of which this repository resolves:
    have ceased to exist, remains undemonstrated here.
 
 In summary, the two layers have complementary strengths. A credential exchange
-layer contributes per-request consent, selective disclosure, issuer-signed
-provenance and an exchange model that does not require a central store of the
-clinical payloads. A repository-based architecture contributes longitudinal
+layer contributes per-request holder confirmation, selective disclosure,
+issuer-signed provenance and an exchange model that does not require a central
+store of the clinical payloads. A repository-based architecture contributes longitudinal
 continuity, query over a maintained record, versioned correction and
 reconciliation. Neither supplies what the other does.
 
@@ -135,10 +137,11 @@ issuer is a practice. Nothing in the flow depends on that.
 
 **Wallet → repository.** A presented credential projects to a CH VACD
 `Immunization` that a FHIR façade accepts and FHIRconnect maps to a COMPOSITION.
-That is the same ingestion path project 28 already built. The credential then serves as a
-signed, consented, verifiable statement of provenance for a record entry. That
-is better provenance than the CDR would otherwise have, because it carries the
-issuer's own signature over the content and a transport-level assertion about
+That is the same ingestion path project 28 already built. The credential then
+serves as an issuer-signed statement of provenance for a record entry, whose
+signature and status a receiving system can check. That is stronger provenance
+than the repository would otherwise hold, because it carries the
+issuer's own signature over the content, where a transport-level assertion about
 who sent the data carries only the sender.
 
 The unresolved question is a governance one: who governs the models when both

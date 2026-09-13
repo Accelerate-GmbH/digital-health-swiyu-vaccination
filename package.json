@@ -19,7 +19,7 @@
     "typecheck": "tsc --build --force",
     "test": "vitest run",
     "test:watch": "vitest",
-    "verify": "npm run typecheck && npm run test && npm run check:mermaid",
+    "verify": "npm run typecheck && npm run test && npm run check:mermaid && npm run check:articulation",
     "generate:config": "tsx scripts/generate-config.ts",
     "build:browser": "esbuild packages/swiyu/src/browser.ts --bundle --format=iife --global-name=SWIYU --target=es2022 --minify --outfile=dist/swiyu.browser.js",
     "vqps": "tsx scripts/vqps.ts",
@@ -27,7 +27,8 @@
     "flows:check": "likec4 validate flows/likec4 && likec4 export json -o /tmp/likec4-views.json flows/likec4",
     "flows:build": "likec4 build -o site/flows --base /digital-health_swiyu/flows/ --use-hash-history --title \"Swiss digital health trust flows\" flows/likec4",
     "flows:dev": "likec4 start flows/likec4",
-    "check:mermaid": "node scripts/check-mermaid.mjs"
+    "check:mermaid": "node scripts/check-mermaid.mjs",
+    "check:articulation": "node scripts/check-articulation.mjs"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",

@@ -27,6 +27,7 @@ Start wherever your question is.
 | [**Swiss Profile conformance**](spec-conformance.md) | The rules this project enforces, each mapped to the clause it comes from, with project policy labelled separately. |
 | [**eHealth Suisse alignment**](ehealth-suisse-alignment.md) | The Swiss identifiers, exchange formats and CH VACD mechanisms this project reuses, the three it repurposes for its own open questions and where it diverges. |
 | [**Source verification**](source-verification.md) | What was checked against a primary source, what rests on a secondary one and which assertions are unverified, the legal citations in particular. |
+| [**Articulation pass**](articulation-pass.md) | The 2026-09-13 precision pass: what changed file by file, which assertions remain strong and on what basis, and which statements depend on unresolved swiyu behaviour or governance. |
 
 ## What the credentials are
 

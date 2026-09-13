@@ -82,9 +82,9 @@ stateDiagram-v2
   reduces what the issuer can observe about where and when its credentials are
   used. It does not make presentations unobservable in general: the registry
   sees the request, and other channels may still correlate.
-- **The status list does not encode a reason.** It carries a status value per
-  entry and nothing else, so "recorded in error", "used up" and "no longer
-  recognised" are indistinguishable to any verifier reading it. The reason is
+- **The status list does not encode a reason.** Each entry carries a status
+  value and no accompanying reason, so "recorded in error", "used up" and "no
+  longer recognised" are indistinguishable to a verifier reading the entry. The reason is
   recorded on the issuer side, in the governance journal and the lifecycle
   policy, which is why the governance rules above have to be written down and
   audited rather than inferred from the list.
