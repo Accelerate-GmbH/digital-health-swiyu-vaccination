@@ -406,20 +406,21 @@
     </div>
     <h1>Immunisation records as verifiable credentials</h1>
     <p class="lede">
-      This project demonstrates how an immunisation record can be issued as a verifiable credential,
-      held in the patient's wallet, presented under the patient's control and verified by a relying
-      party, using the <strong>swiyu Trust Infrastructure</strong>. An authorised vaccinator issues an
-      administered dose to the patient's wallet as a signed credential. A travel clinic later asks
-      for evidence about the doses administered, and receives <strong>four of the eighteen
-      claims</strong> the credential holds; the remaining fourteen are not transmitted. Whether the
-      patient is clinically protected is an inference over those facts, which the clinician makes. The code runs against the swiyu
-      Sandbox and Swiss Profiles 1.0.
+      This project demonstrates an immunisation record carried as verifiable credentials on the
+      <strong>swiyu Trust Infrastructure</strong>. A vaccinator holding the vaccinator role in this
+      project's policy configuration issues one administered dose to the patient's wallet, as a
+      credential signed by that vaccinator. When a travel clinic later requests vaccination evidence,
+      the presentation request selects <strong>four of the eighteen claims</strong> the credential
+      type defines, and the remaining claims are not included in the presentation. The clinic
+      evaluates the issuer signature, the credential status and the holder binding. Whether the
+      patient is clinically protected is a separate inference, drawn by the clinician from the
+      disclosed doses. The code runs against the swiyu Sandbox and Swiss Profiles 1.0.
     </p>
     <div class="facts">
-      <div class="fact"><b>4 / 18</b><span>claims released when a travel clinic requests vaccination evidence</span></div>
+      <div class="fact"><b>4 / 18</b><span>claims included in the presentation when a travel clinic requests vaccination evidence</span></div>
       <div class="fact"><b>4</b><span>credential types issued, each generating its own metadata, schema and wallet rendering</span></div>
       <div class="fact"><b>11</b><span>documented flows with governance and standardisation constraints</span></div>
-      <div class="fact"><b>0</b><span>clinical repositories operated by this project, which runs on the Confederation's registries</span></div>
+      <div class="fact"><b>0</b><span>clinical repositories operated by this project; it depends on the Confederation's registries for identifier, status and trust information</span></div>
     </div>
   </div>
 </header>
@@ -439,13 +440,13 @@
       <table>
         <thead><tr><th>Term</th><th>Meaning here</th></tr></thead>
         <tbody>
-          <tr><td><a href="https://didas-swiss.github.io/didas-glossary/#term:credential">Credential</a></td><td>A digital document signed by the organisation that issued it, held on the patient's phone. One administered dose is one credential.</td></tr>
-          <tr><td><a href="https://didas-swiss.github.io/didas-glossary/#term:claim">Claim</a></td><td>A single data item inside a credential, such as the date of a dose or the disease it targets. The immunization credential has eighteen.</td></tr>
-          <tr><td><a href="https://didas-swiss.github.io/didas-glossary/#term:wallet">Wallet</a></td><td>The app that stores credentials and releases claims from them. The patient operates it.</td></tr>
-          <tr><td><a href="https://didas-swiss.github.io/didas-glossary/#term:issuer">Issuer</a></td><td>The organisation that signs and hands over a credential. Here that is a practice, a pharmacy, an insurer or the Confederation.</td></tr>
-          <tr><td><a href="https://didas-swiss.github.io/didas-glossary/#term:verifier">Verifier</a></td><td>The organisation that asks for claims. Here that is a travel clinic, a practice reception, a pharmacy or a survey.</td></tr>
-          <tr><td><a href="https://didas-swiss.github.io/didas-glossary/#term:selective-disclosure">Selective disclosure</a></td><td>The property that a verifier receives only the claims it asked for and is entitled to. The rest stay on the phone.</td></tr>
-          <tr><td><a href="https://didas-swiss.github.io/didas-glossary/#term:status-list">Status list</a></td><td>A published list with one entry per credential, saying whether it is still valid. Each credential carries the index that finds its own entry. Nothing else connects the two. The list contains no patient data.</td></tr>
+          <tr><td><a href="https://didas-swiss.github.io/didas-glossary/#term:credential">Credential</a></td><td>A set of claims about a subject, signed by the organisation that issued it and stored in the patient's wallet. One administered dose is issued as one credential.</td></tr>
+          <tr><td><a href="https://didas-swiss.github.io/didas-glossary/#term:claim">Claim</a></td><td>A single data item inside a credential, such as the date of a dose or the disease it targets. The immunization credential type defines eighteen.</td></tr>
+          <tr><td><a href="https://didas-swiss.github.io/didas-glossary/#term:wallet">Wallet</a></td><td>The application that stores issued credentials under its own storage and lifecycle model, and that releases selected claims in response to a presentation request. The patient operates it.</td></tr>
+          <tr><td><a href="https://didas-swiss.github.io/didas-glossary/#term:issuer">Issuer</a></td><td>The organisation that signs a credential and transfers it to the wallet. Here that is a practice, a pharmacy, an insurer or the Confederation.</td></tr>
+          <tr><td><a href="https://didas-swiss.github.io/didas-glossary/#term:verifier">Verifier</a></td><td>The organisation that sends a presentation request and evaluates the response. Here that is a travel clinic, a practice reception, a pharmacy or a survey.</td></tr>
+          <tr><td><a href="https://didas-swiss.github.io/didas-glossary/#term:selective-disclosure">Selective disclosure</a></td><td>A property of the credential format: the issuer commits to each claim separately, and the holder can open some of those commitments and leave the others closed. Claims not selected by the presentation request and not released by the wallet are not included in the presentation response.</td></tr>
+          <tr><td><a href="https://didas-swiss.github.io/didas-glossary/#term:status-list">Status list</a></td><td>A published list with one entry per credential. Each credential carries the index of its own entry, and a verifier fetches the list and reads that entry to obtain the status the issuer has published. The status-list representation contains no clinical payload and no patient attributes.</td></tr>
         </tbody>
       </table>
     </div>
@@ -471,10 +472,11 @@
       <cite>What the model does and does not change</cite>
     </div>
     <p>
-      In this showcase each administered dose is issued as its own credential, signed by the authorised
-      vaccinator that administered it, and held in the patient's wallet. A credential already issued
-      remains usable by its holder if the issuing organisation ceases to operate, subject to the status
-      and revocation mechanisms the profile defines.
+      In this showcase each administered dose is issued as its own credential, signed by the
+      vaccinator that administered it, and stored in the patient's wallet. A credential already
+      issued remains usable by its holder if the issuing organisation ceases to operate, subject to
+      the status and revocation mechanisms the profile defines and to the continued availability of
+      the identifier, status and trust infrastructure a verifier reads.
     </p>
   </section>
 
@@ -483,18 +485,19 @@
     <h2>How credentials reach the wallet and how claims leave it</h2>
     <p>
 Four organisations issue credentials to the wallet: the Confederation, a health insurer, a
-      practice and a pharmacy. Each issues only what its role entitles it to assert. Claims are
-      released from the wallet in answer to a specific request from a verifier, with the patient's
-      consent, one request at a time. Issuer and verifier exchange no clinical payload through a
-      shared store; the shared component in the exchange is the status list published by the
-      Confederation's Base Registry, which records whether a credential is still valid and nothing
-      else about it. Both parties also depend on the Base Registry to resolve identifiers and on the
-      Trust Registry for trust statements.
+      practice and a pharmacy. Each issues the credential types its role permits in this project's
+      policy configuration. Claims leave the wallet in response to a specific presentation request
+      from a verifier, after the patient confirms that request in the wallet, one request at a time.
+      Issuer and verifier exchange no clinical payload through a shared store. The component both
+      sides read is the status list published by the Confederation's Base Registry, which carries a
+      status entry per credential and no clinical payload or patient attributes. Both parties also
+      resolve identifiers through the Base Registry and read trust statements from the Trust
+      Registry.
     </p>
 
     <figure>
       <div class="figbox">
-        <svg viewBox="0 0 900 470" role="img" aria-label="Issuers write credentials into the patient's wallet over OpenID4VCI; four verifiers (practice reception, travel clinic, pharmacy and the national coverage survey) ask the wallet for specific claims over OpenID4VP; the coverage survey also issues a single-use invitation credential into the wallet; both sides use a status list on the Base Registry, which carries no patient data.">
+        <svg viewBox="0 0 900 470" role="img" aria-label="Issuers write credentials into the patient's wallet over OpenID4VCI; four verifiers (practice reception, travel clinic, pharmacy and the national coverage survey) ask the wallet for specific claims over OpenID4VP; the coverage survey also issues a single-use invitation credential into the wallet; both sides read a status list on the Base Registry, which carries a status entry per credential and no clinical payload.">
           <defs>
             <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
               <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"></path>
@@ -595,8 +598,8 @@ Four organisations issue credentials to the wallet: the Confederation, a health 
           </g>
           <text x="126" y="300" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="currentColor" opacity="0.7">publishes ·</text>
           <text x="126" y="314" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="currentColor" opacity="0.7">revokes</text>
-          <text x="736" y="330" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="currentColor" opacity="0.7">checks</text>
-          <text x="736" y="344" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="currentColor" opacity="0.7">validity</text>
+          <text x="736" y="330" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="currentColor" opacity="0.7">reads</text>
+          <text x="736" y="344" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="currentColor" opacity="0.7">status</text>
 
           <!-- redemption edge: pharmacy asks the prescriber to revoke -->
           <path d="M 688 202 L 664 202 L 664 340 L 148 340 L 148 258" stroke="currentColor" stroke-opacity="0.35" fill="none" marker-end="url(#ar)"></path>
@@ -605,14 +608,14 @@ Four organisations issue credentials to the wallet: the Confederation, a health 
         </svg>
       </div>
       <figcaption>
-        The status list carries two bits per credential. That is enough to make a prescription
-        single-use without a register recording who was prescribed what.
-        The fourth verifier is the national coverage survey. It asks for five claims and no
-        identifier. Today it gets the same information from a photocopied booklet sent by post. It is
-        also the only verifier that issues. Its letter to a sampled household carries a single-use
-        invitation credential. The wallet presents that credential back together with the dose
-        claims. The survey revokes it once the response is accepted. Survey and invitation are drawn
-        dashed because neither is built.
+        The status list carries two bits per credential, which is what makes a prescription
+        single-use without any party keeping a record of who was prescribed what.
+        The fourth verifier is the national coverage survey. Its presentation request selects five
+        claims and no person identifier. Today the survey obtains comparable information from a
+        photocopied vaccination record sent by post. It is also the only verifier here that issues:
+        its letter to a sampled household carries a single-use invitation credential, the wallet
+        presents that credential together with the dose claims, and the survey revokes it once the
+        response is accepted. Survey and invitation are drawn dashed because neither is built.
       </figcaption>
     </figure>
   </section>
@@ -621,11 +624,15 @@ Four organisations issue credentials to the wallet: the Confederation, a health 
     <p class="kicker">Selective disclosure</p>
     <h2>What each verifier receives</h2>
     <p>
-      The immunization credential carries eighteen claims. An entitlement attached to the verifier's
-      registered role decides which of them it receives. A query for claims outside that entitlement
-      is refused when the query is built, before it reaches the wallet. The timing matters. Once the
-      wallet has answered, the data has left the phone. Any check applied after that point is a
-      promise about how the recipient will behave.
+      The immunization credential type defines eighteen claims. This project's policy layer attaches
+      an entitlement to each verifier role, naming the claims a verifier in that role may request. A
+      query naming a claim outside that entitlement is rejected by the policy layer while the query
+      is being built, before any request reaches the wallet.
+    </p>
+    <p>
+      The point at which that check runs is a design decision. A check applied after the wallet has
+      responded operates on data the verifier already holds, so it constrains what the verifier is
+      permitted to do with the claims rather than which claims it received.
     </p>
 
     <div class="explorer">
@@ -638,17 +645,19 @@ Four organisations issue credentials to the wallet: the Confederation, a health 
       </div>
       <div class="purpose">
         <p class="why" id="purpose-text"></p>
-        <p class="tally"><b id="tally-n">4</b> / 18 claims released</p>
+        <p class="tally"><b id="tally-n">4</b> / 18 claims disclosed</p>
       </div>
       <div class="claimgrid" id="claimgrid"></div>
       <div class="explorer-foot" id="explorer-foot"></div>
     </div>
 
     <p class="prose-note" style="margin-top:22px">
-For comparison, the disclosure profile of the alternatives in routine use differs: a paper
-      booklet is read as a whole page, and a PDF exported from a portal contains the whole file.
-      Selective disclosure narrows what a verifier receives to the claims it requested and is
-      entitled to; it makes no claim about unlinkability across presentations.
+For comparison, the alternatives in routine use disclose differently: a paper booklet is read as
+      a whole page, and a PDF exported from a portal is transferred as a whole file. Selective
+      disclosure narrows the presentation to the claims the request selects and the wallet releases.
+      It says nothing about correlation across presentations, which depends on the credential
+      identifier, the holder key, the disclosed claim values, the status-list reference, timing and
+      network metadata.
     </p>
   </section>
 
@@ -662,32 +671,37 @@ For comparison, the disclosure profile of the alternatives in routine use differ
       questions and are answered here.
     </p>
     <p>
-      First, whether the issuing party has the standing to assert a clinical fact: a valid signature
-      establishes who signed, not whether the signer was entitled to state what it stated. Second,
-      whether the requesting party has the standing to ask for the claims it is requesting, which is
-      separate from whether the request is well formed. Third, whether this particular presentation
-      should be accepted, given its scope and context. Each question is implemented as its own
-      function; the three run in a fixed order, and each records its reasoning whether the outcome is
-      acceptance or refusal.
+      First, whether the issuing party may assert a clinical fact of this kind. A signature that
+      verifies establishes which key signed and, through identifier resolution, which issuer holds
+      that key. It does not establish that the issuer holds the role this project requires for the
+      assertion. Second, whether the requesting party may ask for the claims it is requesting, which
+      is a separate question from whether the request is well formed. Third, whether this particular
+      presentation should be accepted, given its scope and context. Each question is implemented as
+      its own function; the three run in a fixed order, and each records its reasoning whether the
+      outcome is acceptance or refusal.
     </p>
     <div class="gates">
       <div class="gate">
         <span class="fn">reviewIssuance()</span>
         <h3>Who may assert this?</h3>
-        <p>A practice may issue an immunization because it holds the vaccinator role. An insurer may
-          not. Refused before the request reaches the issuer.</p>
+        <p>A practice may issue an immunization credential because it holds the vaccinator role in
+          this project's policy configuration. An insurer does not hold that role, so the same
+          request is rejected before it reaches the issuer.</p>
       </div>
       <div class="gate">
         <span class="fn">reviewRequest()</span>
         <h3>Who may ask and for what?</h3>
-        <p>Claims outside the role's entitlement are refused at query construction. Protected fields such
-          as the AHV number need their own grant, whatever credential carries them.</p>
+        <p>A query naming a claim outside the requesting role's entitlement is rejected while the
+          query is being built. A protected claim such as the AHV number needs an authorisation of
+          its own, in addition to the role entitlement, whichever credential carries it.</p>
       </div>
       <div class="gate">
         <span class="fn">reviewPresentation()</span>
         <h3>Should this be accepted?</h3>
-        <p>Status list first, then Trust Protocol 2.0 markers. A governed use case without
-          authorisation is refused under every policy, because that rule is a MUST.</p>
+        <p>The status-list entry first, then the Trust Protocol 2.0 markers. A counterparty
+          carrying the governed use case marker <code>gucTM</code> without the matching
+          authorisation marker <code>gucaTM</code> is declined under every policy, because
+          <code>swiss-profile-trust:1.0</code> states that rule at MUST level.</p>
       </div>
     </div>
 
@@ -703,9 +717,9 @@ For comparison, the disclosure profile of the alternatives in routine use differ
       <a href="https://github.com/DIDAS-swiss/digital-health_swiyu/blob/main/docs/onboarding-sandbox.md#from-the-sandbox-to-production">what changes on production swiyu →</a>
     </p>
     <p>
-      The journal holds claim <em>names</em> and no claim values. It therefore shows that an
-      interaction stayed within the rules without becoming a second copy of the patient's data. A test
-      asserts that no AHV number and no vaccine lot number reaches it.
+      The journal records claim <em>names</em> and no claim values, so it evidences which rules were
+      applied to an interaction without becoming a second copy of the patient's data. A test asserts
+      that no AHV number and no vaccine lot number reaches it.
     </p>
   </section>
 
@@ -762,9 +776,9 @@ For comparison, the disclosure profile of the alternatives in routine use differ
       Two properties hold for every projection. The code states both wherever it performs one. First,
       a projection is <strong>derived and not authoritative</strong>. The signed credential remains
       the evidence. Second, a projection is <strong>legitimately partial</strong>. After selective
-      disclosure a FHIR resource may carry findings and no patient name. Receiving systems therefore
-      have to treat a missing element as a valid outcome rather than an error. Handling those partial
-      resources is the main integration cost of this approach.
+      disclosure a FHIR resource may carry findings and no patient name. A receiving system therefore
+      has to treat an absent element as an expected outcome of the disclosure rather than as a data
+      error. Handling those partial resources is the main integration cost of this approach.
     </p>
 
     <div class="tablewrap">
@@ -804,16 +818,16 @@ For comparison, the disclosure profile of the alternatives in routine use differ
     </p>
     <div class="flows">
       <a class="flow" href="flows/#/view/actorOnboarding/"><span class="fid">F-01</span><span class="ftitle">Becoming an actor<span>DID, trust statement, role grant</span></span><span class="status partial">Partial</span></a>
-      <a class="flow" href="flows/#/view/immunizationIssuance/"><span class="fid">F-02</span><span class="ftitle">Issuing an administered dose<span>One credential per dose, issued by the authorised vaccinator</span></span><span class="status built">Built</span></a>
+      <a class="flow" href="flows/#/view/immunizationIssuance/"><span class="fid">F-02</span><span class="ftitle">Issuing an administered dose<span>One credential per dose, signed by the vaccinator that administered it</span></span><span class="status built">Built</span></a>
       <a class="flow" href="flows/#/view/protectionCheck/"><span class="fid">F-03</span><span class="ftitle">Presenting vaccination evidence with minimal disclosure<span>Four claims of eighteen</span></span><span class="status built">Built</span></a>
       <a class="flow" href="flows/#/view/practiceCheckIn/"><span class="fid">F-04</span><span class="ftitle">Check-in at the practice<span>Two issuers, one presentation, a name that must match</span></span><span class="status built">Built</span></a>
       <a class="flow" href="flows/#/view/prescriptionRedemption/"><span class="fid">F-05</span><span class="ftitle">Prescription and its redemption<span>Single use, without a register recording who was prescribed what</span></span><span class="status built">Built</span></a>
       <a class="flow" href="flows/#/view/correction/"><span class="fid">F-06</span><span class="ftitle">Correction, suspension and revocation<span>Why business expiry and technical expiry must stay apart</span></span><span class="status partial">Partial</span></a>
       <div class="flow"><span class="fid">F-07</span><span class="ftitle">Projecting into FHIR and openEHR<span>Rebuilding FHIR and openEHR representations from released claims</span></span><span class="status built">Built</span></div>
       <div class="flow"><span class="fid">F-08</span><span class="ftitle">Assembling an International Patient Summary<span>Allergies, problems, medication statements</span></span><span class="status later">Step 2</span></div>
-      <div class="flow"><span class="fid">F-09</span><span class="ftitle">Secondary use under revocable consent<span>Identifying claims excluded by construction</span></span><span class="status later">Step 2</span></div>
+      <div class="flow"><span class="fid">F-09</span><span class="ftitle">Secondary use under revocable research consent<span>Policy configuration prevents the research role requesting identifying claims</span></span><span class="status later">Step 2</span></div>
       <div class="flow"><span class="fid">F-10</span><span class="ftitle">Wearables and continuous data<span>Limits of the authored-event model</span></span><span class="status later">Step 3</span></div>
-      <a class="flow" href="flows/#/view/coverageSurvey/"><span class="fid">F-11</span><span class="ftitle">Answering the national coverage survey<span>Five claims, no identifier, in place of a photocopied booklet</span></span><span class="status later">Step 2</span></a>
+      <a class="flow" href="flows/#/view/coverageSurvey/"><span class="fid">F-11</span><span class="ftitle">Answering the national coverage survey<span>Five claims and no person identifier, in place of a photocopied record</span></span><span class="status later">Step 2</span></a>
     </div>
   </section>
 
@@ -828,7 +842,7 @@ For comparison, the disclosure profile of the alternatives in routine use differ
           <li>FHIR / openEHR interplay</li>
           <li>End-to-end prototype, runnable offline</li>
           <li>Blueprint: the eleven flows</li>
-          <li>Governance model with real refusals</li>
+          <li>Governance model that rejects out-of-policy issuance and requests</li>
         </ul>
       </div>
       <div class="stage">
@@ -944,35 +958,43 @@ For comparison, the disclosure profile of the alternatives in routine use differ
       </div>
     </div>
     <p class="prose-note">
-      Today a family posts a photocopy of the child's vaccination booklet, which shows every dose,
-      every date, the vaccinating physician and usually the child's name. A presentation sends five
-      claims and no name. Of the eleven flows, this is the only one that sends the survey less than
-      it already receives. The survey needs no identifying claim, because it drew the household from
-      the population register and therefore already holds the age band and the canton. Consent adds
-      no new step either: households are invited by letter today and may decline today.
+      Today a family posts a photocopy of the child's vaccination record, which shows every dose,
+      every date, the vaccinating physician and usually the child's name. The presentation modelled
+      here selects five claims and no person identifier, so of the eleven flows it is the one whose
+      disclosure is narrower than the procedure it would replace. The survey response does not
+      require the presentation of an explicit person identifier; the stratum the analysis needs
+      arrives inside the invitation credential. Other disclosed values and protocol metadata may
+      still contribute to correlation, which the section below sets out. The approval step is not
+      new either: households are invited by letter today and may decline today, and the wallet adds a
+      confirmation of the presentation request rather than a new legal consent.
     </p>
     <p class="prose-note">
-      <strong>One methodological constraint governs the whole design.</strong> The wallet is a response
-      channel and not a sampling frame. A survey that allowed holders to volunteer their credentials
-      would measure the people who choose to volunteer. That selection bias cannot be corrected from
-      inside the sample. EBPI draws the sample from the register. The wallet only answers.
+      <strong>One methodological constraint governs the whole design.</strong> The wallet is a
+      response channel and not a sampling frame. A survey that accepted volunteered credentials would
+      measure the population that chose to volunteer, and that selection bias cannot be corrected
+      from inside the sample. EBPI draws the sample from the population register or an equivalent
+      method, and the wallet is used only to return a response to an invitation already issued.
     </p>
 
     <h3 class="rmsub">Unlinkability</h3>
     <p>
-      <strong>Unlinkability</strong> means two things. The party receiving data cannot connect it to
-      the person it came from. It also cannot connect two separate submissions to each other. For a
-      coverage survey this is the property that matters most. A response that can be traced back to a
-      household turns the survey into a register of who replied and what they replied.
+      <strong>Unlinkability</strong> is used here for two distinct properties. First, that the
+      receiving party cannot associate a response with the household it came from. Second, that it
+      cannot associate two responses with each other. Each depends on a specific correlation surface:
+      the credential identifier, the holder key, the disclosed claim values, the status-list
+      reference, the issuer, timing and network metadata. For a coverage survey the first property is
+      the one that decides the design, because a response that can be associated with a household
+      makes the survey a record of who replied and what they replied.
     </p>
     <p>
       The design addresses the first half. The invitation posted to the household carries a
       <strong>single-use credential holding the stratum</strong> (age band, canton, survey cycle)
-      and no household identifier. It is presented together with the dose claims in <strong>one
-      combined proof</strong> and is <strong>revoked once the response is accepted</strong>, using the
-      same two bits on a public status list that make a prescription single-use in F-05. The survey
-      therefore learns that a household in a given canton with an 8-year-old reported a given set of
-      doses. It holds no identifier it could join that record to.
+      and no household identifier. The wallet presents it together with the dose claims in
+      <strong>one presentation</strong>, and the survey <strong>revokes it once the response is
+      accepted</strong>, using the same two bits on a public status list that make a prescription
+      single-use in F-05. From the response itself the survey learns that a household in a given
+      canton with an 8-year-old reported a given set of doses. No person identifier is disclosed that
+      the survey could use to join that response to its sampling record.
     </p>
     <div class="survey">
       <div>
@@ -985,17 +1007,21 @@ For comparison, the disclosure profile of the alternatives in routine use differ
       </div>
       <div>
         <h3>Where unlinkability is not yet structural</h3>
-        <p>The survey both issues the invitation and revokes it, so a retained mapping from invitation
-          to posted address would re-link a response by timing. The same dose credentials presented in
-          two cycles are also linkable to each other. Closing both requires either batch issuance or a
-          zero-knowledge presentation. Neither is in place.</p>
+        <p>The survey both issues the invitation and revokes it. A retained mapping from invitation
+          index to posted address, combined with revocation timing, would let the survey associate a
+          response with a household. Separately, the same dose credentials presented in two cycles
+          expose the same credential-level artefacts, so those two responses may be associated with
+          each other. Closing either requires batch issuance or a zero-knowledge presentation, and
+          neither is in place.</p>
       </div>
     </div>
     <p class="prose-note">
-      Until one of those two mechanisms is implemented, this flow is unlinkable by governance rule
-      rather than by construction, which is the weaker guarantee. A zero-knowledge presentation would
-      let the wallet prove that a valid, unused invitation exists without revealing which one. That
-      would remove the timing correlation. The candidate scheme and its fit to this profile are
+      Until one of those two mechanisms is implemented, the property rests on the survey operator
+      following the retention rules above rather than on the protocol preventing the correlation,
+      which is the weaker of the two positions. A zero-knowledge presentation would
+      let the wallet demonstrate that it holds an invitation credential whose status entry is still
+      unset, without disclosing which invitation that is. That would remove the correlation available
+      through the invitation index and its revocation timing. The candidate scheme and its fit to this profile are
       tracked in
       <a href="https://github.com/DIDAS-swiss/digital-health_swiyu/issues/10">issue 10, Longfellow
       ZK</a>.
@@ -1021,11 +1047,14 @@ For comparison, the disclosure profile of the alternatives in routine use differ
         wallet and simulated generic components. That mock performs no signing, no DPoP, no
         encryption and no identifier resolution, and establishes nothing about protocol
         conformance.</li>
-      <li><strong>No predicate proofs.</strong> The Swiss Profile mandates SD-JWT VC, in which claims
-        are individually disclosable. Proving a property of a claim without disclosing it is not
-        available in this profile.</li>
-      <li><strong>Unlinkability is not claimed.</strong> Selective disclosure limits what a given
-        verifier receives. It does not make presentations unlinkable; see below.</li>
+      <li><strong>No predicate proofs.</strong> The Swiss Profile mandates SD-JWT VC, in which
+        claims are individually disclosable. Demonstrating a property of a claim, such as that a date
+        falls within a range, without disclosing the claim value is not available in this
+        profile.</li>
+      <li><strong>Unlinkability is not claimed.</strong> Selective disclosure narrows the claims
+        included in a presentation. It does not remove the correlation surfaces two verifiers could
+        use, which include the credential identifier, the holder key, the disclosed claim values, the
+        status-list reference, timing and network metadata; see below.</li>
       <li><strong>The semantic mappings are unreviewed.</strong> The FHIR and openEHR bindings are
         this project's own and have not been endorsed by the standards bodies concerned.</li>
       <li><strong>Demonstration data is illustrative.</strong> SNOMED CT codes, GLNs, BAG numbers,
@@ -1040,10 +1069,10 @@ For comparison, the disclosure profile of the alternatives in routine use differ
       <div class="blocker">
         <h3>No one can grant the roles yet</h3>
         <p>
-          Nothing here deploys until some body can issue the trust statement that says "this DID is a
-          practice authorised to vaccinate". The Confederation's onboarding verifies <em>who</em> an
-          organisation is. It does not state what that organisation may do in healthcare. No
-          health-domain governance body exists to state it.
+          Nothing here deploys until some body can issue the trust statement that says "this DID is
+          a practice authorised to vaccinate". The Confederation's onboarding establishes which legal
+          entity controls the identifier. It does not state what that entity may do in healthcare,
+          and no health-domain governance body exists to state it.
         </p>
         <p>
           There is a second half to this, at the protocol layer. swiyu opens governed credential
@@ -1074,10 +1103,15 @@ For comparison, the disclosure profile of the alternatives in routine use differ
       </div>
       <div>
         <h3>Presentations are not unlinkable</h3>
-        <p>A credential presented twice is the same credential, so two verifiers comparing notes can
-          tell it is the same person. Batch issuance reduces this and is not used here, because with a
-          dose series the claim values are themselves close to identifying. A zero-knowledge
-          presentation would address it directly; the candidate is tracked in
+        <p>Repeated presentations of the same credential may be correlatable where the presentations
+          expose stable credential-level or claim-level information. Two verifiers that exchange
+          presentation data may therefore be able to determine that two presentations relate to the
+          same credential, and so to the same holder. The degree of correlation depends on the
+          credential format, the holder-binding mechanism, the disclosed claims and the presentation
+          protocol. Batch issuance reduces the credential-level surface and is not used here, because
+          across a dose series the disclosed claim values are themselves close to identifying. A
+          zero-knowledge presentation would address the credential-level surface directly; the
+          candidate is tracked in
           <a href="https://github.com/DIDAS-swiss/digital-health_swiyu/issues/10">issue 10</a>.</p>
       </div>
       <div>
@@ -1155,29 +1189,29 @@ For comparison, the disclosure profile of the alternatives in routine use differ
   // packages/swiyu/src/credentials/immunization.ts.
   const ROLES = {
     travel: {
-      purpose: 'Obtain evidence of doses administered against a specific disease, as input to travel advice. This role has no entitlement to the vaccine brand, the batch number, the administering organisation or the patient name, so a query for them is refused before it is sent.',
+      purpose: 'Obtain evidence of doses administered against a specific disease, as input to travel advice. This role holds no entitlement to the vaccine brand, the batch number, the administering organisation or the patient name, so a query naming any of them is rejected by the policy layer before the request is sent.',
       claims: ['target_disease', 'occurrence_date', 'dose_number', 'doses_in_series'],
-      foot: 'Fourteen claims stay in the wallet. They are <strong>not transmitted and then redacted</strong>; the wallet releases only the claim paths the query names.'
+      foot: 'The presentation request selects four claims. The remaining fourteen are <strong>not included in the presentation</strong>: the wallet opens the commitments for the claim paths the query names and leaves the others closed, so the excluded values are never transmitted.'
     },
     pharmacy: {
-      purpose: 'Check the series before administering the next dose. A pharmacy with a vaccination permit needs the product and where you are in the schedule.',
+      purpose: 'Establish the position in the dose series before administering the next dose. A pharmacy holding a vaccination permit needs the product and the position in the schedule.',
       claims: ['vaccine_code', 'vaccine_name', 'target_disease', 'occurrence_date', 'dose_number', 'doses_in_series', 'next_dose_due'],
-      foot: 'The same credential answering a different question. Identity claims fall outside this role&rsquo;s entitlement, so <strong>a request for them is refused before it is sent</strong>.'
+      foot: 'The same credential answers a different request. The identifying claims fall outside this role&rsquo;s entitlement, so <strong>a query naming them is rejected before the request is sent</strong>.'
     },
     practice: {
-      purpose: 'Establish vaccination status before advising or vaccinating. The treating practice is the only role entitled to all eighteen claims. It still has to ask for them.',
+      purpose: 'Establish the recorded vaccination history before advising or vaccinating. The treating practice is the only role whose entitlement covers all eighteen claims, and each presentation still requires a request naming the claims it needs.',
       claims: CLAIMS.slice(),
-      foot: 'An entitlement to all eighteen claims is not access to all eighteen. <strong>The holder consents per presentation</strong> and may decline.'
+      foot: 'An entitlement covering all eighteen claims is not access to all eighteen. Each presentation is <strong>confirmed by the holder in the wallet</strong>, per request, and the holder may decline.'
     },
     research: {
-      purpose: 'Secondary use under explicit, revocable patient consent. The entitlement excludes every identifying claim by construction.',
+      purpose: 'Secondary use under an explicit, revocable research consent obtained separately from the wallet interaction. This demonstrator&rsquo;s policy configuration prevents the research role from requesting the identifying claims.',
       claims: ['vaccine_code', 'target_disease', 'occurrence_date', 'dose_number'],
-      foot: 'Four coded claims carrying dates are <strong>not anonymous data</strong>. Minimising what is disclosed is not the same as de-identifying it. The two should not be reported as if they were.'
+      foot: 'Four coded claims carrying dates are <strong>not anonymised data</strong>. Minimising which claims are disclosed is a different operation from removing the identifying power of the values disclosed, and the two should not be reported as if they were the same.'
     },
     statistics: {
-      purpose: 'National vaccination coverage monitoring. The EBPI survey drew this household from the population register, so it already holds the age band and the canton. It asks for neither.',
+      purpose: 'National vaccination coverage monitoring. The stratum the analysis needs, the age band and the canton, arrives inside the invitation credential the survey issued, so the presentation request does not name a person identifier.',
       claims: ['target_disease', 'occurrence_date', 'dose_number', 'doses_in_series', 'vaccine_code'],
-      foot: 'Today the family posts a <strong>photocopy of the vaccination booklet</strong>, showing every dose, every date, the vaccinating physician and usually the child&rsquo;s name. Five coded claims and no name is less than that. This is the only role on this page that sends a verifier less than it already receives.'
+      foot: 'Today the family posts a <strong>photocopy of the vaccination record</strong>, showing every dose, every date, the vaccinating physician and usually the child&rsquo;s name. The presentation modelled here discloses five coded claims and no name, which is narrower than the procedure it would replace.'
     }
   };
 
