@@ -10,12 +10,20 @@ still be acted on, it does.
 
 ## How the national coverage figure is produced
 
-> **Sourcing note.** The description of the survey below — its start year,
-> coordinating institute, sampled age groups, cycle length and contact procedure
-> — was supplied to this project and has **not** been verified against a primary
-> source here: `bag.admin.ch`, `ebpi.uzh.ch` and the literature databases are all
-> blocked at this environment's egress gateway. Treat these as reported rather
-> than established, and confirm them before reuse. See
+> **Sourcing note.** `bag.admin.ch`, `ebpi.uzh.ch` and the literature databases
+> are blocked at this environment's egress gateway, so no primary source for the
+> survey was read here. The coordinating institute (EBPI at the University of
+> Zurich, with the Federal Office of Public Health and the cantons), the sampled
+> age groups (2, 8 and 16) and the three-year cycle are corroborated across
+> independent secondary sources, which the project's convention classes as **S**
+> rather than **P**. The survey is also referred to as the *Kantonales
+> Durchimpfungsmonitoring Schweiz*.
+>
+> One detail does **not** agree with those sources: this document says the survey
+> has run *since 1999*, while secondary sources describe the three-year cycle as
+> running since 2005. The two may both be true — a survey can predate the cycle
+> it later settled into — but the 1999 figure is unconfirmed and should be
+> checked. The contact procedure is likewise unconfirmed. See
 > [source verification](source-verification.md).
 
 The national figure is reported to come from the **Swiss National Vaccination

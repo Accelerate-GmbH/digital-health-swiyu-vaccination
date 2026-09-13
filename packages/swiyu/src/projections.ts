@@ -163,7 +163,7 @@ export function projectToFhir(
           id: `${String(values.prescription_id ?? 'rx')}-${index + 1}`,
           status: 'active',
           intent: 'order',
-          subject: { display: patientDisplay(values, 'patient_given_name', 'patient_family_name') },
+          subject: subjectReference(values, 'patient_given_name', 'patient_family_name'),
         };
         applyClaims(
           request,
@@ -205,7 +205,7 @@ export function projectToFhir(
           resourceType: 'Observation',
           id: `${String(values.report_id ?? 'obs')}-${index + 1}`,
           status: 'final',
-          subject: { display: patientDisplay(values, 'patient_given_name', 'patient_family_name') },
+          subject: subjectReference(values, 'patient_given_name', 'patient_family_name'),
         };
         applyClaims(observation, 'Observation', findingsClaim?.nested ?? [], entry as Record<string, unknown>);
         // The LOINC code needs its system alongside the code to be usable.
@@ -220,7 +220,7 @@ export function projectToFhir(
         ...meta,
         id: String(values.report_id ?? 'report'),
         status: 'final',
-        subject: { display: patientDisplay(values, 'patient_given_name', 'patient_family_name') },
+        subject: subjectReference(values, 'patient_given_name', 'patient_family_name'),
         result: observations.map((observation) => ({ reference: `Observation/${String(observation.id)}` })),
       };
       applyClaims(report, 'DiagnosticReport', definition.claims, values);
@@ -244,7 +244,7 @@ export function projectToFhir(
         // IPS and CH VACD both require a status; a credential only ever
         // attests a dose that was given, so the status is `completed`.
         status: 'completed',
-        patient: { display: patientDisplay(values, 'patient_given_name', 'patient_family_name') },
+        patient: subjectReference(values, 'patient_given_name', 'patient_family_name'),
       };
       applyClaims(resource, 'Immunization', definition.claims, values);
 
@@ -266,7 +266,15 @@ export function projectToFhir(
       const vaccineCode = resource.vaccineCode as { coding?: { system?: string }[] } | undefined;
       if (vaccineCode?.coding?.[0]) vaccineCode.coding[0].system = 'http://snomed.info/sct';
       if (values.patient_birth_date) {
-        (resource.patient as Record<string, unknown>).birthDate = values.patient_birth_date;
+        // `birthDate` is not an element of `Reference`. CH VACD allows
+        // `contained 0..1` for exactly this ("Immunization inline resource"),
+        // so a disclosed birth date goes on a contained Patient and the
+        // subject reference points at it.
+        containSubject(resource, 'patient', {
+          resourceType: 'Patient',
+          id: 'subject',
+          birthDate: values.patient_birth_date,
+        });
       }
       if (values.next_dose_due) {
         // FHIR models a due date as a separate ImmunizationRecommendation; a
@@ -292,8 +300,40 @@ export function projectToFhir(
   }
 }
 
-function patientDisplay(values: Record<string, unknown>, given: string, family: string): string {
-  return [values[given], values[family]].filter(Boolean).join(' ') || 'unknown';
+function patientDisplay(
+  values: Record<string, unknown>,
+  given: string,
+  family: string,
+): string | undefined {
+  return [values[given], values[family]].filter(Boolean).join(' ') || undefined;
+}
+
+/**
+ * The subject reference for a projected resource.
+ *
+ * FHIR requires a subject on each of these resource types, but a `Reference`
+ * with nothing in it asserts nothing, and a `display` of "unknown" asserts
+ * something false: it reads as a patient whose name is not known, when what
+ * actually happened is that the holder chose not to release it. FHIR has an
+ * idiom for exactly this, so the absent value carries `data-absent-reason`
+ * `masked` — "information is not available due to security, privacy or related
+ * reasons" — which is what selective disclosure is.
+ */
+function subjectReference(
+  values: Record<string, unknown>,
+  given: string,
+  family: string,
+): Record<string, unknown> {
+  const display = patientDisplay(values, given, family);
+  if (display) return { display };
+  return {
+    extension: [
+      {
+        url: 'http://hl7.org/fhir/StructureDefinition/data-absent-reason',
+        valueCode: 'masked',
+      },
+    ],
+  };
 }
 
 function nameIntoBeneficiary(
@@ -310,7 +350,37 @@ function nameIntoBeneficiary(
   if (!hasName && !hasBirthDate) return;
   const beneficiary = (resource.beneficiary ??= {}) as Record<string, unknown>;
   if (hasName) beneficiary.display = patientDisplay(values, given, family);
-  if (hasBirthDate) beneficiary.birthDate = values[birth];
+  if (hasBirthDate) {
+    // As on Immunization.patient: `Reference` has no `birthDate`.
+    containSubject(resource, 'beneficiary', {
+      resourceType: 'Patient',
+      id: 'subject',
+      birthDate: values[birth],
+    });
+  }
+}
+
+/**
+ * Attach a contained resource and point the named reference at it.
+ *
+ * Keeps any `display` already on the reference: a contained resource and a
+ * human-readable label are complementary, and dropping the label would lose
+ * something the holder did release.
+ */
+function containSubject(
+  resource: Record<string, unknown>,
+  referenceField: string,
+  contained: Record<string, unknown>,
+): void {
+  const list = (resource.contained ??= []) as Record<string, unknown>[];
+  const existing = list.find((entry) => entry.id === contained.id);
+  if (existing) Object.assign(existing, contained);
+  else list.push(contained);
+
+  const reference = (resource[referenceField] ??= {}) as Record<string, unknown>;
+  reference.reference = `#${String(contained.id)}`;
+  // A reference that resolves no longer needs the absence marker.
+  delete reference.extension;
 }
 
 function unmappedClaims(

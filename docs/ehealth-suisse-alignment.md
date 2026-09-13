@@ -158,11 +158,28 @@ issuing a recommendation should use this profile.
 
 ## What this does not claim
 
-No resource produced by `projectToFhir` has been run through a FHIR validator,
-and no profile conformance is asserted beyond naming the profile a resource is
-shaped towards. The bindings are correct as *references*. The OIDs, archetypes
-and node names were each checked against the published source. They are untested as
-*instances*.
+No resource produced by `projectToFhir` has been run through a FHIR validator.
+A validator run needs `hl7.fhir.r4.core` and the CH IG packages from the FHIR
+package registry, which is unreachable from the environment this repository is
+developed in. The bindings are correct as *references* — the OIDs, archetypes
+and node names were each checked against the published source — and they remain
+untested as *instances*.
+
+What exists in place of a validator is
+`packages/swiyu/test/ch-profile-conformance.test.ts`, which pins the constraints
+of `ch-vacd-immunization` that can be checked without one: the elements base R4
+requires, the `ch-vacd-occurrence-1` invariant, the SNOMED CT coding of
+`vaccineCode`, and the assembly of `protocolApplied`. It is a narrower guarantee
+than validation and is labelled as such.
+
+**A projection is not conformant to `ch-vacd-immunization` as it stands.** The
+profile makes `CHVACDExtensionVerificationStatus` mandatory (`1..1`) and the
+projection does not emit it. Emitting it is not a one-line fix: every dose this
+project issues comes from an authorised vaccinator, so SNOMED CT `59156000`
+"Confirmed by" would be correct today and would silently become wrong as soon as
+a patient-recorded dose is supported, which roadmap step 2 contemplates. A
+verification status the credential does not carry is clinical meaning invented at
+projection time. The gap is pinned by a test so that it stays visible.
 
 That gap is the first thing to close before any of this is offered to a system
 that trusts it. A validator in CI, running the projections against the CH

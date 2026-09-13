@@ -247,6 +247,58 @@ settle them, because they are about this code:
   deployment must take them from the terminology server. The schemas constrain
   their shape and can say nothing about their truth.
 
+## P · 2026-09-13 · two defects the missing validator would have caught
+
+Checking `projectToFhir` against the constraints of `ch-vacd-immunization`,
+rather than against the description of them, found two structural errors. Both
+are now fixed and pinned by tests.
+
+**`birthDate` was being set on a `Reference`.** FHIR's `Reference` has
+`reference`, `type`, `identifier` and `display` and no `birthDate`, so a
+disclosed date of birth was being written to an element that does not exist,
+on `Immunization.patient` and again on `Coverage.beneficiary`. CH VACD allows
+`contained 0..1` for exactly this case — its own short description is
+"Immunization inline resource" — so the date now goes on a contained `Patient`
+and the reference resolves to it.
+
+**An undisclosed name was rendered as `display: "unknown"`.** FHIR requires a
+subject on these resources, so the element has to exist, and the previous code
+filled it with the literal string "unknown". That reads as a patient whose name
+is not known, when what happened is that the holder chose not to release it —
+the opposite of what this project claims about selective disclosure, asserted in
+a clinical resource. The absence now carries the `data-absent-reason` extension
+with `masked`, "information is not available due to security, privacy or related
+reasons". The projection for `Coverage` already handled this correctly, with a
+comment reading "An empty element would claim the holder released a name they
+did not"; the `Immunization` path did not.
+
+Neither defect was reachable by reading the code against the prose. Both came
+out of comparing the output with the profile's FSH source.
+
+**What still has not happened is validation.** `packages.fhir.org`,
+`packages2.fhir.org` and `packages.simplifier.net` are blocked at this
+environment's egress gateway and GitHub release downloads answer 403, so the
+HL7 validator and the `hl7.fhir.r4.core` package cannot be obtained here.
+`packages/swiyu/test/ch-profile-conformance.test.ts` checks what can be checked
+without them and says so in its own header. One known non-conformance is
+recorded there and in
+[`ehealth-suisse-alignment.md`](ehealth-suisse-alignment.md): the mandatory
+`CHVACDExtensionVerificationStatus` is not emitted, deliberately.
+
+## S · 2026-09-13 · the coverage survey, corroborated
+
+The epidemiological description in [`public-health.md`](public-health.md) was
+checked as far as the blocked hosts allow. The coordinating institute, the
+sampled age groups of 2, 8 and 16, the three-year cycle and the involvement of
+the Federal Office of Public Health and all 26 cantons are corroborated across
+independent secondary sources, which moves them from **U** to **S**. The survey
+also appears under the name *Kantonales Durchimpfungsmonitoring Schweiz*.
+
+One figure does not agree and is now flagged in that file: this repository says
+the survey has run since 1999, while secondary sources describe the three-year
+cycle as running since 2005. Both can be true of different things, and neither
+was confirmed here.
+
 ## P · 2026-09-13 · generic components and the CH implementation guides
 
 Two classes of statement that earlier passes could not reach were checked.

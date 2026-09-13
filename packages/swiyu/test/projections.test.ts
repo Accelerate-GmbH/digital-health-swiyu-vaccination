@@ -150,9 +150,16 @@ describe('the immunization showcase projects into CH VACD and IPS shapes', () =>
     expect(resource.lotNumber).toBeUndefined();
     expect(resource.performer).toBeUndefined();
     expect(resource.vaccineCode).toBeUndefined();
-    // A patient element with a placeholder display is the one thing the shape
-    // forces; it must not claim a name that was never disclosed.
-    expect((resource.patient as { display: string }).display).toBe('unknown');
+    // FHIR requires a subject, so the element has to exist. It used to carry a
+    // display of "unknown", which reads as a patient whose name is not known
+    // rather than one who chose not to release it. The absence now carries
+    // `data-absent-reason` `masked`, which is what selective disclosure is.
+    const patient = resource.patient as { display?: string; extension?: { url: string; valueCode: string }[] };
+    expect(patient.display).toBeUndefined();
+    expect(patient.extension?.[0]).toEqual({
+      url: 'http://hl7.org/fhir/StructureDefinition/data-absent-reason',
+      valueCode: 'masked',
+    });
   });
 
   it('builds an openEHR composition from the same dose', () => {

@@ -308,7 +308,7 @@ Node.js 20.10 or later.
 
 ```bash
 npm install
-npm run verify        # typecheck, 97 tests, diagram checks
+npm run verify        # typecheck, 103 tests, diagram checks
 npm run dev           # http://localhost:3000
 ```
 
