@@ -20,6 +20,7 @@ document, and they correct findings above.
 | **P** | Primary: the artefact itself was fetched and read in this environment |
 | **S** | Secondary: the primary source is unreachable here, so the statement rests on search-result summaries and cross-references |
 | **U** | Unverified: asserted in the repository. No source available here could confirm it |
+| **R** | Reported: read against the primary source outside this environment and reported into the repository. Not re-checkable here, and not this environment's own reading |
 
 ## P · Verified against the primary artefact
 
@@ -192,7 +193,7 @@ corroborated across more than one of them:
 
 | Statement | Primary source, unreachable |
 | --- | --- |
-| GovTech Hackathon 2026 project 28 is the openEHR Switzerland "2026 Showcase Impf-Modul" | `govtech.digisus-lab.ch/project/28` |
+| GovTech Hackathon 2026 project 28 is the openEHR Switzerland "2026 Showcase Impf-Modul" | `govtech.digisus-lab.ch/project/28`. **Superseded 2026-09-13**: verified against openEHR Switzerland's own project page and meeting notes, see **R** below |
 | Its data flow is FHIR intake in CH VACD format → validation → persistence as an openEHR COMPOSITION in a clinical data repository, "not as a JSON blob" | `openehr.atlassian.net/.../3468427363` |
 | openEHR Switzerland and HL7 Switzerland have formed a joint working group to turn that showcase into a reusable implementation blueprint | `openehr.org/from-proof-of-concept-to-a-reusable-blueprint/` |
 | Its scope: clinical models, terminology bindings, mapping artefacts, demographic references, transformation logic, orchestration, architectural patterns | same |
@@ -223,11 +224,11 @@ available in this environment could confirm them.
 
 | Assertion | Where it appears |
 | --- | --- |
-| KVG/LAMal Art. 42a as the insurer's basis for issuing the insurance card | `governance-framework.md`, `insurance-card.ts` |
-| OR Art. 958f as the source of the ten-year business-record retention period | `governance-framework.md`, `insurance-card.ts`, `F-04` |
-| MedBG/LPMéd as restricting prescribing to registered practitioners | `governance-framework.md`, `prescription.ts`, `F-05` |
-| EpG/LEp plus cantonal authorisation as the basis for administering a vaccination | `governance-framework.md`, `immunization.ts`, `F-02` |
 | A laboratory's authorisation deriving from the KVG analysis list | `governance-framework.md`, `lab-report.ts` |
+
+The four statutory citations that stood here until 2026-09-13 have moved to
+**R** below. They were read against Fedlex outside this environment and the
+reading changed two of them.
 
 The same caution applies to the healthcare retention periods used in the
 governance policies and to the claim that a practice may retain what it
@@ -298,6 +299,101 @@ One figure does not agree and is now flagged in that file: this repository says
 the survey has run since 1999, while secondary sources describe the three-year
 cycle as running since 2005. Both can be true of different things, and neither
 was confirmed here.
+
+## R · 2026-09-13 · the legal citations, read against Fedlex
+
+The four statutory citations were read against the current Fedlex texts. The
+reading was done outside this environment and reported into the repository, so
+it carries the **R** class: `fedlex.admin.ch` answers nothing through this
+environment's egress gateway, and none of it was re-checked here.
+
+| Citation | Status | What the reading added |
+| --- | --- | --- |
+| **KVG/LAMal Art. 42a** | verified | Art. 42a is the statutory basis for the compulsory-health-insurance card, and the Versichertenkarte ordinance defines the insurer's issuance obligation. It does not by itself establish a legal basis for every attribute or processing operation modelled in the credential |
+| **OR Art. 958f** | verified, with a scope qualification | Ten years applies to the business books and accounting records within the article's scope. Whether particular credential-derived information forms part of such a record depends on the processing purpose and the record concerned |
+| **MedBG/LPMéd** | citation requires refinement | MedBG governs qualification, registration and authorisation for the university medical professions. Prescribing and dispensing of medicinal products are governed more directly by therapeutic-products law, HMG/LPTh, and by cantonal law. The authority to prescribe follows from those together, and the authorisation model should be verified for the intended issuer population |
+| **EpG/LEp** | partially verified | The Epidemics Act and Ordinance establish the federal and cantonal vaccination framework. Whether an individual professional or organisation may administer vaccinations depends additionally on professional law, therapeutic-products law and cantonal law. The single-line citation is incomplete rather than wrong |
+
+The two that required work are corrected at source rather than in a note:
+`prescription.ts` and `immunization.ts` now name the further bodies of law, and
+the governance framework, the generated credential pages and the glossary follow
+from them.
+
+**Deployment-specific legal conclusions still require qualified legal review.**
+That sentence is unchanged by this reading and is the reason every `issuerBasis`
+string still ends with it. A citation being correct is a different question from
+a deployment being lawful.
+
+## R · 2026-09-13 · the coverage survey, against BAG and EBPI primary sources
+
+Read against Federal Office of Public Health and University of Zurich EBPI
+primary sources, including the FOPH's 2020 to 2022 coverage report. These facts
+move from **S** to verified:
+
+- The Institute of Epidemiology, Biostatistics and Prevention at the University
+  of Zurich coordinates the survey, on behalf of the FOPH and together with the
+  cantons
+- Nationwide collection has run **since 1999**
+- The monitored age groups are **2, 8 and 16**
+- Children are selected at random from population registers or by an equivalent
+  sampling methodology
+- Families are invited **by letter** and asked to provide the vaccination
+  record, as a copy, the original or a secure electronic upload
+- The survey runs in multi-year cycles, and all 26 cantons took part in the
+  2020 to 2022 round
+
+This settles the figure flagged in **S** above: the 1999 date belongs to the
+nationwide collection, and the 2005 date the secondary sources give belongs to
+the three-year cycle, which is a different statement.
+
+**Three claims in this repository are not covered by that reading** and should
+be sourced individually before anyone relies on them:
+
+| Claim | Where |
+| --- | --- |
+| "Up to three contact attempts" | [`public-health.md`](public-health.md), [`F-11`](../flows/F-11-coverage-survey.md) |
+| Per-canton operational workflow | [`F-11`](../flows/F-11-coverage-survey.md) |
+| That the sampling frame already carries the age and the canton, which is what lets the flow ask for no identifying claim | [`roadmap.md`](roadmap.md), [`F-11`](../flows/F-11-coverage-survey.md) |
+
+The third is the one that matters, because the privacy argument for F-11 rests
+on it. A register-drawn sample plainly knows who it drew, and what the survey
+operator holds at the point of invitation is a different question that the
+sources above do not answer.
+
+## R · 2026-09-13 · GovTech Hackathon 2026, project 28
+
+Verified in the same reading, against openEHR Switzerland's own material rather
+than the hackathon site. Its project page for the *2026 Showcase Impf-Modul*
+records the hackathon preparation and the event on **28 and 29 May 2026**,
+including the *Challenge Impfen*, and its meeting notes of 19 May link that
+challenge to `govtech.digisus-lab.ch/project/28` alongside the implementation
+repositories. The subsequent openEHR Switzerland and HL7 Switzerland
+communication describes the resulting architecture as a FHIR façade,
+transformation services, an openEHR clinical data repository and FHIR-based
+person-data services, with immunisation based on CH VACD.
+
+This removes the dependency recorded in **S** above, where the attribution
+rested on the hackathon page this environment cannot reach.
+
+## R · 2026-09-13 · what the FHIR and openEHR mappings do and do not establish
+
+The referenced FHIR profiles, identifiers and elements, and the openEHR
+archetypes and node references, were checked against their published source
+artefacts. They are correct as semantic references.
+
+That is one of four separate questions and the other three are open:
+
+| Question | Status |
+| --- | --- |
+| **Reference correctness.** Do the cited FHIR profiles, elements and identifier systems, and the openEHR archetypes and node references, exist and resolve as cited? | **Verified** against CH VACD, CH Core and the CKM artefacts |
+| **FHIR profile conformance.** Does a generated resource satisfy the profile's cardinalities, invariants, slicing, terminology bindings, references, extension rules and required elements? | **Not established.** That needs the HL7 validator with the Swiss implementation-guide packages loaded, and neither the packages nor the validator can be obtained here |
+| **openEHR template conformance.** Is a generated composition valid against a published operational template? | **Not established.** A plausible flat path into an archetype does not demonstrate it. The openEHR REST specification separates parseability from template validation and gives 422 for content that parses and does not validate |
+| **Endorsement.** Has any standards body endorsed this work? | **Not claimed.** No endorsement by HL7 Switzerland, eHealth Suisse, openEHR International or openEHR Switzerland |
+
+Reference correctness, instance conformance and endorsement are three different
+things, and conformance splits again between FHIR and openEHR because the
+machinery that would establish each is different. The sections above keep them
+apart deliberately.
 
 ## P · 2026-09-13 · generic components and the CH implementation guides
 
@@ -449,7 +545,7 @@ credential issued by a private practice is an argument, not a citation. The
 [governance framework](governance-framework.md#what-the-e-id-act-does-and-does-not-decide)
 now makes the argument explicitly and marks where it stops.
 
-The legal statements in the **U** section above are a different matter and are
-unchanged: KVG/LAMal Art. 42a, OR Art. 958f, MedBG/LPMéd, EpG/LEp and the KVG
-analysis list are other statutes and none of them was read here. Reading the
-E-ID Act moves nothing in that list.
+The legal statements in the **U** section above are a different matter: they are
+other statutes and none of them was read here. Reading the E-ID Act moves
+nothing in that list. Four of the five were later read against Fedlex outside
+this environment and are recorded under **R**; the KVG analysis list was not.

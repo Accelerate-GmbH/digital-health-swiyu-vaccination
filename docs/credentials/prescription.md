@@ -24,7 +24,7 @@ Electronic prescription issued by the treating physician.
 
 **Who may issue it:** `ch.didas.health.role.practice`.
 
-Modelled here on the basis of MedBG/LPMéd, under which only a person on the medical register may prescribe; legal review is required before deployment. The practice DID must carry a Governed Use Case Authorization Trust Marker naming this credential type
+The authority to prescribe medicinal products results from the applicable professional-practice and therapeutic-products legislation, including MedBG/LPMéd, HMG/LPTh and cantonal law. The authorisation model should be verified for the intended issuer population before deployment. The practice DID must carry a Governed Use Case Authorization Trust Marker naming this credential type
 
 This is a **governed** credential type: an actor must decline any interaction where the counterparty carries the Governed Use Case Trust Marker without the matching authorization marker.
 

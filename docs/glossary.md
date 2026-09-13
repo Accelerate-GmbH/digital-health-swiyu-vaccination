@@ -155,10 +155,16 @@ professionals and organisations, held in the Refdata index.
 
 **MedReg.** The federal register of medical professionals.
 
-**EpG / LEp.** The epidemics act, under which vaccination is authorised.
+**EpG / LEp.** The epidemics act, which establishes the federal and cantonal
+vaccination framework. Whether a given professional or organisation may
+administer a vaccination depends additionally on professional, therapeutic-
+products and cantonal law.
 
-**MedBG / LPMéd.** The medical professions act: only a registered practitioner
-may prescribe.
+**MedBG / LPMéd.** The medical professions act, which governs qualification,
+registration and authorisation for the university medical professions. Authority
+to prescribe medicinal products follows from professional-practice and
+therapeutic-products legislation together, including MedBG/LPMéd, HMG/LPTh and
+cantonal law.
 
 **EPD / EGD.** The Swiss electronic patient record.
 *In this demonstrator:* not integrated. How the electronic patient record
