@@ -267,7 +267,8 @@ rather than implied.
   components, including a simulated wallet. The mock performs **no signing, no
   DPoP, no encryption and no identifier resolution**. It exercises the business
   flow and the governance rules and establishes nothing about protocol
-  conformance. The portal states this on the page.
+  conformance. The demonstration interface says so where it applies, and the
+  showcase portal carries the same scope note.
 - **Sandbox only.** Nothing here has been run against a production deployment.
   Conformance rules are enforced against the profile text; the issuance and
   verification paths have not been exercised end to end against the live

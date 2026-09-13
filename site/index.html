@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Vaccination records held in the patient's wallet on swiyu, Switzerland's e-ID trust infrastructure. An end-to-end implementation against the swiyu Sandbox and Swiss Profiles 1.0.">
+<meta name="description" content="Immunisation records issued, held, presented and verified as verifiable credentials on the swiyu Trust Infrastructure. A prototype built against the swiyu Sandbox and Swiss Profiles 1.0.">
 <title>Immunization Showcase</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -167,6 +167,13 @@
   .prose-note {
     color: var(--ink-2); font-size: 0.95rem;
   }
+  .scopelist {
+    max-width: var(--measure); margin: 0; padding-left: 18px;
+    color: var(--ink-2); font-size: 0.95rem; line-height: 1.55;
+  }
+  .scopelist li { margin: 0 0 9px; }
+  .scopelist li:last-child { margin-bottom: 0; }
+  .scopelist strong { color: var(--ink); font-weight: 600; }
   code, .mono { font-family: var(--mono); font-size: 0.86em; }
   code { background: var(--surface-2); padding: 1px 5px; border-radius: 3px; }
   a { color: var(--accent); text-underline-offset: 2px; }
@@ -397,20 +404,21 @@
         <span>Source on GitHub</span>
       </a>
     </div>
-    <h1>Vaccination records in the patient's wallet</h1>
+    <h1>Immunisation records as verifiable credentials</h1>
     <p class="lede">
-      A vaccination record can be held by the patient rather than by a central database. This project
-      implements that on <strong>swiyu</strong>, Switzerland's e-ID trust infrastructure. A practice
-      writes an administered dose into an app on the patient's phone as a signed digital document. A
-      travel clinic later asks whether the patient is protected. It receives <strong>four of the
-      eighteen data items</strong> that document holds. The other fourteen are not transmitted. The
-      code runs against the swiyu Sandbox and Swiss Profiles 1.0.
+      This project demonstrates how an immunisation record can be issued as a verifiable credential,
+      held in the patient's wallet, presented under the patient's control and verified by a relying
+      party, using the <strong>swiyu Trust Infrastructure</strong>. An authorised vaccinator issues an
+      administered dose to the patient's wallet as a signed credential. A travel clinic later asks
+      whether the patient is protected and receives <strong>four of the eighteen claims</strong> the
+      credential holds; the remaining fourteen are not transmitted. The code runs against the swiyu
+      Sandbox and Swiss Profiles 1.0.
     </p>
     <div class="facts">
-      <div class="fact"><b>4 / 18</b><span>data items released when a travel clinic asks about protection</span></div>
+      <div class="fact"><b>4 / 18</b><span>claims released when a travel clinic asks about protection</span></div>
       <div class="fact"><b>4</b><span>credential types issued, each generating its own metadata, schema and wallet rendering</span></div>
       <div class="fact"><b>11</b><span>documented flows with governance and standardisation constraints</span></div>
-      <div class="fact"><b>0</b><span>registries, repositories or patient indexes operated by anyone</span></div>
+      <div class="fact"><b>0</b><span>clinical repositories operated by this project, which runs on the Confederation's registries</span></div>
     </div>
   </div>
 </header>
@@ -473,17 +481,19 @@
     <p class="kicker">The mechanism</p>
     <h2>How credentials reach the wallet and how claims leave it</h2>
     <p>
-      Four organisations issue credentials into the wallet: the Confederation, a health insurer, a
-      practice and a pharmacy. Each issues only what it is entitled to assert. Claims leave the wallet
-      in answer to a specific question from a verifier, with the patient's consent, one question at a
-      time. The only infrastructure the two sides share is the status list published by the
+Four organisations issue credentials to the wallet: the Confederation, a health insurer, a
+      practice and a pharmacy. Each issues only what its role entitles it to assert. Claims are
+      released from the wallet in answer to a specific request from a verifier, with the patient's
+      consent, one request at a time. Issuer and verifier exchange no clinical payload through a
+      shared store; the shared component in the exchange is the status list published by the
       Confederation's Base Registry, which records whether a credential is still valid and nothing
-      else about it.
+      else about it. Both parties also depend on the Base Registry to resolve identifiers and on the
+      Trust Registry for trust statements.
     </p>
 
     <figure>
       <div class="figbox">
-        <svg viewBox="0 0 900 470" role="img" aria-label="Issuers write credentials into the patient's wallet over OpenID4VCI; four verifiers (practice reception, travel clinic, pharmacy and the national coverage survey) ask the wallet for specific claims over OpenID4VP; the coverage survey also issues a single-use invitation credential into the wallet; both sides touch only a status list on the Base Registry, which carries no patient data.">
+        <svg viewBox="0 0 900 470" role="img" aria-label="Issuers write credentials into the patient's wallet over OpenID4VCI; four verifiers (practice reception, travel clinic, pharmacy and the national coverage survey) ask the wallet for specific claims over OpenID4VP; the coverage survey also issues a single-use invitation credential into the wallet; both sides use a status list on the Base Registry, which carries no patient data.">
           <defs>
             <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
               <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"></path>
@@ -502,7 +512,7 @@
           <g font-family="Archivo, sans-serif" font-size="12.5" fill="currentColor">
             <rect x="16" y="34" width="196" height="56" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35"></rect>
             <text x="30" y="55">Confederation · BCS</text>
-            <text x="30" y="74" font-size="11" opacity="0.62">Beta-ID → e-ID from 2026</text>
+            <text x="30" y="74" font-size="11" opacity="0.62">Beta-ID, Sandbox stand-in for the e-ID</text>
 
             <rect x="16" y="104" width="196" height="56" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35"></rect>
             <text x="30" y="125">Health insurer</text>
@@ -594,8 +604,8 @@
         </svg>
       </div>
       <figcaption>
-        The status list is the only shared component. It carries two bits per credential. That is
-        enough to make a prescription single-use without a register of who was prescribed what.
+        The status list carries two bits per credential. That is enough to make a prescription
+        single-use without a register recording who was prescribed what.
         The fourth verifier is the national coverage survey. It asks for five claims and no
         identifier. Today it gets the same information from a photocopied booklet sent by post. It is
         also the only verifier that issues. Its letter to a sampled household carries a single-use
@@ -634,9 +644,10 @@
     </div>
 
     <p class="prose-note" style="margin-top:22px">
-      Compare the alternatives. A paper booklet shows the whole page. A PDF from a portal contains the
-      whole file. A registry lookup returns everything the registry holds. It also leaves a record
-      that the lookup took place.
+For comparison, the disclosure profile of the alternatives in routine use differs: a paper
+      booklet is read as a whole page, and a PDF exported from a portal contains the whole file.
+      Selective disclosure narrows what a verifier receives to the claims it requested and is
+      entitled to; it makes no claim about unlinkability across presentations.
     </p>
   </section>
 
@@ -644,7 +655,19 @@
     <p class="kicker">Governance</p>
     <h2>What happens before a clinical fact is accepted</h2>
     <p>
-      The technical profile confirms that a message is well formed and correctly signed, but that confirmation only concerns the shape of the message, not its content or its legitimacy. Three further questions have to be answered before any clinical fact can move. The first is whether the party issuing the assertion has the standing to make a clinical claim in the first place, since a signature proves who sent a message but says nothing about whether that sender was entitled to state what it stated. The second is whether the party requesting the data has the standing to ask for it, which is a separate question from whether the request is technically valid, because a well-formed request can still come from a party with no legitimate claim to the information. The third is whether the specific presentation in front of the system, with its particular scope and context, should be accepted on its own terms, since even a properly authorized sender and a properly authorized requester do not guarantee that this exact exchange should proceed. Each of these questions is implemented as its own function, the three run in a fixed sequence, and each one writes down its reasoning at the moment it decides, regardless of whether the outcome is a grant or a refusal.
+      A presentation raises several distinct questions. The technical profile and the trust
+      infrastructure answer some of them: protocol validity, cryptographic validity, credential and
+      status validity, holder key binding and issuer trust. Three further questions are governance
+      questions and are answered here.
+    </p>
+    <p>
+      First, whether the issuing party has the standing to assert a clinical fact: a valid signature
+      establishes who signed, not whether the signer was entitled to state what it stated. Second,
+      whether the requesting party has the standing to ask for the claims it is requesting, which is
+      separate from whether the request is well formed. Third, whether this particular presentation
+      should be accepted, given its scope and context. Each question is implemented as its own
+      function; the three run in a fixed order, and each records its reasoning whether the outcome is
+      acceptance or refusal.
     </p>
     <div class="gates">
       <div class="gate">
@@ -687,18 +710,20 @@
 
   <section>
     <p class="kicker">Standards</p>
-    <h2>Using the openEHR and HL7 FHIR models without a shared repository</h2>
+    <h2>Composing with the openEHR and HL7 FHIR information models</h2>
     <p>
-      openEHR and HL7 FHIR are normally adopted as a package: a set of shared information models that
-      define what a vaccination record contains, together with a shared repository that some
-      organisation operates and governs. This project adopts the information models and does not
-      adopt the repository.
+      HL7 FHIR and openEHR address healthcare semantics, information models and clinical data exchange
+      and persistence. Verifiable credentials and the swiyu Trust Infrastructure address authenticity,
+      provenance, controlled presentation and trust relationships. These are different layers and they
+      can be composed. This project reuses the information models and does not itself operate a
+      clinical data repository; that is a property of this demonstrator, not a position on how FHIR or
+      openEHR should be deployed.
     </p>
     <p>
       Every claim carries the FHIR element path it corresponds to and, where one exists, its openEHR
-      archetype path. When a presentation arrives, the receiving system rebuilds the representation it
-      already understands from the claims the holder released. That happens locally, with no clinical
-      data repository and no FHIR server on either side of the exchange.
+      archetype path. When a presentation arrives, the receiving system can rebuild the representation
+      it already understands from the claims the holder released, locally. The mappings below are this
+      project's own and have not been reviewed by the standards bodies concerned.
     </p>
     <div class="projections">
       <div class="projection">
@@ -778,16 +803,16 @@
     </p>
     <div class="flows">
       <a class="flow" href="flows/#/view/actorOnboarding/"><span class="fid">F-01</span><span class="ftitle">Becoming an actor<span>DID, trust statement, role grant</span></span><span class="status partial">Partial</span></a>
-      <a class="flow" href="flows/#/view/immunizationIssuance/"><span class="fid">F-02</span><span class="ftitle">Recording an administered dose<span>One credential per dose, issued by whoever vaccinated</span></span><span class="status built">Built</span></a>
-      <a class="flow" href="flows/#/view/protectionCheck/"><span class="fid">F-03</span><span class="ftitle">Proving protection and nothing else<span>Four claims of eighteen</span></span><span class="status built">Built</span></a>
+      <a class="flow" href="flows/#/view/immunizationIssuance/"><span class="fid">F-02</span><span class="ftitle">Issuing an administered dose<span>One credential per dose, issued by the authorised vaccinator</span></span><span class="status built">Built</span></a>
+      <a class="flow" href="flows/#/view/protectionCheck/"><span class="fid">F-03</span><span class="ftitle">Proving protection with minimal disclosure<span>Four claims of eighteen</span></span><span class="status built">Built</span></a>
       <a class="flow" href="flows/#/view/practiceCheckIn/"><span class="fid">F-04</span><span class="ftitle">Check-in at the practice<span>Two issuers, one presentation, a name that must match</span></span><span class="status built">Built</span></a>
-      <a class="flow" href="flows/#/view/prescriptionRedemption/"><span class="fid">F-05</span><span class="ftitle">Prescription and its redemption<span>Single use, without a register of who was prescribed what</span></span><span class="status built">Built</span></a>
+      <a class="flow" href="flows/#/view/prescriptionRedemption/"><span class="fid">F-05</span><span class="ftitle">Prescription and its redemption<span>Single use, without a register recording who was prescribed what</span></span><span class="status built">Built</span></a>
       <a class="flow" href="flows/#/view/correction/"><span class="fid">F-06</span><span class="ftitle">Correction, suspension and revocation<span>Why business expiry and technical expiry must stay apart</span></span><span class="status partial">Partial</span></a>
-      <div class="flow"><span class="fid">F-07</span><span class="ftitle">Projecting into FHIR and openEHR<span>Models without the repository</span></span><span class="status built">Built</span></div>
+      <div class="flow"><span class="fid">F-07</span><span class="ftitle">Projecting into FHIR and openEHR<span>Rebuilding FHIR and openEHR representations from released claims</span></span><span class="status built">Built</span></div>
       <div class="flow"><span class="fid">F-08</span><span class="ftitle">Assembling an International Patient Summary<span>Allergies, problems, medication statements</span></span><span class="status later">Step 2</span></div>
       <div class="flow"><span class="fid">F-09</span><span class="ftitle">Secondary use under revocable consent<span>Identifying claims excluded by construction</span></span><span class="status later">Step 2</span></div>
-      <div class="flow"><span class="fid">F-10</span><span class="ftitle">Wearables and continuous data<span>Where the event model stops working</span></span><span class="status later">Step 3</span></div>
-      <a class="flow" href="flows/#/view/coverageSurvey/"><span class="fid">F-11</span><span class="ftitle">Answering the national coverage survey<span>Five claims, no identifier. Replaces a photocopied booklet</span></span><span class="status later">Step 2</span></a>
+      <div class="flow"><span class="fid">F-10</span><span class="ftitle">Wearables and continuous data<span>Limits of the authored-event model</span></span><span class="status later">Step 3</span></div>
+      <a class="flow" href="flows/#/view/coverageSurvey/"><span class="fid">F-11</span><span class="ftitle">Answering the national coverage survey<span>Five claims, no identifier, in place of a photocopied booklet</span></span><span class="status later">Step 2</span></a>
     </div>
   </section>
 
@@ -796,7 +821,7 @@
     <h2>Planned work, 2026 to 2028</h2>
     <div class="roadmap">
       <div class="stage now">
-        <span class="yr">2026 · delivered</span>
+        <span class="yr">2026 · prototype</span>
         <h3>Immunization Showcase</h3>
         <ul>
           <li>FHIR / openEHR interplay</li>
@@ -980,6 +1005,34 @@
   </section>
 
   <section>
+    <p class="kicker">Scope</p>
+    <h2>What this prototype is and is not</h2>
+    <p>
+      This is a reference implementation for exploration and discussion. It has not undergone a
+      security review, a data protection impact assessment or operational hardening, and it is not
+      production-ready.
+    </p>
+    <ul class="scopelist">
+      <li><strong>Sandbox only.</strong> Nothing here has been run against a production deployment of
+        the swiyu Trust Infrastructure. Conformance rules are enforced against the profile text.</li>
+      <li><strong>The bundled demonstration runs against a mock.</strong> In its default mode the
+        runnable application exercises the business flow and the governance rules against a simulated
+        wallet and simulated generic components. That mock performs no signing, no DPoP, no
+        encryption and no identifier resolution, and establishes nothing about protocol
+        conformance.</li>
+      <li><strong>No predicate proofs.</strong> The Swiss Profile mandates SD-JWT VC, in which claims
+        are individually disclosable. Proving a property of a claim without disclosing it is not
+        available in this profile.</li>
+      <li><strong>Unlinkability is not claimed.</strong> Selective disclosure limits what a given
+        verifier receives. It does not make presentations unlinkable; see below.</li>
+      <li><strong>The semantic mappings are unreviewed.</strong> The FHIR and openEHR bindings are
+        this project's own and have not been endorsed by the standards bodies concerned.</li>
+      <li><strong>Demonstration data is illustrative.</strong> SNOMED CT codes, GLNs, BAG numbers,
+        GTINs and LOINC codes shown here are plausible and not real.</li>
+    </ul>
+  </section>
+
+  <section>
     <p class="kicker">Open questions</p>
     <h2>What is not solved</h2>
     <div class="oq">
@@ -1061,7 +1114,8 @@
               "Showcase Impf-Modul"</td>
             <td>Brought by openEHR Switzerland with a DIDAS contribution. It supplied the clinical
               model side: CH VACD profiling, terminology binding and openEHR persistence. This
-              project reuses that work without adopting the central repository.</td>
+              project reuses the information models; it does not itself operate a clinical data
+              repository. The two address different layers and can be composed.</td>
           </tr>
         </tbody>
       </table>
@@ -1076,8 +1130,8 @@
 <footer class="wrap">
   <p>
     Implementation of <a href="https://hack.opendata.ch/project/1103">hack.opendata.ch project 1103</a>,
-    "Digital Health mit der neuen E-ID Trust-Infrastruktur", continued on the swiyu trust
-    infrastructure. Built against the swiyu Sandbox, the environment renamed from Public Beta and
+    "Digital Health mit der neuen E-ID Trust-Infrastruktur", continued on the swiyu Trust
+    Infrastructure. Built against the swiyu Sandbox, the environment renamed from Public Beta and
     separated from production by change dossier CD-001, using the Confederation's generic issuer and
     verifier components. Code contributed by <a href="https://www.accelerate.swiss/">accelerate.swiss</a>.
   </p>

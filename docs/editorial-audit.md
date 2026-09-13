@@ -88,7 +88,7 @@ identified and not yet applied.
 
 | File | Class | Finding | Status |
 | --- | --- | --- | --- |
-| `site/index.html` | Rewrite | Externally visible communication reproducing the documentation's register. "The platform was badly built. That explanation is accurate as far as it goes."; "EPD / DEP as one issuer among others" | **partial** — those two passages replaced; a full register pass over the remaining ~1,100 lines is **open** |
+| `site/index.html` | Rewrite | Externally visible communication reproducing the documentation's register. "The platform was badly built. That explanation is accurate as far as it goes."; "EPD / DEP as one issuer among others"; a headline statistic reading "0 registries, repositories or patient indexes operated by anyone"; a 190-word single-sentence governance paragraph; no statement of scope or limitations anywhere on the page | **done** — full register pass; 21 passages replaced, a *What this prototype is and is not* section added, and the rendered page checked in a headless browser for layout, tag balance and script errors |
 
 ## Application and library code
 
