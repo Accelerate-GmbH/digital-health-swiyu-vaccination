@@ -84,6 +84,36 @@ byte-identical to the committed versions, because this pass changed prose and no
 credential definition. The `issuerBasis` and retention strings were changed in
 the definitions by the preceding change and are already reflected there.
 
+## 1b · The sweep, and how it stays done
+
+The pass above rewrote the sentences that made a claim. The sweep behind it read
+every sentence in the public prose that uses one of the watched words, 276 of
+them across nineteen files, and decided each one.
+
+Most were kept as written, for four reasons that recur:
+
+| Kept because | Example |
+| --- | --- |
+| The word names a component | "trust registry", "trust marker", "the verifier" |
+| The sentence quotes the specification | The `tvTM` and `vqPS` passages in the governance framework |
+| The absolute is true of the mechanism | "Only the issuer can revoke", "the journal records claim names and no values" |
+| The object is already named | "verified against the CH VACD FSH source" |
+
+[`scripts/check-articulation.mjs`](../scripts/check-articulation.mjs) keeps the
+sweep from decaying. It finds the sentences that use a watched word without the
+surrounding precision, and compares them against
+`scripts/articulation-accepted.json`, which records the 276 already read and the
+category each was accepted under. A sentence that is neither rewritten nor
+recorded fails `npm run verify`, so new prose gets the same reading. Accepting
+is a judgement rather than a suppression: `--accept` rewrites the file from the
+current state, so a reviewer sees in the diff exactly which new sentences an
+author decided were fine.
+
+The watched words are `prove`, `verify`, `valid`, `trust`, `identity`,
+`anonymous`, `unlinkable`, `linkable`, `private`, `privacy`, `consent`,
+`authorised`, `entitled`, `protected`, `secure`, `only`, `never`, `always`,
+`guarantee`, `nothing else` and `the same person`.
+
 ## 2 · Strong assertions that remain, and their basis
 
 These are stated without hedging on purpose. Each is checkable.

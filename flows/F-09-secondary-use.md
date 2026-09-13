@@ -1,6 +1,6 @@
 ---
 id: F-09
-title: Secondary use under revocable consent
+title: Secondary use under revocable research consent
 status: roadmap
 roadmap_step: 2
 actors:
@@ -19,10 +19,10 @@ preconditions:
   - F-02
   - F-03
 produces:
-  - A de-identified contribution, with consent that can be withdrawn
+  - A minimised contribution, under a research consent that can be withdrawn
 ---
 
-# F-09 · Secondary use under revocable consent (roadmap, 2027)
+# F-09 · Secondary use under revocable research consent (roadmap, 2027)
 
 Roadmap step 2. The entitlement model is implemented and tested; the flow around
 it is not built.

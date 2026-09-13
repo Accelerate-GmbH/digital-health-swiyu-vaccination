@@ -38,9 +38,9 @@ party. Three consequences follow from that arrangement:
    organisation's systems remain in service. Continued verification may still
    depend on identifier, status, trust, cryptographic and wallet
    infrastructure.
-2. **A narrow question gets a narrow answer.** A travel clinic asking about
-   protection receives four claims out of the eighteen an immunization
-   credential holds. The other fourteen are never transmitted.
+2. **A narrow request gets a narrow answer.** A travel clinic requesting
+   vaccination evidence receives four claims out of the eighteen an immunization
+   credential holds. The other fourteen are not included in the presentation.
 3. **The exchange model requires no central clinical payload store.** This
    design does not require a repository holding the clinical content of every
    patient's vaccination history in order to exchange it. Shared infrastructure

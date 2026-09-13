@@ -148,7 +148,7 @@ recommendation service is the modelled answer and this project does not use it.
 
 F-09 states this. The reasoning is as follows.
 
-A consent-based contribution produces a **self-selected sample**. People who
+A contribution made under a research consent produces a **self-selected sample**. People who
 consent to share health data differ systematically from those who do not, in
 health literacy, in trust in institutions, in health status. For a prevalence
 estimate that bias is not noise to be averaged away; it moves the estimate in a
@@ -171,7 +171,7 @@ these to be settled and none of them are engineering:
    and whether the sample shifts.
 2. **Quantify the equity gap** before it is designed in. Who cannot hold a
    credential, how does that overlap with existing coverage gaps and what does
-   the fallback path have to guarantee.
+   the fallback path have to provide.
 3. **Put a number on the targeting loss.** What does outbreak response cost when
    the susceptible cannot be enumerated, compared with a canton that can
    enumerate them? The question is answerable empirically and the answer bears

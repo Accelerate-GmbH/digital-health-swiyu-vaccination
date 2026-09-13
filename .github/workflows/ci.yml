@@ -33,6 +33,14 @@ jobs:
       - name: Mermaid diagrams parse
         run: npm run check:mermaid
 
+      # Prose that states a protocol property as a human, legal or clinical
+      # conclusion reads as a stronger claim than the mechanism supports. The
+      # 2026-09-13 pass rewrote those sentences and recorded the ones it read
+      # and kept. This fails when new prose introduces a sentence that has not
+      # been through that reading. See docs/articulation-pass.md.
+      - name: Articulation rule
+        run: npm run check:articulation
+
       # The generated issuer metadata carries SRI hashes over the exact bytes of
       # the Type Metadata, schema and OCA documents. If a credential definition
       # changes and config/ is not regenerated, the hashes describe documents

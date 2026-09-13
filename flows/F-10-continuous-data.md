@@ -49,7 +49,7 @@ Continuous data does not have that shape.
   measurement does not support, and a clinician seeing a signed credential may
   reasonably read more into it than is warranted. This is a clinical-safety
   consideration, not a technical obstacle.
-- **Continuous consent.** F-03's model, where the holder sees a request and decides,
+- **Continuous authorisation.** F-03's model, where the holder sees a request and decides,
   does not fit a standing data flow. Consent to ongoing sharing is a different
   primitive, and the one where an inadequate implementation is hardest to detect.
 
@@ -58,7 +58,7 @@ Continuous data does not have that shape.
 1. A summary-credential pattern with an accountable computation step.
 2. A measurement-provenance model distinguishing "this device produced this" from
    "this describes this person".
-3. Standing-consent semantics with a visible, revocable state the holder can
+3. Standing-authorisation semantics with a visible, revocable state the holder can
    inspect.
 4. openEHR and FHIR models for the summary types. The modelling work of F-07
    applied to a data shape neither standard handles as comfortably as events.

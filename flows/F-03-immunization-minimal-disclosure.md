@@ -56,9 +56,9 @@ names, and the query is built from the requesting role's entitlement.
 
 The credential carries eighteen claims. The travel clinic's entitlement permits
 four. The remaining fourteen are not redacted after the fact and not filtered by
-the verifier's good behaviour. They are never disclosed, because the wallet
-only reveals the claim paths the DCQL query names and the query is constructed
-from the entitlement.
+the verifier after receipt. They are not included in the presentation, because
+the wallet opens the commitments for the claim paths the DCQL query names and
+the query is constructed from the requesting role's entitlement.
 
 ```mermaid
 flowchart LR
@@ -68,7 +68,7 @@ flowchart LR
         B["vaccine_code · vaccine_name · lot_number<br/>route · site · performer_name · performer_gln<br/>organization_name · country · immunization_id<br/>patient_given_name · patient_family_name<br/>patient_birth_date · next_dose_due"]
     end
     A -->|released| V["Travel clinic"]
-    B -.->|never leaves the wallet| X["∅"]
+    B -.->|not included in the presentation| X["∅"]
 ```
 
 ## Sequence
@@ -90,7 +90,7 @@ sequenceDiagram
     GV-->>W: Signed JAR (oauth-authz-req+jwt, ES256)
     W->>W: Resolve client_id to the verifier DID, then check the trust statement
     W->>W: Show the purpose and the four claims to the holder
-    W-->>W: Holder consents, or declines, which is a valid outcome
+    W-->>W: Holder confirms, or declines, which is a defined outcome
     W->>GV: POST the encrypted response (direct_post.jwt, vp_token + KB-JWT)
     GV->>BR: Resolve the status list. Is the credential still valid?
     GV->>TR: Evaluate the issuer's trust markers
@@ -102,12 +102,13 @@ sequenceDiagram
 
 - **The entitlement is the ceiling. It is enforced before the request is
   built.** `reviewRequest()` refuses a query for claims outside the role's
-  entitlement, so an over-broad request never reaches the patient. Enforcing
-  minimisation at the wallet or at the verifier's conscience is too late: once
-  the holder has answered, the data is out.
+  entitlement, so an over-broad request is not sent to the patient. A check
+  applied at the wallet or after receipt would operate on claims the verifier
+  already holds, so it would constrain later use rather than which claims were
+  disclosed.
 - **The purpose is registered.** `verification_purpose` carries a
   stable scope plus localised name and description, shown to the holder before
-  they consent and registered at the transparency service. A verifier that wants
+  the confirmation step and registered at the transparency service. A verifier that wants
   to ask a different question has to say so under a different scope.
 - **Declining is a first-class outcome.** `client_rejected` is a normal answer,
   not an error and the flow must work when the patient says no, which for a
@@ -116,10 +117,14 @@ sequenceDiagram
   on this credential type is explicit: a travel clinic needs to record that the
   series was confirmed. The governance journal
   records claim *names*, never values.
-- **Trust runs both ways.** The holder's wallet checks the verifier's trust
-  statement before showing the consent screen. A verifier without `viTM` asking
-  for health data is the case the Trust Protocol is designed to catch and the
-  wallet is the only place that check can happen before the data moves.
+- **Two distinct trust decisions.** Before the presentation, the wallet
+  evaluates the trust information published about the verifier and shows the
+  request to the holder for confirmation. During verification, the verifier
+  evaluates the credential issuer and the applicable trust information. These
+  are separate decisions made by separate parties. A verifier without `viTM`
+  requesting health data is the case the wallet-side decision exists to catch,
+  and the wallet is the last point at which it can be made before any claim is
+  transmitted.
 
 ## Standardisation constraints
 
@@ -150,16 +155,22 @@ sequenceDiagram
    is accountable for that inference is unresolved: the verifier's software, a
    published rule set, or the clinician. It is a clinical-safety question
    for the sector to settle.
-2. **Unlinkability across presentations.** A credential presented twice is the
-   same credential; batch issuance mitigates this but is not used here, because
-   with a series of dose credentials the claim values themselves are close to
-   identifying. This flow is linkable and stating so is part of the record.
+2. **Correlation across presentations.** Repeated presentations of the same
+   credential may be correlatable where they expose stable credential-level or
+   claim-level information, so two verifiers that exchange presentation data may
+   be able to determine that both presentations relate to the same credential.
+   The surfaces here are the credential identifier, the holder key, the
+   status-list reference, the disclosed claim values and the presentation
+   timing. Batch issuance reduces the credential-level surface and is not used
+   here, because across a series of dose credentials the disclosed claim values
+   are themselves close to identifying. This flow does not remove those
+   surfaces, and stating so is part of the record.
 3. **Enumerating the susceptible.** Coverage *measurement* is less affected
    than it looks: the Swiss National Vaccination Coverage Survey samples
    households and reads the record the family holds, so it never queried a
    register. What a decentralised record removes is the ability to find the
    individuals who are behind: outbreak response and catch-up campaigns. F-09
-   sketches consent-based secondary use, which is research with consent rather
+   sketches secondary use under research consent, which is research rather
    than surveillance, because a self-selected sample is biased in ways a
    prevalence estimate cannot correct for. See `docs/public-health.md`.
 

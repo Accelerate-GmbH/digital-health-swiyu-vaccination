@@ -66,7 +66,7 @@ sequenceDiagram
     R-->>W: One QR code
     W->>GV: Fetch and verify the signed JAR
     W->>TR: Check the verifier's trust statement
-    W-->>W: Holder sees both credentials and the purpose, consents
+    W-->>W: Holder sees both credentials and the purpose, confirms
     W->>GV: Encrypted response: Beta-ID claims + insurance card claims
     GV-->>R: SUCCESS + claims keyed by query id
     R->>R: reviewPresentation() per query
@@ -122,5 +122,5 @@ sequenceDiagram
 ## Implementation status
 
 `implemented`. `PraxisService.startCheckIn` / `completeCheckIn`; covered by
-`apps/demo/test/journey.test.ts`, including the declined-consent and
+`apps/demo/test/journey.test.ts`, including the declined-confirmation and
 missing-credential paths.
