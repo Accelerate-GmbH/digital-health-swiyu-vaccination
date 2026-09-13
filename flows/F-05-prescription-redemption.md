@@ -77,7 +77,7 @@ sequenceDiagram
     Ph->>P: Redemption request
     P->>GI: PATCH …/status?credentialStatus=REVOKED
     GI->>BR: Publish, bit → INVALID
-    Note over W: The credential remains in the wallet.<br/>Its status entry now reads REVOKED,<br/>so a later status check fails.
+    Note over W: The credential remains in the wallet.<br/>The Generic Issuer records it as REVOKED and the<br/>Token Status List entry is published as INVALID.<br/>A verifier evaluating that entry no longer receives VALID.
 ```
 
 ## Governance constraints

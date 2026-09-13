@@ -89,7 +89,7 @@ sequenceDiagram
     W->>W: Show the purpose and every claim requested
     W-->>W: Holder approves the request, or declines<br/>and the postal path stands
     W->>S: One presentation: invitation (stratum) + doses (clinical)
-    Note over S: Nothing in the response names the household.<br/>The stratum arrives in the credential, so there is<br/>nothing to join back to.
+    Note over S: The presentation contains no explicit<br/>household identifier. Other disclosed values or<br/>protocol metadata may still permit correlation.
     S->>BR: Revoke the invitation credential
     Note over BR: Single use. A second response cannot be made,<br/>and no register of who replied is kept.
 ```

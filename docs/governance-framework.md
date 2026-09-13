@@ -2,8 +2,9 @@
 
 A presentation raises several distinct questions, and the technical profile
 answers only some of them: protocol validity, cryptographic validity, credential
-and status validity, and holder key binding. Issuer trust is established through
-the trust infrastructure. The remaining questions are governance questions and
+and status validity, and holder key binding. The verifier resolves the issuer's
+identifier through the Base Registry and evaluates the issuer's trust statements
+through the Trust Registry, applying the Trust Protocol and its own policy. The remaining questions are governance questions and
 this document answers those: who may assert a given fact, who may request it,
 which claims specifically, on what legal basis, whether the relying party should
 accept the presentation, and what happens to the data afterwards.

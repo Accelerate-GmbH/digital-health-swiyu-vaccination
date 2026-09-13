@@ -61,8 +61,10 @@ What has to be built:
 3. **Absence semantics.** "No known allergies" must be distinguishable from "no
    allergy credential present". The IPS has codes for this; using them correctly
    is a clinical-safety requirement.
-4. **Immunization series reconciliation** (F-02 open question 1), which blocks a
-   trustworthy immunization section.
+4. **Immunization series reconciliation** (F-02 open question 1). Until a series
+   reported by several issuers can be reconciled, an immunization section cannot
+   be assembled from held credentials without the risk of duplicate or
+   contradictory entries.
 5. **EPD/EGD integration.** Future work should examine how the Swiss electronic
    patient record infrastructure and holder-controlled verifiable credentials
    can interoperate, including the potential issuer, source, verifier and

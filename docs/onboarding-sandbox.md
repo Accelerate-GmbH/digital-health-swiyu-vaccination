@@ -401,5 +401,7 @@ not yet open to private health issuers. Going to production does not resolve
 either one.
 
 swiyu's own position is that a sector brings its own governance. The Trust
-Registry provides the statement types such a body would publish through. No
-health-domain body has been established to publish them.
+Protocol defines the statement types through which the relevant trust and
+authorisation information is expressed, and the Trust Registry provides the
+infrastructure through which applicable statements are published and retrieved.
+No health-domain body has been established to publish them.

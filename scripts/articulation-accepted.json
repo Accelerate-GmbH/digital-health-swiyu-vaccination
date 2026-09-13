@@ -1,5 +1,6 @@
 {
  "note": "Sentences reviewed under the articulation rule in docs/articulation-pass.md. Each was read on 2026-09-13 and kept as written: the flagged word names a component (trust registry, verifier), quotes a specification, states an absolute that is true of the mechanism, or already names its object. Regenerate with: node scripts/check-articulation.mjs --accept",
+ "standard_version": "2026-09-13-1",
  "reviewed": {
   "24d1e0eb5c71a919": {
    "file": "site/index.html",
@@ -221,6 +222,11 @@
    "risk": "trust-bare",
    "sentence": "GP-10 covers cross-border trust evaluation and the LEI/vLEI organisational bridge."
   },
+  "1317d0a365868f62": {
+   "file": "docs/README.md",
+   "risk": "absolute",
+   "sentence": "| | **Writing standard** | The standing rule for prose in this repository: say what the component does, name the actor and the mechanism, preserve the distincti"
+  },
   "4f58a6d0f516a456": {
    "file": "docs/README.md",
    "risk": "trust-bare",
@@ -231,15 +237,25 @@
    "risk": "absolute",
    "sentence": "What only a person can do and what CODE automates."
   },
-  "741c1f88fc1a4b15": {
+  "46376b59af0b3693": {
+   "file": "docs/architecture.md",
+   "risk": "trust-bare",
+   "sentence": "Trust Registry Trust Protocol 2.0. swiyu Sandbox Wallet (the patient's phone)."
+  },
+  "857594680f676896": {
    "file": "docs/architecture.md",
    "risk": "verify-no-object",
-   "sentence": "# Architecture ## The one-sentence version Health records live in the patient's wallet as SD-JWT VCs; the clinical information models of openEHR and HL7 FHIR ar"
+   "sentence": "**What we do not implement, on purpose.** DPoP, key attestation, application-layer encryption, signed issuer metadata, SD-JWT assembly and disclosure handling, "
   },
   "5ca1a413242b0edf": {
    "file": "docs/architecture.md",
    "risk": "verify-no-object",
    "sentence": "The business applications create offers, state what they want to verify and read outcomes. ## The four layers ### 1 · Credential definitions: one source of trut"
+  },
+  "ea2e8967683a1f18": {
+   "file": "docs/architecture.md",
+   "risk": "verify-no-object",
+   "sentence": "The definition also carries the two things that are usually kept elsewhere: the **semantic bindings** onto FHIR and openEHR and the **governance rules**: who ma"
   },
   "67d88e62cf13b915": {
    "file": "docs/architecture.md",
@@ -288,13 +304,18 @@
   },
   "7ce79c8c060c7de6": {
    "file": "docs/articulation-pass.md",
-   "risk": "verify-no-object,absolute,privacy,anonymous",
+   "risk": "verify-no-object,absolute,privacy,anonymous,promotional",
    "sentence": "It does not make presentations unlinkable\" | Names the surfaces selective disclosure does not remove | | Explorer, research role | \"The entitlement excludes eve"
   },
   "780ac27b864f7ad6": {
    "file": "docs/articulation-pass.md",
    "risk": "verify-no-object,trust-bare,absolute",
    "sentence": "| Kept because | Example | | --- | --- | | The word names a component | \"trust registry\", \"trust marker\", \"the verifier\" | | The sentence quotes the specificati"
+  },
+  "f9e77db41876b7fc": {
+   "file": "docs/articulation-pass.md",
+   "risk": "consent",
+   "sentence": "Reading them found three labels to rewrite, including a wallet step still labelled \"Consent\". ## 2 · Strong assertions that remain, and their basis These are st"
   },
   "b8df3a231fc3abdb": {
    "file": "docs/articulation-pass.md",
@@ -401,6 +422,11 @@
    "risk": "verify-no-object",
    "sentence": "**Re-verified 2026-09-13** against CODE at version CODE ( CODE , dated 2026-06-10, canonical CODE )."
   },
+  "1c257ef91c63ceb6": {
+   "file": "docs/ehealth-suisse-alignment.md",
+   "risk": "protected",
+   "sentence": "| Identifier | OID | CH Core profile | Used in | | --- | --- | --- | --- | | AHVN13 / NAVS13 | CODE | CODE | Insurance card, as the protected CODE | | Insurance"
+  },
   "0aba85c76461b441": {
    "file": "docs/ehealth-suisse-alignment.md",
    "risk": "verify-no-object",
@@ -501,10 +527,10 @@
    "risk": "absolute",
    "sentence": "# Governance framework A presentation raises several distinct questions, and the technical profile answers only some of them: protocol validity, cryptographic v"
   },
-  "d15696cdc66cbebe": {
+  "e0eab760b24cd692": {
    "file": "docs/governance-framework.md",
    "risk": "trust-bare",
-   "sentence": "Issuer trust is established through the trust infrastructure."
+   "sentence": "The verifier resolves the issuer's identifier through the Base Registry and evaluates the issuer's trust statements through the Trust Registry, applying the Tru"
   },
   "512ba847da9ebeb9": {
    "file": "docs/governance-framework.md",
@@ -751,6 +777,11 @@
    "risk": "privacy",
    "sentence": "The protocol layer that such a body would grant it through is not yet open to private health issuers."
   },
+  "1a2668862e01e176": {
+   "file": "docs/onboarding-sandbox.md",
+   "risk": "trust-bare",
+   "sentence": "The Trust Protocol defines the statement types through which the relevant trust and authorisation information is expressed, and the Trust Registry provides the "
+  },
   "b340eac999dd95d8": {
    "file": "docs/positioning.md",
    "risk": "trust-bare",
@@ -831,15 +862,10 @@
    "risk": "verify-no-object",
    "sentence": "The survey method, the CH VACD value sets and the SSPH+ structure were checked against published sources; see source verification for how the repository separat"
   },
-  "93eb6b71965050e6": {
+  "bda415eb00c94917": {
    "file": "docs/roadmap.md",
    "risk": "verify-no-object,trust-bare",
-   "sentence": "This repository is step 1, delivered in full, with steps 2 and 3 specified and not yet started. ## Step 1 · Immunization Showcase (2026) · **this repository** |"
-  },
-  "31fd20cdd4cb00aa": {
-   "file": "docs/roadmap.md",
-   "risk": "trust-bare",
-   "sentence": "**Immunization series reconciliation** (F-02 open question 1), which blocks a trustworthy immunization section. 5."
+   "sentence": "**1 · Immunization Showcase** · 2026 FHIR/openEHR interplay End-to-end prototype **Blueprint**. 2 · International Patient Summary · 2027 Allergies, medication, "
   },
   "d72d0bdff06b0ea9": {
    "file": "docs/roadmap.md",
@@ -875,6 +901,11 @@
    "file": "docs/source-verification.md",
    "risk": "verify-no-object,trust-bare,absolute",
    "sentence": "| Statement | Where it comes from | | --- | --- | | The onboarding steps that are optional in the test environment: payment at both registers, the QES-signed fo"
+  },
+  "1ebb0f3e1922569d": {
+   "file": "docs/source-verification.md",
+   "risk": "protected",
+   "sentence": "Consistent with the protected-field rule this project already enforces against CODE | | AN1 is the e-ID."
   },
   "f998ac964a5b9359": {
    "file": "docs/source-verification.md",
@@ -1156,6 +1187,11 @@
    "risk": "trust-bare",
    "sentence": "| Concept | What it is | | --- | --- | | swiyu DID | Technical identifier within the Swiss trust infrastructure | | Swiss organisational identifier | The Swiss "
   },
+  "6ecb4b8937b95346": {
+   "file": "flows/F-01-actor-onboarding.md",
+   "risk": "verify-no-object,identity",
+   "sentence": "Identity verified → viTM."
+  },
   "7c2b5f23b42066f1": {
    "file": "flows/F-01-actor-onboarding.md",
    "risk": "verify-no-object,identity",
@@ -1191,6 +1227,11 @@
    "risk": "verify-no-object",
    "sentence": "Continued *verification* is a separate matter: it may still depend on identifier resolution, status list availability, trust statements, the issuer's signing ke"
   },
+  "9778f8540af6fc22": {
+   "file": "flows/F-02-immunization-issuance.md",
+   "risk": "absolute",
+   "sentence": "Store and render from the OCA bundle. (later, on a recording error only) PATCH …/status?credentialStatus=REVOKED."
+  },
   "a734ce8be65bc5b0": {
    "file": "flows/F-02-immunization-issuance.md",
    "risk": "absolute",
@@ -1225,6 +1266,16 @@
    "file": "flows/F-03-immunization-minimal-disclosure.md",
    "risk": "protected",
    "sentence": "The distinction matters because \"protected\" and \"has received these doses\" are not the same statement, and only the second is signed."
+  },
+  "36e37fc2082e1bfc": {
+   "file": "flows/F-03-immunization-minimal-disclosure.md",
+   "risk": "verify-no-object",
+   "sentence": "POST /management/api/verifications (DCQL, purpose, accepted_issuer_dids). verification_id + deeplink (PENDING)."
+  },
+  "f8e8237dda9bd3ef": {
+   "file": "flows/F-03-immunization-minimal-disclosure.md",
+   "risk": "verify-no-object",
+   "sentence": "QR code (swiyu-verify://?client_id=…&request_uri=…)."
   },
   "44391af11d14fade": {
    "file": "flows/F-03-immunization-minimal-disclosure.md",
@@ -1276,6 +1327,16 @@
    "risk": "identity",
    "sentence": "The practice asks for ten claims about cover and three about identity and for nothing at all about health."
   },
+  "42d7e42fa02dca0f": {
+   "file": "flows/F-04-practice-check-in.md",
+   "risk": "absolute",
+   "sentence": "The AHV number passes only because the practice role holds that entitlement."
+  },
+  "8758b9418f02c772": {
+   "file": "flows/F-04-practice-check-in.md",
+   "risk": "verify-no-object",
+   "sentence": "Fetch and verify the signed JAR."
+  },
   "89501631e5fab4d7": {
    "file": "flows/F-04-practice-check-in.md",
    "risk": "identity",
@@ -1296,10 +1357,15 @@
    "risk": "absolute",
    "sentence": "- **Only the issuer can revoke.** The pharmacy cannot flip the bit itself, so redemption is a request between two accountable parties."
   },
-  "87bba7c69c9fdba2": {
+  "75af6affae7f6cc6": {
+   "file": "flows/F-05-prescription-redemption.md",
+   "risk": "verify-no-object",
+   "sentence": "Create verification (10 claims, purpose ch.didas.health.dispense)."
+  },
+  "3157c62d962efb87": {
    "file": "flows/F-05-prescription-redemption.md",
    "risk": "absolute",
-   "sentence": "See the open questions. ## Governance constraints - **Only a prescriber may issue.** Modelled here on MedBG/LPMéd, subject to legal review; enforced through COD"
+   "sentence": "Publish, bit → INVALID. ## Governance constraints - **Only a prescriber may issue.** Modelled here on MedBG/LPMéd, subject to legal review; enforced through COD"
   },
   "e4e871ae1a594ef5": {
    "file": "flows/F-05-prescription-redemption.md",
@@ -1326,30 +1392,30 @@
    "risk": "identity",
    "sentence": "**Status list capacity planning.** An issuer that exhausts a list must initialise another; which list a credential landed on is then part of its identity."
   },
-  "52c28c41505e2bda": {
+  "d059eb321eee2783": {
    "file": "flows/F-07-model-projection.md",
    "risk": "verify-no-object",
    "sentence": "| | | | --- | --- | | Begins | after F-03, F-04 or F-05 has completed | | Input | the claims disclosed in that presentation | | Performed by | the verifying org"
   },
-  "88e2bd7d29567426": {
-   "file": "flows/F-07-model-projection.md",
-   "risk": "trust-bare",
-   "sentence": "Verifiable credentials and the swiyu Trust Infrastructure address a different layer: authenticity, provenance, controlled presentation and trust relationships."
-  },
-  "1aa44686b7364401": {
+  "963d1f07ebbb5177": {
    "file": "flows/F-07-model-projection.md",
    "risk": "absolute",
-   "sentence": "Only the topmost edge crosses a party boundary, and that edge belongs to F-03, F-04 or F-05 rather than to F-07. ## Two properties to preserve - **A projection "
+   "sentence": "Only the topmost edge crosses a party boundary, and that edge belongs to F-03, F-04 or F-05 rather than to F-07."
+  },
+  "44cfe4b7d1deb22b": {
+   "file": "flows/F-07-model-projection.md",
+   "risk": "verify-no-object",
+   "sentence": "F-07 · local transformation, inside the verifying organisation."
   },
   "44d4b198d2524592": {
    "file": "flows/F-07-model-projection.md",
    "risk": "absolute",
    "sentence": "A system that retains only the projection cannot reconstruct it."
   },
-  "0273c908ba592d82": {
+  "17c6241ce77bea68": {
    "file": "flows/F-07-model-projection.md",
    "risk": "absolute",
-   "sentence": "This is the main integration cost of the whole approach. ## Governance constraints - **Projection does not launder entitlement.** Claims the verifier was not en"
+   "sentence": "This is the main integration cost of the whole approach. ## Governance constraints - **Projection does not launder entitlement.** Claims outside the verifier's "
   },
   "e188353ebae3d47f": {
    "file": "flows/F-07-model-projection.md",
@@ -1380,6 +1446,11 @@
    "file": "flows/F-08-patient-summary.md",
    "risk": "consent",
    "sentence": "Any break-glass mechanism introduces a party able to read the record without the holder's involvement, which is in direct tension with consent-at-presentation."
+  },
+  "535c440f3c5c77ae": {
+   "file": "flows/F-09-secondary-use.md",
+   "risk": "consent",
+   "sentence": "The > current Swiss Profiles do not define a holder-as-issuer consent-credential > pattern, nor the governance model that would accompany one."
   },
   "9ac5138f52042d47": {
    "file": "flows/F-09-secondary-use.md",
@@ -1416,10 +1487,10 @@
    "risk": "verify-no-object",
    "sentence": "This flow replaces the photocopy. ## How a coverage survey differs from the clinical flows In every other verification here, a holder discloses something to an "
   },
-  "8e3d23551c6eeaa4": {
+  "28a6b2cb5f05eb95": {
    "file": "flows/F-11-coverage-survey.md",
    "risk": "linkability-no-surface",
-   "sentence": "The entitlement below releases five claims and no identifier. ## Sequence ## Linkability analysis **The proposed design removes an explicit household identifier"
+   "sentence": "Revoke the invitation credential. ## Linkability analysis **The proposed design removes an explicit household identifier from the presentation."
   },
   "6bc588fbfc8fc45c": {
    "file": "flows/F-11-coverage-survey.md",

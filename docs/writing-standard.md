@@ -7,7 +7,20 @@ is.
 
 This document is the standing rule. [`articulation-pass.md`](articulation-pass.md)
 records the pass that applied it and the sentences it accepted.
-`npm run check:articulation` enforces the mechanical part.
+
+`npm run check:articulation` is a **review gate, not semantic validation**. It
+finds sentences that use a watched word without the surrounding precision and
+requires that a person has read each one. It cannot tell whether a statement is
+true, whether the actor named is the one that acts, or whether a conclusion
+follows from the mechanism. CI green means every candidate sentence has been
+read and recorded. It does not mean the prose is correct, and it is not a
+substitute for review against the rules below.
+
+The record carries the version of this document it was made against. Changing
+this document in a way that could make an accepted sentence unacceptable
+requires bumping `STANDARD_VERSION` in the checker, which reopens the record for
+re-reading. An acceptance also lapses on its own when the sentence starts
+tripping a rule that did not exist when it was accepted.
 
 ## What this is not
 

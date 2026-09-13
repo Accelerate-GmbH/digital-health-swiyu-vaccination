@@ -31,10 +31,11 @@ produces:
 
 ## What kind of object this is
 
-F-07 is a **local transformation**, not an interaction flow. F-01 to F-06, F-09
-and F-11 describe exchanges between two or more parties over a named protocol.
-F-07 describes a transformation performed inside one party after such an
-exchange has completed.
+F-07 declares `kind: transformation` and `interaction_scope: local`. F-01 to
+F-06, F-09 and F-11 declare `kind: flow` and `interaction_scope: multi-party`:
+they describe messages exchanged between two or more parties over a named
+protocol. F-07 describes a transformation performed inside one party after such
+an exchange has completed.
 
 | | |
 | --- | --- |
@@ -44,27 +45,34 @@ exchange has completed.
 | Output | a FHIR resource, an openEHR composition, or both, held locally |
 | Parties involved | one |
 | Protocol messages exchanged | none |
+| Profile status | `mixed`. The mappings are a choice of this demonstrator; provenance for the derived object is [GP-02](../docs/swiss-profile-gaps.md#gp-02--provenance-of-a-derived-representation) |
 
 Because no messages pass between parties, the LikeC4 model carries no sequence
 view for F-07. The seven dynamic views in `likec4/health-flow.likec4` each render
 an exchange between lifelines, and a sequence diagram of a single-party
-transformation would show one lifeline. The absence of a view records the type of
-the step rather than an omission or unfinished work: the mapping is implemented
-in `packages/swiyu/src/projections.ts` and covered by twelve tests.
+transformation would show one lifeline. The absence of a view records the
+interaction scope of the step rather than an omission or unfinished work: the
+mapping is implemented in `packages/swiyu/src/projections.ts` and covered by
+twelve tests in `packages/swiyu/test/projections.test.ts`. Implemented and tested
+in this repository is not deployment, Swiss Profile endorsement, or clinical
+validation of the mappings.
 
-The credential types already carry the information-model paths, so a receiving
-system that holds disclosed claims can construct the representation it uses
-without a further request to any other party.
+The credential definitions in this demonstrator associate each claim with a FHIR
+element path and, where one exists, an openEHR archetype path. A receiving system
+that holds disclosed claims can therefore construct a local representation
+according to those mappings, without a further request to any other party.
 
 ## The architectural position
 
-HL7 FHIR and openEHR provide established models and implementation patterns for
+HL7 FHIR and openEHR provide models and implementation patterns for
 representing, exchanging and, in openEHR's case, persisting clinical
-information: archetypes, templates, resource profiles and terminology bindings,
-representing decades of clinical modelling work and the reason a laboratory
-result means the same thing in two systems. Verifiable credentials and the swiyu
-Trust Infrastructure address a different layer: authenticity, provenance,
-controlled presentation and trust relationships. These layers can be composed.
+information: archetypes, templates, resource profiles and terminology bindings.
+Whether the same laboratory result carries the same meaning in two systems
+depends on the profiles both apply, the terminology bindings they use and the
+constraints of each implementation. Verifiable credentials and the swiyu Trust
+Infrastructure address a different layer: authenticity, provenance, controlled
+presentation, and the statements a party evaluates about another party. The two
+layers can be composed.
 
 This demonstrator reuses the information models and does not operate a FHIR
 server or an openEHR clinical data repository. That is a scope choice for this
@@ -110,9 +118,10 @@ flowchart TB
 
 ## Governance constraints
 
-- **Projection does not launder entitlement.** Claims the verifier was not
-  entitled to are absent from the projection because they were never disclosed.
-  Nothing downstream can reconstruct them.
+- **Projection does not launder entitlement.** Claims outside the verifier's
+  entitlement are absent from the projection because they were never disclosed.
+  The projection does not contain those claim values and therefore does not
+  provide the information needed to recover them.
 - **Retention attaches to the projection too.** Building a FHIR resource is how a
   verifier retains data; the retention rule on the credential type governs it.
 - **Unmapped claims are reported.** Both projections return the list

@@ -26,6 +26,22 @@
  * Accepting is a judgement, not a suppression. --accept rewrites the file from
  * the current state, so the diff shows a reviewer exactly which new sentences
  * an author decided were fine.
+ *
+ * WHAT THIS IS NOT
+ *
+ * This is a review gate and not semantic validation. It matches words and
+ * neighbouring words. It cannot tell whether a statement is true, whether the
+ * actor named is the one that performs the action, or whether a conclusion
+ * follows from the mechanism described. A green run means every sentence
+ * carrying a watched word has been read by a person and recorded, and nothing
+ * more than that. It does not mean the prose is correct.
+ *
+ * The regexes named SAFE_* are aids for keeping the flagged set readable. They
+ * are not evidence that the sentences they exempt are accurate. A pattern that
+ * exempts a sentence for mentioning a topic word rather than for naming the
+ * basis of its claim is a bug, and two of them were exactly that: SAFE_INTEROP
+ * exempted any sentence containing "profile" or "standard", and SAFE_STRONG any
+ * sentence containing "specification".
  */
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
@@ -36,6 +52,14 @@ import { createHash } from 'node:crypto';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ACCEPTED = join(ROOT, 'scripts', 'articulation-accepted.json');
+
+// Bump this whenever docs/writing-standard.md changes in a way that could make a
+// previously accepted sentence unacceptable. Every entry recorded under an older
+// version is then reported as needing re-review, so a stricter standard is not
+// silently grandfathered away by acceptances made under a looser one. Re-reviewing
+// means reading the sentences again; --accept alone does not clear it, and refuses
+// to when the version has moved.
+const STANDARD_VERSION = '2026-09-13-1';
 
 const FILES = [
   'site/index.html',
@@ -58,7 +82,7 @@ const SAFE_TRUST = /trust (registry|registries|infrastructure|statement|statemen
 const VERIFY_OBJECT = /verif\w+\s+(the\s+)?(signature|issuer|status|holder|binding|presentation|credential|proof|token|key|identity attribute|source|claim)|(signature|issuer|status|holder binding|presentation|credential)\s+\w{0,12}\s?verif/i;
 const SAFE_VERIFY = /verifier|verifiable|swiss-profile-verification|source verification|verification query|\/verifications|verification path|VERIFIERS/i;
 const SAFE_ONLY = /read-?only|only when|only if|only one|only two|only three|only four|only five|only six|only seven|only eight|only nine|only ten|only the (first|second|last)/i;
-const SAFE_PROTECTED = /protected (claim|field|fields|verification|issuance)|protected under|CODE/i;
+const SAFE_PROTECTED = /protected (claim|field|fields|verification|issuance)|protected under/i;
 const SAFE_PROVE = /proof of possession|proof element|zero-knowledge|predicate proof/i;
 const SAFE_IDENTITY = /identity (credential|attribute|provider|trust marker|verification service)|Beta-ID|e-ID|identity onboarding/i;
 const SAFE_PRIVATE = /private key|private organisation|private sector|private entit|private practice/i;
@@ -73,10 +97,13 @@ const SAFE_CONSENT = /research consent|standing-authorisation|legal consent|clin
 // Rule 3. Promotional adjectives, used only where the text defines the property
 // or cites its basis. "Secure" keeps its own category, which predates this.
 const PROMOTIONAL = /\b(privacy[- ]preserving|trustworthy|robust|seamless|powerful|innovative|resilient|state[- ]of[- ]the[- ]art|cutting[- ]edge|world[- ]class)\b/i;
-// "Interoperable" is promotional as a bare adjective and factual when it names
-// the property, so the interoperability sections are not swept up by it.
+// "Interoperable" is promotional as a bare adjective and factual when the
+// sentence says interoperable with what. The exemption is tied to that, and not
+// to the sentence merely mentioning a profile or a standard: an earlier version
+// exempted any sentence containing "profile", "standard" or a code span, which
+// covered most of the repository and exempted the claim rather than the basis.
 const PROMO_INTEROP = /\binteroperable\b/i;
-const SAFE_INTEROP = /interoperable (with|at|through|because|to the extent)|profile|standard|CODE/i;
+const SAFE_INTEROP = /interoperable (with|at|through|to the extent|for)\b/i;
 
 // Rule 4. An agentless subject where an actor should be named.
 // The verb has to be an action. "The infrastructure is operated by FOITT" names
@@ -90,7 +117,11 @@ const FILLER = /\b(this is important because|what this means is|the key point he
 // sentence names the specification, the law or the enforced constraint behind
 // them; the sweep decides the rest.
 const STRONG = /\b(guaranteed|impossible|prohibited|cannot happen|by definition)\b/i;
-const SAFE_STRONG = /MUST|SHOULD|MAY|NOT SUPPORTED|swiss-profile|RFC \d|BGEID|KVG|MedBG|EpG|HMG|OR \d|draft-\d|specification|the profile|the Act|Article|Art\./i;
+// The exemption is a citation, not a topic word. "Specification" and "the
+// profile" were in this list and exempted any sentence that mentioned one, which
+// is the opposite of requiring a source: the sentence has to name the clause,
+// document or statute it rests on.
+const SAFE_STRONG = /\bMUST\b|\bSHOULD\b|\bMAY\b|NOT SUPPORTED|swiss-profile-\w+:\d|trust-protocol|RFC ?\d{3,}|draft-\d|BGEID|ZertES|KVG|MedBG|LPMéd|EpG|HMG|LPTh|\bOR \d|Art\.? ?\d|Article \d/i;
 
 function strip(text, path) {
   if (path.endsWith('.html')) {
@@ -187,18 +218,45 @@ for (const path of FILES) {
 
 const accepted = existsSync(ACCEPTED) ? JSON.parse(readFileSync(ACCEPTED, 'utf8')) : { reviewed: {} };
 const args = process.argv.slice(2);
+const staleStandard = accepted.standard_version !== STANDARD_VERSION;
 
 if (args.includes('--accept')) {
+  if (staleStandard && !args.includes('--reviewed-against-current-standard')) {
+    console.log(
+      `The acceptance record was made against standard ${accepted.standard_version ?? '(none)'} and ` +
+      `the current standard is ${STANDARD_VERSION}.\n\n` +
+      'Every accepted sentence has to be read again against the changed standard before the record\n' +
+      'is rewritten, because an acceptance made under a looser rule is not evidence under a stricter\n' +
+      'one. Read them with --list, rewrite what the new rules reject, then re-run with\n' +
+      '--reviewed-against-current-standard to confirm the reading actually happened.',
+    );
+    process.exit(1);
+  }
+  // The risk set recorded is the one the sentence carries now, because --accept
+  // asserts that the currently flagged set has been read. Carrying an older risk
+  // string forward would leave the record claiming a reading that did not happen.
   const reviewed = {};
   for (const f of flagged) {
-    reviewed[f.id] = accepted.reviewed[f.id] ?? { file: f.file, risk: f.risk.join(','), sentence: f.sentence.slice(0, 160) };
+    reviewed[f.id] = { file: f.file, risk: f.risk.join(','), sentence: f.sentence.slice(0, 160) };
   }
-  writeFileSync(ACCEPTED, JSON.stringify({ note: accepted.note, reviewed }, null, 1) + '\n');
-  console.log(`Recorded ${Object.keys(reviewed).length} reviewed sentences.`);
+  writeFileSync(
+    ACCEPTED,
+    JSON.stringify({ note: accepted.note, standard_version: STANDARD_VERSION, reviewed }, null, 1) + '\n',
+  );
+  console.log(`Recorded ${Object.keys(reviewed).length} reviewed sentences against standard ${STANDARD_VERSION}.`);
   process.exit(0);
 }
 
+// A sentence is identified by its text, so an unchanged sentence keeps its
+// acceptance when a rule is added. That is the grandfathering hole: the reader
+// who accepted it never saw the new category. An acceptance therefore holds only
+// while the risk set it was accepted under is still the risk set the sentence
+// carries. A sentence that trips a newly added rule comes back for reading.
 const unreviewed = flagged.filter((f) => !accepted.reviewed[f.id]);
+const riskChanged = flagged.filter((f) => {
+  const a = accepted.reviewed[f.id];
+  return a && a.risk !== undefined && a.risk !== f.risk.join(',');
+});
 
 if (args.includes('--list')) {
   for (const f of flagged) {
@@ -209,6 +267,25 @@ if (args.includes('--list')) {
 
 console.log(`${flagged.length} sentences use a word the articulation rule watches; ` +
   `${flagged.length - unreviewed.length} reviewed, ${unreviewed.length} not.`);
+
+if (staleStandard) {
+  console.log(
+    `\nThe acceptance record names standard ${accepted.standard_version ?? '(none)'}; ` +
+    `the current standard is ${STANDARD_VERSION}.`,
+  );
+}
+
+if (riskChanged.length) {
+  console.log(`\n${riskChanged.length} accepted sentences now carry a different risk set:`);
+  for (const f of riskChanged.slice(0, 40)) {
+    console.log(`  - ${f.file} [${accepted.reviewed[f.id].risk} -> ${f.risk.join(',')}]`);
+    console.log(`      ${f.sentence.slice(0, 150)}`);
+  }
+  if (riskChanged.length > 40) console.log(`  … and ${riskChanged.length - 40} more`);
+  console.log('\nEach was accepted under the earlier set. Read it against the rule it now trips.');
+}
+
+if (staleStandard || riskChanged.length) process.exitCode = 1;
 
 if (unreviewed.length) {
   console.log();

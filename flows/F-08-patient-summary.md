@@ -39,6 +39,19 @@ produces:
 
 Roadmap step 2. Specified here, deliberately not built.
 
+> **Beyond the current Swiss Profile.** This flow requires several independently
+> issued credentials to contribute to one clinical summary, including several
+> instances of the same credential type where the count is not known when the
+> request is built. `swiss-profile-verification:1.0.0` states that DCQL
+> `multiple` is NOT SUPPORTED, so one credential query returns at most one
+> credential instance. Several credential queries in one authorization request
+> are supported and F-04 uses two, but that does not reach a set whose size the
+> verifier does not know in advance. The multi-credential interaction described
+> here is a requirement for future profile evolution, recorded as
+> [GP-01](../docs/swiss-profile-gaps.md#gp-01--multi-instance-credential-presentation),
+> and not a capability this repository assumes today. Cross-border presentation
+> raises [GP-10](../docs/swiss-profile-gaps.md#gp-10--cross-domain-and-cross-border-trust-evaluation).
+
 The International Patient Summary is the standardised minimum dataset for
 unplanned care: allergies, current medication, problems and immunizations. That
 last section is why it belongs in this blueprint. It is designed for the case where a
