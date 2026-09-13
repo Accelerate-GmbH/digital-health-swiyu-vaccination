@@ -40,7 +40,10 @@ const ACCEPTED = join(ROOT, 'scripts', 'articulation-accepted.json');
 const FILES = [
   'site/index.html',
   'README.md',
-  ...readdirSync(join(ROOT, 'docs')).filter((f) => f.endsWith('.md')).sort().map((f) => `docs/${f}`),
+  // writing-standard.md is the definition of this rule and quotes the wording it
+  // bans, so it is the one document the rule cannot be applied to.
+  ...readdirSync(join(ROOT, 'docs')).filter((f) => f.endsWith('.md') && f !== 'writing-standard.md')
+    .sort().map((f) => `docs/${f}`),
   ...readdirSync(join(ROOT, 'flows')).filter((f) => f.endsWith('.md')).sort().map((f) => `flows/${f}`),
   // The LikeC4 model carries the step notes that the rendered diagrams and the
   // flow documents both draw on, so the notes are public prose under a file
@@ -60,6 +63,34 @@ const SAFE_PROVE = /proof of possession|proof element|zero-knowledge|predicate p
 const SAFE_IDENTITY = /identity (credential|attribute|provider|trust marker|verification service)|Beta-ID|e-ID|identity onboarding/i;
 const SAFE_PRIVATE = /private key|private organisation|private sector|private entit|private practice/i;
 const SAFE_CONSENT = /research consent|standing-authorisation|legal consent|clinical consent|consent credential|Human Research/i;
+
+// --- rules 3, 4, 7 and 9 of docs/writing-standard.md ------------------------
+//
+// Each of these is mechanical enough to catch by pattern. The rest of the
+// standard is not, which is why the accepted file records a human decision per
+// sentence rather than a suppression list.
+
+// Rule 3. Promotional adjectives, used only where the text defines the property
+// or cites its basis. "Secure" keeps its own category, which predates this.
+const PROMOTIONAL = /\b(privacy[- ]preserving|trustworthy|robust|seamless|powerful|innovative|resilient|state[- ]of[- ]the[- ]art|cutting[- ]edge|world[- ]class)\b/i;
+// "Interoperable" is promotional as a bare adjective and factual when it names
+// the property, so the interoperability sections are not swept up by it.
+const PROMO_INTEROP = /\binteroperable\b/i;
+const SAFE_INTEROP = /interoperable (with|at|through|because|to the extent)|profile|standard|CODE/i;
+
+// Rule 4. An agentless subject where an actor should be named.
+// The verb has to be an action. "The infrastructure is operated by FOITT" names
+// its actor; "the infrastructure supports it" does not.
+const AGENTLESS = /\b(the system|the infrastructure|the platform|the technology|the solution)\s+(?!is\b|was\b|has\b|have\b|had\b|does\b|will be\b)\w+s\b|\btrust is established\b|\btrust is created\b/i;
+
+// Rule 7. Pedagogical filler.
+const FILLER = /\b(this is important because|what this means is|the key point here is|this is the beauty of|it is worth noting that|it should be noted that|as we have seen|in other words, this)\b/i;
+
+// Rule 9. Words that assert a normative or absolute source. Permitted where the
+// sentence names the specification, the law or the enforced constraint behind
+// them; the sweep decides the rest.
+const STRONG = /\b(guaranteed|impossible|prohibited|cannot happen|by definition)\b/i;
+const SAFE_STRONG = /MUST|SHOULD|MAY|NOT SUPPORTED|swiss-profile|RFC \d|BGEID|KVG|MedBG|EpG|HMG|OR \d|draft-\d|specification|the profile|the Act|Article|Art\./i;
 
 function strip(text, path) {
   if (path.endsWith('.html')) {
@@ -85,7 +116,25 @@ function strip(text, path) {
     // technology strings around them are labels rather than statements.
     text = (text.match(/'''[\s\S]*?'''/g) ?? []).map((n) => n.slice(3, -3)).join('\n\n');
   } else {
-    text = text.replace(/^---\n[\s\S]*?\n---\n/, '').replace(/```[\s\S]*?```/g, ' ');
+    text = text.replace(/^---\n[\s\S]*?\n---\n/, '');
+    // A mermaid block is a fenced code block that renders as a picture, so its
+    // node labels and notes are prose a reader sees. Other fenced blocks are
+    // code and shell transcripts and are dropped. Labels are read; the arrows,
+    // participant ids and directives around them are not.
+    text = text.replace(/```mermaid\n([\s\S]*?)```/g, (_, body) => {
+      const labels = [];
+      for (const m of body.matchAll(/\[\s*"([^"]+)"\s*\]|\{\s*"([^"]+)"\s*\}|\(\s*"([^"]+)"\s*\)/g)) {
+        labels.push(m[1] ?? m[2] ?? m[3]);
+      }
+      for (const m of body.matchAll(/^\s*Note (?:over|left of|right of) [^:]+:\s*(.+)$/gm)) labels.push(m[1]);
+      for (const m of body.matchAll(/^\s*[\w-]+\s*-*>>?\s*[\w-]+\s*:\s*(.+)$/gm)) labels.push(m[1]);
+      return ' ' + labels
+        .map((l) => l.replace(/<br\s*\/?>/g, ' ').replace(/\s+/g, ' ').trim())
+        .filter((l) => /\s/.test(l) && /[a-z]{3}/i.test(l))
+        .map((l) => (/[.:;!?]$/.test(l) ? l : `${l}.`))
+        .join(' ') + ' ';
+    });
+    text = text.replace(/```[\s\S]*?```/g, ' ');
   }
   return text.replace(/`[^`]*`/g, ' CODE ')
              .replace(/https?:\/\/\S+/g, ' URL ')
@@ -110,6 +159,11 @@ function risks(s) {
   if (/\b(secure|security|securely)\b/i.test(s)) out.push('secure');
   if (/\b(anonymous|anonymity|anonymised|anonymized)\b/i.test(s)) out.push('anonymous');
   if (/\b(consent|consents|consented)\b/i.test(s) && !SAFE_CONSENT.test(s)) out.push('consent');
+  if (PROMOTIONAL.test(s)) out.push('promotional');
+  if (PROMO_INTEROP.test(s) && !SAFE_INTEROP.test(s)) out.push('promotional');
+  if (AGENTLESS.test(s)) out.push('agentless');
+  if (FILLER.test(s)) out.push('filler');
+  if (STRONG.test(s) && !SAFE_STRONG.test(s)) out.push('strong-claim');
   if (/\b(unlinkable|unlinkability|linkable|linkability)\b/i.test(s) &&
       !/credential identifier|holder key|claim values|status-list reference|timing|network metadata|correlation surface/i.test(s)) {
     out.push('linkability-no-surface');

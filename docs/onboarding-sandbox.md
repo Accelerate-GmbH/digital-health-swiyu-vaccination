@@ -400,5 +400,6 @@ to grant the role. The protocol layer that such a body would grant it through is
 not yet open to private health issuers. Going to production does not resolve
 either one.
 
-swiyu's own position is that a sector brings its own governance. The
-infrastructure supports it. Health has not yet done it.
+swiyu's own position is that a sector brings its own governance. The Trust
+Registry provides the statement types such a body would publish through. No
+health-domain body has been established to publish them.

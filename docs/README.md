@@ -28,6 +28,7 @@ Start wherever your question is.
 | [**eHealth Suisse alignment**](ehealth-suisse-alignment.md) | The Swiss identifiers, exchange formats and CH VACD mechanisms this project reuses, the three it repurposes for its own open questions and where it diverges. |
 | [**Swiss Profile gaps**](swiss-profile-gaps.md) | Capabilities this demonstrator requires that Swiss Profiles 1.0 and Trust Protocol 2.0 do not define, GP-01 to GP-10, each referenced from the flows that need it. GP-10 covers cross-border trust evaluation and the LEI/vLEI organisational bridge. |
 | [**Source verification**](source-verification.md) | What was checked against a primary source, what rests on a secondary one and which assertions are unverified, the legal citations in particular. |
+| [**Writing standard**](writing-standard.md) | The standing rule for prose in this repository: say what the component does, name the actor and the mechanism, preserve the distinctions that matter, and use strong words only where a specification, a law or an enforced constraint supports them. |
 | [**Articulation pass**](articulation-pass.md) | The 2026-09-13 precision pass: what changed file by file, which assertions remain strong and on what basis, and which statements depend on unresolved swiyu behaviour or governance. |
 
 ## What the credentials are

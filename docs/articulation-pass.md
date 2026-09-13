@@ -123,6 +123,20 @@ The watched words are `prove`, `verify`, `valid`, `trust`, `identity`,
 `authorised`, `entitled`, `protected`, `secure`, `only`, `never`, `always`,
 `guarantee`, `nothing else` and `the same person`.
 
+Four categories from [the writing standard](writing-standard.md) were added
+afterwards, each mechanical enough to catch by pattern: promotional adjectives
+(rule 3), an agentless subject where an actor should be named (rule 4),
+pedagogical filler (rule 7), and words asserting a normative or absolute source
+outside a sentence that names the specification, the law or the enforced
+constraint behind them (rule 9). The remaining rules are judgements and stay
+with the reader, which is what the per-sentence record in
+`articulation-accepted.json` is for.
+
+A third blind spot closed with them: a fenced `mermaid` block renders as a
+picture, so its node labels and notes are prose, and the check was dropping them
+with the rest of the fenced code. Reading them found three labels to rewrite,
+including a wallet step still labelled "Consent".
+
 ## 2 · Strong assertions that remain, and their basis
 
 These are stated without hedging on purpose. Each is checkable.

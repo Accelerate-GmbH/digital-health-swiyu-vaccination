@@ -102,7 +102,8 @@ Project 1103 published a three-stage transition and it remains the clearest
 frame available:
 
 1. **Document-oriented ("EPD 1.0").** The current Swiss EPR: reports as PDFs,
-   which makes search and automated processing all but impossible.
+   which a receiving system cannot search or process by field without first
+   extracting the content.
 2. **Structured, server-based ("EPD 2.0").** Structured, standardised clinical
    information on server technologies that are readily available today.
 3. **Structured, wallet-based ("EPD 3.0").** The same standards, carried as
