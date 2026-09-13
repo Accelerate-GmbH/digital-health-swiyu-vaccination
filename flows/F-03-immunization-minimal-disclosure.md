@@ -1,9 +1,16 @@
 ---
 id: F-03
 title: Presenting vaccination evidence with minimal disclosure
-type: interaction-flow
+kind: flow
+interaction_scope: multi-party
+composition: atomic
+data_mode: discrete
 status: implemented
 roadmap_step: 1
+profile_status: mixed
+profile_gaps:
+  - GP-08
+  - GP-09
 actors:
   - ch.didas.health.role.travel-clinic
   - holder

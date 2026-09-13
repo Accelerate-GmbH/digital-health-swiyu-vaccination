@@ -1,10 +1,15 @@
 ---
 id: F-07
 title: Projecting a presented credential into FHIR and openEHR
-type: local-transformation
+kind: transformation
+interaction_scope: local
+composition: atomic
+data_mode: discrete
 status: implemented
 roadmap_step: 1
-execution_scope: local
+profile_status: mixed
+profile_gaps:
+  - GP-02
 actors:
   - any verifying role
 credentials:

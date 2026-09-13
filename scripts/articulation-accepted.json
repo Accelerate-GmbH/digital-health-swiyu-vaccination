@@ -56,12 +56,12 @@
    "risk": "trust-bare",
    "sentence": "Profile Carries swiss-profile-anchor:1.0.0 DID Core 1.0, did:webvh 1.0 swiss-profile-issuance:1.0.0 OpenID4VCI 1.0, OAuth 2.0 DPoP (RFC 9449) swiss-profile-veri"
   },
-  "1fdec03c76e36898": {
+  "493301a0704b376f": {
    "file": "site/index.html",
    "risk": "verify-no-object",
-   "sentence": "F-07 is implemented and has no sequence diagram because it is a local projection step rather than an exchange between parties: it begins after a presentation ha"
+   "sentence": "F-07 is implemented and has none because it is a local projection step rather than an exchange between parties: it begins after a presentation has completed and"
   },
-  "fd7d0c892ef590da": {
+  "a1afb8cd0239fd16": {
    "file": "site/index.html",
    "risk": "verify-no-object",
    "sentence": "Open all the diagrams → F-01 Becoming an actor DID, trust statement, role grant · Sequence diagram Partial F-02 Issuing an administered dose One credential per "
@@ -215,6 +215,11 @@
    "file": "README.md",
    "risk": "trust-bare",
    "sentence": "| Profile | Covers | | --- | --- | | CODE | DID Core 1.0, CODE 1.0 | | CODE | OpenID4VCI 1.0, OAuth 2.0 DPoP (RFC 9449) | | CODE | OpenID4VP 1.0, JAR (RFC 9101)"
+  },
+  "8284d9c5b33d9990": {
+   "file": "docs/README.md",
+   "risk": "trust-bare",
+   "sentence": "GP-10 covers cross-border trust evaluation and the LEI/vLEI organisational bridge."
   },
   "4f58a6d0f516a456": {
    "file": "docs/README.md",
@@ -1050,6 +1055,106 @@
    "file": "docs/spec-conformance.md",
    "risk": "verify-no-object,absolute,secure",
    "sentence": "Sandbox hosts in CODE | | CD-002 Issuer security enforcements | generic issuer | | CD-004 Verifier security enforcements | generic verifier | | CD-005 DPoP enfo"
+  },
+  "fb247b18abf39cab": {
+   "file": "docs/swiss-profile-gaps.md",
+   "risk": "trust-bare,identity",
+   "sentence": "CODE NOT SUPPORTED | Swiss Profile Verification | specification | | GP-02 | Provenance of a derived representation | F-07, F-08 | No defined way to carry or ret"
+  },
+  "009783be41442eb8": {
+   "file": "docs/swiss-profile-gaps.md",
+   "risk": "verify-no-object",
+   "sentence": "**Likely affected area.** Swiss Profile Verification."
+  },
+  "0248eecaac49aca3": {
+   "file": "docs/swiss-profile-gaps.md",
+   "risk": "verify-no-object",
+   "sentence": "**Likely affected area.** Swiss Profile Verification, and governance."
+  },
+  "1d7a5924ee9bdef6": {
+   "file": "docs/swiss-profile-gaps.md",
+   "risk": "identity",
+   "sentence": "**Current limitation.** Five things are distinct in a continuous-measurement setting and the profiles address none of them as a set: 1. device identity; 2. the "
+  },
+  "6b50dd4c392e225e": {
+   "file": "docs/swiss-profile-gaps.md",
+   "risk": "trust-bare",
+   "sentence": "Device attestation is not a Trust Protocol trust marker:"
+  },
+  "a30bc4555e8b06ef": {
+   "file": "docs/swiss-profile-gaps.md",
+   "risk": "privacy",
+   "sentence": "A richer status value is not obviously an improvement and the privacy consequences have to be evaluated with the functional benefit."
+  },
+  "16a32569c9930344": {
+   "file": "docs/swiss-profile-gaps.md",
+   "risk": "absolute",
+   "sentence": "ES256 is the only signature algorithm the current profile permits, which constrains the candidates."
+  },
+  "3e9724bb8a04a630": {
+   "file": "docs/swiss-profile-gaps.md",
+   "risk": "linkability-no-surface",
+   "sentence": "--- ## GP-09 · Structural unlinkability **Relevant to:** F-03, F-11."
+  },
+  "eab219f26ca28375": {
+   "file": "docs/swiss-profile-gaps.md",
+   "risk": "linkability-no-surface",
+   "sentence": "Selective disclosure is not unlinkability, and this document does not use one word for the other."
+  },
+  "1ee5484aa1c79681": {
+   "file": "docs/swiss-profile-gaps.md",
+   "risk": "linkability-no-surface",
+   "sentence": "**Required capability.** If stronger unlinkability is a Swiss requirement, the correlation model has to be established first: which surfaces matter for which us"
+  },
+  "b52edbefa20837a1": {
+   "file": "docs/swiss-profile-gaps.md",
+   "risk": "trust-bare",
+   "sentence": "--- ## GP-10 · Cross-domain and cross-border trust evaluation **Relevant to:** F-08, and any interaction where an organisation in one trust domain deals with an"
+  },
+  "d7442024a01dbb12": {
+   "file": "docs/swiss-profile-gaps.md",
+   "risk": "verify-no-object",
+   "sentence": "**Current limitation.** Cryptographic verification of a Swiss credential establishes which key signed it and, through identifier resolution, which issuer holds "
+  },
+  "d969be3f48e0cf41": {
+   "file": "docs/swiss-profile-gaps.md",
+   "risk": "trust-bare",
+   "sentence": "It does not establish that the organisation is recognised, authorised or acceptable in another jurisdiction or trust framework."
+  },
+  "72a9190e6b5f2a74": {
+   "file": "docs/swiss-profile-gaps.md",
+   "risk": "trust-bare",
+   "sentence": "Trust statements are published and evaluated within the Swiss trust domain, and no recognition path across trust domains is defined."
+  },
+  "23b4dac5a4724093": {
+   "file": "docs/swiss-profile-gaps.md",
+   "risk": "trust-bare,identity",
+   "sentence": "**Likely affected area.** Swiss Profile Trust, Trust Protocol, organisational-identity governance, and alignment with a Swiss OrgID if one is established."
+  },
+  "6b5864e337db2f22": {
+   "file": "docs/swiss-profile-gaps.md",
+   "risk": "trust-bare",
+   "sentence": "This is not primarily a credential-format question. ### GP-10a · LEI and vLEI as an organisational bridge LEI and vLEI are worth evaluating as a bridge between "
+  },
+  "1d2d367dae20c60f": {
+   "file": "docs/swiss-profile-gaps.md",
+   "risk": "identity",
+   "sentence": "Where suitable vLEI credentials exist, they can carry cryptographically verifiable assertions about organisational identity, roles and authority within the vLEI"
+  },
+  "0606af149d25257a": {
+   "file": "docs/swiss-profile-gaps.md",
+   "risk": "verify-no-object",
+   "sentence": "**What it does not answer.** Whether the organisation is authorised to issue or verify a given credential type, in a given jurisdiction, for a given governed us"
+  },
+  "f8ec015dfee562a4": {
+   "file": "docs/swiss-profile-gaps.md",
+   "risk": "identity",
+   "sentence": "**Design principle: dual anchoring rather than replacement.** A Swiss organisational actor should be able to remain governed by Swiss law and the Swiss trust in"
+  },
+  "f5e3bd82f5badab3": {
+   "file": "docs/swiss-profile-gaps.md",
+   "risk": "trust-bare",
+   "sentence": "| Concept | What it is | | --- | --- | | swiyu DID | Technical identifier within the Swiss trust infrastructure | | Swiss organisational identifier | The Swiss "
   },
   "7c2b5f23b42066f1": {
    "file": "flows/F-01-actor-onboarding.md",

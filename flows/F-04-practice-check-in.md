@@ -1,9 +1,13 @@
 ---
 id: F-04
 title: Check-in at the practice
-type: interaction-flow
+kind: flow
+interaction_scope: multi-party
+composition: atomic
+data_mode: discrete
 status: implemented
 roadmap_step: 1
+profile_status: mixed
 actors:
   - ch.didas.health.role.practice
   - holder

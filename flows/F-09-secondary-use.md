@@ -1,9 +1,15 @@
 ---
 id: F-09
 title: Secondary use under revocable research consent
-type: interaction-flow
+kind: flow
+interaction_scope: multi-party
+composition: atomic
+data_mode: discrete
 status: roadmap
 roadmap_step: 2
+profile_status: beyond-current-profile
+profile_gaps:
+  - GP-03
 actors:
   - ch.didas.health.role.research
   - holder

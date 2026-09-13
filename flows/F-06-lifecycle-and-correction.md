@@ -1,9 +1,16 @@
 ---
 id: F-06
 title: Correction, suspension and revocation
-type: interaction-flow
+kind: flow
+interaction_scope: multi-party
+composition: atomic
+data_mode: discrete
 status: partial
 roadmap_step: 1
+profile_status: mixed
+profile_gaps:
+  - GP-06
+  - GP-07
 actors:
   - all issuing roles
   - holder

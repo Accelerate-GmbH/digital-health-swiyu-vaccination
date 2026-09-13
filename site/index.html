@@ -1032,11 +1032,15 @@ For comparison, the alternatives in routine use disclose differently: a paper bo
       file can be moved into a trust flows repository and sit beside flows from unrelated sectors.
     </p>
     <p>
-      Eight of the eleven are <span class="ftype">interaction-flow</span>: messages exchanged between
-      two or more parties over a named protocol. The other three are not. F-07 is
-      <span class="ftype">local-transformation</span>, F-08 is
-      <span class="ftype">composed-flow</span> and F-10 is
-      <span class="ftype">continuous-data-flow</span>. Each file declares its type.
+      The eleven are not the same kind of object, and the ways they differ are independent of each
+      other. Each file declares four characteristics: whether it is a <b>flow</b> or a
+      <b>transformation</b>, whether messages cross a party boundary
+      (<span class="ftype">multi-party</span>, <span class="ftype">local</span> or
+      <span class="ftype">unresolved</span>), whether it is <span class="ftype">atomic</span> or
+      <span class="ftype">composed</span>, and whether it concerns a
+      <span class="ftype">discrete</span> event or a <span class="ftype">continuous</span> stream.
+      F-08 is composed <em>and</em> an inter-party exchange; F-10 is continuous, which says nothing
+      about whether it is local or multi-party, so those two fields are unresolved for it.
     </p>
     <p class="c4link">
       The seven modelled interaction flows are also drawn in <a href="https://likec4.dev">LikeC4</a>,
@@ -1044,10 +1048,15 @@ For comparison, the alternatives in routine use disclose differently: a paper bo
       <a href="https://didas-swiss.github.io/Trust-Flow-Diagram-Repository/basic-flow/">DIDAS
       reference flow</a>, so that they can move without being redrawn. Every step in the model carries
       the protocol, the data format and the eHealth Suisse rule behind it in its notes.
-      F-07 is implemented and has no sequence diagram because it is a local projection step rather
-      than an exchange between parties: it begins after a presentation has completed and maps the
-      disclosed claims into FHIR or openEHR representations inside the verifying organisation.
-      F-08 to F-10 are roadmap flows and are not yet implemented.
+      Interaction scope decides which entries have a diagram, not maturity. F-07 is implemented and
+      has none because it is a local projection step rather than an exchange between parties: it
+      begins after a presentation has completed and maps the disclosed claims into FHIR or openEHR
+      representations inside the verifying organisation. F-08 and F-09 are multi-party and could
+      carry one; both are roadmap flows and are not yet modelled. F-10 leaves its interaction scope
+      unresolved, so there is no exchange to draw.
+      Three of the eleven depend on a mechanism the current Swiss Profiles do not define, recorded
+      with stable identifiers in the
+      <a href="https://github.com/DIDAS-swiss/digital-health_swiyu/blob/main/docs/swiss-profile-gaps.md">Swiss Profile gap register</a>.
       <a class="cta" href="flows/">Open all the diagrams →</a>
     </p>
     <div class="flows">
@@ -1057,12 +1066,51 @@ For comparison, the alternatives in routine use disclose differently: a paper bo
       <div class="flow"><span class="fid">F-04</span><span class="ftitle"><a href="https://github.com/DIDAS-swiss/digital-health_swiyu/blob/main/flows/F-04-practice-check-in.md">Check-in at the practice</a><span>Two issuers, one presentation, a name that must match · <a href="flows/#/view/practiceCheckIn/">Sequence diagram</a></span></span><span class="status built">Built</span></div>
       <div class="flow"><span class="fid">F-05</span><span class="ftitle"><a href="https://github.com/DIDAS-swiss/digital-health_swiyu/blob/main/flows/F-05-prescription-redemption.md">Prescription and its redemption</a><span>Single use, without a register recording who was prescribed what · <a href="flows/#/view/prescriptionRedemption/">Sequence diagram</a></span></span><span class="status built">Built</span></div>
       <div class="flow"><span class="fid">F-06</span><span class="ftitle"><a href="https://github.com/DIDAS-swiss/digital-health_swiyu/blob/main/flows/F-06-lifecycle-and-correction.md">Correction, suspension and revocation</a><span>Why business expiry and technical expiry must stay apart · <a href="flows/#/view/correction/">Sequence diagram</a></span></span><span class="status partial">Partial</span></div>
-      <div class="flow"><span class="fid">F-07</span><span class="ftitle"><a href="https://github.com/DIDAS-swiss/digital-health_swiyu/blob/main/flows/F-07-model-projection.md">Local model projection</a><span>Project disclosed credential claims into FHIR or openEHR representations within the verifying system · <span class="ftype">local-transformation</span></span></span><span class="status built">Built</span></div>
-      <div class="flow"><span class="fid">F-08</span><span class="ftitle"><a href="https://github.com/DIDAS-swiss/digital-health_swiyu/blob/main/flows/F-08-patient-summary.md">Assembling an International Patient Summary</a><span>Allergies, problems, medication statements · <span class="ftype">composed-flow</span></span></span><span class="status later">Step 2</span></div>
-      <div class="flow"><span class="fid">F-09</span><span class="ftitle"><a href="https://github.com/DIDAS-swiss/digital-health_swiyu/blob/main/flows/F-09-secondary-use.md">Secondary use under revocable research consent</a><span>Policy configuration prevents the research role requesting identifying claims</span></span><span class="status later">Step 2</span></div>
-      <div class="flow"><span class="fid">F-10</span><span class="ftitle"><a href="https://github.com/DIDAS-swiss/digital-health_swiyu/blob/main/flows/F-10-continuous-data.md">Wearables and continuous data</a><span>Limits of the authored-event model · <span class="ftype">continuous-data-flow</span></span></span><span class="status later">Step 3</span></div>
+      <div class="flow"><span class="fid">F-07</span><span class="ftitle"><a href="https://github.com/DIDAS-swiss/digital-health_swiyu/blob/main/flows/F-07-model-projection.md">Local model projection</a><span>Project disclosed credential claims into FHIR or openEHR representations within the verifying system · <span class="ftype">transformation · local</span></span></span><span class="status built">Built</span></div>
+      <div class="flow"><span class="fid">F-08</span><span class="ftitle"><a href="https://github.com/DIDAS-swiss/digital-health_swiyu/blob/main/flows/F-08-patient-summary.md">Assembling an International Patient Summary</a><span>Allergies, problems, medication statements · <span class="ftype">composed · not yet modelled</span></span></span><span class="status later">Step 2</span></div>
+      <div class="flow"><span class="fid">F-09</span><span class="ftitle"><a href="https://github.com/DIDAS-swiss/digital-health_swiyu/blob/main/flows/F-09-secondary-use.md">Secondary use under revocable research consent</a><span>Policy configuration prevents the research role requesting identifying claims · <span class="ftype">multi-party · not yet modelled</span></span></span><span class="status later">Step 2</span></div>
+      <div class="flow"><span class="fid">F-10</span><span class="ftitle"><a href="https://github.com/DIDAS-swiss/digital-health_swiyu/blob/main/flows/F-10-continuous-data.md">Wearables and continuous data</a><span>Limits of the authored-event model · <span class="ftype">continuous · scope unresolved</span></span></span><span class="status later">Step 3</span></div>
       <div class="flow"><span class="fid">F-11</span><span class="ftitle"><a href="https://github.com/DIDAS-swiss/digital-health_swiyu/blob/main/flows/F-11-coverage-survey.md">Answering the national coverage survey</a><span>Five claims and no person identifier, in place of a photocopied record · <a href="flows/#/view/coverageSurvey/">Sequence diagram</a></span></span><span class="status later">Step 2</span></div>
     </div>
+  </section>
+
+  <section>
+    <p class="kicker">Roadmap</p>
+    <h2>Planned work, 2026 to 2028</h2>
+    <div class="roadmap">
+      <div class="stage now">
+        <span class="yr">2026 · prototype</span>
+        <h3>Immunization Showcase</h3>
+        <ul>
+          <li>FHIR / openEHR interplay</li>
+          <li>End-to-end prototype, runnable offline</li>
+          <li>Blueprint: the eleven flows</li>
+          <li>Governance model that rejects out-of-policy issuance and requests</li>
+        </ul>
+      </div>
+      <div class="stage">
+        <span class="yr">2027 · specified</span>
+        <h3>International Patient Summary</h3>
+        <ul>
+          <li>Allergies, problems, medication statements</li>
+          <li>Multi-credential presentation, which the current Swiss Profile Verification does not define (GP-01)</li>
+          <li>Absence semantics: "none known" vs "none held"</li>
+          <li>Interoperation with EPD / EGD infrastructure: issuer, source, verifier and repository roles to be examined</li>
+          <li>Composition with the openEHR / HL7 blueprint</li>
+        </ul>
+      </div>
+      <div class="stage">
+        <span class="yr">2028 · sketched</span>
+        <h3>Swiss Health App</h3>
+        <ul>
+          <li>Wearable and continuous data</li>
+          <li>Summary credentials with accountable computation</li>
+          <li>Measurement provenance (GP-05) and standing authorisation (GP-04)</li>
+          <li>User experience optimised</li>
+        </ul>
+      </div>
+    </div>
+
 
     <h3 class="rmsub">Step 1, item by item</h3>
     <div class="tablewrap">

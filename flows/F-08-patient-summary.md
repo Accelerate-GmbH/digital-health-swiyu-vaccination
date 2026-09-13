@@ -1,9 +1,17 @@
 ---
 id: F-08
 title: Assembling an International Patient Summary from held credentials
-type: composed-flow
+kind: flow
+interaction_scope: multi-party
+composition: composed
+data_mode: discrete
 status: roadmap
 roadmap_step: 2
+profile_status: beyond-current-profile
+profile_gaps:
+  - GP-01
+  - GP-02
+  - GP-10
 actors:
   - holder
   - ch.didas.health.role.practice
