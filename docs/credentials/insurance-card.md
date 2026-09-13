@@ -40,7 +40,7 @@ built, before it reaches the holder. See `reviewRequest()`.
 
 **Revocation.** The insurer revokes on termination of cover or card replacement; the status list bit flips and every later presentation fails without the patient having to return anything.
 
-**Retention.** A practice may keep the disclosed claims for as long as the billing record requires (10 years under OR Art. 958f); a pharmacy only for the duration of the dispensation.
+**Retention.** A practice may keep the disclosed claims for as long as the billing record requires; where the information forms part of records subject to the accounting-law retention requirements, OR Art. 958f provides for ten years, and whether a given credential-derived attribute falls within that obligation depends on the purpose and the record it is retained in. A pharmacy keeps it only for the duration of the dispensation.
 
 ## Clinical models
 

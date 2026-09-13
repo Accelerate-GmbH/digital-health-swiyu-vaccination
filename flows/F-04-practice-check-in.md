@@ -86,7 +86,8 @@ sequenceDiagram
   Reception is better placed than software to decide which, so the flow raises
   the discrepancy rather than resolving it.
 - **Retention follows the billing record**: ten years under
-  OR Art. 958f for what the practice legitimately keeps. The credential itself is
+  OR Art. 958f for what the practice legitimately keeps, so far as the
+  information forms part of a record that provision covers. The credential itself is
   not stored.
 
 ## Standardisation constraints

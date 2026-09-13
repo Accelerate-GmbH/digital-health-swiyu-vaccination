@@ -24,7 +24,7 @@ Proof of one administered vaccination, issued by the administering party.
 
 **Who may issue it:** `ch.didas.health.role.vaccinator`.
 
-Modelled here on the basis of EpG/LEp and the cantonal authorisation to vaccinate; legal review is required before deployment. A practice, a pharmacy with a vaccination permit, or a company medical service. The issuing DID must carry a Governed Use Case Authorization Trust Marker naming this credential type, because "who is allowed to say that a vaccination happened" is precisely what a verifier needs to check.
+Modelled here on the basis of EpG/LEp, which establishes the federal and cantonal vaccination framework, together with the professional, therapeutic-products and cantonal law that decides whether a given professional or organisation may administer a vaccination; legal review is required before deployment. A practice, a pharmacy with a vaccination permit, or a company medical service. The issuing DID must carry a Governed Use Case Authorization Trust Marker naming this credential type, because "who is allowed to say that a vaccination happened" is precisely what a verifier needs to check.
 
 This is a **governed** credential type: an actor must decline any interaction where the counterparty carries the Governed Use Case Trust Marker without the matching authorization marker.
 

@@ -202,16 +202,20 @@ layer](#the-missing-layer) describes from the trust-marker side.
 
 ## Legal basis, by credential type
 
-These are **modelled** legal bases, not settled ones: each is this project's own
-reading, none of the statutes was read in the environment this repository was
-developed in, and [source verification](source-verification.md) lists them as
-unverified. Legal review is required before deployment.
+These are **modelled** legal bases, not settled ones. Four of the citations were
+read against Fedlex outside this environment on 2026-09-13, which confirmed two,
+qualified the scope of a third and established that two of them named only part
+of the applicable law; the table below carries the corrected form and
+[source verification](source-verification.md) records the reading. The KVG
+analysis list was not part of it. Legal review is still required before
+deployment: a citation being correct is a different question from a deployment
+being lawful.
 
 | Credential | Modelled on |
 | --- | --- |
 | Insurance card | KVG/LAMal Art. 42a: the insurer issues the card |
-| Immunization | EpG/LEp and the cantonal authorisation to vaccinate |
-| Prescription | MedBG/LPMéd: only a registered practitioner may prescribe |
+| Immunization | EpG/LEp for the federal and cantonal framework, with professional, therapeutic-products and cantonal law deciding who may administer |
+| Prescription | The applicable professional-practice and therapeutic-products legislation, including MedBG/LPMéd, HMG/LPTh and cantonal law |
 | Laboratory report | A laboratory on the KVG analysis list, or the treating practice on its behalf |
 
 These are recorded as `issuerBasis` on each credential type and surface in the
@@ -222,7 +226,10 @@ journal entry for every issuance.
 Retention attaches to the receiving role:
 
 - **Practice.** Disclosed claims may be kept as long as the billing record
-  requires (10 years, OR Art. 958f).
+  requires. Where the information forms part of records subject to the
+  accounting-law retention requirements, OR Art. 958f provides for ten years.
+  Whether a given credential-derived attribute falls within that obligation
+  depends on the purpose and the record it is retained in.
 - **Pharmacy.** A dispensation record under HMG/LPTh, not the credential.
 - **Travel clinic.** The conclusion that the series was confirmed, without a
   copy of every dose.

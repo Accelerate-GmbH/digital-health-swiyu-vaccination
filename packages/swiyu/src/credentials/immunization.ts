@@ -86,8 +86,10 @@ export const IMMUNIZATION: CredentialDefinition = {
   governance: {
     issuerRole: 'ch.didas.health.role.vaccinator',
     issuerBasis:
-      'Modelled here on the basis of EpG/LEp and the cantonal authorisation to vaccinate; ' +
-      'legal review is required before deployment. A practice, a pharmacy with a ' +
+      'Modelled here on the basis of EpG/LEp, which establishes the federal and cantonal ' +
+      'vaccination framework, together with the professional, therapeutic-products and ' +
+      'cantonal law that decides whether a given professional or organisation may ' +
+      'administer a vaccination; legal review is required before deployment. A practice, a pharmacy with a ' +
       'vaccination permit, or a company medical service. The issuing DID must carry a Governed ' +
       'Use Case Authorization Trust Marker naming this credential type, because "who is allowed ' +
       'to say that a vaccination happened" is precisely what a verifier needs to check.',
