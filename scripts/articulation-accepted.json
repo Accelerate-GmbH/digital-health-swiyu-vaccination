@@ -1375,6 +1375,71 @@
    "file": "flows/trust-flow-basis.md",
    "risk": "consent",
    "sentence": "| Flow | Composition | | --- | --- | | F-04 check-in | two CODE runs in one presentation request | | F-05 prescription redemption | CODE , then a status change "
+  },
+  "cc0dac7946238150": {
+   "file": "flows/likec4/health-flow.likec4",
+   "risk": "verify-no-object",
+   "sentence": "ES256 on P-256 and the DID log carries three verification methods: two assertion keys and one authentication key, so an assertion key can be rotated without re-"
+  },
+  "9a4c8be7f57566c6": {
+   "file": "flows/likec4/health-flow.likec4",
+   "risk": "verify-no-object,trust-bare",
+   "sentence": "**Protocol:** swiyu Trust Registry API v1 (Trust Protocol 2.0) **Format:** JWT signed with the assertion key Yields the **Verified Identity trust marker (viTM)*"
+  },
+  "fc5f939b7663c03d": {
+   "file": "flows/likec4/health-flow.likec4",
+   "risk": "trust-bare",
+   "sentence": "It is the same statement the reference model's Trust Authority issues."
+  },
+  "8e70c7421afe7637": {
+   "file": "flows/likec4/health-flow.likec4",
+   "risk": "trust-bare",
+   "sentence": "**Format:** Trust statement naming the role and the credential types it authorises Yields the **Governed Use Case Authorization trust marker (gucaTM)** for CODE"
+  },
+  "449a1603935f449d": {
+   "file": "flows/likec4/health-flow.likec4",
+   "risk": "verify-no-object",
+   "sentence": "**Protocol:** swiyu Trust Registry API v1 **Format:** Verification Query Public Statement (vqPS) The verifier declares, in public and in advance, which claims i"
+  },
+  "9c7f7b62d9bbf846": {
+   "file": "flows/likec4/health-flow.likec4",
+   "risk": "absolute",
+   "sentence": "The journal records claim **names** and never claim values."
+  },
+  "a66e7bf2d2490599": {
+   "file": "flows/likec4/health-flow.likec4",
+   "risk": "absolute",
+   "sentence": "A dose is an event with a single author, so each issuer revokes only its own assertion and the patient's history is assembled in the wallet."
+  },
+  "9ee7bc65cd9479bc": {
+   "file": "flows/likec4/health-flow.likec4",
+   "risk": "verify-no-object",
+   "sentence": "**Protocol:** HTTPS The wallet resolves the verifier DID, checks the request signature, and compares what is being asked against the vqPS the verifier published"
+  },
+  "e1d04234be5b55b1": {
+   "file": "flows/likec4/health-flow.likec4",
+   "risk": "absolute",
+   "sentence": "**Protocol:** swiyu issuer management API, on the practice's side Only the issuer can revoke, so redemption is a request between two accountable parties."
+  },
+  "18b7714523131cfe": {
+   "file": "flows/likec4/health-flow.likec4",
+   "risk": "absolute",
+   "sentence": "Only the issuer's journal separates them, so the journal serves as a governance control."
+  },
+  "9900478e45fad1b0": {
+   "file": "flows/likec4/health-flow.likec4",
+   "risk": "absolute",
+   "sentence": "The wallet is a **response channel and never a sampling frame**."
+  },
+  "f006ceb2c46ea7a1": {
+   "file": "flows/likec4/health-flow.likec4",
+   "risk": "absolute",
+   "sentence": "**Unsolved separately:** a missing credential may mean no dose, a dose given before credentials existed, or an issuer who never issued one."
+  },
+  "093031f7b75e2130": {
+   "file": "flows/likec4/health-flow.likec4",
+   "risk": "absolute",
+   "sentence": "**Gap.** Revocation reaches the verifier and never the holder."
   }
  }
 }

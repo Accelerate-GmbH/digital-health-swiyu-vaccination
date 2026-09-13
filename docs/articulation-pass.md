@@ -87,8 +87,8 @@ the definitions by the preceding change and are already reflected there.
 ## 1b · The sweep, and how it stays done
 
 The pass above rewrote the sentences that made a claim. The sweep behind it read
-every sentence in the public prose that uses one of the watched words, 276 of
-them across nineteen files, and decided each one.
+every sentence in the public prose that uses one of the watched words, 288 of
+them across twenty files, and decided each one.
 
 Most were kept as written, for four reasons that recur:
 
@@ -102,8 +102,17 @@ Most were kept as written, for four reasons that recur:
 [`scripts/check-articulation.mjs`](../scripts/check-articulation.mjs) keeps the
 sweep from decaying. It finds the sentences that use a watched word without the
 surrounding precision, and compares them against
-`scripts/articulation-accepted.json`, which records the 276 already read and the
-category each was accepted under. A sentence that is neither rewritten nor
+`scripts/articulation-accepted.json`, which records the ones already read and the
+category each was accepted under.
+
+Two files the first version of the check could not see have since been brought
+in. The page's script blocks are reduced to their string literals, because the
+disclosure explorer renders its copy from those literals while the code around
+them states nothing about the system. The LikeC4 model is read through its note
+blocks, which carry the step commentary the diagrams and the flow documents both
+draw on. Adding the model surfaced seven statements the earlier tranches had not
+reached, among them the sampling-frame claim in the sample-drawing note, which
+contradicted the invitation-credential note directly below it. A sentence that is neither rewritten nor
 recorded fails `npm run verify`, so new prose gets the same reading. Accepting
 is a judgement rather than a suppression: `--accept` rewrites the file from the
 current state, so a reviewer sees in the diff exactly which new sentences an
