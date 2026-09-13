@@ -9,9 +9,11 @@
  * all: it is information derived from the date of birth, which Art. 10 para. 1
  * contemplates the holder releasing in place of the underlying claim.
  *
- * The flows here use only claims in that subset, so they do not change shape
- * when the e-ID replaces the Beta-ID. A flow needing nationality or a facial
- * image cannot be written against the Beta-ID today.
+ * The flows here use only claims in that subset. This demonstrator currently
+ * uses the Sandbox Beta-ID; migration to the production e-ID will require the
+ * final production issuer, `vct` and schema or profile details once those are
+ * available. A flow needing nationality or a facial image cannot be written
+ * against the Beta-ID today.
  *
  * Two deliberate omissions. There is no `governance` block: the Confederation
  * governs this credential and writing rules for it here

@@ -88,6 +88,57 @@ Do not collapse:
 
 Where a sentence crosses one of these boundaries, split it.
 
+## 5a · Statements are published, markers are derived
+
+Trust Protocol 2.0 has three layers and they are collapsed easily:
+
+```
+governing actor
+      │ publishes
+      ▼
+applicable statements          Trust Statements, Trust List Statements,
+      │                        Public Statements such as the vqPS
+      │ validated and evaluated by an actor
+      ▼
+trust markers                  viTM, caTM, tvTM, gucTM, gucaTM,
+      │                        derived for one relationship or interaction
+      │ evaluated with local policy
+      ▼
+accept, refuse or continue
+```
+
+A trust marker is an **evaluation result**. It is not issued to a DID, not held
+by an organisation, not a registry entry, not a credential, not a role grant and
+not something a governing authority gives to an actor.
+
+| Write | Rather than |
+| --- | --- |
+| The competent governing actor publishes the applicable authorisation statement. An actor that validates the applicable statements may derive `gucaTM` for that interaction | The health authority issues `gucaTM` to the practice |
+| The trust evaluation returned `gucaTM` for the practice in this governed-use-case interaction | The practice holds `gucaTM` |
+| The Trust Registry publishes and serves the applicable statements; markers are derived when an actor evaluates them | `gucaTM` is stored in the Trust Registry |
+| The evaluating actor validates the applicable trust information obtained through the Trust Registry and applies the Trust Protocol and its policy | Trust is established by the registry |
+
+Use the statement type the Trust Protocol defines where one applies: `piaTS` for
+protected issuance authorisation, `pvaTS` for protected verification
+authorisation, the applicable Trust List Statements, and `vqPS` for a published
+verification query and purpose. Do not invent a field inside a statement type
+that the protocol does not define.
+
+An implementation object may still be called a marker where that is what it is.
+`IssuerTrustMarker` in this repository is the generic verifier's evaluation
+response for one interaction, and its documentation says so.
+
+## 5b · Project vocabulary stays visibly project vocabulary
+
+`ch.didas.health.role.*` is DIDAS governance vocabulary. It is not a Trust
+Protocol role identifier, not a Trust Protocol claim and not a marker.
+
+Write: a deployment may map the governance decision a role represents onto one
+or more applicable Trust Protocol authorisation statements.
+
+Do not write that the role is stored in the Trust Registry, or that a role
+corresponds to `gucaTM`.
+
 ## 6 · Short exact sentences
 
 Precision does not require dense prose. Three sentences that each state one

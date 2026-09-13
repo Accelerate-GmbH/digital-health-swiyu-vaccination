@@ -143,9 +143,17 @@ if (decision.outcome === 'allow') {
   Management Service and inject it into the signed authorization request. This
   repository instead submits statements itself with `scripts/vqps.ts`, so that the
   published statement is generated from the same objects the verifier sends.
-- **One credential per DCQL query.** `multiple` is not supported. Two
-  credentials means two queries in one request, which works and is exactly
-  what check-in does.
+- **`multiple` is NOT SUPPORTED, and the multi-query case is under
+  clarification.** This demonstrator places two Credential Queries in one
+  authorization request for F-04, one for the Beta-ID and one for the insurance
+  card. OpenID4VP 1.0 defines several Credential Queries in the `credentials`
+  array. `swiss-profile-verification:1.0.0` §6.1 states that `multiple` is NOT
+  SUPPORTED and adds that "only a single credential can be used in a
+  verification". Conformance of the multi-query pattern therefore remains under
+  clarification; see
+  [GP-01](swiss-profile-gaps.md#gp-01--multi-credential-and-multi-instance-presentation-semantics).
+  Plan for the possibility that a deployment has to send separate
+  verifications.
 - **Always set `accepted_issuer_dids` or `trust_anchors`.** Without either, every
   issuer DID is accepted and you cannot evaluate your counterparty at all.
 - **`PENDING` is normal.** Poll, or take the webhook. The wallet is showing the
@@ -165,7 +173,7 @@ const { resource, unmapped } = projectToFhir(definition, released);
 
 Two properties you must design around:
 
-1. **The projection is derived, never authoritative.** The signed credential is
+1. **The projection is derived, not authoritative.** The signed credential is
    the evidence; the FHIR resource carries no signature. If you need provenance,
    retain the presentation itself.
 2. **The projection is legitimately partial.** After selective disclosure a

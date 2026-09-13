@@ -101,7 +101,7 @@ sequenceDiagram
     W-->>W: Holder confirms, or declines, which is a defined outcome
     W->>GV: POST the encrypted response (direct_post.jwt, vp_token + KB-JWT)
     GV->>BR: Resolve the status list. Is the credential still valid?
-    GV->>TR: Evaluate the issuer's trust markers
+    GV->>TR: Retrieve and validate the applicable statements<br/>about the issuer, then derive its trust markers
     GV-->>T: SUCCESS + disclosed claims + credential_evaluation
     Note over T: reviewPresentation(): status first,<br/>then trust markers, then act
 ```

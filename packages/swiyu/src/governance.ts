@@ -17,7 +17,16 @@ import type { CredentialDefinition, VerifierEntitlement } from './credential-def
 import { PROTECTED_CLAIMS } from './profile.js';
 import type { CredentialEvaluation, IssuerTrustMarker } from './types.js';
 
-/** Roles in the health use case. Each corresponds to a registered trust role. */
+/**
+ * Roles in the health use case.
+ *
+ * These are **DIDAS project-local governance vocabulary**. They are not Trust
+ * Protocol role identifiers, and a role identifier is not a Trust Protocol
+ * claim or a trust marker. A deployment can map the governance decision a role
+ * represents onto one or more applicable Trust Protocol authorisation
+ * statements; the identifier itself does not travel in the protocol and is not
+ * stored in the Trust Registry.
+ */
 export const ROLE = {
   insurer: 'ch.didas.health.role.insurer',
   practice: 'ch.didas.health.role.practice',
@@ -200,7 +209,11 @@ export const SANDBOX_HEALTH_POLICY: TrustPolicy = {
   enforceGovernedUseCase: true,
 };
 
-/** Apply the trust policy to the markers the generic verifier evaluated. */
+/**
+ * Apply the trust policy to the markers the generic verifier derived for this
+ * interaction. The markers are an evaluation result, so every reason below is
+ * phrased as what the evaluation returned rather than as what the issuer holds.
+ */
 export function reviewTrustMarkers(
   markers: IssuerTrustMarker | undefined,
   policy: TrustPolicy,
@@ -210,7 +223,7 @@ export function reviewTrustMarkers(
     return {
       outcome: policy.requireVerifiedIdentity ? 'deny' : 'allow',
       reasons: [
-        'no trust markers were evaluated for the issuer' +
+        'the trust evaluation returned no markers for the issuer' +
           (policy.requireVerifiedIdentity ? '' : ' (accepted under the Sandbox policy)'),
       ],
     };
@@ -221,25 +234,25 @@ export function reviewTrustMarkers(
     return {
       outcome: 'deny',
       reasons: [
-        'issuer carries the Governed Use Case Trust Marker but not the Governed Use Case ' +
-          'Authorization Trust Marker, swiss-profile-trust requires declining this relationship',
+        'trust evaluation returned gucTM without gucaTM for the issuer in this interaction, ' +
+          'and swiss-profile-trust requires declining this relationship',
       ],
     };
   }
   if (markers.gucTM === true) {
-    reasons.push('issuer is authorised for this governed use case (gucTM + gucaTM)');
+    reasons.push('trust evaluation returned gucaTM for the issuer in this governed-use-case interaction');
   }
 
   if (policy.requireVerifiedIdentity && markers.viTM !== true) {
-    return { outcome: 'deny', reasons: [...reasons, 'issuer lacks the Verified Identity Trust Marker'] };
+    return { outcome: 'deny', reasons: [...reasons, 'trust evaluation did not return viTM for the issuer'] };
   }
-  if (markers.viTM === true) reasons.push('issuer identity is verified (viTM)');
-  else reasons.push('issuer identity is NOT verified, waived by the Sandbox policy');
+  if (markers.viTM === true) reasons.push('trust evaluation returned viTM for the issuer');
+  else reasons.push('trust evaluation did not return viTM, waived by the Sandbox policy');
 
   if (policy.requireCompliantActor && markers.caTM !== true) {
-    return { outcome: 'deny', reasons: [...reasons, 'issuer lacks the Compliant Actor Trust Marker'] };
+    return { outcome: 'deny', reasons: [...reasons, 'trust evaluation did not return caTM for the issuer'] };
   }
-  if (markers.caTM === true) reasons.push('issuer is a compliant actor (caTM)');
+  if (markers.caTM === true) reasons.push('trust evaluation returned caTM for the issuer');
 
   return { outcome: 'allow', reasons };
 }

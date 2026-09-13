@@ -471,7 +471,7 @@ What the primary text settles that was open before:
 | --- | --- |
 | Where the artefact sits in Trust Protocol 2.0 | `trust-protocol-v2-0`, Statement types: the vqPS is one of six statement types, alongside idTS, pvaTS, piaTS, piTLS and ncTLS, and it is the statement behind the Transparent Verification Trust Marker |
 | Whether the deck's vocabulary maps to the specification's | It is the specification's vocabulary. "Verification Query Public Statement" is the specification's own term, not the deck's |
-| Whether publishing is a duty | The verifier **MUST** provide the relevant vqPS to the wallet and **MUST** link its `scope` claim from the request, for a verification that carries the tvTM. The wallet **MAY** decline a counterparty without that marker |
+| Whether publishing is a duty | The verifier **MUST** provide the relevant vqPS to the wallet and **MUST** link its `scope` claim from the request, for a verification whose evaluation derives the tvTM. The wallet **MAY** decline a counterparty whose evaluation does not |
 | What the tvTM actually claims | The *type* of verification is public for third-party review. The specification says explicitly that the individual verification, what was requested and what was exposed, is not |
 | Where the 40-character `purpose_name` limit comes from | The protocol, not the registry: the vqPS table says `purpose_name` **MUST NOT** contain more than 40 characters, and `purpose_description` no more than 1000 |
 

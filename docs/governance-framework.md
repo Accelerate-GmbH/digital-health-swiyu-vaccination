@@ -114,14 +114,23 @@ Checked on the response, in a deliberate order:
 2. **Protocol and cryptographic validity, and holder key binding.** Signature,
    key binding and issuer identifier resolution, all performed by the generic
    verifier.
-3. **Issuer trust**: trust markers evaluated against the configured policy.
+3. **Issuer trust**: the applicable statements are validated, trust markers are
+   derived for this interaction, and the configured policy is applied to them.
 4. **Business acceptance**: whether the relying party acts on the result, which
    no protocol decides.
 
 ## Trust markers and policies
 
-The generic verifier evaluates Trust Protocol 2.0 markers on the credential's
-issuer. The policy decides what to do with them.
+The generic verifier retrieves the applicable Trust Protocol 2.0 statements
+about the credential's issuer, validates them, and derives the trust markers for
+this interaction. The policy decides what to do with the derived markers.
+
+A trust marker is an evaluation result, not an object an actor holds. The
+governing actor publishes the statement; the evaluating actor derives the marker
+for one relationship or interaction; the relying party then decides. Wording in
+this repository that reads as though a marker were issued to a DID, held by an
+organisation, or stored in a registry refers to an implementation object rather
+than the Trust Protocol concept, and says so where it appears.
 
 | Marker | Meaning | Strict | Sandbox |
 | --- | --- | --- | --- |
