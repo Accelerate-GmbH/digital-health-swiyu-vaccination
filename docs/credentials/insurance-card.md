@@ -24,7 +24,7 @@ Electronic insurance card for Swiss mandatory health insurance.
 
 **Who may issue it:** `ch.didas.health.role.insurer`.
 
-KVG/LAMal Art. 42a. The insurer issues the insurance card
+Modelled here on the basis of KVG/LAMal Art. 42a, under which the insurer issues the insurance card; legal review is required before deployment
 
 This is a **governed** credential type: an actor must decline any interaction where the counterparty carries the Governed Use Case Trust Marker without the matching authorization marker.
 

@@ -43,8 +43,20 @@ Where something is *not* implemented, it says so.
 
 ## Actors and roles
 
-A role is a registered capability. One organisation holds several: a family practice is also an authorised vaccinator and often runs its
-own laboratory.
+**These role identifiers are project vocabulary.** `ch.didas.health.role.practice`,
+`ch.didas.health.role.vaccinator` and the rest are governance abstractions
+defined by this project. They are **not** swiyu roles, and they are not
+standardised ecosystem vocabulary: the swiyu Trust Infrastructure has no health
+role taxonomy, and no body exists today that could assign one. Their intended
+mapping to the infrastructure is described under [the missing
+layer](#the-missing-layer) — a role would correspond to a Governed Use Case
+Authorization Trust Marker naming a credential type, issued by a governing
+authority for the health domain. Until such a body exists the roles are
+configured locally and the mapping is a design intention rather than a
+deployment.
+
+One organisation holds several roles: a family practice is also an authorised
+vaccinator and often runs its own laboratory.
 
 | Role | Identifier | Issues | Verifies |
 | --- | --- | --- | --- |
@@ -89,13 +101,21 @@ A failure at any point stops the request before the patient sees it.
 
 ### Gate 3 · `reviewPresentation()` · should this be accepted?
 
+A distinction worth keeping: the **verifier** is the technical component that
+performs verification — here the swiyu generic verifier — while the **relying
+party** is the organisation that acts on the result. Gates 1 and 2 and this gate
+are relying-party decisions; the checks at step 2 below are the verifier's.
+
 Checked on the response, in a deliberate order:
 
-1. **Status list first.** Revoked or suspended fails immediately, before any
-   trust reasoning.
-2. **Technical validity.** Signature, key binding, issuer DID resolution, all
-   performed by the generic verifier.
-3. **Trust markers**, against the configured policy.
+1. **Credential and status validity.** Revoked or suspended fails immediately,
+   before any trust reasoning.
+2. **Protocol and cryptographic validity, and holder key binding.** Signature,
+   key binding and issuer identifier resolution, all performed by the generic
+   verifier.
+3. **Issuer trust**: trust markers evaluated against the configured policy.
+4. **Business acceptance**: whether the relying party acts on the result, which
+   no protocol decides.
 
 ## Trust markers and policies
 
@@ -182,7 +202,12 @@ layer](#the-missing-layer) describes from the trust-marker side.
 
 ## Legal basis, by credential type
 
-| Credential | Issuer acts under |
+These are **modelled** legal bases, not settled ones: each is this project's own
+reading, none of the statutes was read in the environment this repository was
+developed in, and [source verification](source-verification.md) lists them as
+unverified. Legal review is required before deployment.
+
+| Credential | Modelled on |
 | --- | --- |
 | Insurance card | KVG/LAMal Art. 42a: the insurer issues the card |
 | Immunization | EpG/LEp and the cantonal authorisation to vaccinate |

@@ -213,7 +213,7 @@ curl -X POST -H "Authorization: Bearer $TRUST_ACCESS_TOKEN" \
     "sub": "'"$TRAVEL_CLINIC_DID"'",
     "scope": "ch.didas.health.immunization.status",
     "purpose_name": { "default": "Check vaccination protection" },
-    "purpose_description": { "default": "Asks only which diseases you are protected against and when, but not the vaccine brand, the batch, or who vaccinated you." },
+    "purpose_description": { "default": "Asks only which diseases you were vaccinated against and when, but not the vaccine brand, the batch number, or the organisation that administered the dose." },
     "query": { "credentials": [ { "id": "immunization", "format": "dc+sd-jwt",
       "meta": { "vct_values": ["urn:vct:ch.didas.health.immunization:1.0"] },
       "claims": [ {"path":["target_disease"]}, {"path":["occurrence_date"]},
@@ -225,7 +225,7 @@ The scope, purpose and query are exactly the `verification_purpose` and
 `dcql_query` this project already builds, so the published statement and the
 running verifier cannot disagree.
 
-> **A limit that will bite you.** Trust Protocol 2.0 says a vqPS `purpose_name`
+> **A limit worth noting.** Trust Protocol 2.0 says a vqPS `purpose_name`
 > MUST NOT contain more than **40 characters** per locale, while the generic
 > verifier's own management API accepts 50. A 45-character name passes locally
 > and fails at publication. `conformance.ts` enforces 40 for this reason.
@@ -302,7 +302,7 @@ Wallet.
 
 ## Validating properly
 
-The mock proves nothing about protocol conformance. Against real components, use
+The mock establishes nothing about protocol conformance. Against real components, use
 the Confederation's own harnesses:
 
 - [swiyu-generic-application-test](https://github.com/swiyu-admin-ch/swiyu-generic-application-test)

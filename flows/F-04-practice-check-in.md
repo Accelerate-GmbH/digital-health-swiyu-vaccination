@@ -26,13 +26,21 @@ produces:
 
 Reception, in one QR code: who are you and who is paying.
 
-## What is different from a card reader
+## Two credentials, two issuers, one presentation
 
-Two credentials from two unrelated issuers arrive in a single presentation, each
-cryptographically bound to the same wallet key. The practice learns the patient's
-identity from the Confederation's credential and their cover from the insurer's,
-and can notice when the two disagree. A card reader cannot perform that check,
-because the card asserts both and nothing corroborates it.
+Two credentials from two unrelated issuers arrive in a single presentation. The
+practice reads the patient's identity from the Confederation's credential and
+their insurance cover from the insurer's, and can compare the two: a mismatch
+between the name on the identity credential and the name on the insurance
+credential is visible, because each is attested by a different party.
+
+*Not claimed:* that both credentials are bound to the same wallet key. Key
+binding is per credential — `swiss-profile-vc:1.0.0` §4.1.2 makes the `cnf`
+claim conditional on the issuer enabling it — and nothing in the profiles
+establishes that two credentials from different issuers share a holder key. The
+profile's batch-issuance guidance points the other way, since it exists where
+unlinkability across verifiers is wanted. Corroboration here rests on two
+independent issuers attesting consistent values, not on a shared key.
 
 The claim list is where the data-minimisation argument becomes concrete. The
 practice asks for ten claims about cover and three about identity and for

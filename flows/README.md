@@ -56,7 +56,7 @@ That intent shapes the format:
 | --- | --- | --- | --- |
 | [F-01](F-01-actor-onboarding.md) | Becoming an actor | `partial` | 1 |
 | [F-02](F-02-immunization-issuance.md) | Recording an administered dose | `implemented` | 1 |
-| [F-03](F-03-immunization-minimal-disclosure.md) | Proving protection and nothing else | `implemented` | 1 |
+| [F-03](F-03-immunization-minimal-disclosure.md) | Presenting vaccination evidence with minimal disclosure | `implemented` | 1 |
 | [F-04](F-04-practice-check-in.md) | Check-in at the practice | `implemented` | 1 |
 | [F-05](F-05-prescription-redemption.md) | Prescription and its redemption | `implemented` | 1 |
 | [F-06](F-06-lifecycle-and-correction.md) | Correction, suspension and revocation | `partial` | 1 |

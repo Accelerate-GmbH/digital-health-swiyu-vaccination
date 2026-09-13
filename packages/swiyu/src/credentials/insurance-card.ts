@@ -53,7 +53,9 @@ export const INSURANCE_CARD: CredentialDefinition = {
   },
   governance: {
     issuerRole: 'ch.didas.health.role.insurer',
-    issuerBasis: 'KVG/LAMal Art. 42a. The insurer issues the insurance card',
+    issuerBasis:
+      'Modelled here on the basis of KVG/LAMal Art. 42a, under which the insurer issues the ' +
+      'insurance card; legal review is required before deployment',
     governed: true,
     revocation:
       'The insurer revokes on termination of cover or card replacement; the status list bit ' +

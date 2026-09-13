@@ -103,7 +103,7 @@ Statement, generated from the same objects the verifier sends, see
 | Scope | Asked by | Credentials | Claims | Purpose |
 | --- | --- | --- | --- | --- |
 | `ch.didas.health.checkin` | `ch.didas.health.role.practice` | 2 | 13 | Check-in at the practice |
-| `ch.didas.health.immunization.status` | `ch.didas.health.role.travel-clinic` | 1 | 4 | Check vaccination protection |
+| `ch.didas.health.immunization.status` | `ch.didas.health.role.travel-clinic` | 1 | 4 | Check vaccination evidence |
 | `ch.didas.health.dispense` | `ch.didas.health.role.pharmacy` | 1 | 10 | Dispense prescribed medication |
 
 ---

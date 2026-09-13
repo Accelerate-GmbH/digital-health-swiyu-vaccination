@@ -182,7 +182,7 @@ these to be settled and none of them are engineering:
 
 ## Status of this document
 
-This document is an argument, not a specification. Nothing described here as a
+This document sets out analysis and proposals rather than specification. Nothing described here as a
 possibility is built. The survey method, the CH VACD value sets and the SSPH+
 structure were checked against published sources; see
 [source verification](source-verification.md) for how the repository separates

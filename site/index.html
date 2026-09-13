@@ -410,12 +410,13 @@
       held in the patient's wallet, presented under the patient's control and verified by a relying
       party, using the <strong>swiyu Trust Infrastructure</strong>. An authorised vaccinator issues an
       administered dose to the patient's wallet as a signed credential. A travel clinic later asks
-      whether the patient is protected and receives <strong>four of the eighteen claims</strong> the
-      credential holds; the remaining fourteen are not transmitted. The code runs against the swiyu
+      for evidence about the doses administered, and receives <strong>four of the eighteen
+      claims</strong> the credential holds; the remaining fourteen are not transmitted. Whether the
+      patient is clinically protected is an inference over those facts, which the clinician makes. The code runs against the swiyu
       Sandbox and Swiss Profiles 1.0.
     </p>
     <div class="facts">
-      <div class="fact"><b>4 / 18</b><span>claims released when a travel clinic asks about protection</span></div>
+      <div class="fact"><b>4 / 18</b><span>claims released when a travel clinic requests vaccination evidence</span></div>
       <div class="fact"><b>4</b><span>credential types issued, each generating its own metadata, schema and wallet rendering</span></div>
       <div class="fact"><b>11</b><span>documented flows with governance and standardisation constraints</span></div>
       <div class="fact"><b>0</b><span>clinical repositories operated by this project, which runs on the Confederation's registries</span></div>
@@ -547,7 +548,7 @@ Four organisations issue credentials to the wallet: the Confederation, a health 
 
             <rect x="688" y="104" width="196" height="56" rx="3" fill="none" stroke="#0B6E5F" stroke-width="1.6"></rect>
             <text x="702" y="125" fill="#0B6E5F">Travel clinic</text>
-            <text x="702" y="144" font-size="11" opacity="0.62">4 claims · protection only</text>
+            <text x="702" y="144" font-size="11" opacity="0.62">4 claims · dose evidence</text>
 
             <rect x="688" y="174" width="196" height="56" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35"></rect>
             <text x="702" y="195">Pharmacy</text>
@@ -804,7 +805,7 @@ For comparison, the disclosure profile of the alternatives in routine use differ
     <div class="flows">
       <a class="flow" href="flows/#/view/actorOnboarding/"><span class="fid">F-01</span><span class="ftitle">Becoming an actor<span>DID, trust statement, role grant</span></span><span class="status partial">Partial</span></a>
       <a class="flow" href="flows/#/view/immunizationIssuance/"><span class="fid">F-02</span><span class="ftitle">Issuing an administered dose<span>One credential per dose, issued by the authorised vaccinator</span></span><span class="status built">Built</span></a>
-      <a class="flow" href="flows/#/view/protectionCheck/"><span class="fid">F-03</span><span class="ftitle">Proving protection with minimal disclosure<span>Four claims of eighteen</span></span><span class="status built">Built</span></a>
+      <a class="flow" href="flows/#/view/protectionCheck/"><span class="fid">F-03</span><span class="ftitle">Presenting vaccination evidence with minimal disclosure<span>Four claims of eighteen</span></span><span class="status built">Built</span></a>
       <a class="flow" href="flows/#/view/practiceCheckIn/"><span class="fid">F-04</span><span class="ftitle">Check-in at the practice<span>Two issuers, one presentation, a name that must match</span></span><span class="status built">Built</span></a>
       <a class="flow" href="flows/#/view/prescriptionRedemption/"><span class="fid">F-05</span><span class="ftitle">Prescription and its redemption<span>Single use, without a register recording who was prescribed what</span></span><span class="status built">Built</span></a>
       <a class="flow" href="flows/#/view/correction/"><span class="fid">F-06</span><span class="ftitle">Correction, suspension and revocation<span>Why business expiry and technical expiry must stay apart</span></span><span class="status partial">Partial</span></a>
@@ -1154,7 +1155,7 @@ For comparison, the disclosure profile of the alternatives in routine use differ
   // packages/swiyu/src/credentials/immunization.ts.
   const ROLES = {
     travel: {
-      purpose: 'Confirm protection against a specific disease before giving travel advice. This role has no entitlement to the vaccine brand, the batch number, the administering clinic or the patient name, so a query for them is refused before it is sent.',
+      purpose: 'Obtain evidence of doses administered against a specific disease, as input to travel advice. This role has no entitlement to the vaccine brand, the batch number, the administering organisation or the patient name, so a query for them is refused before it is sent.',
       claims: ['target_disease', 'occurrence_date', 'dose_number', 'doses_in_series'],
       foot: 'Fourteen claims stay in the wallet. They are <strong>not transmitted and then redacted</strong>; the wallet releases only the claim paths the query names.'
     },

@@ -62,9 +62,10 @@ export const LAB_REPORT: CredentialDefinition = {
   governance: {
     issuerRole: 'ch.didas.health.role.laboratory',
     issuerBasis:
-      'A laboratory authorised under the KVG analysis list, or the treating practice ' +
+      'Modelled here on the basis of authorisation under the KVG analysis list, or the ' +
+      'treating practice ' +
       'issuing on its behalf; either way the issuing DID must carry the authorization ' +
-      'marker for this credential type',
+      'marker for this credential type. Legal review is required before deployment',
     governed: true,
     revocation:
       'The issuing laboratory revokes on a corrected or withdrawn result. The patient keeps ' +

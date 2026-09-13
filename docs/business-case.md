@@ -23,18 +23,21 @@ The consequences are ordinary and expensive:
   one indication of that dependency.
 - **Every organisation re-collects the same data.** Name, date of birth,
   insurance cover and AHV number are re-keyed at every reception desk, from a
-  plastic card that proves nothing.
+  card that carries no cryptographic evidence of its own authenticity.
 - **Sharing is all-or-nothing.** A patient who wants to prove one fact hands
   over a document containing twenty.
 
 ## What actually changes
 
-The record moves to the patient's wallet as verifiable credentials. Three
-consequences follow that no amount of integration work delivers otherwise:
+Health records are issued to the patient's wallet as verifiable credentials,
+held there, presented under the patient's control and verified by a relying
+party. Three consequences follow from that arrangement:
 
-1. **The record outlives its issuers.** A practice that closes, a platform that
-   is wound up, a canton that changes supplier. None of it removes the
-   patient's copy.
+1. **The holder retains a copy independently of the issuer's systems.** Once
+   issued, a credential stays in the patient's wallet whether or not the issuing
+   organisation's systems remain in service. Continued verification may still
+   depend on identifier, status, trust, cryptographic and wallet
+   infrastructure.
 2. **A narrow question gets a narrow answer.** A travel clinic asking about
    protection receives four claims out of the eighteen an immunization
    credential holds. The other fourteen are never transmitted.
@@ -52,7 +55,7 @@ consequences follow that no amount of integration work delivers otherwise:
 | --- | --- | --- |
 | **Patient** | A vaccination record they keep and can prove anywhere; the ability to answer one question without disclosing twenty | Installing a wallet; understanding a consent screen |
 | **Practice** | Identity and cover confirmed at check-in against two independent issuers, so a name mismatch surfaces; no re-keying; results handed over once | Integration with its practice management system; a DID and its onboarding |
-| **Pharmacy** | A prescription that can be verified and used up exactly once, without a central e-prescription register | A verifier deployment; a DID |
+| **Pharmacy** | A prescription that can be verified and redeemed exactly once, with the single-use property recorded on the status list | A verifier deployment; a DID |
 | **Insurer** | Card data that can be revoked the day cover ends, in place of a plastic card that stays in circulation for years | An issuer deployment; a DID |
 | **Laboratory** | Results delivered to the patient without operating a portal | An issuer deployment |
 | **Public health** | A coverage survey that reads structured, signed, already-coded records in place of photocopied booklets | Loses the ability to enumerate susceptible individuals for outbreak response or recall (see below) |

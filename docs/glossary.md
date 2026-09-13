@@ -160,21 +160,26 @@ professionals and organisations, held in the Refdata index.
 **MedBG / LPMéd.** The medical professions act: only a registered practitioner
 may prescribe.
 
-**EPD / DEP.** The Swiss electronic patient record. The incumbent. In a
-decentralised design it becomes one issuer among others: it can issue a
-credential for a record it already holds. A patient can present that credential
-anywhere, without the EPD being involved in the presentation.
+**EPD / EGD.** The Swiss electronic patient record.
+*In this demonstrator:* not integrated. How the electronic patient record
+infrastructure and holder-controlled credentials could interoperate — including
+the potential issuer, source, verifier and repository roles each could play — is
+future work, and this project does not prescribe a target architecture. See
+[roadmap](roadmap.md).
 
-**`meineimpfungen.ch`.** The national electronic vaccination record, shut down
-in 2021 after serious security failures. The failure this project is a response
-to.
+**`meineimpfungen.ch`.** The national electronic vaccination record, closed in
+2021, after which the records it held were no longer accessible to the people
+they described. Cited in this repository as an illustration of availability and
+continuity risk, not as a judgement on that implementation.
 
 ## Clinical models
 
 **openEHR.** An approach to clinical information modelling based on
 *archetypes* (reusable clinical concepts) and *templates* (their use in a
-context). Usually deployed with a central clinical data repository; this project
-reuses the models and declines the repository.
+context), with an associated persistence model.
+*In this demonstrator:* the information models are reused and no clinical data
+repository is operated. That is a scope choice for this prototype, not a
+position on how openEHR should be deployed.
 
 **Archetype.** E.g. `openEHR-EHR-OBSERVATION.laboratory_test_result.v1`.
 

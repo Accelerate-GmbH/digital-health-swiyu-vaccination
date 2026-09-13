@@ -97,26 +97,28 @@ export function renderPage(config: AppConfig): string {
       <h2><span class="n">3</span> Vaccination: the showcase</h2>
       <p class="why">
         Switzerland already tried the central version of this. <em>meineimpfungen.ch</em> held the
-        national electronic vaccination record until it was shut down in 2021 after serious security
-        failures and several hundred thousand people lost access to their own vaccination history
-        at once. Here each administered dose is a credential in the patient's wallet: the practice
-        attests what it did and then has no further hold over the record, which outlives the
-        practice, the platform and anyone's decision to switch a registry off.
+        national electronic vaccination record until its closure in 2021, after which the records
+        it held were no longer accessible to the people they described. Here each administered dose
+        is issued as a credential to the patient's wallet. Once issued, the holder retains a copy
+        independently of the issuing organisation's operational system; continued verification may
+        still depend on identifier, status, trust and wallet infrastructure.
       </p>
       <button id="issue-immunization">Record the dose and issue it</button>
       <div class="result" id="result-immunization"></div>
     </section>
 
     <section class="step showcase" id="step-travel">
-      <h2><span class="n">4</span> Proving protection and nothing else</h2>
+      <h2><span class="n">4</span> Presenting vaccination evidence with minimal disclosure</h2>
       <p class="why">
-        A travel clinic asks whether you are protected. Under its entitlement it may ask for the
-        disease and the date. And it <em>cannot</em> obtain the vaccine brand, the batch, the
-        clinic or your name, even if its software asks for them. Compare the claim list here with
-        the one the practice sent at check-in: same credential, same wallet, a fraction of the data.
-        A paper vaccination booklet handed across a counter cannot do this.
+        A travel clinic requests evidence about administered doses. Under its entitlement it may
+        request the target disease, the date and the position in the series; it cannot obtain the
+        vaccine brand, the batch number, the administering organisation or the patient name, because
+        the query is built from the entitlement and the wallet releases only the claim paths the
+        query names. Compare the claim list here with the one the practice sent at check-in: the
+        same credential, a smaller disclosure. Whether the patient is clinically protected is an
+        inference from these facts, which the clinician makes.
       </p>
-      <button id="start-travel">Check vaccination protection</button>
+      <button id="start-travel">Request vaccination evidence</button>
       <div class="result" id="result-travel"></div>
     </section>
 

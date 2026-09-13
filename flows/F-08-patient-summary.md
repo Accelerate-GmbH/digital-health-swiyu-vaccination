@@ -72,17 +72,17 @@ flowchart TB
   difference between a useful summary and a dangerous one.
 - **Series reconciliation** (open question 1 of F-02) has to be resolved before
   an immunization section can be trusted.
-- **EPD/DEP integration.** Switzerland's electronic patient record exists and is
-  the incumbent. Step 2 has to define whether the wallet reads from it, writes to
-  it, or neither. The position a decentralised design has to argue is that the EPD
-  becomes one issuer among others.
+- **EPD/EGD integration.** Future work should examine how the Swiss electronic
+  patient record infrastructure and holder-controlled verifiable credentials can
+  interoperate, including the potential issuer, source, verifier and repository
+  roles each could play. This project does not prescribe a target architecture.
 
 ## Governance constraints to carry forward
 
 - Emergency access is the hardest case in the whole architecture: the patient may
   be unconscious and consent-at-presentation assumes they are not. Any
-  break-glass mechanism reintroduces a party that can read the record without the
-  holder's involvement, which is the property this design exists to avoid.
+  break-glass mechanism introduces a party able to read the record without the
+  holder's involvement, which is in direct tension with consent-at-presentation.
 - Cross-border presentation means a verifier outside the Swiss trust registry.
   Either the trust infrastructure federates, or the flow degrades to "a
   clinician reads a rendered summary and decides how much to believe it".

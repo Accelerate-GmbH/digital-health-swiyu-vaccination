@@ -9,7 +9,7 @@
  *
  * This entry exists so a browser demo can exercise the real decision code
  * itself. A demo that reimplements the rules it
- * is demonstrating proves nothing about the rules.
+ * is demonstrating establishes nothing about the rules.
  *
  * Deliberately excluded: `credential-definition.js` (the generators),
  * `cesr.js`, `sri.js` and the management API clients, which have no business

@@ -12,7 +12,7 @@
  *      into looking real. There is no signing here, no DPoP, no encryption, no
  *      DID resolution, no did:webvh log. The mock exercises the business flow
  *      and the governance rules; it does not exercise the cryptography, and
- *      passing against it proves nothing about protocol conformance.
+ *      passing against it establishes nothing about protocol conformance.
  *
  * The wallet endpoints under `/mock/wallet` have no counterpart in the real
  * ecosystem (a real wallet is an app on a phone) and are namespaced so they

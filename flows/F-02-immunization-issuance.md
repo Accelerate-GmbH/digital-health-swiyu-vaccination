@@ -55,10 +55,14 @@ choice:
   the patient's history is assembled in the wallet, under the patient's control.
   The cost is that "is this series complete?" becomes a question about several
   credentials instead of a lookup, which F-03 and F-08 have to handle.
-- **The credential outlives its issuer.** A practice that closes cannot take the
-  record with it. This is the property a registry cannot offer and a paper
-  vaccination booklet can. The architecture is closer to the booklet than to
-  the platform, deliberately.
+- **The holder retains a copy independently of the issuer's systems.** Once
+  issued, the credential is held in the patient's wallet and does not depend on
+  the issuing organisation's operational system to remain in the holder's
+  possession. Continued *verification* is a separate matter: it may still depend
+  on identifier resolution, status list availability, trust statements, the
+  issuer's signing key remaining resolvable, and the wallet itself. F-05 records
+  the case this cuts against — a prescription whose issuer can no longer revoke
+  it.
 - **No expiry on the event.** A vaccination that happened stays happened, so
   `exp` is set far out and the credential is not
   refreshable: there is nothing for a refresh to fetch.
@@ -102,8 +106,10 @@ practice management system would place that burden on every vendor.
 
 - **Only an authorised vaccinator may issue.** `reviewIssuance()` refuses before
   any request reaches the issuer and the refusal is journalled. The underlying
-  grant is `gucaTM` naming this credential type; the legal basis is EpG/LEp plus
-  the cantonal authorisation to vaccinate.
+  grant is `gucaTM` naming this credential type. The legal basis is modelled here
+  on EpG/LEp plus the cantonal authorisation to vaccinate; that reading is this
+  project's own and legal review is required before deployment
+  ([source verification](../docs/source-verification.md)).
 - **Revocation corrects, it does not retract.** The only legitimate reason to
   revoke a dose credential is that it records something that did not happen:
   wrong patient, wrong vaccine, duplicate entry. Revoking to express "we no

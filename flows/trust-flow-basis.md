@@ -58,7 +58,7 @@ the OCA bundle it renders the credential from. Those are three steps with no cou
 in the reference flow. Raised as
 [Trust-Flow-Diagram-Repository#4](https://github.com/DIDAS-swiss/Trust-Flow-Diagram-Repository/issues/4).
 
-## F-03 · Proving protection → `verification`
+## F-03 · Presenting vaccination evidence → `verification`
 
 This one maps almost exactly, including the parts that are easy to leave out.
 

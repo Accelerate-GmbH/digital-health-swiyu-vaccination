@@ -81,21 +81,21 @@ export const CHECK_IN: VerificationQuerySpec = {
   ],
 };
 
-/** The travel clinic: protection and nothing else. */
+/** The travel clinic: evidence of administered doses, and nothing further. */
 export const IMMUNIZATION_STATUS: VerificationQuerySpec = {
   scope: 'ch.didas.health.immunization.status',
   role: ROLE.travelClinic,
   purposeName: {
-    default: 'Check vaccination protection',
-    'de': 'Impfschutz prüfen',
-    'fr': 'Vérifier la protection vaccinale',
-    'it': 'Verificare la protezione vaccinale',
+    default: 'Check vaccination evidence',
+    'de': 'Impfnachweis prüfen',
+    'fr': 'Vérifier les preuves de vaccination',
+    'it': 'Verificare le prove di vaccinazione',
   },
   purposeDescription: {
     default:
-      'Asks only which diseases you are protected against and when, not the vaccine brand, the batch, or who vaccinated you.',
+      'Asks only which diseases you were vaccinated against and when, not the vaccine brand, the batch number, or the organisation that administered the dose.',
     'de':
-      'Fragt nur, gegen welche Krankheiten Sie geschützt sind und seit wann, nicht den Impfstoff, die Charge oder wer Sie geimpft hat.',
+      'Fragt nur, gegen welche Krankheiten Sie geimpft wurden und wann, nicht den Impfstoff, die Chargennummer oder die impfende Stelle.',
   },
   plans: [
     {

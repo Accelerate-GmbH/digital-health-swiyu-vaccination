@@ -65,7 +65,7 @@ const offer = await issuer.createOffer({
 Keep `offer.management_id`. It is the only handle you have on the credential
 afterwards: revocation, suspension and status queries all take it.
 
-### Things that will bite you
+### Constraints worth knowing before you start
 
 - **`status_lists` takes the `statusRegistryUrl`, not the id.** Creating a status
   list returns both; the credential offer references the URL. Store the URL.
@@ -129,7 +129,7 @@ if (decision.outcome === 'allow') {
 }
 ```
 
-### Things that will bite you
+### Constraints worth knowing before you start
 
 - **`purpose_name` is capped at 40 characters.** Trust Protocol 2.0 states that a
   vqPS `purpose_name` **MUST NOT** contain more than 40 characters per locale.

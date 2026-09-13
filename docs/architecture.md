@@ -115,20 +115,24 @@ not be enough: it is specific to an operational template this project does not
 publish, so it cannot be checked and six of them were in fact wrong until they
 were checked against CKM ([source verification](source-verification.md)).
 
-Declining the repository is the project's central bet. It has a strong
-argument against it: that a vaccination record has to stay clinically usable
-for a lifetime, which a point-in-time document is not. That argument, the
-openEHR clinical data repository showcase it comes from and the two directions
-in which the two designs compose, are in [positioning](positioning.md).
+This demonstrator reuses the information models and does not operate a FHIR
+server or an openEHR clinical data repository. That is a scope choice for this
+prototype rather than a position on either architecture, and it has a substantive
+limitation: a credential is a point-in-time attestation, while a vaccination
+record has to stay clinically usable over a lifetime, which is what a
+longitudinal record provides. That limitation, the openEHR clinical data
+repository showcase it comes from, and the two directions in which the layers
+compose, are in [positioning](positioning.md).
 
 ## Why four separate actors
 
-Collapsing them into one service would be simpler and would destroy the point.
-Four actors means four DIDs, four trust statements, four entitlements, and
-presentations that cross organisational boundaries, which is the only
-configuration in which "verifiable" means anything. The check-in flow combines
-credentials from the Confederation and from an insurer; the redemption flow
-requires the pharmacy to ask the practice to revoke, because only the issuer can.
+Four actors means four identifiers, four trust statements, four entitlements and
+presentations that cross organisational boundaries. Modelling them as one
+service would be simpler to run but would exercise none of that: the properties
+this demonstrator is built to show only appear between separate organisations.
+The check-in flow combines credentials from the Confederation and from an
+insurer; the redemption flow requires the pharmacy to ask the practice to
+revoke, because only the issuer can.
 
 ## Trade-offs taken
 
@@ -137,6 +141,6 @@ requires the pharmacy to ask the practice to revoke, because only the issuer can
 | `vct` as a URN | Issued credentials and DCQL queries keep their meaning when a deployment moves host | An extra indirection through `vct_metadata_uri` |
 | External URL baked into generated config | The issuer metadata hashes the exact bytes of the Type Metadata; a templated URL would hash a document never served | Config must be regenerated per environment |
 | One credential per vaccination dose | Authorship stays with the administering party; each issuer revokes only its own assertion | "Is the series complete?" spans several credentials |
-| Prescription revoked on dispensing | Single use without a central register of who was prescribed what | A window between presentation and revocation (F-05) |
-| Mock is not cryptographic | A mock that says which steps it skips beats a mock that looks real | The mock proves nothing about conformance |
+| Prescription revoked on dispensing | Single use, with the single-use property recorded only on the status list | A window between presentation and revocation (F-05) |
+| Mock is not cryptographic | A mock that states which steps it omits is less misleading than one that appears complete | The mock establishes nothing about protocol conformance |
 | In-memory demo state | The demo is a demo | Restarting loses the encounters; the credentials stay in the wallet |

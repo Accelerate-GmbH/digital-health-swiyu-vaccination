@@ -1,6 +1,6 @@
 ---
 id: F-03
-title: Proving protection and nothing else
+title: Presenting vaccination evidence with minimal disclosure
 status: implemented
 roadmap_step: 1
 actors:
@@ -20,32 +20,39 @@ basis: basic-flow/verification
 preconditions:
   - F-02
 produces:
-  - A yes/no answer about protection and a governance journal entry
+  - Four disclosed claims about administered doses, and a governance journal entry
 ---
 
-# F-03 · Proving protection and nothing else
+# F-03 · Presenting vaccination evidence with minimal disclosure
 
-The flow that justifies the architecture. A travel clinic needs to know whether
-the person in front of them is protected against a disease. It does not need to
-know the vaccine brand, the batch number, the vaccinating physician, the clinic,
-or, arguably, the patient's name, which it already has from the appointment.
+A travel clinic needs evidence about the doses a patient has received against a
+particular disease. It does not need the vaccine brand, the batch number, the
+administering practitioner or the organisation, and it already holds the
+patient's name from the appointment.
 
-This is the `verification` view of the reference model with a different claim
-name. The reference flow asks "is this person over 18?"; this flow asks "is this
-person protected against diphtheria?" are the same exchange. The mechanics are
-therefore left to the [reference
+**What this flow produces is evidence, not a clinical conclusion.** The
+credential attests that a dose was administered, on a date, as dose *n* of a
+series. Whether the person is protected is an inference over the vaccination
+schedule, the elapsed time and clinical judgement. This flow implements no such
+inference and identifies no party accountable for one; the clinician makes it.
+The distinction matters because "protected" and "has received these doses" are
+not the same statement, and only the second is signed.
+
+Mechanically this is the `verification` view of the reference model with
+different claim names, so the mechanics are left to the [reference
 diagram](https://didas-swiss.github.io/Trust-Flow-Diagram-Repository/basic-flow/)
-and what follows is about what a travel clinic may ask for. One step here has no
-counterpart there is the holder declining
+and what follows is about what a travel clinic may request. One step here has no
+counterpart there: the holder declining
 ([#5](https://github.com/DIDAS-swiss/Trust-Flow-Diagram-Repository/issues/5)).
 
 ## What is actually different here
 
-A paper vaccination booklet handed across a counter discloses everything on the
-page. A PDF exported from a portal discloses everything in the file. A registry
-lookup discloses everything the registry holds, plus the fact that the lookup
-happened. Selective disclosure is the first mechanism in routine use where the
-holder can answer a narrow question narrowly.
+A paper vaccination booklet handed across a counter is read as a whole page, and
+a PDF exported from a portal contains the whole file. What a query against
+another system discloses depends on that system's access controls and audit
+model and is not a property this flow can assert. What this flow implements is
+narrower and checkable: the wallet releases the claim paths the DCQL query
+names, and the query is built from the requesting role's entitlement.
 
 The credential carries eighteen claims. The travel clinic's entitlement permits
 four. The remaining fourteen are not redacted after the fact and not filtered by
@@ -129,8 +136,8 @@ sequenceDiagram
   carrying a list of accepted issuer DIDs.
 - **The Key Binding JWT's `aud` must be the verifier's `client_id`** and the
   wallet must first satisfy itself that the `client_id` belongs to the entity
-  that signed the JAR. This is the anti-impersonation check; skipping it makes
-  every other control decorative.
+  that signed the JAR. This is the anti-impersonation check: without it, the
+  other controls can be satisfied by a party impersonating the verifier.
 - **Status is checked at the Base Registry.** The profile
   forces the status provider to be the registry precisely so that presenting a
   credential does not tell its issuer where it was used.

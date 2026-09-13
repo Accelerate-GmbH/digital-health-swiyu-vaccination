@@ -84,18 +84,23 @@ sequenceDiagram
     Note over BR: Single use. A second response cannot be made,<br/>and no register of who replied is kept.
 ```
 
-## Unlinkability
+## Linkability analysis
 
-Unlinkability means that the party receiving the data cannot connect it to the
-person it came from and cannot connect two separate submissions to each other.
-For a coverage survey it is the property that matters most: a response that can
-be traced back to a household turns the survey into a register of who replied
-and what they replied.
+**The proposed design removes an explicit household identifier from the
+presentation. It does not yet provide protocol-enforced unlinkability, because
+issuer-side issuance and status information, and the timing of presentation, may
+permit correlation.** What follows sets out what the design achieves and where
+correlation remains possible.
 
-An earlier draft of this flow had the survey join each response to its sampling
-record by an invitation token. That token is a household identifier and holding
-it would have produced exactly that register. The design below removes the need
-for it.
+The property being sought is that the party receiving a response cannot connect
+it to the household it came from, and cannot connect two separate submissions to
+each other. For a coverage survey this matters because a response traceable to a
+household turns the survey into a register of who replied and what they replied.
+
+An earlier draft had the survey join each response to its sampling record by an
+invitation token. That token is a household identifier, and holding it would
+have produced exactly that register. The design below removes the need for it,
+which is a necessary step and not a sufficient one.
 
 **The invitation credential carries the stratum.** The QR in the posted letter
 offers a single-use credential issued by the survey, holding the age band, the

@@ -147,7 +147,7 @@ export function loadConfig(overrides: ConfigOverrides = {}): AppConfig {
         did: env('PHARMACY_DID', demoDid('pharmacy')),
         verifierManagementUrl: verifierUrl('pharmacy', 'PHARMACY_VERIFIER_URL'),
       },
-      // A verifier that never needs to know who vaccinated you, only that you
+      // A verifier that does not need the administering organisation, only that the
       // are protected. It exists in the demo to make the minimisation
       // difference visible in the run.
       travelClinic: {

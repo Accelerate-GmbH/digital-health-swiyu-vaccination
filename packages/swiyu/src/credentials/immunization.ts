@@ -86,7 +86,8 @@ export const IMMUNIZATION: CredentialDefinition = {
   governance: {
     issuerRole: 'ch.didas.health.role.vaccinator',
     issuerBasis:
-      'EpG/LEp and the cantonal authorisation to vaccinate. A practice, a pharmacy with a ' +
+      'Modelled here on the basis of EpG/LEp and the cantonal authorisation to vaccinate; ' +
+      'legal review is required before deployment. A practice, a pharmacy with a ' +
       'vaccination permit, or a company medical service. The issuing DID must carry a Governed ' +
       'Use Case Authorization Trust Marker naming this credential type, because "who is allowed ' +
       'to say that a vaccination happened" is precisely what a verifier needs to check.',
@@ -142,7 +143,7 @@ export const IMMUNIZATION: CredentialDefinition = {
         // know which disease you are protected against and when, not the lot
         // number. Who vaccinated you and where stay in the wallet.
         role: 'ch.didas.health.role.travel-clinic',
-        purpose: 'Confirm protection against a specific disease for travel advice',
+        purpose: 'Obtain evidence of doses administered against a specific disease, as input to travel advice',
         claims: ['target_disease', 'occurrence_date', 'dose_number', 'doses_in_series'],
       },
       {

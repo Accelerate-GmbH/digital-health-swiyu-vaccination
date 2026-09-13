@@ -24,7 +24,7 @@ Proof of one administered vaccination, issued by the administering party.
 
 **Who may issue it:** `ch.didas.health.role.vaccinator`.
 
-EpG/LEp and the cantonal authorisation to vaccinate. A practice, a pharmacy with a vaccination permit, or a company medical service. The issuing DID must carry a Governed Use Case Authorization Trust Marker naming this credential type, because "who is allowed to say that a vaccination happened" is precisely what a verifier needs to check.
+Modelled here on the basis of EpG/LEp and the cantonal authorisation to vaccinate; legal review is required before deployment. A practice, a pharmacy with a vaccination permit, or a company medical service. The issuing DID must carry a Governed Use Case Authorization Trust Marker naming this credential type, because "who is allowed to say that a vaccination happened" is precisely what a verifier needs to check.
 
 This is a **governed** credential type: an actor must decline any interaction where the counterparty carries the Governed Use Case Trust Marker without the matching authorization marker.
 
@@ -34,7 +34,7 @@ This is a **governed** credential type: an actor must decline any interaction wh
 | --- | --- | --- | --- |
 | `ch.didas.health.role.practice` | Establish vaccination status before advising or vaccinating | 18 of 18 | n/a |
 | `ch.didas.health.role.pharmacy` | Check the series before administering the next dose | 7 of 18 | n/a |
-| `ch.didas.health.role.travel-clinic` | Confirm protection against a specific disease for travel advice | 4 of 18 | n/a |
+| `ch.didas.health.role.travel-clinic` | Obtain evidence of doses administered against a specific disease, as input to travel advice | 4 of 18 | n/a |
 | `ch.didas.health.role.research` | Secondary use under explicit, revocable patient consent | 4 of 18 | n/a |
 | `ch.didas.health.role.statistics` | National vaccination coverage monitoring | 5 of 18 | n/a |
 

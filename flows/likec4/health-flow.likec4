@@ -145,7 +145,7 @@ model {
 
   // ---- The incumbent --------------------------------------------------
 
-  epd = system 'EPD / DEP' 'The Swiss electronic patient record. One issuer among others in this design' {
+  epd = system 'EPD / EGD' 'The Swiss electronic patient record. How it and holder-controlled credentials interoperate is future work' {
     style {
       color muted
       opacity 15%
@@ -162,7 +162,7 @@ model {
   patient -> practice 'presents e-ID and cover at check-in' {
     navigateTo practiceCheckIn
   }
-  patient -> travelClinic 'proves protection and nothing else' {
+  patient -> travelClinic 'presents vaccination evidence, four claims of eighteen' {
     navigateTo protectionCheck
   }
   patient -> pharmacy 'presents a prescription, once' {
@@ -399,11 +399,11 @@ views {
   }
 
   // =====================================================================
-  // F-03 · Proving protection and nothing else
+  // F-03 · Presenting vaccination evidence with minimal disclosure
   // =====================================================================
 
   dynamic view protectionCheck {
-    title 'F-03 · Proving protection with minimal disclosure · Sequence'
+    title 'F-03 · Presenting vaccination evidence with minimal disclosure · Sequence'
 
     travelClinic -> travelClinic 'Check the entitlement before building the query' {
       notes '''
@@ -419,7 +419,7 @@ views {
       '''
     }
 
-    travelClinic -> patient 'Request proof of protection' {
+    travelClinic -> patient 'Request vaccination evidence' {
       notes '''
         **Protocol:** OpenID4VP 1.0 with DCQL, request object per JAR (RFC 9101)
         **Format:** signed `oauth-authz-req+jwt`, ES256
