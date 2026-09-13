@@ -86,7 +86,7 @@ Three properties hold:
   is refused under every policy. The profile's SHOULDs are waived under the
   Sandbox policy and *recorded as waived*, because a demo that silently drops
   rules teaches that the rules are optional.
-- **The journal holds claim names, never values.** It proves an interaction was
+- **The journal holds claim names and no claim values.** It evidences that an interaction was
   within the rules without becoming a second copy of the patient's data. A test
   asserts it.
 

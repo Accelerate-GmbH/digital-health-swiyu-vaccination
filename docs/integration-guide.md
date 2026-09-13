@@ -148,10 +148,10 @@ if (decision.outcome === 'allow') {
   what check-in does.
 - **Always set `accepted_issuer_dids` or `trust_anchors`.** Without either, every
   issuer DID is accepted and you cannot evaluate your counterparty at all.
-- **`PENDING` is normal.** Poll, or take the webhook. The patient is looking at
-  a consent screen.
-- **A declined request is not an error.** `client_rejected` is a valid answer
-  and your flow must work when it arrives.
+- **`PENDING` is normal.** Poll, or take the webhook. The wallet is showing the
+  presentation request to the holder for confirmation.
+- **A declined request is not an error.** `client_rejected` is a defined
+  response and your flow must work when it arrives.
 - **Claims come back keyed by DCQL query id.** Credential type is not the key.
 
 ## Using what you receive

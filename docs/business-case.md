@@ -24,7 +24,7 @@ The consequences are ordinary and expensive:
 - **Every organisation re-collects the same data.** Name, date of birth,
   insurance cover and AHV number are re-keyed at every reception desk, from a
   card that carries no cryptographic evidence of its own authenticity.
-- **Sharing is all-or-nothing.** A patient who wants to prove one fact hands
+- **Sharing is all-or-nothing.** A patient who needs to evidence one fact hands
   over a document containing twenty.
 
 ## What actually changes
@@ -53,9 +53,9 @@ party. Three consequences follow from that arrangement:
 
 | Party | What they get | What it costs them |
 | --- | --- | --- |
-| **Patient** | A vaccination record they keep and can prove anywhere; the ability to answer one question without disclosing twenty | Installing a wallet; understanding a consent screen |
+| **Patient** | A vaccination record retained independently of the issuing organisation, and the ability to answer one request without disclosing every claim the credential carries | Installing a wallet; understanding what a presentation request discloses |
 | **Practice** | Identity and cover confirmed at check-in against two independent issuers, so a name mismatch surfaces; no re-keying; results handed over once | Integration with its practice management system; a DID and its onboarding |
-| **Pharmacy** | A prescription that can be verified and redeemed exactly once, with the single-use property recorded on the status list | A verifier deployment; a DID |
+| **Pharmacy** | A prescription whose signature, status and holder binding it can check, and which the prescriber revokes on redemption so a second presentation fails the status check | A verifier deployment; a DID |
 | **Insurer** | Card data that can be revoked the day cover ends, in place of a plastic card that stays in circulation for years | An issuer deployment; a DID |
 | **Laboratory** | Results delivered to the patient without operating a portal | An issuer deployment |
 | **Public health** | A coverage survey that reads structured, signed, already-coded records in place of photocopied booklets | Loses the ability to enumerate susceptible individuals for outbreak response or recall (see below) |
@@ -91,8 +91,8 @@ Three things line up. They will not line up again for some years:
    content; the openEHR/HL7 joint working group is converging the two, and
    diverging. Reusing them costs nothing and buys interoperability.
 
-The opposite of acting now is not "wait and see". It is watching the sector
-build another central register because nothing else was demonstrably ready.
+The alternative to acting now is not a neutral wait. It is the sector selecting
+a central register because no holder-controlled option was demonstrably ready.
 
 ## How adoption could actually start
 
@@ -125,7 +125,7 @@ usually lack.
 - **Patients without a smartphone.** Every flow must degrade to the existing
   paper or plastic path without making those patients second-class. That is a
   service-design problem this repository does not answer.
-- **Emergency access.** A patient who is unconscious cannot consent. Any
+- **Emergency access.** An unconscious patient cannot confirm a presentation request in the wallet. Any
   break-glass mechanism reintroduces a party who can read the record without
   them. That is the exact property this design exists to avoid. Unsolved and the
   hardest question in the architecture.

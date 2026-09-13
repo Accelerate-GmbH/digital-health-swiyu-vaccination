@@ -77,7 +77,7 @@ was issued to. Without it a credential is a bearer token.
 **Status list / Token Status List.** A published list with one entry per
 credential, saying whether it is still valid. A credential carries the index
 that finds its own entry. The entry is two bits wide, which is what supports
-both revocation and suspension. The list carries nothing else: no patient, no
+both revocation and suspension. The representation carries no patient data, no
 medication, no verifier and no cryptographic keys. Those live in the DID
 documents, which the Base Registry publishes separately.
 
@@ -117,7 +117,7 @@ its keys without a certificate authority.
 **DID log.** The append-only history of a DID document, each entry signed with
 the *update key*. Lose that key and the DID can never be changed again.
 
-**Proof of possession (PoP).** A JWT signed with a DID's private key proving
+**Proof of possession (PoP).** A JWT signed with a DID's private key, demonstrating
 control of it. How the Trust Registry verifies an onboarding.
 
 **Trust marker.** A machine-readable statement about an actor:

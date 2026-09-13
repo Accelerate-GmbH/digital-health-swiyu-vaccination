@@ -28,7 +28,7 @@ Where something is *not* implemented, it says so.
 3. **MUST and SHOULD are kept apart.** Profile-level MUST rules are enforced
    under every policy. SHOULDs may be waived. A waiver is *recorded*, not
    silently applied.
-4. **The audit record holds claim names, never claim values.** It must prove an
+4. **The audit record holds claim names and no claim values.** It must evidence an
    interaction stayed within the rules without becoming a second copy of the
    patient's data.
 5. **Refusal is a first-class outcome.** A holder declining and a verifier

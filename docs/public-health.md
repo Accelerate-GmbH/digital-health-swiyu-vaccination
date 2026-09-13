@@ -61,7 +61,7 @@ that removes most of that work:
 | Handwriting, faded stamps, missing booklets | Structured claims, bound to CH VACD element paths |
 | No way to tell a transcription error from a real gap | The issuer signed it; provenance travels with the data |
 | Manual coding to SNOMED for analysis | Already coded: `vaccine_code` and `target_disease` are SNOMED CT |
-| Consent handled per study, on paper | Selective disclosure: the survey asks for the five claims it needs and gets nothing else |
+| Research consent handled per study, on paper | Selective disclosure: the presentation request selects the five claims the analysis needs, and the remaining claims are not included in the presentation |
 
 A survey participant presenting credentials would be releasing *less* than a
 photocopy of a booklet discloses today and the receiving analyst would get

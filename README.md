@@ -22,8 +22,11 @@ prescriptions.
 The objective is not to replace established healthcare information standards such
 as HL7 FHIR or openEHR. Instead, the project explores how established healthcare
 semantics can be combined with verifiable credentials and the swiyu Trust
-Infrastructure to support cryptographically verifiable, privacy-preserving and
-governed exchange of healthcare information.
+Infrastructure. The properties this adds are specific: a signature over the
+issued claims that a verifier can check, selective disclosure at claim level,
+status resolution that does not require contacting the issuer, and a policy
+layer that decides which role may issue a credential type and which claims a
+role may request.
 
 ## Purpose
 
@@ -146,17 +149,19 @@ evaluated within the flows. The full model is documented in the
 
 - **Issuance authorisation.** `reviewIssuance()` evaluates whether an actor may
   issue a given credential type before a request reaches the issuer. A practice
-  may issue an immunisation record because it holds the vaccinator role; an
-  insurer may not.
+  may issue an immunisation credential because it holds the vaccinator role in
+  this project's policy configuration; an insurer does not hold that role.
 - **Request entitlement.** Each credential type declares per-role entitlements.
-  A request for a claim outside the requesting role's entitlement is refused when
-  the DCQL query is constructed, before it reaches the holder. Enforcing
-  minimisation after the wallet has responded would be too late.
+  A request for a claim outside the requesting role's entitlement is rejected
+  while the DCQL query is being constructed, before it reaches the holder. A
+  check applied after the wallet has responded would operate on claims the
+  verifier already holds, so it would constrain the verifier's later use of them
+  rather than which claims it received.
 - **Protected fields.** Under `swiss-profile-trust:1.0`,
-  `personal_administrative_number` — the AHV number — requires special permission
-  to verify, regardless of the credential type carrying it. In this project the
-  practice holds that entitlement because Swiss billing uses the number; no other
-  role does.
+  `personal_administrative_number`, the AHV number, requires an explicit
+  authorisation before a verifier may request it, whichever credential type
+  carries it. In this project the practice holds that authorisation because Swiss
+  billing uses the number, and no other role does.
 - **Trust markers.** Presentations are evaluated against a configured policy.
   MUST-level rules of the Trust Protocol are enforced under every policy;
   SHOULD-level rules are waived under the Sandbox policy and recorded as waived.
@@ -199,7 +204,8 @@ projection and are stated in the code at the point where it performs one:
 - a projection is **derived and not authoritative** — the signed credential is
   the evidence;
 - a projection is **legitimately partial** — after selective disclosure, an
-  absent element is a valid outcome rather than an error.
+  absent element is an expected outcome of the disclosure rather than a data
+  error.
 
 The mappings in this repository are the project's own and have not been reviewed
 or endorsed by the standards bodies concerned. They are intended to demonstrate
@@ -274,12 +280,16 @@ rather than implied.
   verification paths have not been exercised end to end against the live
   Sandbox.
 - **Selective disclosure.** The Swiss Profile mandates the SD-JWT VC format, in
-  which claims are individually disclosable. Predicate proofs — proving a
-  property of a claim without disclosing it — are not available in this profile.
-  Where an age threshold is used, it is a separate claim carried by the
-  credential, not a proof computed over a withheld date of birth.
-- **Unlinkability is not claimed.** The design limits what is disclosed to a
-  given verifier. It does not claim unlinkability across presentations.
+  which claims are individually disclosable. Predicate proofs, meaning a
+  demonstration that a claim satisfies a condition without disclosing the claim
+  value, are not available in this profile. Where an age threshold is used it is
+  a separate claim carried by the credential, computed by the issuer, rather than
+  a proof computed over a withheld date of birth.
+- **Unlinkability is not claimed.** Selective disclosure narrows the claims
+  included in a presentation to a given verifier. It does not remove the
+  correlation surfaces available across presentations, which include the
+  credential identifier, the holder key, the disclosed claim values, the
+  status-list reference, timing and network metadata.
 - **Semantic mappings are unreviewed.** See
   [Healthcare interoperability](#healthcare-interoperability).
 - **Demonstration data is illustrative.** SNOMED CT codes, GLNs, BAG numbers,

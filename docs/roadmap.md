@@ -85,7 +85,7 @@ What has to be built:
    credential is an alternative to a longitudinal record rather than something
    useful to one. See [positioning](positioning.md).
 8. **Emergency access.** The hardest question in the architecture: a patient who
-   is unconscious cannot consent and any break-glass mechanism reintroduces a
+   is unconscious cannot confirm a presentation request, and any break-glass mechanism reintroduces a
    party that can read the record without them.
 
 Prerequisite from step 1: F-06 supersession, so that a corrected result can name
@@ -101,7 +101,7 @@ author who can be held responsible. A heart-rate reading does not. Before
 wearables fit this architecture, four things need to exist: a summary-credential
 pattern with an accountable computation step, a measurement-provenance model
 that distinguishes "this device produced this" from "this describes this
-person", standing-consent semantics the holder can inspect and revoke, and
+person", standing-authorisation semantics the holder can inspect and revoke, and
 clinical models for summary types that neither FHIR nor openEHR handles as
 comfortably as events.
 
