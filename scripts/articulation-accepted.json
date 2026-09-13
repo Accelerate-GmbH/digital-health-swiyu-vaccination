@@ -867,6 +867,11 @@
    "risk": "verify-no-object,trust-bare",
    "sentence": "**1 · Immunization Showcase** · 2026 FHIR/openEHR interplay End-to-end prototype **Blueprint**. 2 · International Patient Summary · 2027 Allergies, medication, "
   },
+  "663bc4bf40750bf8": {
+   "file": "docs/roadmap.md",
+   "risk": "verify-no-object",
+   "sentence": "DCQL CODE is NOT SUPPORTED, so there is no mechanism for an unknown number of instances of one credential type, and the profile is not explicit about several Cr"
+  },
   "d72d0bdff06b0ea9": {
    "file": "docs/roadmap.md",
    "risk": "trust-bare",
@@ -1037,10 +1042,20 @@
    "risk": "verify-no-object",
    "sentence": "See CODE for what was and was not verified against a primary source."
   },
-  "7c5ce406978b2694": {
+  "11689a9b7cb808ee": {
    "file": "docs/spec-conformance.md",
-   "risk": "verify-no-object,trust-bare,absolute",
+   "risk": "verify-no-object,absolute",
    "sentence": "The Source column now names the embedded specification first, so each row resolves to one place. ## Cryptography · all profiles | Rule | Source | Status | | ---"
+  },
+  "e364421b91ea6a8a": {
+   "file": "docs/spec-conformance.md",
+   "risk": "verify-no-object,absolute",
+   "sentence": "The accompanying sentence, \"only a single credential can be used in a verification\", is not explicit about several Credential Queries in one verification."
+  },
+  "1d5cfcc389b270be": {
+   "file": "docs/spec-conformance.md",
+   "risk": "verify-no-object,trust-bare",
+   "sentence": "F-04 sends two as an implementation pattern under clarification; see GP-01 | | Trusted authorities MUST use the CODE type | OID4VP §6.1.1 | **checked** | | ISO "
   },
   "3df07acfae700dfe": {
    "file": "docs/spec-conformance.md",
@@ -1087,10 +1102,35 @@
    "risk": "verify-no-object,absolute,secure",
    "sentence": "Sandbox hosts in CODE | | CD-002 Issuer security enforcements | generic issuer | | CD-004 Verifier security enforcements | generic verifier | | CD-005 DPoP enfo"
   },
-  "fb247b18abf39cab": {
+  "8113eb3744e3927f": {
    "file": "docs/swiss-profile-gaps.md",
    "risk": "trust-bare,identity",
-   "sentence": "CODE NOT SUPPORTED | Swiss Profile Verification | specification | | GP-02 | Provenance of a derived representation | F-07, F-08 | No defined way to carry or ret"
+   "sentence": "A flow can run end to end on the current profiles and still depend on decisions the profiles leave to a deployment. ## Gap table | Gap | Capability | Affected f"
+  },
+  "93ad328b21e271e3": {
+   "file": "docs/swiss-profile-gaps.md",
+   "risk": "verify-no-object,absolute",
+   "sentence": "CODE §6.1 states that the DCQL CODE property is NOT SUPPORTED, and adds that \"only a single credential can be used in a verification\"."
+  },
+  "bb670f71cd50b7a2": {
+   "file": "docs/swiss-profile-gaps.md",
+   "risk": "verify-no-object",
+   "sentence": "The explanatory sentence can be read more broadly, as restricting the whole verification to one credential."
+  },
+  "d7e95a0b6f5630f8": {
+   "file": "docs/swiss-profile-gaps.md",
+   "risk": "verify-no-object",
+   "sentence": "Three cases need to be distinguished, and the profile currently separates none of them: 1. several Credential Queries in one DCQL request, each satisfied by one"
+  },
+  "743577fa695196eb": {
+   "file": "docs/swiss-profile-gaps.md",
+   "risk": "verify-no-object",
+   "sentence": "**Required profile evolution or clarification.** Swiss Profile Verification should state explicitly:"
+  },
+  "cb7bc65bc7bb699b": {
+   "file": "docs/swiss-profile-gaps.md",
+   "risk": "verify-no-object",
+   "sentence": "- whether several Credential Queries are permitted in one verification;"
   },
   "009783be41442eb8": {
    "file": "docs/swiss-profile-gaps.md",
@@ -1297,6 +1337,16 @@
    "risk": "absolute",
    "sentence": "A verifier without CODE requesting health data is the case the wallet-side decision exists to catch, and the wallet is the last point at which it can be made be"
   },
+  "cbfe29b406c7e2cd": {
+   "file": "flows/F-03-immunization-minimal-disclosure.md",
+   "risk": "verify-no-object,absolute",
+   "sentence": "- **DCQL CODE is NOT SUPPORTED**, and §6.1 adds that \"only a single credential can be used in a verification\"."
+  },
+  "73f10f59a778b34d": {
+   "file": "flows/F-03-immunization-minimal-disclosure.md",
+   "risk": "verify-no-object",
+   "sentence": "Whether that also rules out several Credential Queries in one verification is not stated."
+  },
   "7337bfb0181a9d88": {
    "file": "flows/F-03-immunization-minimal-disclosure.md",
    "risk": "trust-bare",
@@ -1341,6 +1391,11 @@
    "file": "flows/F-04-practice-check-in.md",
    "risk": "identity",
    "sentence": "- **No health data at check-in.** The purpose scope CODE covers identity and cover."
+  },
+  "4d6424d305b2e588": {
+   "file": "flows/F-04-practice-check-in.md",
+   "risk": "verify-no-object,absolute",
+   "sentence": "CODE §6.1 states that CODE is NOT SUPPORTED and adds that \"only a single credential can be used in a verification\", which is not explicit about this case."
   },
   "0463e7c20a5701e4": {
    "file": "flows/F-04-practice-check-in.md",
@@ -1422,10 +1477,25 @@
    "risk": "protected",
    "sentence": "SNOMED CT for vaccines and diseases, LOINC for analytes, UCUM for units, GTIN for medication packs, GLN for professionals, AHVN13 for the protected administrati"
   },
+  "90a34b00acb8659d": {
+   "file": "flows/F-08-patient-summary.md",
+   "risk": "verify-no-object,absolute",
+   "sentence": "CODE §6.1 states that DCQL > CODE is NOT SUPPORTED, and adds that \"only a single credential can be > used in a verification\"."
+  },
+  "d349790ed228c2d2": {
+   "file": "flows/F-08-patient-summary.md",
+   "risk": "verify-no-object",
+   "sentence": "The profile is not explicit about whether several > Credential Queries may appear in one verification, so this repository treats > that case as requiring clarif"
+  },
   "b812787f49aeb86a": {
    "file": "flows/F-08-patient-summary.md",
    "risk": "absolute",
    "sentence": "It is designed for the case where a clinician who has never seen you needs to know the few things that could kill you, possibly in another country."
+  },
+  "3f2262dc85d46ea8": {
+   "file": "flows/F-08-patient-summary.md",
+   "risk": "verify-no-object",
+   "sentence": "DCQL CODE is NOT SUPPORTED, and the profile is not explicit about several Credential Queries in one verification."
   },
   "90ee06e46bb32f43": {
    "file": "flows/F-08-patient-summary.md",

@@ -141,9 +141,13 @@ sequenceDiagram
 - **The authorization request must be a signed JAR.** `client_id` is the
   verifier's DID, optionally prefixed `decentralized_identifier:` and must match
   the `kid` of the signature without its fragment.
-- **One credential per verification.** DCQL `multiple` is not supported, so a
-  question spanning several credentials needs several queries in one request,
-  or, for the immunization series, F-08.
+- **DCQL `multiple` is NOT SUPPORTED**, and §6.1 adds that "only a single
+  credential can be used in a verification". Whether that also rules out several
+  Credential Queries in one verification is not stated. This flow uses one query.
+  F-04 uses two as an implementation pattern under clarification, and F-08 needs
+  an unknown number of instances of one type, which the profile does not provide
+  for. See
+  [GP-01](../docs/swiss-profile-gaps.md#gp-01--multi-credential-and-multi-instance-presentation-semantics).
 - **Trusted authorities are DID-based.** The DCQL trusted-authority types in the
   base OID4VP specification do not apply; the Swiss Profile defines a `did` type
   carrying a list of accepted issuer DIDs.

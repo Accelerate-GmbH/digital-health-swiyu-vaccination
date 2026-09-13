@@ -70,7 +70,7 @@ first, so each row resolves to one place.
 | Verifiers MUST send a signed JAR | §5 | **checked** |
 | `response_mode` MUST be `direct_post.jwt` | §5.2, §8 | **checked** |
 | Client Identifier Prefix `decentralized_identifier` MUST be supported and SHOULD be used; an absent or unknown prefix MUST be interpreted as it | §5.9.2, §5.9.3 | generic verifier |
-| DCQL `multiple` NOT SUPPORTED | OID4VP §6.1 | **checked** |
+| DCQL `multiple` NOT SUPPORTED | OID4VP §6.1 | **checked**. The accompanying sentence, "only a single credential can be used in a verification", is not explicit about several Credential Queries in one verification. F-04 sends two as an implementation pattern under clarification; see [GP-01](swiss-profile-gaps.md#gp-01--multi-credential-and-multi-instance-presentation-semantics) |
 | Trusted authorities MUST use the `did` type | OID4VP §6.1.1 | **checked** |
 | ISO mdoc claim semantics NOT SUPPORTED | §7.2 | **checked** via format |
 | `transaction_data` NOT SUPPORTED | §5.1, §8.4 | not used |

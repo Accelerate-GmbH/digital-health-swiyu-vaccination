@@ -99,9 +99,17 @@ sequenceDiagram
 
 ## Standardisation constraints
 
-- Two DCQL credential queries in one authorization request; `multiple` remains
-  unsupported, so this is two *queries* inside one presentation request, each
-  naming its own credential type and claim paths.
+- **Two Credential Queries in one authorization request, as an implementation
+  pattern under profile clarification.** This demonstrator places two DCQL
+  Credential Queries in one authorization request, one for the Beta-ID and one
+  for the insurance-card credential, each naming its own credential type and
+  claim paths. OpenID4VP 1.0 defines several Credential Queries in the
+  `credentials` array. `swiss-profile-verification:1.0.0` §6.1 states that
+  `multiple` is NOT SUPPORTED and adds that "only a single credential can be used
+  in a verification", which is not explicit about this case. The repository
+  therefore treats profile conformance of this pattern as requiring
+  clarification, recorded as
+  [GP-01](../docs/swiss-profile-gaps.md#gp-01--multi-credential-and-multi-instance-presentation-semantics).
 - `accepted_issuer_dids` is set per query, so the Beta-ID must come from the
   Beta Credential Service and the card from the patient's insurer. Without it the
   verifier would accept any issuer, which `checkVerificationRequest()` refuses.
