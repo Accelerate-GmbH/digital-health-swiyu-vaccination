@@ -1,187 +1,366 @@
-# digital-health_swiyu
+# Digital Health on the swiyu Trust Infrastructure
 
-**📍 [Immunization Showcase: the portal](https://didas-swiss.github.io/digital-health_swiyu/)**
+**[Immunisation showcase portal](https://didas-swiss.github.io/digital-health_swiyu/)**
 · [Flow diagrams](https://didas-swiss.github.io/digital-health_swiyu/flows/)
 
-Digital health on the **swiyu** Swiss trust infrastructure, the ecosystem behind
-the Swiss e-ID. An end-to-end, runnable implementation of
-[GovTech Hackathon project 1103](https://hack.opendata.ch/project/1103),
-"Digital Health mit der neuen E-ID Trust-Infrastruktur", built against the
-**swiyu Sandbox** and **Swiss Profiles version 1.0**.
+This repository demonstrates how verifiable digital health credentials can be
+issued, held, presented and verified using the Swiss swiyu Trust Infrastructure.
 
-The showcase is an **immunization record**. A vaccination is administered, the
-vaccinator issues one credential per dose into the patient's wallet and the
-patient later proves protection to a travel clinic while disclosing four claims
-out of the eighteen the credential holds. Around it sits the rest of a
-consultation: check-in against an e-ID and an insurance card, a laboratory
-report and a prescription redeemed once at a pharmacy.
+The implementation builds on the Digital Health use case developed through the
+Swiss GovTech Hackathons and demonstrates an end-to-end patient journey using the
+swiyu Sandbox and the applicable Swiss Profiles.
 
-```
-patient wallet ──┬── Beta-ID (e-ID from 2026)         issued by the Confederation
-                 ├── insurance card                   issued by the insurer
-                 ├── immunization × n                 issued by whoever vaccinated
-                 ├── laboratory report                issued by the practice
-                 ├── prescription                     issued by the prescriber
-                 └── survey invitation, single use    issued by EBPI   [roadmap]
-```
+The current showcase focuses on immunisation records. Vaccination credentials can
+be issued to a patient wallet and subsequently presented to an authorised
+healthcare provider, including through selective disclosure where supported by
+the credential design and protocol.
 
-The first five are issued and verified by the code in this repository. The sixth
-is specified in [F-11](flows/F-11-coverage-survey.md) and not built: the Swiss
-National Vaccination Coverage Survey posts an invitation to a sampled household,
-the QR in that letter delivers a single-use credential carrying the sampling
-stratum and no household identifier. It is revoked once the response is
-accepted.
+The implementation also explores additional digital-health credential types,
+including patient identification, insurance information, laboratory reports and
+prescriptions.
 
-No registry sits in the middle of any of it.
+The objective is not to replace established healthcare information standards such
+as HL7 FHIR or openEHR. Instead, the project explores how established healthcare
+semantics can be combined with verifiable credentials and the swiyu Trust
+Infrastructure to support cryptographically verifiable, privacy-preserving and
+governed exchange of healthcare information.
 
-## The portal
+## Purpose
+
+The repository addresses three complementary layers:
+
+- **Interoperability** — implementation against the applicable swiyu profiles and
+  the relevant OpenID and SD-JWT standards.
+- **Healthcare semantics** — mapping credential content to established healthcare
+  information models such as FHIR and openEHR where appropriate.
+- **Governance** — definition of the rules and trust relationships governing who
+  may issue, request, present and verify particular credentials and attributes.
+
+The result is a practical reference implementation for exploring how
+Switzerland's digital trust infrastructure can support interoperable
+digital-health use cases.
+
+## What this repository demonstrates
+
+The material in this repository falls into four categories, which are kept
+distinct throughout the documentation.
+
+| Category | Meaning | Where |
+| --- | --- | --- |
+| **Implemented** | Running code in this repository, exercised by the test suite and the demonstration application | F-02, F-03, F-04, F-05, F-07 |
+| **Demonstrated against current swiyu specifications** | Rules of the Swiss Profiles and Trust Protocol 2.0 that the code enforces, each mapped to the specification section that states it | [`docs/spec-conformance.md`](docs/spec-conformance.md) |
+| **Beyond the current specification** | Behaviour this project models but the current profiles do not define, or that depends on an ecosystem role that does not yet exist | F-01, F-06; see [Current implementation scope and limitations](#current-implementation-scope-and-limitations) |
+| **Roadmap or conceptual** | Specified as documented flows, not built | F-08, F-09, F-10, F-11; see [`docs/roadmap.md`](docs/roadmap.md) |
+
+Nothing in this repository has been executed against a production deployment of
+the swiyu Trust Infrastructure. See
+[Current implementation scope and limitations](#current-implementation-scope-and-limitations).
+
+## Digital health use case and patient journey
+
+The showcase follows a patient through a course of care. A vaccination is
+administered and the vaccinator issues one credential per dose to the patient's
+wallet. The patient later presents evidence of protection to a travel clinic,
+releasing four of the eighteen claims the immunisation credential carries. Around
+that sit the other steps of a consultation: check-in against an identity
+credential and an insurance credential, a laboratory report, and a prescription
+redeemed once at a pharmacy.
+
+| Credential | Issuer | Status in this repository |
+| --- | --- | --- |
+| Beta-ID — the swiyu Sandbox stand-in for the e-ID | Beta Credential Service (Confederation) | Verified, never issued here |
+| Insurance information | Health insurer | Implemented |
+| Immunisation record, one per dose | The authorised vaccinator that administered the dose | Implemented |
+| Laboratory report | Laboratory, or the treating practice on its behalf | Implemented |
+| Prescription | The prescribing practitioner | Implemented |
+| Coverage-survey invitation, single use | Epidemiology, Biostatistics and Prevention Institute (EBPI), University of Zurich | Roadmap, specified in [F-11](flows/F-11-coverage-survey.md) |
+
+The coverage-survey invitation is documented but not built. In the modelled
+design the Swiss National Vaccination Coverage Survey posts an invitation to a
+sampled household; the QR code in that letter delivers a single-use credential
+carrying the sampling stratum and no household identifier, and the credential is
+revoked once the response has been accepted.
+
+### The showcase portal
 
 The portal is published at
-**<https://didas-swiss.github.io/digital-health_swiyu/>**.
-[`site/index.html`](site/index.html) is its source: a single page
-that walks the full journey: issuance, minimal disclosure at the travel clinic,
-the governance gates, the FHIR and openEHR projections and the roadmap. It is
-published by the `portal` workflow on every push to `main` that touches it, and
-it is checked in so the prose versions alongside the credential definitions and
-the flows it describes.
+**<https://didas-swiss.github.io/digital-health_swiyu/>** and its source is
+[`site/index.html`](site/index.html). It walks through issuance, minimal
+disclosure at the travel clinic, the governance gates, the FHIR and openEHR
+projections and the roadmap. It is published by the `portal` workflow on every
+push to `main` that touches it, and is committed to the repository so that its
+prose can be reviewed alongside the credential definitions and flows it
+describes.
 
-Open it locally with `open site/index.html`; it has no build step and no runtime
-dependencies. The interactive flow diagrams are built alongside it from
+The page can be opened locally with `open site/index.html`; it has no build step
+and no runtime dependencies. The interactive flow diagrams are built from
 [`flows/likec4/`](flows/likec4/README.md) and published under
-[`/flows/`](https://didas-swiss.github.io/digital-health_swiyu/flows/). Each of
-the seven modelled flows is linked from its row on the showcase.
+[`/flows/`](https://didas-swiss.github.io/digital-health_swiyu/flows/). Seven of
+the eleven documented flows are modelled as diagrams, each linked from its row on
+the showcase.
 
-## Why the record lives in the wallet
+## Architecture
 
-Switzerland has run the centralised version. `meineimpfungen.ch` held the
-national electronic vaccination record until it was shut down in 2021 after
-serious security failures and several hundred thousand people lost access to
-their own vaccination history at once. The platform was badly built and that
-explanation is accurate as far as it goes. There is a second, structural point: a
-design in which one database holds everyone's record carries a failure mode that
-careful engineering does not remove, because the database can be breached,
-defunded or switched off. Each of those removes access for every person at the
-same moment.
+Credentials are issued to, and held in, the patient's wallet. A relying party
+receives credential content when the holder presents it, and verifies it against
+the issuer's signature and the swiyu Trust Infrastructure.
 
-Here the record is a set of credentials in the patient's wallet. The patient
-keeps them when the practice that issued them closes, when a platform is wound
-up and when someone decides to switch a registry off.
+The swiyu Trust Infrastructure provides shared components that this design
+depends on, including the Base Registry, which resolves issuer and verifier
+identifiers and hosts status information, and the Trust Registry, which carries
+trust statements about participants. These are central components of the
+ecosystem and this project relies on them. What the design avoids is a separate
+central repository holding the healthcare payloads themselves.
 
-## Reusing the models without the repository
+### An architectural consideration from meineimpfungen.ch
 
-openEHR and HL7 FHIR are usually adopted as a package: shared information models
-*and* a shared repository that some organisation operates. This project adopts
-the information models and does not adopt the repository.
+The former meineimpfungen.ch platform illustrates some of the risks associated
+with concentrating sensitive health information in a central service. This
+project explores an alternative exchange model in which verifiable credentials
+can be issued to patients and subsequently presented to authorised relying
+parties without requiring the same healthcare payload to be stored in a central
+credential-exchange repository.
 
-Every claim of every credential type carries the FHIR element path and, where
-one exists, the openEHR archetype path it corresponds to. At presentation time a
-receiving system rebuilds the representation it already understands. That
-happens locally, from what the holder released, with no clinical data repository
-and no FHIR server on either side. Two consequences hold for every projection,
-and the code states them at the point where it performs one: a projection is
-**derived and not authoritative** (the signed credential is the evidence) and a
-projection is **legitimately partial** (after selective disclosure, a missing
-element is a valid outcome rather than an error).
+This model does not eliminate central infrastructure, governance dependencies or
+security risks. It relies on the federal registries named above, on the
+availability of the wallet and on the governance arrangements described below. It
+changes where the healthcare payload resides and who controls its release; it
+does not remove the need for operational security, key management or
+institutional trust.
 
-See [`flows/F-07`](flows/F-07-model-projection.md).
+## Governance
 
-## Governance as well as protocol
-
-The technical profile answers whether a message is well formed and correctly
-signed. It does not answer who may assert a clinical fact, who may ask for one,
-and whether a given presentation should be accepted. Those questions are
+The technical profile establishes whether a message is well formed and correctly
+signed. It does not establish who may assert a clinical fact, who may request
+one, or whether a given presentation should be accepted. Those questions are
 implemented in
-[`packages/swiyu/src/governance.ts`](packages/swiyu/src/governance.ts) and run
-inside the flow:
+[`packages/swiyu/src/governance.ts`](packages/swiyu/src/governance.ts) and
+evaluated within the flows. The full model is documented in the
+[governance framework](docs/governance-framework.md).
 
-- **Who may issue.** `reviewIssuance()` refuses before a request reaches the
-  issuer. A practice may issue an immunization because it holds the vaccinator
-  role; an insurer may not.
-- **Who may ask and for what.** Each credential type declares per-role
-  entitlements. A pharmacy asking for the AHV number is refused when the query is
-  *built*. Enforcing minimisation after the wallet has answered is too late.
-- **Protected fields.** `personal_administrative_number` needs an explicit
-  authorization marker under `swiss-profile-trust:1.0`, whatever credential
-  carries it. The practice holds that entitlement because it bills with the
-  number; nobody else in this project does.
-- **Trust markers.** Presentations are evaluated against a policy. The MUST
-  rules (a governed use case without authorization is always refused) are
-  enforced under every policy; the SHOULDs are waived under the Sandbox policy
-  and **recorded as waived**.
-- **The journal.** Every decision is recorded with its reasons. It records claim
-  *names* only. A test asserts that no claim value ever reaches it.
+- **Issuance authorisation.** `reviewIssuance()` evaluates whether an actor may
+  issue a given credential type before a request reaches the issuer. A practice
+  may issue an immunisation record because it holds the vaccinator role; an
+  insurer may not.
+- **Request entitlement.** Each credential type declares per-role entitlements.
+  A request for a claim outside the requesting role's entitlement is refused when
+  the DCQL query is constructed, before it reaches the holder. Enforcing
+  minimisation after the wallet has responded would be too late.
+- **Protected fields.** Under `swiss-profile-trust:1.0`,
+  `personal_administrative_number` — the AHV number — requires special permission
+  to verify, regardless of the credential type carrying it. In this project the
+  practice holds that entitlement because Swiss billing uses the number; no other
+  role does.
+- **Trust markers.** Presentations are evaluated against a configured policy.
+  MUST-level rules of the Trust Protocol are enforced under every policy;
+  SHOULD-level rules are waived under the Sandbox policy and recorded as waived.
+- **Audit journal.** Every decision is recorded with its reasons. The journal
+  records claim *names* only; a test asserts that no claim value reaches it.
 
-## The blueprint
+### Legal framing
 
-[`flows/`](flows/README.md) is the blueprint deliverable: eleven flows, each with
+The Federal Act on Electronic Proof of Identity of 20 December 2024 (E-ID-Gesetz,
+BGEID) governs the federal trust infrastructure and the EID. It does not govern
+the content of a health credential, and it does not determine what a practice or
+a pharmacy may request. Article 23 establishes a proportionality requirement on
+verifiers for the EID specifically; there is no equivalent statutory test for the
+other credentials modelled here. See
+[`docs/governance-framework.md`](docs/governance-framework.md#what-the-e-id-act-does-and-does-not-decide).
+
+A governance body for the health domain, able to grant and withdraw the role
+entitlements this model depends on, does not currently exist. This is the most
+significant open dependency in the design and is documented as such.
+
+## Healthcare interoperability
+
+openEHR and HL7 FHIR are commonly adopted together with a repository that some
+organisation operates. This project adopts the information models and does not
+adopt a central clinical data repository.
+
+Every claim of every credential type carries the FHIR element path and, where one
+exists, the openEHR archetype path it corresponds to. At presentation time a
+receiving system can rebuild the representation it already understands, locally,
+from the claims the holder released. Two properties hold for every such
+projection and are stated in the code at the point where it performs one:
+
+- a projection is **derived and not authoritative** — the signed credential is
+  the evidence;
+- a projection is **legitimately partial** — after selective disclosure, an
+  absent element is a valid outcome rather than an error.
+
+The mappings in this repository are the project's own and have not been reviewed
+or endorsed by the standards bodies concerned. They are intended to demonstrate
+that verifiable credentials can complement established healthcare semantics —
+adding holder-controlled exchange, cryptographic authenticity, selective
+disclosure and governance — rather than to constitute a conformant FHIR or
+openEHR implementation. See [`flows/F-07`](flows/F-07-model-projection.md) and
+[`docs/positioning.md`](docs/positioning.md).
+
+## Implemented credential flows
+
+[`flows/`](flows/README.md) contains eleven documented flows. Each carries
 machine-readable front matter, a sequence diagram, its governance constraints,
-its standardisation constraints and its open questions. Each file stands alone,
-so that a flow can be **transferred into a trust flows repository** without the
-rest of this repository.
+its standardisation constraints and its open questions. Each file is
+self-contained, so that a flow can be transferred to a trust-flow repository
+independently of the rest of this repository.
 
-Flows F-08 to F-11 are marked `roadmap`: they are specified and not built. See
-[`docs/roadmap.md`](docs/roadmap.md).
+| Flow | Subject | Status |
+| --- | --- | --- |
+| [F-01](flows/F-01-actor-onboarding.md) | Actor onboarding: identifier publication, identity verification, role grant, verification query publication | Partial |
+| [F-02](flows/F-02-immunization-issuance.md) | Issuance of an immunisation record | Implemented |
+| [F-03](flows/F-03-immunization-minimal-disclosure.md) | Presentation of protection evidence with minimal disclosure | Implemented |
+| [F-04](flows/F-04-practice-check-in.md) | Check-in at a practice against identity and insurance credentials | Implemented |
+| [F-05](flows/F-05-prescription-redemption.md) | Single-use prescription redemption at a pharmacy | Implemented |
+| [F-06](flows/F-06-lifecycle-and-correction.md) | Revocation, correction and supersession | Partial |
+| [F-07](flows/F-07-model-projection.md) | Projection of released claims into FHIR and openEHR representations | Implemented |
+| [F-08](flows/F-08-patient-summary.md) | Patient summary | Roadmap |
+| [F-09](flows/F-09-secondary-use.md) | Secondary use of health data | Roadmap |
+| [F-10](flows/F-10-continuous-data.md) | Continuous data | Roadmap |
+| [F-11](flows/F-11-coverage-survey.md) | National vaccination coverage survey | Roadmap |
 
-## Running it in a browser
+## Relationship to swiyu
 
-`npm run build:browser` bundles the decision code into a single script that runs
-in a page. That code is the governance engine, the DCQL builder, the conformance
-checks and the projections. Only the *generators* need Node, because they compute CESR
-and SRI digests over files on disk. The reason for this arrangement is that the
-walkthrough exercises the same rules the library enforces, rather than a second
-implementation of them written for the demonstration.
+The implementation is pinned to the Swiss Profiles version 1.0 as published for
+the swiyu Sandbox, and to Trust Protocol 2.0. It uses the swiyu generic issuer
+and generic verifier components rather than reimplementing the protocols, and it
+follows the swiyu onboarding process for each actor.
 
-## Running it
+Where this project goes beyond what the current specifications define, it says
+so:
+
+- **Role entitlement.** The model requires an authorisation stating that a given
+  issuer may issue a specific health credential type. In Trust Protocol 2.0 terms
+  this corresponds to a Governed Use Case Authorization Trust Marker. No
+  health-domain governing authority exists to issue such a marker, so
+  verification currently relies on explicitly configured accepted issuer
+  identifiers. This is adequate for a pilot and does not scale.
+- **Holder notification on correction.** F-06 models a notification to the holder
+  when a credential is superseded. The current profiles define no mechanism for
+  it.
+
+This repository is an independent implementation. It is not an official
+deliverable of the swiyu programme, the Confederation or any federal office.
+
+## Current implementation scope and limitations
+
+These limitations are material to any assessment of the work and are stated
+rather than implied.
+
+- **Not production-ready.** This is a reference implementation for exploration
+  and discussion. It has not undergone a security review, a data protection
+  impact assessment or operational hardening.
+- **The bundled mock is not a protocol test.** The default `SWIYU_MODE=mock`
+  runs the journey offline against a bundled mock of the swiyu generic
+  components, including a simulated wallet. The mock performs **no signing, no
+  DPoP, no encryption and no identifier resolution**. It exercises the business
+  flow and the governance rules and establishes nothing about protocol
+  conformance. The portal states this on the page.
+- **Sandbox only.** Nothing here has been run against a production deployment.
+  Conformance rules are enforced against the profile text; the issuance and
+  verification paths have not been exercised end to end against the live
+  Sandbox.
+- **Selective disclosure.** The Swiss Profile mandates the SD-JWT VC format, in
+  which claims are individually disclosable. Predicate proofs — proving a
+  property of a claim without disclosing it — are not available in this profile.
+  Where an age threshold is used, it is a separate claim carried by the
+  credential, not a proof computed over a withheld date of birth.
+- **Unlinkability is not claimed.** The design limits what is disclosed to a
+  given verifier. It does not claim unlinkability across presentations.
+- **Semantic mappings are unreviewed.** See
+  [Healthcare interoperability](#healthcare-interoperability).
+- **Demonstration data is illustrative.** SNOMED CT codes, GLNs, BAG numbers,
+  GTINs and LOINC codes in the demonstration data are plausible and not real. A
+  deployment must take them from the appropriate terminology service.
+- **Legal citations require review.** Statements about the legal basis on which
+  each issuer acts are the project's own reading and should be reviewed by
+  qualified counsel before reuse. They are itemised in
+  [`docs/source-verification.md`](docs/source-verification.md).
+
+## Roadmap and future work
+
+Flows F-08 to F-11 are specified and not built: patient summary, secondary use,
+continuous data and the national vaccination coverage survey. The roadmap,
+including the sequencing and the dependencies each item carries, is in
+[`docs/roadmap.md`](docs/roadmap.md). The public-health perspective on the
+coverage survey is in [`docs/public-health.md`](docs/public-health.md).
+
+## Technical setup
+
+### Prerequisites
+
+Node.js 20.10 or later.
+
+### Running the demonstration
 
 ```bash
 npm install
-npm run verify        # typecheck + 97 tests
+npm run verify        # typecheck, 97 tests, diagram checks
 npm run dev           # http://localhost:3000
 ```
 
-The default `SWIYU_MODE=mock` runs the whole journey offline against a bundled
-mock of the swiyu generic components, including a simulated wallet. **The mock
-performs no signing, no DPoP, no encryption and no DID resolution**. It
-exercises the business flow and the governance rules. It proves nothing about
-protocol conformance. The page says so.
+The default mode is `SWIYU_MODE=mock`, described under
+[Current implementation scope and limitations](#current-implementation-scope-and-limitations).
 
-To run the same code against the real Sandbox, see
+To run the same application code against the swiyu Sandbox, follow
 [`docs/onboarding-sandbox.md`](docs/onboarding-sandbox.md): onboard each actor,
-generate the configuration, start the generic components, set
-`SWIYU_MODE=sandbox`. No application code changes.
+generate the configuration, start the generic components and set
+`SWIYU_MODE=sandbox`. No application code changes are required.
 
-## Layout
+### Generating credential configuration
 
-| Path | What it is |
-| --- | --- |
-| [`docs/`](docs/README.md) | Business case, governance framework, architecture, integration guide, conformance mapping, onboarding runbook, glossary. |
-| [`docs/credentials/`](docs/credentials/README.md) | **Generated.** One page per credential type, plus the who-may-ask-for-what matrix. |
-| [`flows/`](flows/README.md) | The blueprint. Eleven documented flows, transferable. |
-| `packages/swiyu/` | Swiss Profile constants, management API clients, DCQL builder, credential definitions, conformance checks, governance engine, FHIR/openEHR projections. |
-| `apps/demo/` | The four actors, the patient journey UI and the offline mock. |
-| `config/` | **Generated.** Issuer metadata, VCT metadata, JSON Schemas, OCA bundles. |
-| `scripts/` | `generate-config.ts`, `generate-docs.ts`, `vqps.ts`, `onboard.sh`. |
-
-## One source of truth per credential type
-
-A credential type needs four artefacts that must agree: the OID4VCI
-configuration entry, the SD-JWT VC Type Metadata, a JSON Schema and an OCA
-bundle for the wallet's rendering. Maintaining four documents by hand is how they
-drift. Here one TypeScript definition generates all four, computes the CESR
-self-addressing digests the OCA bundle needs and the SRI hashes that bind the
-documents together. The generator refuses to emit anything the Swiss Profile
-would reject.
+A credential type requires four artefacts that must remain consistent: the
+OID4VCI configuration entry, the SD-JWT VC Type Metadata, a JSON Schema and an
+OCA bundle for wallet rendering. In this repository one TypeScript definition
+generates all four, computes the CESR self-addressing digests the OCA bundle
+requires and the SRI hashes that bind the documents together. The generator
+refuses to emit output that the Swiss Profile would reject.
 
 ```bash
 npm run generate:config -- --praxis-url https://praxis.example.ch
 ```
 
-The external URL is baked in at generation time on purpose: the issuer metadata
+The external URL is fixed at generation time deliberately: the issuer metadata
 carries an SRI hash over the exact bytes of the Type Metadata document, so a
 templated URL substituted at serve time would hash a document that is never
-served. Change the URL, regenerate.
+served. If the URL changes, regenerate.
 
-## Specifications
+### Browser bundle
+
+```bash
+npm run build:browser
+```
+
+This bundles the decision logic — the governance engine, the DCQL builder, the
+conformance checks and the projections — into a single script that runs in a
+page. Only the generators require Node, because they compute CESR and SRI digests
+over files on disk. The arrangement exists so that the walkthrough exercises the
+same rules the library enforces, rather than a second implementation written for
+the demonstration.
+
+### Repository layout
+
+| Path | Contents |
+| --- | --- |
+| [`docs/`](docs/README.md) | Business case, governance framework, architecture, integration guide, conformance mapping, onboarding runbook, positioning, source verification, glossary |
+| [`docs/credentials/`](docs/credentials/README.md) | **Generated.** One page per credential type, and the per-role disclosure matrix |
+| [`flows/`](flows/README.md) | Eleven documented flows, transferable |
+| `packages/swiyu/` | Swiss Profile constants, management API clients, DCQL builder, credential definitions, conformance checks, governance engine, FHIR and openEHR projections |
+| `apps/demo/` | The four actors, the patient journey interface and the offline mock |
+| `config/` | **Generated.** Issuer metadata, Type Metadata, JSON Schemas, OCA bundles |
+| `scripts/` | `generate-config.ts`, `generate-docs.ts`, `vqps.ts`, `onboard.sh` |
+
+### Where to start
+
+| Audience | Suggested entry point |
+| --- | --- |
+| Assessing the case for the work | [Business case](docs/business-case.md), then the [roadmap](docs/roadmap.md) |
+| Reviewing the governance model | [Governance framework](docs/governance-framework.md) and the [disclosure matrix](docs/credentials/README.md) |
+| Integrating a practice or pharmacy system | [Integration guide](docs/integration-guide.md) |
+| Deploying against the Sandbox | [Onboarding runbook](docs/onboarding-sandbox.md) |
+| Reusing the flows elsewhere | [`flows/`](flows/README.md) |
+| Terminology | [Glossary](docs/glossary.md) |
+
+## Standards and conformance
 
 Pinned to Swiss Profiles 1.0 as published for the swiyu Sandbox:
 
@@ -190,32 +369,24 @@ Pinned to Swiss Profiles 1.0 as published for the swiyu Sandbox:
 | `swiss-profile-anchor:1.0.0` | DID Core 1.0, `did:webvh` 1.0 |
 | `swiss-profile-issuance:1.0.0` | OpenID4VCI 1.0, OAuth 2.0 DPoP (RFC 9449) |
 | `swiss-profile-verification:1.0.0` | OpenID4VP 1.0, JAR (RFC 9101) |
-| `swiss-profile-vc:1.0.0` | SD-JWT (RFC 9901), SD-JWT VC draft-15, Token Status List draft-20, OCA 1.0 |
-| Trust Protocol 2.0 | Trust markers, trust registry |
+| `swiss-profile-vc:1.0.0` | SD-JWT (RFC 9901), SD-JWT VC Draft 15, Token Status List Draft 20, OCA 1.0 |
+| `swiss-profile-trust:1.0` | Trust Protocol 2.0: trust markers, protected fields, Trust Registry |
 
 [`docs/spec-conformance.md`](docs/spec-conformance.md) maps each rule this
-project enforces to the section it comes from.
+project enforces to the specification section that states it.
+[`docs/source-verification.md`](docs/source-verification.md) records which
+statements in this repository were checked against a primary source, which rest
+on secondary sources and which remain unverified.
 
-## Where to start
+## Origins and contributors
 
-| You are | Read |
+This showcase was prompted by two Swiss GovTech Hackathons, each of which
+contributed part of the basis it builds on.
+
+| Use case | Contribution |
 | --- | --- |
-| Deciding whether this is worth doing | [Business case](docs/business-case.md), then the [roadmap](docs/roadmap.md) |
-| Reviewing the governance model | [Governance framework](docs/governance-framework.md) and the [disclosure matrix](docs/credentials/README.md) |
-| Integrating a practice or pharmacy system | [Integration guide](docs/integration-guide.md) |
-| Standing it up on the Sandbox | [Onboarding runbook](docs/onboarding-sandbox.md) |
-| Reusing the flows in another project | [`flows/`](flows/README.md) |
-| Lost in the vocabulary | [Glossary](docs/glossary.md) |
-
-## Origins and credits
-
-This showcase was prompted by two GovTech Hackathons and both supplied part of
-the basis it builds on.
-
-| Use case | What it contributed |
-| --- | --- |
-| [GovTech Hackathon 2024, project 1103](https://hack.opendata.ch/project/1103), "Digital Health mit der neuen E-ID Trust-Infrastruktur" | Led by DIDAS, with Peter Janes as project lead. It established the use case, the stakeholder model and the staged EPD 1.0 / 2.0 / 3.0 framing this repository continues and won the future-oriented category that year. |
-| [GovTech Hackathon 2026, project 28](https://govtech.digisus-lab.ch/project/28), "Showcase Impf-Modul" | Brought by openEHR Switzerland with a DIDAS contribution. It supplied the clinical model side: CH VACD profiling, terminology binding and openEHR persistence. This project reuses that work without adopting the central repository. See [`docs/positioning.md`](docs/positioning.md). |
+| [GovTech Hackathon 2024, project 1103](https://hack.opendata.ch/project/1103), "Digital Health mit der neuen E-ID Trust-Infrastruktur" | Led by DIDAS, with Peter Janes as project lead. Established the use case, the stakeholder model and the staged EPD 1.0 / 2.0 / 3.0 framing this repository continues. Awarded in the future-oriented category. |
+| [GovTech Hackathon 2026, project 28](https://govtech.digisus-lab.ch/project/28), "Showcase Impf-Modul" | Brought by openEHR Switzerland with a DIDAS contribution. Supplied the clinical model perspective: CH VACD profiling, terminology binding and openEHR persistence. This project reuses that work without adopting a central repository. See [`docs/positioning.md`](docs/positioning.md). |
 
 The implementation in this repository was written and contributed by
 [accelerate.swiss](https://www.accelerate.swiss/).
