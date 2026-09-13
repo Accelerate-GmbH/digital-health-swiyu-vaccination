@@ -24,8 +24,9 @@ produces:
 
 # F-02 · Recording an administered dose
 
-The showcase flow. A vaccination is administered; the vaccinator attests what
-they did; the attestation goes into the patient's wallet and stays there.
+The showcase flow. A vaccination is administered, the vaccinator issues a
+credential attesting the dose it administered, and the wallet stores that
+credential under its own storage and lifecycle model.
 
 The offer, the token exchange and the credential request are the `issuance` view
 of the reference model. Two things here depart from it, both because of the

@@ -34,10 +34,11 @@ The mechanism is the status list. The pharmacy dispenses and then asks the
 issuing practice to revoke; the bit flips on the list published to the Base
 Registry; every later presentation fails. Three properties follow:
 
-- **The status list carries no prescription content.** It records that a
-  credential is no longer valid and nothing else: no patient, no medication, no
-  pharmacy. The single-use property is recorded there and nowhere else in this
-  design, so it holds for every verifier that checks the status. What a given
+- **The status list carries no prescription content.** Its entry records the
+  status value the issuer published for that credential. The representation
+  carries no patient, medication or pharmacy data. The single-use property is
+  recorded in that entry and nowhere else in this design, so it applies to every
+  verifier that resolves the status before accepting a presentation. What a given
   national e-prescription service records is a property of that service and is
   not compared here.
 - **Only the issuer can revoke.** The pharmacy cannot flip the bit itself, so

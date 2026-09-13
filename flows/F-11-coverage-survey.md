@@ -140,16 +140,16 @@ Closing that properly needs one of two things and both are open:
 - **Batch issuance**, so the invitation presented is not the invitation issued
   to a known index. The profile supports batches of at least ten and this
   project does not use them.
-- **A zero-knowledge presentation**, so the proof reveals eligibility and
-  stratum without revealing which invitation it came from.
+- **A zero-knowledge presentation**, so the response demonstrates eligibility
+  and discloses the stratum without disclosing which invitation it came from.
   [Longfellow ZK](https://github.com/DIDAS-swiss/digital-health_swiyu/issues/10)
-  is the candidate, because it proves statements about ES256 signatures without
-  changing the credential.
+  is the candidate, because it demonstrates statements about ES256 signatures
+  without changing the credential format.
 
-Until one of them is in place, the unlinkability of this flow rests on the survey
-following its own rules. That is a weaker guarantee than one enforced by the
-protocol. This document states it as such rather than describing the flow as
-unlinkable without qualification.
+Until one of them is in place, the correlation surfaces named above remain open
+and the property rests on the survey operator following its own retention rules.
+That is weaker than a property the protocol enforces, and this document states it
+as such rather than describing the flow as unlinkable without qualification.
 
 ## What is disclosed
 
@@ -183,8 +183,8 @@ identifies a person or a practitioner.
 
 ## Governance constraints
 
-- **The sampling frame stays where it is.** The wallet improves the *response*,
-  never the *selection*. A survey that let people volunteer their credentials
+- **The sampling frame stays where it is.** The wallet changes the *response*
+  channel and not the *selection* method. A survey that let people volunteer their credentials
   would be measuring the people who volunteer, and
   [the public health view](../docs/public-health.md) explains why that estimate
   cannot be corrected from inside the sample. This constraint governs the whole
@@ -221,10 +221,12 @@ identifies a person or a practitioner.
   therefore N queries in one request, which is the same limitation F-04 hits
   with two credentials and is worse here.
 - **Predicate proofs do not exist in this profile.** SD-JWT discloses a claim
-  or withholds it; it cannot prove a property of a withheld claim. There is no
-  way to show "this person is 8" without disclosing the birth date. The flow
-  avoids needing one only because the sampling frame already carries the age.
-  A different survey design would hit this wall immediately.
+  or withholds it. It offers no way to demonstrate that a withheld claim
+  satisfies a condition, so "this person is 8" cannot be shown without
+  disclosing the birth date. This flow does not need one, because the age band
+  it reports arrives inside the invitation credential the survey issued rather
+  than being derived from a birth date in the wallet. A survey design that
+  derived the age band from the dose credentials would need one.
 - **CH VACD supplies the denominator of "complete".** The FOPH/EKIF vaccination
   plan defines the expected series, and
   `ch-vacd-ch-vaccination-plan-immunizations-vs` carries it as a value set. The
@@ -252,10 +254,11 @@ identifies a person or a practitioner.
    - The same dose credentials presented in two cycles three years apart are
      linkable to each other.
 
-   Batch issuance or a zero-knowledge presentation closes both;
-   [issue 10](https://github.com/DIDAS-swiss/digital-health_swiyu/issues/10)
-   tracks the second. Until then this flow is unlinkable by governance and not
-   by construction, which is the weaker guarantee.
+   Batch issuance closes the first and a zero-knowledge presentation closes
+   both; [issue 10](https://github.com/DIDAS-swiss/digital-health_swiyu/issues/10)
+   tracks the second. Until then the property rests on the survey operator
+   following its retention rules rather than on the protocol preventing the
+   correlation.
 3. **Who accredits a survey.** The statistics role needs the same
    authorisation layer that does not exist for any health role
    ([F-01](F-01-actor-onboarding.md)). A verifier claiming to be a national

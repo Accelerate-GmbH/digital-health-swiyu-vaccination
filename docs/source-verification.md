@@ -353,7 +353,7 @@ be sourced individually before anyone relies on them:
 | --- | --- |
 | "Up to three contact attempts" | [`public-health.md`](public-health.md), [`F-11`](../flows/F-11-coverage-survey.md) |
 | Per-canton operational workflow | [`F-11`](../flows/F-11-coverage-survey.md) |
-| That the sampling frame already carries the age and the canton, which is what lets the flow ask for no identifying claim | [`roadmap.md`](roadmap.md), [`F-11`](../flows/F-11-coverage-survey.md) |
+| What the sampling frame holds at the point of invitation | Was asserted in [`roadmap.md`](roadmap.md), [`F-11`](../flows/F-11-coverage-survey.md) and the portal as "the sampling frame already carries the age and the canton". Removed from all three on 2026-09-13, because the design does not need it: the stratum arrives inside the invitation credential |
 
 The third is the one that matters, because the privacy argument for F-11 rests
 on it. A register-drawn sample plainly knows who it drew, and what the survey

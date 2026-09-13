@@ -70,11 +70,12 @@ What has to be built:
    question and does not propose a target architecture for it.
 6. **The national coverage survey** ([F-11](../flows/F-11-coverage-survey.md)).
    EBPI's Swiss National Vaccination Coverage Survey already reads the record
-   the family holds, by asking for a photocopy. Replacing that photocopy with a
-   presentation discloses less, arrives structured and signed and needs no
-   identifying claim, because the sampling frame already carries the age and the
-   canton. It is the least costly pilot in this list, because the survey already
-   collects this data by asking families to post a photocopy.
+   the family holds, by asking for a copy of it. A presentation in place of that
+   copy discloses fewer data items, arrives structured and signed by the issuing
+   vaccinator, and requires no person identifier in the request, because the
+   stratum the analysis needs arrives inside the invitation credential the survey
+   issues. It is the least costly pilot in this list, because the survey already
+   collects this data through the postal procedure.
 7. **Composition with the openEHR/HL7 blueprint.** The joint working group of
    openEHR Switzerland and HL7 Switzerland is turning the other 2026 showcase,
    FHIR intake into an openEHR clinical data repository, into a reusable

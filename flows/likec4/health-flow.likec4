@@ -443,9 +443,9 @@ views {
       '''
     }
 
-    patient -> patient 'Show the purpose, then consent or decline' {
+    patient -> patient 'Show the purpose, then confirm or decline' {
       notes '''
-        **Outcome:** consent, or `client_rejected`
+        **Outcome:** the holder confirms the request, or `client_rejected`
 
         Declining is a first-class outcome of OpenID4VP and an ordinary thing
         for a patient to do: the travel clinic falls back to the paper
@@ -501,10 +501,11 @@ views {
 
         DCQL `multiple` is NOT SUPPORTED, so this is two queries inside one
         presentation request, each naming its own credential type and claim
-        paths. The patient consents once.
+        paths. The holder confirms the combined request once.
 
-        Two issuers in one presentation, crossing organisational boundaries,
-        is the configuration in which "verifiable" means something.
+        The two credentials come from two independent issuers, so the reception
+        desk evaluates two issuer signatures and two status entries in one
+        exchange, and can compare the values each issuer attested.
       '''
     }
 
@@ -687,11 +688,13 @@ views {
         timing, IP, user agent and response ordering, all identifying in a
         sample this small. That is a governance rule. It has to be auditable.
 
-        **The residual leak.** The survey issues and revokes the invitation, so
-        a retained mapping from invitation index to posted address would
-        re-link the response by timing. Batch issuance or a zero-knowledge
-        presentation closes it; neither is available here, so the unlinkability
-        of this flow currently rests on the survey behaving.
+        **The residual correlation surface.** The survey issues and revokes the
+        invitation, so a retained mapping from invitation index to posted
+        address, combined with revocation timing, would let the survey associate
+        a response with a household. Batch issuance or a zero-knowledge
+        presentation closes it. Neither is available here, so the property rests
+        on the survey operator following its retention rules rather than on the
+        protocol preventing the correlation.
 
         **Unsolved separately:** a missing credential may mean no dose, a dose
         given before credentials existed, or an issuer who never issued one.

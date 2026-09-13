@@ -30,8 +30,9 @@ That intent shapes the format:
   footnotes. A flow that documents only the message exchange is the easy half.
   The half that decides whether a flow can be deployed is who is allowed to
   play each role, what they may ask for, what they must keep and which parts of
-  the standards stack are fixed: the Swiss Profile settles the format, the
-  algorithms and the flows and a use case chooses only what it asks for.
+  the standards stack are fixed. The Swiss Profile settles the credential
+  format, the algorithms and the protocol flows; what a use case decides is
+  which claims its presentation requests select.
 - **Open questions are recorded.** Where this project
   had to decide something that the ecosystem has not decided, the decision is
   marked as ours.
