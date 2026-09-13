@@ -1,6 +1,6 @@
 # Immunization Record
 
-Proof of one administered vaccination, issued by whoever administered it.
+Proof of one administered vaccination, issued by the administering party.
 
 | | |
 | --- | --- |
@@ -18,7 +18,7 @@ Proof of one administered vaccination, issued by whoever administered it.
 | `de-CH` | Impfeintrag | Nachweis einer verabreichten Impfung, ausgestellt durch die impfende Stelle. |
 | `fr-CH` | Vaccination | Preuve d'une vaccination administrée, délivrée par le vaccinateur. |
 | `it-CH` | Vaccinazione | Prova di una vaccinazione somministrata, rilasciata da chi la somministra. |
-| `en-GB` | Immunization | Proof of one administered vaccination, issued by whoever administered it. |
+| `en-GB` | Immunization | Proof of one administered vaccination, issued by the administering party. |
 
 ## Governance
 

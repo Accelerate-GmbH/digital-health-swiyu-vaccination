@@ -167,7 +167,7 @@ export function checkVerificationRequest(request: CreateVerificationRequest): Fi
   if (request.response_mode !== 'direct_post.jwt') {
     add(
       'swiss-profile-verification §5.2 / §8',
-      `response_mode MUST be "direct_post.jwt". The presentation response is always encrypted; found ${JSON.stringify(request.response_mode)}`,
+      `response_mode MUST be "direct_post.jwt"; the profile requires encryption to be enforced. Found ${JSON.stringify(request.response_mode)}`,
     );
   }
   if (!request.dcql_query || request.dcql_query.credentials.length === 0) {
@@ -197,11 +197,11 @@ export function checkVerificationRequest(request: CreateVerificationRequest): Fi
     }
     // Two different limits apply to the same string and the tighter one is
     // not the one the verifier enforces. The generic verifier's management API
-    // accepts a purpose_name up to 50 characters, but Trust Protocol 2.0 says
-    // the vqPS `purpose_name` MUST NOT contain more than 40, and the vqPS is
-    // where the purpose is actually published. A 45-character name therefore
-    // passes locally and fails when the verifier registers the query, which is
-    // a miserable thing to debug live. Enforce the 40.
+    // has been observed to accept a purpose_name up to 50 characters, but Trust
+    // Protocol 2.0 says the vqPS `purpose_name` MUST NOT contain more than 40,
+    // and the vqPS is where the purpose is published. A 45-character name
+    // therefore passes locally and fails when the verifier registers the query,
+    // which is hard to diagnose at that point. Enforce the 40.
     const nameLimit = 40;
     const descriptionLimit = 500;
     for (const [locale, text] of Object.entries(purpose.purpose_name ?? {})) {

@@ -46,7 +46,7 @@ const DID_ENV_BY_ROLE: Record<string, string> = {
 /**
  * Issuer DIDs accepted per credential query. A vqPS does not carry these:
  * `accepted_issuer_dids` is a runtime parameter, so the published query is
- * the claim shape only, which is what holders need to see.
+ * the claim shape only, which is the part holders need to see.
  */
 function buildQuery(spec: VerificationQuerySpec): unknown {
   const queries = spec.plans.map((plan) => {

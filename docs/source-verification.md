@@ -247,6 +247,56 @@ settle them, because they are about this code:
   deployment must take them from the terminology server. The schemas constrain
   their shape and can say nothing about their truth.
 
+## P · 2026-09-13 · generic components and the CH implementation guides
+
+Two classes of statement that earlier passes could not reach were checked.
+
+**The swiyu generic components.** The `swiyu-issuer` and `swiyu-verifier`
+repository READMEs are readable over `raw.githubusercontent.com`, and the
+onboarding cookbooks were already fetched. The management API paths in
+[`integration-guide.md`](integration-guide.md) match the cookbooks exactly:
+`POST /management/api/status-list`, `POST /management/api/credentials`,
+`PATCH /management/api/credentials/{id}/status?credentialStatus=…`,
+`POST /management/api/verifications`, `GET /management/api/verifications/{id}`.
+The `swiyu-verifier` README shows `POST /management/verifications` without the
+`api` segment; the cookbook, this repository's client and the guide all use the
+longer form, and the discrepancy is now noted in the guide rather than silently
+resolved.
+
+Corrected as a result: the claim that 100'000 entries is "the registry's
+ceiling" for a status list. The cookbook documents a 200 kB maximum file size,
+"subject to evaluation and might change for go-live", and uses 100'000 as an
+example value; the figure this project works to is derived from the size limit,
+which the guide now says. Status list immutability after initialisation is
+recorded as an assumption, being stated in no source reachable here. The claim
+that the verifier's management API accepts a 50-character `purpose_name` is
+marked as this project's observation for the same reason.
+
+Confirmed and left alone: the error-code table, every entry of which appears in
+the verifier's `VerificationErrorResponseCode`; `credential_refresh_disabled`,
+which `swiss-profile-issuance` defines as an OPTIONAL boolean; and that
+`status_lists` takes the `statusRegistryUrl`.
+
+**The CH implementation guides.** `hl7ch/ch-vacd` clones from this environment.
+Every claim in [`ehealth-suisse-alignment.md`](ehealth-suisse-alignment.md) was
+checked against the FSH source at version `7.0.0-ballot` and matched, including
+the three extensions the document repurposes:
+
+| Claim | In the IG |
+| --- | --- |
+| `ch-vacd-immunization` | `Profile: CHVACDImmunization`, `Id: ch-vacd-immunization` |
+| `relatesTo` identifies the replaced or corrected entry | `EntryResourceCrossReferences named relatesTo 0..1`, definition quoted verbatim |
+| `conflict` is an indicator for merging conflicts | `CHVACDExtensionMergingConflictEntryReference named conflict 0..*`, definition "Indicator for merging conflicts." |
+| `verificationStatus` is mandatory 1..1 and changes interpretation | `CHVACDExtensionVerificationStatus named verificationStatus 1..1`, definition "Status of verification by a practitioner. Attention: changes the interpretation of the content of the resource!" |
+| Travel indication SNOMED CT `129018004` "Traveling" | `CHVACDTravelInformation`, `* code = $sct#129018004` |
+
+**Still unverified: the epidemiology.** `bag.admin.ch`, `ebpi.uzh.ch` and the
+literature databases are blocked here, so the survey description in
+[`public-health.md`](public-health.md) — start year, coordinating institute,
+sampled age groups, cycle length, contact procedure — rests on what was supplied
+to the project. That file now carries a sourcing note saying so, and its section
+heading no longer states the conclusion as fact.
+
 ## 2026-09-12 · the specifications are readable, and a wording pass
 
 **One reachability finding above is wrong and is corrected here.** The four Swiss

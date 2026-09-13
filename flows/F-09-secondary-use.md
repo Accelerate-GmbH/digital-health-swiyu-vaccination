@@ -58,7 +58,7 @@ built, before the patient is ever asked.
   and has its own consent requirements, which a technical consent mechanism must
   satisfy: the consent object and the minimisation envelope are evidence a
   review board can inspect and the board still has to approve the study.
-- **Aggregation without a collector.** If the point is to avoid a central
+- **Aggregation without a collector.** Where the objective is to avoid a central
   repository, the destination of a research contribution needs thought: a study
   database is a central repository. Federated analysis or local computation over
   presented data is the coherent answer and is substantially harder.

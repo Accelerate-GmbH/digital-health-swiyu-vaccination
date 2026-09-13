@@ -50,9 +50,14 @@ files, of which 84 carry prose.
 
 ## Status of this audit
 
-Items marked **done** were applied in the commit that introduced this file or in
-the commits preceding it on the same branch. Items marked **open** are
-identified and not yet applied.
+Items marked **done** were applied in the commit that introduced this file, in
+the commits preceding it, or in the follow-up pass of 2026-09-13. Items marked
+**open** are identified and not yet applied.
+
+As of 2026-09-13 no register items remain open. The statements that remain
+unverified are listed under [Statements that still require independent
+verification](#statements-that-still-require-independent-verification), and
+those are questions of evidence rather than of editing.
 
 ## Root and documentation
 
@@ -66,22 +71,22 @@ identified and not yet applied.
 | `docs/governance-framework.md` | Edit | "A role is granted, never claimed" is too absolute; "The technical profile answers *can this message be validated*" collapses nine distinct questions into one | **done** — both reframed; the nine questions named in the opening |
 | `docs/spec-conformance.md` | Verify | "Every rule this project enforces and where it comes from" sets an evidentiary burden the file must meet rule by rule | **done** — 63 section references machine-checked against the profile text; nine ambiguous citations qualified; three rows corrected; project-policy rows now labelled |
 | `docs/onboarding-sandbox.md` | Edit / Verify | "each is a separate legal entity with its own DID" and "cannot be automated, delegated to a contractor" are categorical statements about the onboarding model | **done** — both qualified; a required-by-swiyu / this-demonstrator / recommended-practice convention added |
-| `docs/integration-guide.md` | Verify | Absolute statements about what the generic components do and do not do require checking against the current components | **open** |
-| `docs/architecture.md` | Edit | "The one-sentence version" collapses the layering; "Health records live in the patient's wallet" overstates what the demonstrator holds | **open** |
-| `docs/public-health.md` | Verify | Epidemiological claims about coverage measurement and outbreak response need sourcing | **open** |
-| `docs/ehealth-suisse-alignment.md` | Verify | Alignment claims against eHealth Suisse exchange formats need confirmation by someone who can read the current specifications | **open** |
+| `docs/integration-guide.md` | Verify | Absolute statements about what the generic components do and do not do require checking against the current components | **done** — every management API path verified against the swiyu cookbooks; the status-list "registry ceiling" corrected to a figure derived from the documented 200 kB file-size limit; list immutability and the 50-character `purpose_name` observation both marked unverified |
+| `docs/architecture.md` | Edit | "The one-sentence version" collapses the layering; "Health records live in the patient's wallet" overstates what the demonstrator holds | **done** — mock limitations stated explicitly; "models without a repository" heading replaced |
+| `docs/public-health.md` | Verify | Epidemiological claims about coverage measurement and outbreak response need sourcing | **done as far as possible** — `bag.admin.ch`, `ebpi.uzh.ch` and the literature databases are blocked here, so the survey description now carries a sourcing note marking it reported rather than established, and the section heading no longer states the conclusion as fact |
+| `docs/ehealth-suisse-alignment.md` | Verify | Alignment claims against eHealth Suisse exchange formats need confirmation by someone who can read the current specifications | **done** — `hl7ch/ch-vacd` clones from this environment; every profile id, extension name, cardinality and quoted definition checked against the FSH source at `7.0.0-ballot` and matched. The IG version is now recorded in the document |
 | `docs/source-verification.md` | OK | This file exists to carry the evidentiary record and does so | — |
-| `docs/README.md` | Edit | Index page; minor register | **open** |
+| `docs/README.md` | Edit | Index page; minor register | **done** |
 | `docs/credentials/*.md` | Generated | 6 files, produced by `scripts/generate-docs.ts`; CI fails if they drift | Fix the generator |
 
 ## Flows
 
 | File | Class | Finding | Status |
 | --- | --- | --- | --- |
-| `flows/F-01` … `flows/F-11` | Edit | Eleven flow files. Register is largely appropriate — each already separates governance constraints, standardisation constraints and open questions, which is the discipline the rest of the repository should adopt. Residual issues: rhetorical contrast in F-02, F-08 and F-11; "is not a" constructions; a small number of absolute statements | **open** |
-| `flows/README.md` | Edit | Index; minor register | **open** |
-| `flows/trust-flow-basis.md` | Edit | Second-person register | **open** |
-| `flows/likec4/health-flow.likec4` | Edit | Diagram `notes` are user-visible on the published flow site and carry the same register as the prose | **open** |
+| `flows/F-01` … `flows/F-11` | Edit | Eleven flow files. Register is largely appropriate — each already separates governance constraints, standardisation constraints and open questions, which is the discipline the rest of the repository should adopt. Residual issues: the meineimpfungen blame framing in F-02, "whoever" and "nobody" as actor names, and a few absolute statements | **done** — F-01, F-02, F-04, F-06, F-08, F-09 and F-10 edited; F-03, F-05, F-07 and F-11 needed no change |
+| `flows/README.md` | Edit | Index; minor register | **done** — no change needed on review |
+| `flows/trust-flow-basis.md` | Edit | Second-person register | **done** — the second person is correct for this file; one phrasing fixed |
+| `flows/likec4/health-flow.likec4` | Edit | Diagram `notes` are user-visible on the published flow site and carry the same register as the prose | **done** — two view titles renamed to match the flows; the notes themselves needed no change |
 | `flows/likec4/README.md` | OK | Accurate; lists the seven modelled flow views | — |
 
 ## Portal
@@ -97,16 +102,16 @@ through the demonstration interface. It is in scope.
 
 | File | Class | Finding | Status |
 | --- | --- | --- | --- |
-| `apps/demo/src/ui/page.ts` | Edit | UI strings carry the same register as the portal, including a readiness formulation and an architectural absolute | **open** |
-| `apps/demo/src/domain/services.ts`, `mock/server.ts`, `routes/*.ts`, `server.ts`, `config.ts`, `domain/store.ts`, `domain/status-lists.ts`, `mock/state.ts` | Edit | Comment register; no claim defects identified | **open** |
-| `packages/swiyu/src/credentials/immunization.ts` | Edit | Comments carry rhetorical constructions; one of the more heavily flagged files in the scan | **open** |
+| `apps/demo/src/ui/page.ts` | Edit | UI strings carry the same register as the portal, including a readiness formulation and an architectural absolute | **done** — the lede said "No registry in the middle"; it now states the narrow property and the full credential lifecycle |
+| `apps/demo/src/domain/services.ts`, `mock/server.ts`, `routes/*.ts`, `server.ts`, `config.ts`, `domain/store.ts`, `domain/status-lists.ts`, `mock/state.ts` | Edit | Comment register; no claim defects identified | **done** |
+| `packages/swiyu/src/credentials/immunization.ts` | Edit | Comments carry rhetorical constructions; the `en-GB` credential description read "issued by whoever administered it", which ships in the issuer metadata and the OCA bundle | **done** — header rewritten, description corrected, `config/` regenerated |
 | `packages/swiyu/src/credentials/beta-id.ts` | OK | Corrected earlier on this branch: it now states which four of the nine Art. 15 para. 1 items the Beta-ID carries | — |
 | `packages/swiyu/src/profile.ts` | OK | All 33 pinned constants machine-checked against the specification text; no mismatches | — |
-| `packages/swiyu/src/conformance.ts` | Edit | One comment presents a project policy in specification voice | **open** |
-| `packages/swiyu/src/credential-definition.ts`, `queries.ts`, `projections.ts`, `governance.ts`, `dcql.ts`, `issuer-client.ts`, `verifier-client.ts`, `cesr.ts`, `sri.ts`, `http.ts`, `types.ts`, `browser.ts`, `index.ts`, `credentials/{index,insurance-card,lab-report,prescription}.ts` | Edit / OK | Comment register only; no claim defects identified in the scan | **open** |
+| `packages/swiyu/src/conformance.ts` | Edit | One comment presents a project policy in specification voice | **done** — the 50-character management API limit is now stated as an observation |
+| `packages/swiyu/src/credential-definition.ts`, `queries.ts`, `projections.ts`, `governance.ts`, `dcql.ts`, `issuer-client.ts`, `verifier-client.ts`, `cesr.ts`, `sri.ts`, `http.ts`, `types.ts`, `browser.ts`, `index.ts`, `credentials/{index,insurance-card,lab-report,prescription}.ts` | Edit / OK | Comment register only; no claim defects identified | **done** — three comments edited, the rest needed no change |
 | `packages/swiyu/test/*.ts` | OK | 6 files. Test names are descriptive; no external claims | — |
-| `scripts/generate-config.ts`, `generate-docs.ts`, `vqps.ts` | Edit | Header comments carry repository register; `generate-docs.ts` additionally emits prose into every credential page and is therefore the highest-leverage single file | **open** |
-| `scripts/onboard.sh` | Edit | Operator-facing output strings | **open** |
+| `scripts/generate-config.ts`, `generate-docs.ts`, `vqps.ts` | Edit | Header comments carry repository register; `generate-docs.ts` additionally emits prose into every credential page | **done** — the emitted prose was corrected in an earlier commit; header comments now match |
+| `scripts/onboard.sh` | Edit | Operator-facing output strings | **done** |
 
 ## Configuration, data and workflows
 
@@ -114,7 +119,7 @@ through the demonstration interface. It is in scope.
 | --- | --- | --- |
 | `config/**` | Generated | 21 files from `scripts/generate-config.ts`; CI fails if they drift |
 | `package.json`, `package-lock.json`, `tsconfig*.json`, `vitest.config.ts`, `docker-compose.yml`, `Dockerfile`, `.gitignore`, `.env.example` | OK | No prose claims |
-| `.github/workflows/ci.yml`, `.github/workflows/pages.yml` | Edit | Step comments carry repository register; no claim defects |
+| `.github/workflows/ci.yml`, `.github/workflows/pages.yml` | OK | Step comments explain why each check exists, which is the right thing for a workflow file to do |
 | `site/*.css`, `flows/likec4/*.json` | OK | — |
 
 ## Statements that still require independent verification
@@ -125,10 +130,10 @@ them.
 | Statement | Where | What would settle it |
 | --- | --- | --- |
 | The legal basis on which each issuer acts: KVG/LAMal Art. 42a, OR Art. 958f, MedBG/LPMéd, EpG/LEp, the KVG analysis list | `governance-framework.md`, credential definitions | Review by qualified counsel. None of these statutes has been read in this environment |
-| What the swiyu generic issuer and verifier do and do not implement | `integration-guide.md`, several `spec-conformance.md` rows attributed to "generic issuer" / "generic verifier" | Testing against the current components, or confirmation from the component documentation |
-| Coverage-measurement and outbreak-response claims | `public-health.md`, `business-case.md` | An epidemiological source |
-| Alignment with eHealth Suisse exchange formats | `ehealth-suisse-alignment.md` | Review against the current CH VACD, CH EMED and CH Core specifications |
-| FHIR element paths and openEHR archetype bindings | Credential definitions, `positioning.md` | Review by HL7 Switzerland and openEHR Switzerland. Bindings were checked against the openEHR CKM mirror; they are not endorsed |
+| ~~What the swiyu generic issuer and verifier do and do not implement~~ | `integration-guide.md` | **Resolved 2026-09-13** for the management API surface, against the swiyu cookbooks. What remains open is narrower: whether a status list is immutable after initialisation, and the observed 50-character `purpose_name` limit. Both are marked in the guide |
+| Coverage-measurement and outbreak-response claims | `public-health.md`, `business-case.md` | An epidemiological source. Still open: `bag.admin.ch`, `ebpi.uzh.ch` and the literature databases are blocked from this environment. `public-health.md` now marks the description as reported rather than established |
+| ~~Alignment with eHealth Suisse exchange formats~~ | `ehealth-suisse-alignment.md` | **Resolved 2026-09-13** against `hl7ch/ch-vacd` at `7.0.0-ballot`; every id, cardinality and quoted definition matched. Re-check on a later IG version |
+| FHIR element paths and openEHR archetype bindings | Credential definitions, `positioning.md` | Review by HL7 Switzerland and openEHR Switzerland. The bindings were checked against the openEHR CKM mirror and the CH VACD FSH source and match; being correct as references is not the same as being endorsed, and no resource has been run through a FHIR validator |
 | Attribution and outcome of GovTech Hackathon 2026 project 28 | `README.md`, `positioning.md` | A primary source. `govtech.digisus-lab.ch` is not reachable from this environment |
 | The e-ID availability date | Previously "e-ID from 2026" | The current programme schedule. The claim has been removed rather than restated |
 

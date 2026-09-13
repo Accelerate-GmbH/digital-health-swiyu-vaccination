@@ -19,6 +19,13 @@ this repository's working environment. `fhir.ch` itself is unreachable from
 here, so the rendered guides were not consulted; see
 [source verification](source-verification.md) for what that distinction means.
 
+**Re-verified 2026-09-13** against `hl7ch/ch-vacd` at version `7.0.0-ballot`
+(`sushi-config.yaml`, dated 2026-06-10, canonical `http://fhir.ch/ig/ch-vacd`).
+Every profile id, extension name, cardinality and quoted definition in this
+document was checked against the FSH source and matched. A profile can move
+between IG versions, so a reader working against a different version should
+re-check rather than rely on this note.
+
 ## Identifiers, reused as published
 
 CH Core defines each Swiss identifier as a profile with a fixed `system`. Those

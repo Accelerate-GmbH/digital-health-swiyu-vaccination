@@ -137,7 +137,8 @@ export interface CredentialDefinition {
 /**
  * The governance rules attached to a credential type.
  *
- * Trust in this ecosystem is not a property of a server certificate; it is a
+ * Trust in this ecosystem is established by trust statements rather than by a
+ * server certificate. It is a
  * statement someone made about someone else, published in the trust registry
  * and checked at presentation time. Writing those expectations down next to the
  * data model keeps the two from drifting apart: a credential type whose issuer

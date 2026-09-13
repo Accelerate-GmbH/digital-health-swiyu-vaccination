@@ -9,7 +9,7 @@
  *
  * What is *not* generated: the architecture, the governance framework, the
  * business case and the flows. Those are arguments and an argument that can be
- * generated from a data structure was not worth making.
+ * generated from a data structure is better expressed as data.
  *
  *   npm run generate:docs
  */

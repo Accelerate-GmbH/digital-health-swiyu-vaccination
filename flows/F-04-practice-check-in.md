@@ -105,7 +105,7 @@ sequenceDiagram
 2. **Delegation.** A parent checking in a child, or a carer acting for someone
    else, has no representation model in the trust infrastructure today.
 3. **Whether the practice should receive a name at all** when the appointment
-   already establishes it. Asking for less than the entitlement permits is always
+   already establishes it. Asking for less than the entitlement permits remains
    allowed and arguably should be the default.
 
 ## Implementation status

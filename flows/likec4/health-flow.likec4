@@ -302,7 +302,7 @@ views {
   // =====================================================================
 
   dynamic view immunizationIssuance {
-    title 'F-02 · Recording an administered dose · Sequence'
+    title 'F-02 · Issuing an administered dose · Sequence'
 
     practice -> baseRegistry 'Create and publish a status list' {
       notes '''
@@ -403,7 +403,7 @@ views {
   // =====================================================================
 
   dynamic view protectionCheck {
-    title 'F-03 · Proving protection and nothing else · Sequence'
+    title 'F-03 · Proving protection with minimal disclosure · Sequence'
 
     travelClinic -> travelClinic 'Check the entitlement before building the query' {
       notes '''

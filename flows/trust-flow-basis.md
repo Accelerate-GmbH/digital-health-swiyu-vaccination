@@ -78,7 +78,7 @@ the mechanics to the reference diagram.
 
 The one gap is the holder saying no. Every step in the reference verification
 view assumes consent is given; `client_rejected` is a first-class outcome of
-OID4VP and the flow that a relying party is most likely to handle badly. Raised
+OID4VP, and the outcome a relying party is most likely to leave unhandled. Raised
 as [Trust-Flow-Diagram-Repository#5](https://github.com/DIDAS-swiss/Trust-Flow-Diagram-Repository/issues/5).
 
 ## The remaining flows

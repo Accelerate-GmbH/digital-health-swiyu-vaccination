@@ -2,26 +2,28 @@
  * Immunization record as a verifiable credential. The showcase case.
  *
  * Switzerland has tried the centralised version of this. `meineimpfungen.ch`
- * held the national electronic vaccination record until it was shut down in
- * 2021 after serious security failures and several hundred thousand people
- * lost access to their own vaccination history at once. That is the failure
- * mode this architecture is meant to avoid: not a bad database, but a design in
- * which one database existing at all is a single point of failure for everyone.
+ * held the national electronic vaccination record until its closure in 2021,
+ * after which the records it held were no longer accessible to the people they
+ * described. The episode illustrates the availability and continuity risks of
+ * relying on a single service for access to longitudinal health information.
  *
- * Here the record is a credential in the patient's wallet. Nobody operates a
- * registry that can be breached or switched off and the vaccination history
- * survives its issuers. A practice that closes, a pharmacy chain that is sold,
- * a platform that is wound up. What is reused from the centralised world is the
- * part worth reusing: the information models. The claims below carry FHIR
- * element paths (CH VACD and the International Patient Summary profile that
- * roadmap step 2 builds on) and openEHR archetype paths, so any system that
- * already speaks either can read a presented credential.
+ * Here a dose is issued as a credential to the patient's wallet. The exchange
+ * model does not require a central repository holding the clinical payloads,
+ * and a credential already issued stays usable by its holder if the issuing
+ * organisation ceases to operate, subject to the status and revocation
+ * mechanisms the profile defines. It does depend on the registries of the swiyu
+ * Trust Infrastructure, on wallet availability and recovery, and on governance
+ * arrangements that do not yet exist for this domain.
  *
- * Each administered dose is its own credential. That is deliberate: a dose is
- * an event, issued by whoever administered it, revocable by them alone if it
- * was recorded in error and independently presentable. A wallet holding four
- * dose credentials is a vaccination record, without anyone having to own the
- * record itself.
+ * The information models are reused rather than replaced. The claims below
+ * carry FHIR element paths (CH VACD, and the International Patient Summary
+ * profile that roadmap step 2 builds on) and openEHR archetype paths, so a
+ * system that already speaks either can rebuild the representation it knows
+ * from a presented credential.
+ *
+ * Each administered dose is its own credential: a dose is an event with a
+ * single author, issued by the administering party, revocable by that party
+ * alone if it was recorded in error, and independently presentable.
  */
 
 import type { CredentialDefinition } from '../credential-definition.js';
@@ -40,7 +42,7 @@ export const IMMUNIZATION: CredentialDefinition = {
     'de-CH': 'Nachweis einer verabreichten Impfung, ausgestellt durch die impfende Stelle.',
     'fr-CH': "Preuve d'une vaccination administrée, délivrée par le vaccinateur.",
     'it-CH': 'Prova di una vaccinazione somministrata, rilasciata da chi la somministra.',
-    'en-GB': 'Proof of one administered vaccination, issued by whoever administered it.',
+    'en-GB': 'Proof of one administered vaccination, issued by the administering party.',
   },
   backgroundColor: '#0F6E8C',
   textColor: '#FFFFFF',

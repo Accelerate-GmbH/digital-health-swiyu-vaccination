@@ -50,4 +50,4 @@ generated from a data structure should be. Hand-written prose about a data
 structure drifts out of date silently.
 
 Everything else here is an argument. It is also an argument that could be generated
-from a data structure was not worth making.
+from a data structure is better expressed as data.

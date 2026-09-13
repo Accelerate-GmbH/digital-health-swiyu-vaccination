@@ -18,14 +18,23 @@ swiyu-verifier    POST /management/api/verifications
                   GET  /management/api/verifications/{id}
 ```
 
-You do **not** implement: OpenID4VCI, OpenID4VP, DPoP, key attestation,
-application-layer encryption, signed issuer metadata, SD-JWT assembly and
-disclosure handling, JAR signing, response decryption, key binding verification,
-DID resolution, status list signing and publication, or trust marker evaluation.
+The generic components provide the protocol layer, so an integrating system does
+not implement OpenID4VCI, OpenID4VP, DPoP, key attestation, application-layer
+encryption, signed issuer metadata, SD-JWT assembly and disclosure handling, JAR
+signing, response decryption, key binding verification, identifier resolution,
+status list signing and publication, or trust marker evaluation.
 
-That list is what the generic components exist to provide. It is also where
-conformance is decided, so implementing it inside a practice management system
-would place that burden on every vendor separately.
+That is where protocol conformance is decided, which is the argument for not
+reimplementing it in each practice management system.
+
+**Endpoint paths verified** against the swiyu
+[generic issuer](https://swiyu-admin-ch.github.io/cookbooks/onboarding-generic-issuer/)
+and
+[generic verifier](https://swiyu-admin-ch.github.io/cookbooks/onboarding-generic-verifier/)
+cookbooks. Note that the `swiyu-verifier` repository README shows
+`POST /management/verifications` without the `api` segment; the cookbook and this
+repository's client both use `/management/api/verifications`. Confirm against the
+Swagger UI of your own deployment before relying on either.
 
 ## Issuing a credential
 
@@ -58,9 +67,15 @@ afterwards: revocation, suspension and status queries all take it.
 
 ### Things that will bite you
 
-- **`status_lists` takes the `statusRegistryUrl`.** The id is rejected.
-- **A status list is immutable** in type, config and length once initialised.
-  Plan capacity; 100'000 entries at two bits is the registry's ceiling.
+- **`status_lists` takes the `statusRegistryUrl`, not the id.** Creating a status
+  list returns both; the credential offer references the URL. Store the URL.
+- **Plan status list capacity up front.** The generic-issuer cookbook's example
+  creates a list with `maxLength: 100000` at two bits per entry, and states that
+  the maximum status list file size is currently 200 kB, "subject to evaluation
+  and might change for go-live". This project treats 100'000 entries as the
+  working ceiling on that basis; it is a derived figure, not a documented limit.
+  *Not verified here:* whether a status list's type, config or length can be
+  changed after initialisation. This repository assumes they cannot.
 - **`exp` and `expiry_date` are different.** `credential_valid_until` sets `exp`:
   past it, the credential cannot be presented at all. A business `expiry_date`
   claim only warns the holder and leaves the decision to the verifier. Collapsing
@@ -116,10 +131,18 @@ if (decision.outcome === 'allow') {
 
 ### Things that will bite you
 
-- **`purpose_name` is capped at 40 characters.** Trust Protocol 2.0 says a vqPS
-  `purpose_name` MUST NOT contain more than 40 per locale, while the verifier's
-  own management API accepts 50. A 45-character name passes locally and fails at
-  publication. `assertVerificationRequest` enforces 40.
+- **`purpose_name` is capped at 40 characters.** Trust Protocol 2.0 states that a
+  vqPS `purpose_name` **MUST NOT** contain more than 40 characters per locale.
+  This project has observed the verifier's own management API accepting longer
+  values, so a name that passes locally can still fail at publication; that
+  observation is not documented in any source reachable here.
+  `assertVerificationRequest` enforces 40 either way.
+- **The verifier can register the vqPS for you.** Where
+  `SWIYU_TMS_AUTHORING_URL` is configured, supplying `verification_purpose` in
+  the request makes the generic verifier register or reuse a vqPS with the Trust
+  Management Service and inject it into the signed authorization request. This
+  repository instead submits statements itself with `scripts/vqps.ts`, so that the
+  published statement is generated from the same objects the verifier sends.
 - **One credential per DCQL query.** `multiple` is not supported. Two
   credentials means two queries in one request, which works and is exactly
   what check-in does.
@@ -162,8 +185,14 @@ instead of silently losing data.
 | `SwiyuApiError` 4xx | The generic component rejected it. Read the body. |
 | `SwiyuApiError` 0 | Network. The component is down or unreachable. |
 | `credential_revoked` / `_suspended` | The status list says no. Terminal for revoked. |
-| `credential_missing_data` | The wallet holds nothing satisfying the query. |
-| `client_rejected` | The holder declined. A normal outcome. |
+| `credential_missing_data` | The credential presented does not contain the required fields. |
+| `client_rejected` | The holder rejected the verification request. A normal outcome. |
+| `issuer_not_accepted` | The issuer was not in the allow-list given in the request. |
+| `holder_binding_mismatch` | The holder's proof of control over the credential was invalid. |
+
+The codes above are those this project handles. The generic verifier defines
+more; see `VerificationErrorResponseCode` in the
+[swiyu-verifier documentation](https://github.com/swiyu-admin-ch/swiyu-verifier).
 
 ## Checklist before you go live
 

@@ -330,7 +330,7 @@ export function registerMockRoutes(app: FastifyInstance, context: RouteContext):
       const verification = state.verifications.get(request.params.verificationId);
       if (!verification) return reply.code(404).send({ message: 'verification not found' });
       // A real verifier returns a signed JAR (`application/oauth-authz-req+jwt`).
-      // The mock returns the claims unsigned and says so, in place of
+      // The mock returns the claims unsigned and labels them as such, in place of
       // something that merely looks like a JWT.
       return reply.send({
         __mock__: 'unsigned; a real verifier returns a signed oauth-authz-req+jwt',

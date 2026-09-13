@@ -39,7 +39,7 @@ Continuous data does not have that shape.
   Summary credentials over a period are the plausible unit, which reintroduces
   the question of who computes the summary and whether it can be trusted.
 - **Authorship.** A practice attests a vaccination. What attests a step count?
-  The device manufacturer can attest that a device produced a reading; nobody can
+  The device manufacturer can attest that a device produced a reading; no party can
   attest that the reading describes the person holding the wallet. Device
   attestation exists in the profile for *key storage*, not for measurement
   provenance and the gap is not incidental.
@@ -49,7 +49,7 @@ Continuous data does not have that shape.
   safety argument against making it too easy.
 - **Continuous consent.** F-03's model, where the holder sees a request and decides,
   does not fit a standing data flow. Consent to ongoing sharing is a different
-  primitive and the one most likely to be implemented badly.
+  primitive, and the one where an inadequate implementation is hardest to detect.
 
 ## What would have to exist first
 

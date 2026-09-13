@@ -97,11 +97,13 @@ only surface the business applications touch
 (`IssuerManagementClient`, `VerifierManagementClient`).
 
 `SWIYU_MODE` switches between the bundled mock and real deployments. The mock
-reproduces the management contract exactly, with the same paths and the same shapes, so
-switching is a URL change. It reproduces **nothing** of the cryptography, and
-says so on the page and in its own source.
+reproduces the management contract — the same paths and the same payload shapes
+— so switching is a configuration change rather than a code change. It
+reproduces **none** of the cryptography: no signing, no DPoP, no encryption and
+no identifier resolution. The demonstration interface and the mock's own source
+both state this.
 
-### 4 · Projection: models without a repository
+### 4 · Projection: rebuilding FHIR and openEHR representations
 
 At presentation time, a verifier rebuilds a FHIR resource or an openEHR flat
 composition from the disclosed claims, locally. Derived, never authoritative;
@@ -134,7 +136,7 @@ requires the pharmacy to ask the practice to revoke, because only the issuer can
 | --- | --- | --- |
 | `vct` as a URN | Issued credentials and DCQL queries keep their meaning when a deployment moves host | An extra indirection through `vct_metadata_uri` |
 | External URL baked into generated config | The issuer metadata hashes the exact bytes of the Type Metadata; a templated URL would hash a document never served | Config must be regenerated per environment |
-| One credential per vaccination dose | Authorship stays with whoever administered; each issuer revokes only their own assertion | "Is the series complete?" spans several credentials |
+| One credential per vaccination dose | Authorship stays with the administering party; each issuer revokes only its own assertion | "Is the series complete?" spans several credentials |
 | Prescription revoked on dispensing | Single use without a central register of who was prescribed what | A window between presentation and revocation (F-05) |
 | Mock is not cryptographic | A mock that says which steps it skips beats a mock that looks real | The mock proves nothing about conformance |
 | In-memory demo state | The demo is a demo | Restarting loses the encounters; the credentials stay in the wallet |

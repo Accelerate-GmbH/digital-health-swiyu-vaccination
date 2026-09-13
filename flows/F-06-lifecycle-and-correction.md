@@ -61,7 +61,7 @@ stateDiagram-v2
   the wallet and stops working. Whether the holder is told and by whom, is
   unspecified by the standards and needs a policy: silently dead credentials are
   a poor experience and, for a vaccination record, potentially a clinical risk.
-- **Publication to the registry is public.** The Swiss Profile says so plainly:
+- **Publication to the registry is public.** The Swiss Profile states it directly:
   information on a status list is public information. A suspension is therefore a
   disclosure, which is a reason to prefer revocation-on-correction over
   suspension-on-suspicion for sensitive credential types.

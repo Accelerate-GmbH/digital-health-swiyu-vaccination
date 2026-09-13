@@ -39,7 +39,7 @@ The design question is **where the summary is assembled**. The usual answer is a
 national infrastructure that holds the data and renders a summary on request.
 The proposal here is that the wallet assembles it: an IPS Bundle
 constructed at presentation time from the credentials the patient holds, each
-contributed by whoever issued it, each independently verifiable.
+contributed by its own issuer, each independently verifiable.
 
 ```mermaid
 flowchart TB

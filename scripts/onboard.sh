@@ -10,7 +10,7 @@
 # What it cannot automate and does not pretend to:
 #   * the ePortal account and business partner registration;
 #   * subscribing to the three APIs and minting tokens;
-#   * starting the trust onboarding in the swiyu Service Portal, which is what
+#   * starting the trust onboarding in the swiyu Service Portal, the step that
 #     creates the challenge this script then answers.
 # Those bind a legal entity to a cryptographic identity and are a person's job.
 #

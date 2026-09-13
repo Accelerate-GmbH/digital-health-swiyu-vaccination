@@ -34,11 +34,13 @@ export function renderPage(config: AppConfig): string {
 <body>
 <header class="masthead">
   <div class="wrap">
-    <h1>Digital Health on the swiyu trust infrastructure</h1>
+    <h1>Digital Health on the swiyu Trust Infrastructure</h1>
     <p class="lede">
-      A patient checks in at a practice, is vaccinated and later proves that protection wherever
-      it is asked for, with their identity, their cover and their health records held in their own
-      wallet as verifiable credentials. No registry in the middle. Swiss Profiles 1.0, swiyu Sandbox.
+      A patient checks in at a practice, is vaccinated, and later presents evidence of that
+      protection where it is asked for. Identity, insurance cover and health records are issued to
+      the patient's wallet as verifiable credentials, held there, presented under the patient's
+      control and verified by the relying party. No central repository holds the clinical payloads
+      exchanged here. Swiss Profiles 1.0, swiyu Sandbox.
     </p>
     <div class="badges">
       <span class="badge ${mock ? 'badge-warn' : 'badge-ok'}">mode: ${escapeHtml(config.mode)}</span>

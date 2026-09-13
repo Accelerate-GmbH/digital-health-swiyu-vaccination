@@ -37,20 +37,20 @@ See [`trust-flow-basis.md`](trust-flow-basis.md).
 
 ## Why this shape
 
-Switzerland has already run the centralised experiment. `meineimpfungen.ch`
-held the national electronic vaccination record until 2021, when it was shut
-down after serious security failures and several hundred thousand people lost
-access to their own vaccination history at once. The lesson usually drawn is
-"that platform was badly built". The more useful lesson is that a design in
-which one database holds everyone's record has a failure mode that no amount of
-careful engineering removes: the database can be breached, defunded, or simply
-switched off and when it is, everyone loses at once.
+`meineimpfungen.ch` held the national electronic vaccination record until its
+closure in 2021, after which the records it held were no longer accessible to
+the people they described. The episode illustrates the availability and
+continuity risks of relying on a single service for access to longitudinal
+health information: such a service can be withdrawn, defunded or discontinued,
+and access is then lost for everyone it served at the same time. That is an
+architectural consideration rather than a judgement on any particular
+implementation.
 
 Three design decisions follow, each weighed against an obvious
 choice:
 
-- **One credential per dose.** A dose is an event with a
-  single author, whoever administered it. Issuing one credential per dose keeps
+- **One credential per dose.** A dose is an event with a single author, the
+  party that administered it. Issuing one credential per dose keeps
   authorship intact, lets each issuer revoke only their own assertion and means
   the patient's history is assembled in the wallet, under the patient's control.
   The cost is that "is this series complete?" becomes a question about several
@@ -108,7 +108,7 @@ practice management system would place that burden on every vendor.
   revoke a dose credential is that it records something that did not happen:
   wrong patient, wrong vaccine, duplicate entry. Revoking to express "we no
   longer recognise this vaccination" would make the status list a policy
-  instrument and a patient's record would become contestable by whoever issued
+  instrument and a patient's record would become contestable by any party that issued
   it. This is a governance rule with no technical enforcement: the status list
   cannot tell the two motives apart, so it has to be written down and audited.
 - **The patient is not asked to consent to issuance**, because they asked for
@@ -147,7 +147,7 @@ practice management system would place that burden on every vendor.
 
 1. **Series semantics across issuers.** Dose 2 is administered by a pharmacy
    that cannot see dose 1. Today `dose_number` and `doses_in_series` are asserted
-   by whoever administers, which means a wallet holding two "dose 1 of 3"
+   by the administering party, which means a wallet holding two "dose 1 of 3"
    credentials is possible. Resolving this needs either a presentation at
    administration time (the wallet shows what it holds) or a series identifier.
    Both are F-08 territory.

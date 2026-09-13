@@ -8,22 +8,31 @@ This document checks the assumption. On the central point, whether coverage can
 still be measured, it does not hold. On a second point, whether individuals can
 still be acted on, it does.
 
-## Switzerland does not measure vaccination coverage from a register
+## How the national coverage figure is produced
 
-The national figure comes from the **Swiss National Vaccination Coverage
-Survey**, running since 1999, coordinated by the **Epidemiology, Biostatistics
-and Prevention Institute (EBPI)** at the University of Zurich with the Federal
-Office of Public Health and all 26 cantons. Its method:
+> **Sourcing note.** The description of the survey below — its start year,
+> coordinating institute, sampled age groups, cycle length and contact procedure
+> — was supplied to this project and has **not** been verified against a primary
+> source here: `bag.admin.ch`, `ebpi.uzh.ch` and the literature databases are all
+> blocked at this environment's egress gateway. Treat these as reported rather
+> than established, and confirm them before reuse. See
+> [source verification](source-verification.md).
+
+The national figure is reported to come from the **Swiss National Vaccination
+Coverage Survey**, running since 1999, coordinated by the **Epidemiology,
+Biostatistics and Prevention Institute (EBPI)** at the University of Zurich with
+the Federal Office of Public Health and all 26 cantons. Its method:
 
 - children aged **2, 8 and 16**
 - **randomly selected households**, invited by letter
 - families **submit a copy of the child's vaccination record**
 - a **three-year rolling cycle**, roughly a third of the cantons each year
 
-So the instrument is a sample and the data source is *the record the family
-holds*. Coverage monitoring has never depended on a central database. When
-`meineimpfungen.ch` closed in 2021, the coverage survey carried on, because the
-survey was never reading from it.
+On that description the instrument is a sample and the data source is *the record
+the family holds*, which would mean coverage monitoring by this survey does not
+depend on a central database. The survey is reported to have continued after
+`meineimpfungen.ch` closed in 2021. This says nothing about other uses of a
+central register, and nothing about coverage measurement in other countries.
 
 A decentralised record does not produce coverage statistics as a side effect.
 That statement is true and it carries a false implication: that a central

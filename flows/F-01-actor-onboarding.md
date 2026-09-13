@@ -81,7 +81,7 @@ flow is usually misjudged as blocked when two thirds of it are available today:
 | Organisation | An ePortal account, a business partner, API access | **Yes**, self-service, chargeable per DID |
 | Identity | A `did:webvh` on the Base Registry, proven by possession → `viTM` | **Yes**, self-service |
 | Transparency | A Verification Query Public Statement: this verifier, this scope, this DCQL query, published | **Yes**, self-service, per verifier per query |
-| Entitlement | `gucaTM`: this DID may issue *this credential type* in health | **No**, nobody can issue it |
+| Entitlement | `gucaTM`: this DID may issue *this credential type* in health | **No**, no health-domain governing authority exists to issue it |
 
 Only the last layer is blocked. A pilot runs on the first three plus explicitly
 listed `accepted_issuer_dids`, which is what this project does.

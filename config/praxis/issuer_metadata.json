@@ -65,7 +65,7 @@
       "credential_refresh_disabled": true,
       "vct": "urn:vct:ch.didas.health.immunization:1.0",
       "vct_metadata_uri": "http://localhost:8081/oid4vci/vct/health-immunization-sd-jwt",
-      "vct_metadata_uri#integrity": "sha256-WqMVAbmlbg/C1+6WjISJxEH9h1YdemibLdMNElRzyhI=",
+      "vct_metadata_uri#integrity": "sha256-BABG5iaXreCUxpE5RP2f/69433HdX7JLCGauaUpCZTs=",
       "credential_metadata": {
         "display": [
           {
@@ -89,7 +89,7 @@
           {
             "name": "Immunization",
             "locale": "en-GB",
-            "description": "Proof of one administered vaccination, issued by whoever administered it.",
+            "description": "Proof of one administered vaccination, issued by the administering party.",
             "background_color": "#0F6E8C"
           }
         ],

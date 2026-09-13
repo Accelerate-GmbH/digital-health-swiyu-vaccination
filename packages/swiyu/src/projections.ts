@@ -242,7 +242,7 @@ export function projectToFhir(
         resourceType,
         ...meta,
         // IPS and CH VACD both require a status; a credential only ever
-        // attests a dose that was given, so it is always `completed`.
+        // attests a dose that was given, so the status is `completed`.
         status: 'completed',
         patient: { display: patientDisplay(values, 'patient_given_name', 'patient_family_name') },
       };
