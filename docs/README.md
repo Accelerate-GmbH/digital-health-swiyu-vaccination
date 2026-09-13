@@ -26,6 +26,7 @@ Start wherever your question is.
 | [**Integration guide**](integration-guide.md) | For a practice, pharmacy or insurer system: the two management APIs to call, and the constraints most likely to cause problems in practice. |
 | [**Swiss Profile conformance**](spec-conformance.md) | The rules this project enforces, each mapped to the clause it comes from, with project policy labelled separately. |
 | [**eHealth Suisse alignment**](ehealth-suisse-alignment.md) | The Swiss identifiers, exchange formats and CH VACD mechanisms this project reuses, the three it repurposes for its own open questions and where it diverges. |
+| [**Swiss Profile gaps**](swiss-profile-gaps.md) | Capabilities this demonstrator requires that Swiss Profiles 1.0 and Trust Protocol 2.0 do not define, GP-01 to GP-10, each referenced from the flows that need it. GP-10 covers cross-border trust evaluation and the LEI/vLEI organisational bridge. |
 | [**Source verification**](source-verification.md) | What was checked against a primary source, what rests on a secondary one and which assertions are unverified, the legal citations in particular. |
 | [**Articulation pass**](articulation-pass.md) | The 2026-09-13 precision pass: what changed file by file, which assertions remain strong and on what basis, and which statements depend on unresolved swiyu behaviour or governance. |
 

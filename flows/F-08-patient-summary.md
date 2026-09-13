@@ -1,8 +1,17 @@
 ---
 id: F-08
 title: Assembling an International Patient Summary from held credentials
+kind: flow
+interaction_scope: multi-party
+composition: composed
+data_mode: discrete
 status: roadmap
 roadmap_step: 2
+profile_status: beyond-current-profile
+profile_gaps:
+  - GP-01
+  - GP-02
+  - GP-10
 actors:
   - holder
   - ch.didas.health.role.practice
@@ -13,8 +22,9 @@ credentials:
   - urn:vct:ch.didas.health.lab-report:1.0
   - allergy / problem credential types (not yet modelled)
 protocols:
-  - HL7 FHIR IPS (Bundle, Composition)
   - OpenID4VP 1.0 with several credential queries
+representations:
+  - HL7 FHIR IPS (Bundle, Composition)
 trust_markers:
   - gucaTM per contributing issuer
 preconditions:

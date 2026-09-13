@@ -1,8 +1,13 @@
 ---
 id: F-01
 title: Becoming an actor in the health trust domain
+kind: flow
+interaction_scope: multi-party
+composition: atomic
+data_mode: discrete
 status: partial
 roadmap_step: 1
+profile_status: mixed
 actors:
   - ch.didas.health.role.practice
   - ch.didas.health.role.pharmacy

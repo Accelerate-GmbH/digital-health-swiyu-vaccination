@@ -1,8 +1,16 @@
 ---
 id: F-11
 title: Answering the national coverage survey
+kind: flow
+interaction_scope: multi-party
+composition: atomic
+data_mode: discrete
 status: roadmap
 roadmap_step: 2
+profile_status: mixed
+profile_gaps:
+  - GP-08
+  - GP-09
 basis: basic-flow/verification
 actors:
   - ch.didas.health.role.statistics

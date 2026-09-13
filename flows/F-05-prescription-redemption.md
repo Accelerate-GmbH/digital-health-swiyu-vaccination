@@ -1,8 +1,15 @@
 ---
 id: F-05
 title: Prescription and its redemption
+kind: flow
+interaction_scope: multi-party
+composition: atomic
+data_mode: discrete
 status: implemented
 roadmap_step: 1
+profile_status: mixed
+profile_gaps:
+  - GP-06
 actors:
   - ch.didas.health.role.practice
   - ch.didas.health.role.pharmacy
