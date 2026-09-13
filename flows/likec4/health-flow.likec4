@@ -503,9 +503,12 @@ views {
         **Credentials:** Beta-ID (Confederation) and the insurance card
         (`urn:vct:ch.didas.health.insurance-card:1.0`)
 
-        DCQL `multiple` is NOT SUPPORTED, so this is two queries inside one
-        presentation request, each naming its own credential type and claim
-        paths. The holder confirms the combined request once.
+        DCQL `multiple` is NOT SUPPORTED, so this is two Credential Queries
+        inside one presentation request, each naming its own credential type and
+        claim paths. Whether the profile permits that is not explicit, so this
+        is an implementation pattern of this demonstrator under clarification
+        rather than confirmed profile behaviour: see GP-01. The holder confirms
+        the combined request once.
 
         The two credentials come from two independent issuers, so the reception
         desk evaluates two issuer signatures and two status entries in one

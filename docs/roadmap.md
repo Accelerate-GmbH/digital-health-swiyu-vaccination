@@ -56,13 +56,18 @@ What has to be built:
    `10160-0`, Problems `11450-4`, Procedures `47519-4`, Immunizations `11369-6`,
    Results `30954-2`, Devices `46264-8`. Step 1 covers Immunizations, and
    partially Medications and Results.
-2. **Multi-credential presentation at scale.** An IPS spans many credentials,
-   and the profile allows one credential per DCQL query with no `multiple`.
+2. **Multi-credential presentation at scale.** An IPS spans many credentials.
+   DCQL `multiple` is NOT SUPPORTED, so there is no mechanism for an unknown
+   number of instances of one credential type, and the profile is not explicit
+   about several Credential Queries in one verification. See
+   [GP-01](swiss-profile-gaps.md#gp-01--multi-credential-and-multi-instance-presentation-semantics).
 3. **Absence semantics.** "No known allergies" must be distinguishable from "no
    allergy credential present". The IPS has codes for this; using them correctly
    is a clinical-safety requirement.
-4. **Immunization series reconciliation** (F-02 open question 1), which blocks a
-   trustworthy immunization section.
+4. **Immunization series reconciliation** (F-02 open question 1). Until a series
+   reported by several issuers can be reconciled, an immunization section cannot
+   be assembled from held credentials without the risk of duplicate or
+   contradictory entries.
 5. **EPD/EGD integration.** Future work should examine how the Swiss electronic
    patient record infrastructure and holder-controlled verifiable credentials
    can interoperate, including the potential issuer, source, verifier and

@@ -2,9 +2,15 @@
  * Building DCQL queries for the Swiss Profile.
  *
  * The profile narrows OID4VP's query language considerably: only `dc+sd-jwt`,
- * only one credential per query (`multiple` is not supported) and a
- * DID-based trusted-authorities query in place of the ones in the base spec.
- * These helpers make the narrow path the easy one.
+ * no `multiple`, and a DID-based trusted-authorities query in place of the ones
+ * in the base spec. These helpers make the narrow path the easy one.
+ *
+ * One case the profile leaves open: §6.1 says `multiple` is NOT SUPPORTED and
+ * adds that "only a single credential can be used in a verification", without
+ * saying whether that also excludes several Credential Queries in one request.
+ * F-04 sends two. That is this demonstrator's reading and not confirmed profile
+ * behaviour; GP-01 in docs/swiss-profile-gaps.md records the clarification the
+ * profile would need.
  */
 
 import type { CredentialDefinition } from './credential-definition.js';

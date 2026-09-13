@@ -236,7 +236,12 @@ function checkCredentialQuery(credential: DcqlCredential): Finding[] {
     add('OID4VP §6.1', 'id must match ^[a-zA-Z0-9_-]+$');
   }
   if ('multiple' in credential) {
-    add('swiss-profile-verification §6.1', 'multiple is NOT SUPPORTED. Only a single credential per verification');
+    // §6.1 states that `multiple` is NOT SUPPORTED and adds that "only a single
+    // credential can be used in a verification". This rejects the property,
+    // which is the narrow reading. Whether the sentence also rules out several
+    // Credential Queries in one verification is not stated by the profile, and
+    // this check does not decide it: see GP-01 in docs/swiss-profile-gaps.md.
+    add('swiss-profile-verification §6.1', 'multiple is NOT SUPPORTED');
   }
   for (const authority of credential.trusted_authorities ?? []) {
     if (authority.type !== 'did') {

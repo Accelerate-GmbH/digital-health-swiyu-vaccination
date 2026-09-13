@@ -105,9 +105,10 @@ great deal.
 ## Equity is a public health question
 
 The business case lists "patients without a smartphone" among the things this
-project does not solve, which treats the matter as a usability limitation. From
-a public health view it is a question about who the system works for and it
-belongs with the other population-level questions in this document.
+project does not solve, which treats the matter as a usability limitation. A
+credential-based flow reaches the part of the population that holds a wallet on
+a device it controls. Coverage of that population is a population-level
+question, so it belongs with the others in this document.
 
 A wallet-first design assumes a smartphone, a working knowledge of what a
 credential is, the capacity to manage one's own records over decades, and

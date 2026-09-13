@@ -400,5 +400,8 @@ to grant the role. The protocol layer that such a body would grant it through is
 not yet open to private health issuers. Going to production does not resolve
 either one.
 
-swiyu's own position is that a sector brings its own governance. The
-infrastructure supports it. Health has not yet done it.
+swiyu's own position is that a sector brings its own governance. The Trust
+Protocol defines the statement types through which the relevant trust and
+authorisation information is expressed, and the Trust Registry provides the
+infrastructure through which applicable statements are published and retrieved.
+No health-domain body has been established to publish them.

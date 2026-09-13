@@ -30,7 +30,7 @@ and still depend on decisions the profiles leave to a deployment.
 
 | Gap | Capability | Affected flows | Current limitation | Likely change area | Change type |
 | --- | --- | --- | --- | --- | --- |
-| GP-01 | Multi-instance credential presentation | F-08 | One credential instance per DCQL query; `multiple` NOT SUPPORTED | Swiss Profile Verification | specification |
+| GP-01 | Multi-credential and multi-instance presentation semantics | F-08, F-04 | `multiple` NOT SUPPORTED, and the profile does not separate several queries in one verification from several instances per query | Swiss Profile Verification | specification |
 | GP-02 | Provenance of a derived representation | F-07, F-08 | No defined way to carry or retain provenance from a verified presentation into FHIR or openEHR | Swiss Profile VC, interoperability profile | specification, implementation |
 | GP-03 | Holder-originated authorisation object | F-09 | No holder-as-issuer pattern, and no lifecycle or verifier interpretation for one | Swiss Profile Issuance, Trust Protocol | specification, governance |
 | GP-04 | Standing authorisation for a continuing exchange | F-10 | Each presentation is a discrete, separately approved interaction | Swiss Profile Verification, governance | specification, governance |
@@ -48,34 +48,59 @@ Protocol 2.0, and sector-specific authorisation.
 
 ---
 
-## GP-01 · Multi-instance credential presentation
+## GP-01 · Multi-credential and multi-instance presentation semantics
 
-**Required by:** F-08.
+**Required by:** F-08. **Relevant to:** F-04.
 
-**Current limitation.** `swiss-profile-verification:1.0.0` states that DCQL
-`multiple` is NOT SUPPORTED, so one credential query returns at most one
-credential instance. Several credential queries in one authorization request are
-supported and this repository uses them: F-04 sends two, one for the Beta-ID and
-one for the insurance card, and that flow is implemented.
+**Current profile ambiguity, and the limitation behind it.** OpenID4VP 1.0
+allows one DCQL request to contain several Credential Queries in its
+`credentials` array. `swiss-profile-verification:1.0.0` §6.1 states that the
+DCQL `multiple` property is NOT SUPPORTED, and adds that "only a single
+credential can be used in a verification".
 
-The limitation is therefore narrower than "one credential per verification" and
-harder to work around. An International Patient Summary needs several instances
-of the same credential type, one per administered dose, and the number is not
-known when the request is built. A verifier cannot enumerate one query per dose
-for a count it does not have.
+Those two sentences do not settle the same question. The first can be read
+narrowly, as prohibiting several credential *instances* satisfying one Credential
+Query. The explanatory sentence can be read more broadly, as restricting the
+whole verification to one credential. The profile does not state which reading
+applies, so this repository does not treat either as confirmed.
 
-**Required capability.** One of:
+Three cases need to be distinguished, and the profile currently separates none of
+them:
 
-- several credential instances satisfying one credential query;
-- several DCQL credential queries with defined response semantics for a set
-  whose size the verifier does not know in advance;
-- another standardised composition mechanism.
+1. several Credential Queries in one DCQL request, each satisfied by one
+   credential;
+2. several credential instances satisfying one Credential Query, through
+   `multiple`;
+3. several credentials returned and evaluated as one verification interaction.
 
-Whichever is chosen, the verifier has to be able to associate each returned
-credential with the query it answers, and to determine whether the request was
-satisfied completely or partially. A summary assembled from an unknown subset,
+**What this demonstrator does.** F-04 exercises case 1, requesting a Beta-ID and
+an insurance-card credential in one interaction. That is an implementation
+pattern of this demonstrator under profile clarification. It is not evidence that
+the pattern is normative Swiss Profile behaviour, and this repository does not
+cite it as such.
+
+**What F-08 adds.** F-08 introduces case 2. A verifier assembling an
+International Patient Summary may need several instances of the same credential
+type, for example an unknown number of immunization-dose credentials. Because
+`multiple` is NOT SUPPORTED, the current profile provides no direct mechanism for
+requesting an unknown number of matching credential instances. That requirement
+stands whether or not case 1 is later confirmed.
+
+**Required profile evolution or clarification.** Swiss Profile Verification
+should state explicitly:
+
+- whether several Credential Queries are permitted in one verification;
+- whether each query may return exactly one credential;
+- how several returned credentials are represented and associated with their
+  query identifiers;
+- whether and how a future profile permits several instances satisfying the same
+  query;
+- how complete as against partial satisfaction of a composite request is
+  represented.
+
+The last point is not presentational. A summary assembled from an unknown subset,
 with no way to distinguish "no allergy credential presented" from "no allergy
-credential held", is a clinical hazard rather than a formatting problem.
+credential held", is a clinical hazard.
 
 **Likely affected area.** Swiss Profile Verification.
 
