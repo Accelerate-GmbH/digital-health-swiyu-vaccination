@@ -887,6 +887,91 @@
    "risk": "verify-no-object",
    "sentence": "The survey method, the CH VACD value sets and the SSPH+ structure were checked against published sources; see source verification for how the repository separat"
   },
+  "2a0c1ebb82073ffd": {
+   "file": "docs/review-report.md",
+   "risk": "verify-no-object",
+   "sentence": "Nothing in this repository has run against production swiyu. ## 1 · Statement classification ### Cryptography and formats | File | Statement or mechanism | Clas"
+  },
+  "c83710f1452860a7": {
+   "file": "docs/review-report.md",
+   "risk": "verify-no-object",
+   "sentence": "W3C VCDM and ISO mdoc are NOT SUPPORTED | Current Swiss Profile | CODE §3.3.1 | — | | CODE , CODE | Predicate proofs are not available in this profile | Current"
+  },
+  "80d3be5a614ae91b": {
+   "file": "docs/review-report.md",
+   "risk": "verify-no-object,absolute",
+   "sentence": "CODE MUST be CODE | Current Swiss Profile | CODE §5, §5.2, §8 | Generic verifier behaviour, unexercised in mock mode | | CODE , CODE | DCQL CODE is NOT SUPPORTE"
+  },
+  "267ddd1403956976": {
+   "file": "docs/review-report.md",
+   "risk": "verify-no-object,trust-bare,absolute",
+   "sentence": "Not evidence of normative profile behaviour | | CODE | Trusted authorities MUST use the CODE type | Current Swiss Profile | CODE §6.1.1 | The DCQL trusted-autho"
+  },
+  "db83696efbdaf0ca": {
+   "file": "docs/review-report.md",
+   "risk": "prove,verify-no-object,trust-bare",
+   "sentence": "**Unresolved** in fact | Trust Protocol 2.0 defines the statement types; the Trust Registry publishes and serves them | No health-domain governance body exists,"
+  },
+  "3736940084dc5fd8": {
+   "file": "docs/review-report.md",
+   "risk": "absolute",
+   "sentence": "DIDAS implementation choice for the flow | Token Status List Draft 20 via CODE | Three distinct things. \"The credential is invalid\" is not used as shorthand for"
+  },
+  "42bb4434b26fe4d4": {
+   "file": "docs/review-report.md",
+   "risk": "verify-no-object",
+   "sentence": "**Unresolved** in observation | The profile requires a verifier to resolve status | This repository cannot observe whether every deployed verifier does | | F-06"
+  },
+  "38ff7150926a8f4b": {
+   "file": "docs/review-report.md",
+   "risk": "verify-no-object",
+   "sentence": "One known non-conformance is recorded | | CODE | CODE sets CODE and CODE to CODE | External standard | CH Core, read from CODE | Verified against the FSH source"
+  },
+  "3bc31606b85ccd39": {
+   "file": "docs/review-report.md",
+   "risk": "anonymous",
+   "sentence": "DIDAS governance choice for which four | SD-JWT (RFC 9901) via CODE ; the entitlement is in CODE | Selective disclosure is not anonymity and not unlinkability |"
+  },
+  "ff7739f535c35026": {
+   "file": "docs/review-report.md",
+   "risk": "trust-bare",
+   "sentence": "The requirement stands whichever way the multi-query question resolves | | F-08 | Provenance from a verified presentation into an assembled IPS Bundle | **Beyon"
+  },
+  "f6928d73f49c3047": {
+   "file": "docs/review-report.md",
+   "risk": "verify-no-object,absolute",
+   "sentence": "Corrected: an earlier citation named only part of the applicable law | The authorisation model should be verified for the intended issuer population | | CODE | "
+  },
+  "d01a0eaab2d2162b": {
+   "file": "docs/review-report.md",
+   "risk": "verify-no-object",
+   "sentence": "OR Art. 958f, ten years, where the record falls within the accounting-law obligation | External law, read against Fedlex | Fedlex, 2026-09-13 | Whether a given "
+  },
+  "eb459df35f84baf9": {
+   "file": "docs/review-report.md",
+   "risk": "verify-no-object,identity",
+   "sentence": "Human Research Act as the distinct legal layer | | GP-04 | Standing authorisation and continuous disclosure | F-10 | Each presentation is a discrete, separately"
+  },
+  "9b1fed272cf84a95": {
+   "file": "docs/review-report.md",
+   "risk": "trust-bare",
+   "sentence": "Swiss Profile Issuance | specification | Batch issuance, pairwise identifiers, key rotation; none prescribed before the model exists | | GP-10 | Cross-domain an"
+  },
+  "8938f1efb5203db4": {
+   "file": "docs/review-report.md",
+   "risk": "identity",
+   "sentence": "Trust Protocol; organisational-identity governance | specification, governance, legal/policy | **LEI (ISO 17442); vLEI within the GLEIF ecosystem governance fra"
+  },
+  "170c97275ea9cc3e": {
+   "file": "docs/review-report.md",
+   "risk": "trust-bare,identity",
+   "sentence": "Trust Protocol 2.0; sector-specific authorisation** | ### GP-10a · what each part of the bridge answers | Component | Answers | Does not answer | | --- | --- | "
+  },
+  "33cdd9fc1a8d926e": {
+   "file": "docs/review-report.md",
+   "risk": "absolute,protected",
+   "sentence": "Building this report found two doc comments in CODE that the documentation had moved past: the CODE role said a coverage survey \"needs no identifying claim at a"
+  },
   "bda415eb00c94917": {
    "file": "docs/roadmap.md",
    "risk": "verify-no-object,trust-bare",
