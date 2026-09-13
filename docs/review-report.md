@@ -10,7 +10,8 @@ which records what was checked against a primary source, and
 [Swiss Profile gaps](swiss-profile-gaps.md), which is the register the second
 table below summarises.
 
-Current as at 2026-09-13, against Swiss Profiles 1.0 and Trust Protocol 2.0.
+Current as at 2026-09-13, against Swiss Profiles 1.0 and Trust Protocol 2.0, and
+against [`writing-standard.md`](writing-standard.md) at `2026-09-13-2`.
 
 ## The five classifications
 
@@ -66,8 +67,9 @@ against production swiyu.
 | `governance.ts`, `spec-conformance.md` | An actor MUST decline a counterparty carrying `gucTM` without `gucaTM` | Current Swiss Profile | `swiss-profile-trust:1.0`, Trust requirements, at MUST level | Enforced under both policies; a test covers the Sandbox path |
 | `governance.ts` | The SHOULD-level rules are waived under `SANDBOX_HEALTH_POLICY` and enforced under `STRICT_HEALTH_POLICY` | DIDAS governance choice | This project's two policy configurations | **Unresolved in practice**: the strict policy has never run against production swiyu, so this is a statement about a code path |
 | `governance-framework.md` | `personal_administrative_number` is the one protected field and requires authorisation before a verifier may request it | Current Swiss Profile | `swiss-profile-trust:1.0`, Protected fields | Enforced at query construction here |
-| `governance.ts` | `ch.didas.health.role.*`, eight roles with per-type issuance rights and per-claim entitlements | DIDAS governance choice | This repository's own vocabulary | **Not swiyu roles and not standardised ecosystem vocabulary.** Their intended mapping to a `gucaTM` is this project's proposal |
+| `governance.ts` | `ch.didas.health.role.*`, eight roles with per-type issuance rights and per-claim entitlements | DIDAS governance choice | This repository's own vocabulary | **Not Trust Protocol role identifiers, not a Trust Protocol claim and not a marker.** A deployment may map the governance decision a role represents onto applicable authorisation statements; the identifier does not travel in the protocol |
 | F-01, `governance-framework.md` | An issuer's authorisation to issue a governed credential type is expressed as a trust statement from which markers are derived | Current Swiss Profile for the mechanism; **Unresolved** in fact | Trust Protocol 2.0 defines the statement types; the Trust Registry publishes and serves them | No health-domain governance body exists, so no such statement has been issued for a health role |
+| `governance-framework.md`, F-01, `types.ts` | A governing actor publishes applicable statements; an evaluating actor derives trust markers for one interaction; the relying party then decides | Current Swiss Profile | Trust Protocol 2.0 statement types and evaluation rules | A marker is an evaluation result. Where this repository names an implementation object a marker, as `IssuerTrustMarker` does, it is the generic verifier's response for one interaction and says so |
 | `conformance.ts` | `purpose_description` capped at 500 characters | DIDAS implementation choice | The verifier management API's own limit, stricter than the protocol's 1000 | Marked `[project policy]` in the conformance table |
 | `governance-framework.md` | The audit journal records claim names and no claim values | DIDAS governance choice | A test asserts that no AHV number and no vaccine lot number reaches the journal | Evidences which rules ran; it is not proof that an interaction occurred |
 | `governance.ts` | A query naming a claim outside the requesting role's entitlement is rejected while the query is built | DIDAS governance choice | `reviewRequest()`, exercised by the DCQL builder tests | The entitlement model is this project's, not the profile's |
@@ -130,6 +132,7 @@ against production swiyu.
 | --- | --- | --- | --- | --- |
 | `README.md`, `spec-conformance.md` | Nothing here has run against production swiyu | Statement about this repository | Its own history | — |
 | `spec-conformance.md` | Under `SWIYU_MODE=mock` there is no signing, no DPoP, no encryption and no DID resolution | DIDAS implementation choice | The bundled mock | Everything attributed to "generic issuer" or "generic verifier" is unexercised in that mode |
+| F-04, `beta-id.ts` | The demonstrator uses the Sandbox Beta-ID | DIDAS implementation choice | What is available on the Sandbox today | Migration to the production e-ID will require the final production issuer, `vct` and schema or profile details once available. **No date is asserted and the production credential is not assumed to be a drop-in replacement** |
 | `architecture.md` | No FHIR server and no clinical data repository are operated here | DIDAS implementation choice | A scope choice for this prototype | Not a judgement on either architecture |
 | F-01 | Verification falls back to explicitly listed issuer DIDs | DIDAS governance choice | Adequate for a pilot | Inadequate at scale; the missing layer is the health governance body |
 

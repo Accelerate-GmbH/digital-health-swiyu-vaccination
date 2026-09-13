@@ -902,15 +902,20 @@
    "risk": "verify-no-object,absolute",
    "sentence": "CODE MUST be CODE | Current Swiss Profile | CODE §5, §5.2, §8 | Generic verifier behaviour, unexercised in mock mode | | CODE , CODE | DCQL CODE is NOT SUPPORTE"
   },
-  "267ddd1403956976": {
+  "e80599a886e8c06c": {
    "file": "docs/review-report.md",
    "risk": "verify-no-object,trust-bare,absolute",
    "sentence": "Not evidence of normative profile behaviour | | CODE | Trusted authorities MUST use the CODE type | Current Swiss Profile | CODE §6.1.1 | The DCQL trusted-autho"
   },
-  "db83696efbdaf0ca": {
+  "3d16d7aafcacc53e": {
    "file": "docs/review-report.md",
-   "risk": "prove,verify-no-object,trust-bare",
+   "risk": "trust-bare",
    "sentence": "**Unresolved** in fact | Trust Protocol 2.0 defines the statement types; the Trust Registry publishes and serves them | No health-domain governance body exists,"
+  },
+  "45dcafd487f39733": {
+   "file": "docs/review-report.md",
+   "risk": "prove,verify-no-object",
+   "sentence": "Where this repository names an implementation object a marker, as CODE does, it is the generic verifier's response for one interaction and says so | | CODE | CO"
   },
   "3736940084dc5fd8": {
    "file": "docs/review-report.md",
@@ -942,10 +947,15 @@
    "risk": "verify-no-object,absolute",
    "sentence": "Corrected: an earlier citation named only part of the applicable law | The authorisation model should be verified for the intended issuer population | | CODE | "
   },
-  "d01a0eaab2d2162b": {
+  "11e62e025003c014": {
    "file": "docs/review-report.md",
    "risk": "verify-no-object",
    "sentence": "OR Art. 958f, ten years, where the record falls within the accounting-law obligation | External law, read against Fedlex | Fedlex, 2026-09-13 | Whether a given "
+  },
+  "4445c167c95bdab8": {
+   "file": "docs/review-report.md",
+   "risk": "verify-no-object",
+   "sentence": "**No date is asserted and the production credential is not assumed to be a drop-in replacement** | | CODE | No FHIR server and no clinical data repository are o"
   },
   "eb459df35f84baf9": {
    "file": "docs/review-report.md",
