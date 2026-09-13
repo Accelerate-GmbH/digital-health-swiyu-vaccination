@@ -42,6 +42,11 @@ const FILES = [
   'README.md',
   ...readdirSync(join(ROOT, 'docs')).filter((f) => f.endsWith('.md')).sort().map((f) => `docs/${f}`),
   ...readdirSync(join(ROOT, 'flows')).filter((f) => f.endsWith('.md')).sort().map((f) => `flows/${f}`),
+  // The LikeC4 model carries the step notes that the rendered diagrams and the
+  // flow documents both draw on, so the notes are public prose under a file
+  // extension the earlier list did not reach.
+  ...readdirSync(join(ROOT, 'flows', 'likec4')).filter((f) => f.endsWith('.likec4')).sort()
+    .map((f) => `flows/likec4/${f}`),
 ];
 
 // A sentence is risky when it uses one of these and the surrounding words do
@@ -75,6 +80,10 @@ function strip(text, path) {
                .replace(/<style\b[\s\S]*?<\/style>/g, ' ')
                .replace(/<pre\b[\s\S]*?<\/pre>/g, ' ')
                .replace(/<[^>]+>/g, ' ');
+  } else if (path.endsWith('.likec4')) {
+    // The prose in the model is the note blocks. Element names, titles and
+    // technology strings around them are labels rather than statements.
+    text = (text.match(/'''[\s\S]*?'''/g) ?? []).map((n) => n.slice(3, -3)).join('\n\n');
   } else {
     text = text.replace(/^---\n[\s\S]*?\n---\n/, '').replace(/```[\s\S]*?```/g, ' ');
   }

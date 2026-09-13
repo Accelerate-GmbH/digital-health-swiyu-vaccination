@@ -26,8 +26,9 @@ produces:
 
 Today a family posts a photocopy of the child's vaccination booklet, which shows
 every dose, every date, the vaccinating physician and usually the child's name.
-A presentation sends five claims and no name. Of the eleven flows in this set,
-this is the only one that sends a verifier less than it already receives.
+The presentation request modelled here selects five claims and no name. Of the
+eleven flows in this set, this is the one whose presentation discloses less than
+the procedure it would replace.
 
 Switzerland measures vaccination coverage with the Swiss National Vaccination
 Coverage Survey, coordinated by the **Epidemiology, Biostatistics and
