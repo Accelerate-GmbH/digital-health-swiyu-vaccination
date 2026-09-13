@@ -1,9 +1,15 @@
 # Governance framework
 
-The technical profile answers *can this message be validated*. This document
-answers the questions that decide whether health data should change hands at
-all: who may assert something, who may ask for it, which claims specifically,
-on what legal basis and what happens to the data afterwards.
+A presentation raises several distinct questions, and the technical profile
+answers only some of them: protocol validity, cryptographic validity, credential
+and status validity, and holder key binding. Issuer trust is established through
+the trust infrastructure. The remaining questions are governance questions and
+this document answers those: who may assert a given fact, who may request it,
+which claims specifically, on what legal basis, whether the relying party should
+accept the presentation, and what happens to the data afterwards.
+
+Keeping these separate matters. A presentation can be cryptographically valid
+and still be one the relying party has no entitlement to request.
 
 Everything described here is implemented and enforced in
 [`packages/swiyu/src/governance.ts`](../packages/swiyu/src/governance.ts).
@@ -14,9 +20,11 @@ Where something is *not* implemented, it says so.
 1. **Minimisation is enforced where the query is built.** Once the wallet has
    answered, the data is out. A check at the verifier is a promise; a check at
    query construction is a control.
-2. **A role is granted, never claimed.** An actor's entitlements derive from
-   trust statements published by someone accountable. What its software asserts
-   about itself carries no weight.
+2. **A role is authoritatively established, not self-asserted.** An actor's
+   software can of course assert a role; the governance question is whether that
+   assertion is established by a trust statement from an accountable body and
+   accepted by the relying party. In this project only the latter carries
+   weight.
 3. **MUST and SHOULD are kept apart.** Profile-level MUST rules are enforced
    under every policy. SHOULDs may be waived. A waiver is *recorded*, not
    silently applied.

@@ -18,36 +18,37 @@ the repository. It is offered as extensible to further clinical domains and to
 the Swiss Health Data Space.
 
 **This repository** takes the lineage of project 1103 from the 2024 hackathon
-forward onto the swiyu trust infrastructure. It reuses the same clinical models
-(the same archetypes, the same CH VACD element paths, the same terminology
-bindings) and declines the repository. A vaccination is issued to the patient's
-wallet as an SD-JWT verifiable credential; presentation is selective, consent is
-per-request and there is no server, federal or otherwise, that holds the
-record.
+forward onto the swiyu Trust Infrastructure. It reuses the same clinical models
+— the same archetypes, the same CH VACD element paths, the same terminology
+bindings — and adds a credential exchange layer over them. A vaccination is
+issued to the patient's wallet as an SD-JWT VC, held there, presented under the
+holder's control with selective disclosure, and verified by the relying party.
+This demonstrator operates no clinical data repository of its own.
 
-The instruction that shaped this repository was explicit: reuse the schemas,
-without the centralised openEHR approach, on the basis of verifiable
-credentials. The two showcases are therefore deliberate alternatives and this
-document says what that costs.
+The two projects address different layers of the same problem. Project 28
+addresses healthcare semantics, information models and clinical persistence.
+This repository addresses authenticity, provenance, controlled presentation and
+trust relationships. They are composable, and the sections below set out both
+where they compose and what this demonstrator does not provide on its own.
 
-## The objection
+## What a credential exchange layer does not provide
 
-The openEHR position is this:
+A credential exchange layer does not substitute for a longitudinal clinical
+record. The clearest statement of this comes from the openEHR side:
 
 > A vaccination record must remain clinically usable throughout a person's
 > lifetime and a document exchanged at a particular point in time is not the
 > same as a longitudinal record maintained over decades.
 
-This is correct and it is the substantive argument against the design in this
-repository. A credential is a signed statement about one event, made at one
-moment, by one issuer. Forty years of immunisations are forty such statements,
-held by a person who has changed phones eleven times, whose issuers have merged,
-been dissolved, or rotated their keys and several of whom no longer exist to be
-asked. An openEHR CDR answers "is this patient protected against diphtheria?" as
-a query. A wallet answers it as an act of retrieval that the patient must
-perform, from a collection they alone are responsible for having kept.
+This is correct, and it identifies the limits of what this demonstrator
+provides. A credential is a signed statement about one event, made at one moment,
+by one issuer. A lifetime of immunisations is a set of such statements, held
+across a succession of devices, by issuers that may have merged, been dissolved
+or rotated their keys. A clinical data repository answers "is this patient
+protected against diphtheria?" as a query over a maintained record. A wallet
+answers it from the credentials the holder has retained and chooses to present.
 
-Three specific consequences follow and none of them is solved here:
+Three specific consequences follow, none of which this repository resolves:
 
 1. **Series reconciliation.** F-02 acknowledges it: the prototype cannot reliably
    tell a third dose from a duplicate record of the second, because it has no
@@ -59,9 +60,12 @@ Three specific consequences follow and none of them is solved here:
    The swiyu wallet has a recovery story; a forty-year one, across issuers who
    have ceased to exist, remains undemonstrated here.
 
-In summary, this repository is strong where the CDR
-approach is weak: consent, selective disclosure, no central store to breach or
-to be compelled. It is weak exactly where that approach is strong.
+In summary, the two layers have complementary strengths. A credential exchange
+layer contributes per-request consent, selective disclosure, issuer-signed
+provenance and an exchange model that does not require a central store of the
+clinical payloads. A repository-based architecture contributes longitudinal
+continuity, query over a maintained record, versioned correction and
+reconciliation. Neither supplies what the other does.
 
 ## What the 2024 lineage already learned
 
@@ -78,7 +82,8 @@ one does not survive contact with them. It was written before this repository
 existed and it argues against the maximal form of the position this repository
 takes.
 
-So the defensible claim is narrower than "records belong in the wallet":
+The defensible claim is therefore a narrow one about where a credential is the
+right instrument:
 
 **A credential is the right carrier for a fact that a specific party attested at
 a specific moment and that a patient needs to present to someone who has no
@@ -86,8 +91,8 @@ right to their whole record.** A vaccination at a border. Cover at a reception
 desk. A prescription at a pharmacy counter. Each of these is a presentation, and
 the wallet is the right instrument for a presentation.
 
-For "what is this patient's immunisation status", the right instrument is a
-longitudinal record and a credential answers only one dose of it.
+For "what is this patient's immunisation status", the appropriate instrument is
+a longitudinal record. A credential answers for one dose within it.
 
 ## The 2024 staging, where the two meet
 
@@ -104,9 +109,10 @@ frame available:
 with the caveat, from the same document, that "there will certainly be extended
 transition periods and overlaps between the above stages".
 
-Project 28 is a working demonstration of stage 2. This repository is a working
-demonstration of stage 3. They are adjacent stages rather than competing answers
-to one question and the section below sets out where they compose.
+Project 28 demonstrates stage 2 and this repository demonstrates stage 3. The
+staging is the 2024 project's own framing and is reproduced here as published;
+this repository does not assert it as a target architecture for the Swiss health
+sector. The section below sets out where the two compose.
 
 ## Where they compose
 
@@ -148,7 +154,7 @@ Places where this repository knowingly differs from the sources it draws on:
 | Medication coding | Project 1103 used ATC (`A02BC01`) | GTIN | A pharmacy dispenses against a package; CH EMED carries both codings and step 2 should too |
 | Insurance identity | Project 1103 keyed the insurance proof on AVS13 | AVS13 present but governed | `personal_administrative_number` is a protected field under swiyu Trust Protocol 2.0; asking for it needs an entitlement and the check-in flow does not ask |
 | Signature format | Project 1103 used AnonCreds via VCMS, with SD-JWT planned | SD-JWT VC only | The Swiss Profile permits nothing else: ISO mdoc and W3C VCDM are NOT SUPPORTED |
-| Persistence | Project 28 persists to a CDR | No persistence | The point of the exercise; the projections exist so that a deployment can choose otherwise |
+| Persistence | Project 28 persists to a CDR | This demonstrator does not persist | Scope of this prototype; the projections exist so that a deployment can compose the two |
 | Allergies | Project 1103's wallet carried allergies | Not implemented | Roadmap step 2 (IPS); the check-in flow requests cover only |
 
 That last row is a functional gap against the project this repository set out to

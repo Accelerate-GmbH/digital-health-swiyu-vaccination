@@ -1,12 +1,25 @@
 # Swiss Profile conformance
 
-Every rule this project enforces and where it comes from. Rules marked
-**checked** are asserted by `packages/swiyu/src/conformance.ts` and covered by
-`packages/swiyu/test/conformance.test.ts`; a violation fails the build or the
-request, ahead of a wallet that would silently refuse to connect.
+The rules this project enforces, each traced to the specification section that
+states it. It is a record of what has been checked, not a certification: rules
+are enforced against the profile text, not against a live deployment, and nothing
+here has been run against production. See
+[`source-verification.md`](source-verification.md) for what was and was not
+verified against a primary source.
+
+Rules marked **checked** are asserted by `packages/swiyu/src/conformance.ts` and
+covered by `packages/swiyu/test/conformance.test.ts`; a violation fails the build
+or the request rather than reaching a wallet.
 
 Profiles are pinned in `packages/swiyu/src/profile.ts`, one file to change when
 the profile moves.
+
+**Specification requirement or project policy.** The tables below carry rules
+from the Swiss Profiles and from Trust Protocol 2.0. Where this project enforces
+something the specifications do not require — a stricter limit, an additional
+refusal, a deployment convention — the row is marked **[project policy]** and
+names the reason. Those rows are this repository's choices and are not
+conformance requirements for anyone else.
 
 **On the section numbers.** Each profile states that its subsections "rely on the
 numbering from the original reference specification", and a profile embeds more
@@ -66,11 +79,11 @@ first, so each row resolves to one place.
 | Wallet schemes `openid4vp://` and `swiyu-verify://` | §9 | generic verifier |
 | Authorization response size 21 MB | §13 | documented in `LIMITS` |
 
-Beyond the profile, `checkVerificationRequest()` refuses a request that sets
-neither `accepted_issuer_dids` nor `trust_anchors`. The profile does not spell
-this out, but `swiss-profile-trust` requires an actor to be able to evaluate its
-counterparty's trust markers and accepting every issuer DID makes that
-impossible.
+**[project policy]** `checkVerificationRequest()` refuses a request that sets
+neither `accepted_issuer_dids` nor `trust_anchors`. No profile requires this.
+The reasoning is that `swiss-profile-trust` requires an actor to evaluate its
+counterparty's trust markers, and a request accepting every issuer identifier
+leaves nothing to evaluate. Other deployments may reasonably decide otherwise.
 
 ## swiss-profile-vc:1.0.0 · SD-JWT VC, Token Status List, OCA
 
@@ -119,6 +132,7 @@ impossible.
 | The wallet MAY decline one without `caTM`, and one without `tvTM` | Trust requirements | strict policy |
 | `personal_administrative_number` (AHV number) is the one protected field; it needs special permission to verify regardless of the VCT carrying it | Protected fields | enforced at query construction; refuses without entitlement |
 | vqPS `purpose_name` MUST NOT exceed 40 characters; `purpose_description` MUST NOT exceed 1000 | TP 2.0, vqPS | **checked**; `scripts/vqps.ts` refuses to emit past either |
+| **[project policy]** `purpose_description` is additionally capped at 500 characters in `conformance.ts` | the verifier management API's own limit, stricter than the protocol's 1000 | **checked** |
 | Each DCQL Credential Query MUST carry a `meta` object with a non-empty `vct_values` | TP 2.0, Verification Type: DCQL | query construction |
 | A verifier MUST provide the relevant vqPS to the wallet and MUST link its `scope` claim via the request's `scope` parameter | TP 2.0, Verification | generic verifier |
 

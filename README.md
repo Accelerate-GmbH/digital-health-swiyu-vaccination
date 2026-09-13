@@ -109,24 +109,30 @@ The swiyu Trust Infrastructure provides shared components that this design
 depends on, including the Base Registry, which resolves issuer and verifier
 identifiers and hosts status information, and the Trust Registry, which carries
 trust statements about participants. These are central components of the
-ecosystem and this project relies on them. What the design avoids is a separate
-central repository holding the healthcare payloads themselves.
+ecosystem and this project relies on them.
+
+The narrower architectural property this design has is this: **the exchange
+model does not require a central repository containing the clinical payloads
+exchanged through these credentials.** It makes no claim about the absence of
+registries or central components generally.
 
 ### An architectural consideration from meineimpfungen.ch
 
-The former meineimpfungen.ch platform illustrates some of the risks associated
-with concentrating sensitive health information in a central service. This
-project explores an alternative exchange model in which verifiable credentials
-can be issued to patients and subsequently presented to authorised relying
-parties without requiring the same healthcare payload to be stored in a central
-credential-exchange repository.
+The closure of meineimpfungen.ch illustrates the availability and continuity
+risks associated with relying on a single service for access to longitudinal
+health information. This project explores an alternative exchange model in which
+verifiable credentials can be issued to patients and subsequently presented to
+authorised relying parties without requiring the same healthcare payload to be
+stored in a central credential-exchange repository. A credential already issued
+remains usable by its holder if the issuing organisation ceases to operate,
+subject to the status and revocation mechanisms described below.
 
 This model does not eliminate central infrastructure, governance dependencies or
-security risks. It relies on the federal registries named above, on the
-availability of the wallet and on the governance arrangements described below. It
-changes where the healthcare payload resides and who controls its release; it
-does not remove the need for operational security, key management or
-institutional trust.
+security risks. It depends on the federal registries named above, on wallet
+availability and recovery, on key management and on the governance arrangements
+described in the next section. It changes where the healthcare payload resides
+and who controls its release; it does not remove the need for operational
+security or institutional trust.
 
 ## Governance
 
@@ -173,9 +179,16 @@ significant open dependency in the design and is documented as such.
 
 ## Healthcare interoperability
 
-openEHR and HL7 FHIR are commonly adopted together with a repository that some
-organisation operates. This project adopts the information models and does not
-adopt a central clinical data repository.
+HL7 FHIR and openEHR address healthcare semantics, information models and
+clinical data exchange and persistence. Verifiable credentials and the swiyu
+Trust Infrastructure address authenticity, provenance, controlled presentation
+and trust relationships. These are different layers and they can be composed.
+
+This project reuses the information models and does not itself operate a
+clinical data repository. That is a property of this demonstrator, not a
+statement about how FHIR or openEHR should be deployed: FHIR is an exchange
+and information-model specification rather than a repository architecture, and
+an openEHR deployment's persistence model is a separate design decision.
 
 Every claim of every credential type carries the FHIR element path and, where one
 exists, the openEHR archetype path it corresponds to. At presentation time a

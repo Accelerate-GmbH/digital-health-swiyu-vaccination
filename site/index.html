@@ -444,27 +444,28 @@
 
   <section>
     <p class="kicker">Background</p>
-    <h2>What we learned from the past</h2>
+    <h2>An architectural consideration</h2>
     <p>
-      <code>meineimpfungen.ch</code> held the national electronic vaccination record until 2021, when
-      it was shut down after serious security failures. Several hundred thousand people lost access to
-      their own vaccination history at once.
+      <code>meineimpfungen.ch</code> held the national electronic vaccination record until its closure
+      in 2021, after which the records it held were no longer accessible to the people they described.
     </p>
     <p>
-      The platform was badly built. That explanation is accurate as far as it goes. There is a second
-      point. It is structural. A design in which one database holds everyone's record carries a
-      failure mode that careful engineering does not remove. The database can be breached, defunded or
-      switched off. Each of those removes access for every person at the same moment.
+      The episode illustrates the availability and continuity risks associated with relying on a single
+      service for access to longitudinal health information. This showcase explores a different
+      distribution model rather than a judgement on that platform.
     </p>
     <div class="pull">
-      <p>If the practice that wrote in your paper booklet closes tomorrow, you still have the
-        booklet. When <code>meineimpfungen.ch</code> closed, everyone lost their record at once.</p>
-      <cite>Why the record here is held by the patient</cite>
+      <p>The exchange model demonstrated here does not require a central repository holding the
+        clinical payloads exchanged through these credentials. It does depend on the registries of the
+        swiyu Trust Infrastructure, on wallet availability and recovery, and on governance
+        arrangements that do not yet exist for the health domain.</p>
+      <cite>What the model does and does not change</cite>
     </div>
     <p>
-      So the record here is a set of credentials in the patient's wallet. Each administered dose is
-      its own credential, signed by whoever administered it. A practice that closes cannot take the
-      record with it; neither can a platform that is wound up.
+      In this showcase each administered dose is issued as its own credential, signed by the authorised
+      vaccinator that administered it, and held in the patient's wallet. A credential already issued
+      remains usable by its holder if the issuing organisation ceases to operate, subject to the status
+      and revocation mechanisms the profile defines.
     </p>
   </section>
 
@@ -811,7 +812,7 @@
           <li>Allergies, problems, medication statements</li>
           <li>Multi-credential presentation at scale</li>
           <li>Absence semantics: "none known" vs "none held"</li>
-          <li>EPD / DEP as one issuer among others</li>
+          <li>Interoperation with EPD / EGD infrastructure: issuer, source, verifier and repository roles to be examined</li>
           <li>Composition with the openEHR / HL7 blueprint</li>
         </ul>
       </div>

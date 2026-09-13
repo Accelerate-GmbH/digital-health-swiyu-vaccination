@@ -25,11 +25,15 @@ flowchart LR
 | Lifecycle and correction | partial | F-06: holder notification and supersession missing |
 | Actor onboarding | partial | F-01: no health-domain governance body exists to grant roles |
 
-**The blocking gap.** Nothing here can be deployed until some body can issue the
-trust statement that says "this DID is a practice authorised to vaccinate". That
-is a governance question rather than a technical one and it is the principal
-finding of step 1: the technology is ready some distance ahead of the
-institutional arrangements. See F-01, open question 1.
+**The blocking dependency.** Deployment depends on a body able to issue the
+trust statement stating that a given issuer is a practice authorised to
+vaccinate. That is a governance question rather than a technical one, and it is
+the principal finding of step 1.
+
+Stated conservatively: the prototype indicates that key technical building
+blocks are available, while production deployment additionally depends on
+unresolved governance, lifecycle, clinical-safety and operational requirements.
+Several of those are itemised in this document. See F-01, open question 1.
 
 ## Step 2 · International Patient Summary (2027)
 
@@ -59,9 +63,11 @@ What has to be built:
    is a clinical-safety requirement.
 4. **Immunization series reconciliation** (F-02 open question 1), which blocks a
    trustworthy immunization section.
-5. **EPD/DEP integration.** The Swiss electronic patient record is the
-   incumbent. The coherent position for a decentralised design is that it
-   becomes one issuer among others. That position has to be argued for.
+5. **EPD/EGD integration.** Future work should examine how the Swiss electronic
+   patient record infrastructure and holder-controlled verifiable credentials
+   can interoperate, including the potential issuer, source, verifier and
+   repository roles each could play. This repository does not settle that
+   question and does not propose a target architecture for it.
 6. **The national coverage survey** ([F-11](../flows/F-11-coverage-survey.md)).
    EBPI's Swiss National Vaccination Coverage Survey already reads the record
    the family holds, by asking for a photocopy. Replacing that photocopy with a
@@ -103,7 +109,11 @@ The failure mode to avoid is making an unsolved safety question look solved.
 
 ## What this repository deliberately does not do
 
-- **Operate anything.** No registry, no CDR, no FHIR server, no patient index.
+- **Operate shared infrastructure.** This repository operates no registry,
+  clinical data repository, FHIR server or patient index of its own. It depends
+  on the Base Registry and Trust Registry of the swiyu Trust Infrastructure,
+  which are operated by the Confederation. This is a statement about what this
+  repository runs, not a claim about the architecture of the ecosystem.
 - **Replace billing.** The practice bills through existing channels.
 - **Model identity proofing.** How a person obtains an e-ID is upstream.
 - **Claim protocol conformance from the mock.** The mock exercises the business

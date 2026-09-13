@@ -1,26 +1,42 @@
 # Glossary
 
-Swiss administrative, verifiable-credential and clinical-informatics vocabulary
-collide in this project. This is the minimum needed to read the rest.
+This glossary covers the Swiss administrative, verifiable-credential and
+clinical-informatics vocabulary needed to read the rest of the repository.
+
+**How to read the entries.** Where a term is defined by the swiyu programme or a
+specification, the entry gives that meaning first. Where this demonstrator makes
+a choice, applies a narrower reading or adds something of its own, that is marked
+*In this demonstrator* and is not part of the official definition. The
+authoritative sources are the [swiyu
+specifications](https://swiyu-admin-ch.github.io/specifications/) and the
+[DIDAS glossary](https://github.com/DIDAS-swiss/didas-glossary); where this file
+and those differ, they are correct.
 
 ## The trust infrastructure
 
-**swiyu.** The Swiss trust infrastructure operated by FOITT, on which the e-ID
-is built. Not itself the e-ID.
+**swiyu.** The Swiss Trust Infrastructure, operated by FOITT, on which the e-ID
+is built. It is the infrastructure, not the credential.
 
 **Sandbox.** The test environment, renamed from "Public Beta" by change dossier
-CD-001 and strictly separated from production. Hosts carry `swiyu-int`. Needs
-its own wallet; the production swiyu Wallet refuses Sandbox credentials.
+CD-001 and separated from production. Hosts carry `swiyu-int`. It requires its
+own wallet; the production swiyu Wallet does not accept Sandbox credentials.
 
-**Base Registry.** Publishes DID documents and status lists. The only shared
-infrastructure this project touches. It holds no patient data.
+**Base Registry.** Publishes DID documents and status lists. Under
+`swiss-profile-vc:1.0.0` §12.1 the Status Provider MUST be the registry provided
+by FOITT, so that it is a different party from the issuer.
+*In this demonstrator:* the Base Registry and the Trust Registry are the shared
+components this project depends on. The status lists it publishes carry status
+bits and no patient data.
 
-**Trust Registry.** Publishes trust statements about actors: who they are, what
-they are entitled to do, what they say they ask for.
+**Trust Registry.** Publishes trust statements about actors under Trust Protocol
+2.0: identity trust statements, authorisation statements and the Verification
+Query Public Statements that verifiers publish about the queries they send.
 
 **Generic issuer / verifier.** `swiyu-issuer` and `swiyu-verifier`, the
 Confederation's reference implementations. Each actor runs its own instance.
-They carry the protocol so business applications don't have to.
+They implement the protocol, so business applications do not have to.
+*In this demonstrator:* the four actors each run one, and the application code
+addresses them through their management APIs only.
 
 **Beta-ID.** The Sandbox stand-in for the e-ID, carrying four of the nine items
 of EID content listed in Art. 15 para. 1 BGEID - surname, given names, date of

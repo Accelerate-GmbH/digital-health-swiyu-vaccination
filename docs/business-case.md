@@ -14,11 +14,13 @@ The consequences are ordinary and expensive:
   travel clinic each hold part of a patient's vaccination history. Asked "are
   you covered for tetanus?", most people guess. The clinical response to a guess
   is to vaccinate again.
-- **A booklet in a drawer outlasts a platform.** `meineimpfungen.ch` held the
-  national electronic vaccination record until 2021, when it was shut down after
-  serious security failures and several hundred thousand people lost access to
-  their own history at once. Nobody lost a yellow booklet that day, which is why
-  it is still the most reliable vaccination record in the country.
+- **Continuity of access depends on the custody model.** `meineimpfungen.ch`
+  held the national electronic vaccination record until its closure in 2021,
+  after which the records it held were no longer accessible to the people they
+  described. The episode illustrates the availability and continuity risks of
+  relying on a single service for access to longitudinal health information.
+  The paper vaccination booklet remains widely used, and its continued use is
+  one indication of that dependency.
 - **Every organisation re-collects the same data.** Name, date of birth,
   insurance cover and AHV number are re-keyed at every reception desk, from a
   plastic card that proves nothing.
@@ -36,9 +38,13 @@ consequences follow that no amount of integration work delivers otherwise:
 2. **A narrow question gets a narrow answer.** A travel clinic asking about
    protection receives four claims out of the eighteen an immunization
    credential holds. The other fourteen are never transmitted.
-3. **There is no honeypot.** No database holds everyone's vaccination history,
-   so no breach exposes it. The only shared infrastructure is a status list of
-   bits, carrying no patient data at all.
+3. **The exchange model requires no central clinical payload store.** This
+   design does not require a repository holding the clinical content of every
+   patient's vaccination history in order to exchange it. Shared infrastructure
+   is still required: the Base Registry and Trust Registry, and the status lists
+   the Base Registry publishes, which carry status bits and no patient data.
+   Credentials remain held on end-user devices, which carries its own security
+   and recovery considerations.
 
 ## What each party gets
 
@@ -64,8 +70,9 @@ trust infrastructure is expensive:
 - **Integration**: the business application talks to two management APIs. It
   does not implement OpenID4VCI, DPoP, SD-JWT, encryption, DID resolution or
   status lists. The Confederation's generic components do all of that.
-- **No registry to build.** The largest line item in the centralised version of
-  this project does not exist here.
+- **No new registry to build.** This use case adds no register of its own. It
+  runs on the Base Registry and Trust Registry that the Confederation already
+  operates for the e-ID.
 
 ## Why 2026
 
@@ -130,6 +137,8 @@ governance body exists** to say "this DID is a practice authorised to
 vaccinate". Until one does, verification falls back to explicitly listed issuer
 DIDs, which is workable for a pilot and unworkable at scale.
 
-The technology is therefore ready some distance ahead of the institutional
-arrangements. That is this project's main finding. It is the decision it
-puts in front of the sector.
+The prototype indicates that key technical building blocks are available, while
+production deployment additionally depends on unresolved governance, lifecycle,
+clinical-safety and operational requirements. This document and
+[the roadmap](roadmap.md) itemise the open ones. That balance is this project's
+main finding and the question it puts to the sector.

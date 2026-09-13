@@ -4,7 +4,18 @@ The demo runs offline by default. This is what it takes to run the same code
 against the real Sandbox trust infrastructure.
 
 Budget a day for a first onboarding, mostly waiting on portal steps. Repeat it
-per actor: each is a separate legal entity with its own DID.
+per actor. In the model used here each actor is a separate organisation with its
+own identifier; whether a given deployment needs one identifier per legal entity,
+per organisational unit or per service is a decision for that deployment and for
+the applicable swiyu onboarding rules, not something this runbook settles.
+
+**How to read this runbook.** Steps marked *required by swiyu* follow the
+programme's own onboarding process. Steps marked *this demonstrator* are choices
+made here and may not apply elsewhere. Anything else is suggested operational
+practice. Where this text and the current swiyu onboarding documentation differ,
+the latter is correct; the
+[cookbooks](https://swiyu-admin-ch.github.io/cookbooks/) are the authoritative
+source.
 
 > **This is the Sandbox.** The environment formerly called Public Beta was
 > renamed Sandbox by change dossier CD-001 and separated from production. Use
@@ -14,9 +25,11 @@ per actor: each is a separate legal entity with its own DID.
 
 ## What only a person can do
 
-Three things in this runbook cannot be automated, delegated to a contractor, or
-done from a CI job, because they bind a legal entity to a cryptographic
-identity:
+Three steps in this runbook require an authorised representative of the
+organisation to act, because they bind an organisation to a cryptographic
+identity. They are not suitable for an unattended CI job. Whether an
+organisation may have an agent carry them out on its behalf is a question for its
+own governance and for the applicable swiyu terms, and is not determined here:
 
 1. **The ePortal account and business partner registration.** A federal ePortal
    account for the organisation, then a business partner under it.
