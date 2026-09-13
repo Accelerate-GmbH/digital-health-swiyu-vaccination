@@ -291,6 +291,11 @@
    "risk": "verify-no-object,absolute,privacy,anonymous",
    "sentence": "It does not make presentations unlinkable\" | Names the surfaces selective disclosure does not remove | | Explorer, research role | \"The entitlement excludes eve"
   },
+  "780ac27b864f7ad6": {
+   "file": "docs/articulation-pass.md",
+   "risk": "verify-no-object,trust-bare,absolute",
+   "sentence": "| Kept because | Example | | --- | --- | | The word names a component | \"trust registry\", \"trust marker\", \"the verifier\" | | The sentence quotes the specificati"
+  },
   "b8df3a231fc3abdb": {
    "file": "docs/articulation-pass.md",
    "risk": "trust-bare,absolute",
