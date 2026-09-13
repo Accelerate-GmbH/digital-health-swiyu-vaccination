@@ -41,6 +41,9 @@ jobs:
       - name: Articulation rule
         run: npm run check:articulation
 
+      - name: Flow types match the model
+        run: npm run check:flow-types
+
       # The generated issuer metadata carries SRI hashes over the exact bytes of
       # the Type Metadata, schema and OCA documents. If a credential definition
       # changes and config/ is not regenerated, the hashes describe documents

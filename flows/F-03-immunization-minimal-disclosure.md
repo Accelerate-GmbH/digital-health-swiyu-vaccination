@@ -1,6 +1,7 @@
 ---
 id: F-03
 title: Presenting vaccination evidence with minimal disclosure
+type: interaction-flow
 status: implemented
 roadmap_step: 1
 actors:

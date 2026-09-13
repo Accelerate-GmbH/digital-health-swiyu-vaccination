@@ -1,6 +1,7 @@
 ---
 id: F-06
 title: Correction, suspension and revocation
+type: interaction-flow
 status: partial
 roadmap_step: 1
 actors:

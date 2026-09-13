@@ -1,15 +1,20 @@
 ---
 id: F-07
 title: Projecting a presented credential into FHIR and openEHR
+type: local-transformation
 status: implemented
 roadmap_step: 1
+execution_scope: local
 actors:
   - any verifying role
 credentials:
   - all
-protocols:
+protocols: []
+input:
+  - Claims disclosed in a completed presentation
+representations:
   - HL7 FHIR R4 (CH VACD, CH EMED, CH Core; IPS from step 2)
-  - openEHR flat-format compositions
+  - openEHR flat-format composition
 trust_markers: []
 preconditions:
   - F-03 or F-04 or F-05
@@ -19,11 +24,32 @@ produces:
 
 # F-07 · Projecting a presented credential into FHIR and openEHR
 
-This flow is the answer to the obvious objection: *the health sector already has
-information models and systems that speak them. Why would it adopt a credential
-format?*
+## What kind of object this is
 
-It does not have to. The credential carries the model with it.
+F-07 is a **local transformation**, not an interaction flow. F-01 to F-06, F-09
+and F-11 describe exchanges between two or more parties over a named protocol.
+F-07 describes a transformation performed inside one party after such an
+exchange has completed.
+
+| | |
+| --- | --- |
+| Begins | after F-03, F-04 or F-05 has completed |
+| Input | the claims disclosed in that presentation |
+| Performed by | the verifying organisation, in its own systems |
+| Output | a FHIR resource, an openEHR composition, or both, held locally |
+| Parties involved | one |
+| Protocol messages exchanged | none |
+
+Because no messages pass between parties, the LikeC4 model carries no sequence
+view for F-07. The seven dynamic views in `likec4/health-flow.likec4` each render
+an exchange between lifelines, and a sequence diagram of a single-party
+transformation would show one lifeline. The absence of a view records the type of
+the step rather than an omission or unfinished work: the mapping is implemented
+in `packages/swiyu/src/projections.ts` and covered by twelve tests.
+
+The credential types already carry the information-model paths, so a receiving
+system that holds disclosed claims can construct the representation it uses
+without a further request to any other party.
 
 ## The architectural position
 
@@ -45,13 +71,22 @@ one exists, the openEHR archetype path it corresponds to. At presentation, the
 receiving system can rebuild the representation it already understands, locally,
 from the claims the holder released.
 
+The diagram below is an internal data-flow diagram and not a sequence diagram.
+Only the topmost edge crosses a party boundary, and that edge belongs to F-03,
+F-04 or F-05 rather than to F-07.
+
 ```mermaid
-flowchart LR
-    W["Patient wallet<br/>(SD-JWT VC, the record)"] -->|selective disclosure| V["Verifier"]
-    V --> F["FHIR Immunization / MedicationRequest /<br/>DiagnosticReport + Observation"]
-    V --> O["openEHR flat composition<br/>(template + archetype paths)"]
+flowchart TB
+    subgraph EX["F-03, F-04 or F-05 · interaction flow, two parties"]
+        W["Patient wallet<br/>SD-JWT VC"] -->|"OpenID4VP, selective disclosure"| V["Verifier"]
+    end
+    V ==>|"disclosed claims"| P
+    subgraph LOC["F-07 · local transformation, inside the verifying organisation"]
+        P["Projection<br/>projections.ts"] --> F["FHIR Immunization, MedicationRequest,<br/>DiagnosticReport and Observation"]
+        P --> O["openEHR flat composition<br/>template and archetype paths"]
+    end
     F --> S1["Practice management system"]
-    O --> S2["Analysis, research export, or a CDR<br/>for deployments that run one"]
+    O --> S2["Analysis, research export, or a clinical data<br/>repository for deployments that run one"]
     style W stroke-width:3px
 ```
 

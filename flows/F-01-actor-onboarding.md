@@ -1,6 +1,7 @@
 ---
 id: F-01
 title: Becoming an actor in the health trust domain
+type: interaction-flow
 status: partial
 roadmap_step: 1
 actors:

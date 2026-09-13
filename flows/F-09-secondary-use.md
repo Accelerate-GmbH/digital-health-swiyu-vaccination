@@ -1,6 +1,7 @@
 ---
 id: F-09
 title: Secondary use under revocable research consent
+type: interaction-flow
 status: roadmap
 roadmap_step: 2
 actors:

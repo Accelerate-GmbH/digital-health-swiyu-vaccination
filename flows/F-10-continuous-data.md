@@ -1,6 +1,7 @@
 ---
 id: F-10
 title: Wearables and continuous data
+type: continuous-data-flow
 status: roadmap
 roadmap_step: 3
 actors:

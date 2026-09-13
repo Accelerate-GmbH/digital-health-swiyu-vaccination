@@ -1,6 +1,7 @@
 ---
 id: F-11
 title: Answering the national coverage survey
+type: interaction-flow
 status: roadmap
 roadmap_step: 2
 basis: basic-flow/verification

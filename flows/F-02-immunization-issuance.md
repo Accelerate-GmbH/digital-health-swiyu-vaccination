@@ -1,6 +1,7 @@
 ---
 id: F-02
 title: Recording an administered dose
+type: interaction-flow
 status: implemented
 roadmap_step: 1
 actors:

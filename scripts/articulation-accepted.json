@@ -51,15 +51,20 @@
    "risk": "trust-bare",
    "sentence": "Verifiable credentials and the swiyu Trust Infrastructure address authenticity, provenance, controlled presentation and trust relationships."
   },
-  "7f7da27a84056c06": {
+  "42d3e336202820b2": {
    "file": "site/index.html",
    "risk": "trust-bare",
    "sentence": "Profile Carries swiss-profile-anchor:1.0.0 DID Core 1.0, did:webvh 1.0 swiss-profile-issuance:1.0.0 OpenID4VCI 1.0, OAuth 2.0 DPoP (RFC 9449) swiss-profile-veri"
   },
-  "3f07e0382f3648b7": {
+  "1fdec03c76e36898": {
    "file": "site/index.html",
    "risk": "verify-no-object",
-   "sentence": "Open all the diagrams → F-01 Becoming an actor DID, trust statement, role grant Partial F-02 Issuing an administered dose One credential per dose, signed by the"
+   "sentence": "F-07 is implemented and has no sequence diagram because it is a local projection step rather than an exchange between parties: it begins after a presentation ha"
+  },
+  "fd7d0c892ef590da": {
+   "file": "site/index.html",
+   "risk": "verify-no-object",
+   "sentence": "Open all the diagrams → F-01 Becoming an actor DID, trust statement, role grant · Sequence diagram Partial F-02 Issuing an administered dose One credential per "
   },
   "c38a076084c4581a": {
    "file": "site/index.html",
@@ -1216,10 +1221,20 @@
    "risk": "identity",
    "sentence": "**Status list capacity planning.** An issuer that exhausts a list must initialise another; which list a credential landed on is then part of its identity."
   },
+  "52c28c41505e2bda": {
+   "file": "flows/F-07-model-projection.md",
+   "risk": "verify-no-object",
+   "sentence": "| | | | --- | --- | | Begins | after F-03, F-04 or F-05 has completed | | Input | the claims disclosed in that presentation | | Performed by | the verifying org"
+  },
   "88e2bd7d29567426": {
    "file": "flows/F-07-model-projection.md",
    "risk": "trust-bare",
    "sentence": "Verifiable credentials and the swiyu Trust Infrastructure address a different layer: authenticity, provenance, controlled presentation and trust relationships."
+  },
+  "1aa44686b7364401": {
+   "file": "flows/F-07-model-projection.md",
+   "risk": "absolute",
+   "sentence": "Only the topmost edge crosses a party boundary, and that edge belongs to F-03, F-04 or F-05 rather than to F-07. ## Two properties to preserve - **A projection "
   },
   "44d4b198d2524592": {
    "file": "flows/F-07-model-projection.md",
@@ -1340,11 +1355,6 @@
    "file": "flows/README.md",
    "risk": "absolute",
    "sentence": "A flow that documents only the message exchange is the easy half."
-  },
-  "abca4318ef754a09": {
-   "file": "flows/README.md",
-   "risk": "consent",
-   "sentence": "| ## Status of the set | Flow | Title | Status | Step | | --- | --- | --- | --- | | F-01 | Becoming an actor | CODE | 1 | | F-02 | Recording an administered dos"
   },
   "531ba5e3ef78d939": {
    "file": "flows/README.md",

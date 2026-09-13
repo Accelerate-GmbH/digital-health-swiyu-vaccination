@@ -1,6 +1,7 @@
 ---
 id: F-04
 title: Check-in at the practice
+type: interaction-flow
 status: implemented
 roadmap_step: 1
 actors:

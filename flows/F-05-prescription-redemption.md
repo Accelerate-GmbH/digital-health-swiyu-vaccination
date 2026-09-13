@@ -1,6 +1,7 @@
 ---
 id: F-05
 title: Prescription and its redemption
+type: interaction-flow
 status: implemented
 roadmap_step: 1
 actors:
