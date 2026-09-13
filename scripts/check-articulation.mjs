@@ -59,7 +59,7 @@ const ACCEPTED = join(ROOT, 'scripts', 'articulation-accepted.json');
 // silently grandfathered away by acceptances made under a looser one. Re-reviewing
 // means reading the sentences again; --accept alone does not clear it, and refuses
 // to when the version has moved.
-const STANDARD_VERSION = '2026-09-13-1';
+const STANDARD_VERSION = '2026-09-13-2';
 
 const FILES = [
   'site/index.html',

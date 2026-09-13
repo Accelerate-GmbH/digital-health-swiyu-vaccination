@@ -922,10 +922,13 @@ For comparison, the alternatives in routine use disclose differently: a paper bo
       <div class="gate">
         <span class="fn">reviewPresentation()</span>
         <h3>Should this be accepted?</h3>
-        <p>The status-list entry first, then the Trust Protocol 2.0 markers. A counterparty
-          carrying the governed use case marker <code>gucTM</code> without the matching
-          authorisation marker <code>gucaTM</code> is declined under every policy, because
-          <code>swiss-profile-trust:1.0</code> states that rule at MUST level.</p>
+        <p>The status-list entry first, then the Trust Protocol 2.0 evaluation: the applicable
+          statements about the counterparty are validated and the markers for this interaction
+          are derived from them. An interaction for which the evaluation derives the governed
+          use case marker <code>gucTM</code> without the matching authorisation marker
+          <code>gucaTM</code> is declined under every policy, because
+          <code>swiss-profile-trust:1.0</code> states that rule at MUST level. A marker is the
+          result of that evaluation rather than something the counterparty holds.</p>
       </div>
     </div>
 

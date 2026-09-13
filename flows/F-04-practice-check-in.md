@@ -8,6 +8,8 @@ data_mode: discrete
 status: implemented
 roadmap_step: 1
 profile_status: mixed
+profile_gaps:
+  - GP-01
 actors:
   - ch.didas.health.role.practice
   - holder
@@ -22,7 +24,7 @@ trust_markers:
   - gucaTM for the protected field
 preconditions:
   - F-01
-  - The patient holds a Beta-ID (e-ID from 2026) and an insurance card credential
+  - The patient holds a Beta-ID in the Sandbox and an insurance-card credential
 produces:
   - An encounter with a verified identity and confirmed cover
 ---
@@ -115,8 +117,10 @@ sequenceDiagram
   verifier would accept any issuer, which `checkVerificationRequest()` refuses.
 - Beta-ID carries a subset of the EID content of Art. 15 para. 1 BGEID - surname,
   given names, date of birth, AHV number - plus the derived `age_over_18`. This
-  flow uses only claims in that subset, so it does not change in 2026 when the
-  e-ID replaces the Beta-ID. Only the issuer DID and the `vct` do.
+  flow uses only claims in that subset. This demonstrator currently uses the
+  Beta-ID; migration to the production e-ID will require the final production
+  issuer, `vct` and schema or profile details once those are available, and the
+  production credential is not assumed to be a drop-in replacement.
 - The insurance card models FHIR `Coverage`; there is no openEHR archetype for
   an insurance relationship and inventing one would be worse than pointing at
   the standard that already covers it.

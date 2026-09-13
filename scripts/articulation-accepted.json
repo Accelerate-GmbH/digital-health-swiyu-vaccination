@@ -1,6 +1,6 @@
 {
  "note": "Sentences reviewed under the articulation rule in docs/articulation-pass.md. Each was read on 2026-09-13 and kept as written: the flagged word names a component (trust registry, verifier), quotes a specification, states an absolute that is true of the mechanism, or already names its object. Regenerate with: node scripts/check-articulation.mjs --accept",
- "standard_version": "2026-09-13-1",
+ "standard_version": "2026-09-13-2",
  "reviewed": {
   "24d1e0eb5c71a919": {
    "file": "site/index.html",
@@ -37,10 +37,10 @@
    "risk": "trust-bare",
    "sentence": "The technical profile and the trust infrastructure answer some of them: protocol validity, cryptographic validity, credential and status validity, holder key bi"
   },
-  "1f562267313176bb": {
+  "2c07119bc44e499d": {
    "file": "site/index.html",
    "risk": "trust-bare",
-   "sentence": "A counterparty carrying the governed use case marker gucTM without the matching authorisation marker gucaTM is declined under every policy, because swiss-profil"
+   "sentence": "An interaction for which the evaluation derives the governed use case marker gucTM without the matching authorisation marker gucaTM is declined under every poli"
   },
   "5b345b7793970bed": {
    "file": "site/index.html",
@@ -557,15 +557,15 @@
    "risk": "trust-bare",
    "sentence": "**Credential and status validity.** Revoked or suspended fails immediately, before any trust reasoning. 2."
   },
-  "4f750cf969383b52": {
+  "c355cc18c70b86d5": {
    "file": "docs/governance-framework.md",
    "risk": "trust-bare",
-   "sentence": "**Issuer trust**: trust markers evaluated against the configured policy. 4."
+   "sentence": "**Issuer trust**: the applicable statements are validated, trust markers are derived for this interaction, and the configured policy is applied to them. 4."
   },
-  "5ac051d75143161d": {
+  "87d4005e89f258ef": {
    "file": "docs/governance-framework.md",
    "risk": "trust-bare",
-   "sentence": "**Business acceptance**: whether the relying party acts on the result, which no protocol decides. ## Trust markers and policies The generic verifier evaluates T"
+   "sentence": "**Business acceptance**: whether the relying party acts on the result, which no protocol decides. ## Trust markers and policies The generic verifier retrieves t"
   },
   "e8ef809ae04a4cc0": {
    "file": "docs/governance-framework.md",
@@ -672,10 +672,35 @@
    "risk": "verify-no-object",
    "sentence": "The generic components provide the protocol layer, so an integrating system does not implement OpenID4VCI, OpenID4VP, DPoP, key attestation, application-layer e"
   },
-  "3d7b99bb09de0df9": {
+  "d955e626776bb094": {
    "file": "docs/integration-guide.md",
    "risk": "verify-no-object",
-   "sentence": "**Endpoint paths verified** against the swiyu generic issuer - [ ] A vqPS published for every verification scope you send - [ ] CODE if this is production - [ ]"
+   "sentence": "**Endpoint paths verified** against the swiyu generic issuer."
+  },
+  "c21dad49acca1764": {
+   "file": "docs/integration-guide.md",
+   "risk": "verify-no-object",
+   "sentence": "Plan for the possibility that a deployment has to send separate verifications."
+  },
+  "cb3ef481a14fbd4d": {
+   "file": "docs/integration-guide.md",
+   "risk": "absolute",
+   "sentence": "- **Always set CODE or CODE .** Without either, every issuer DID is accepted and you cannot evaluate your counterparty at all."
+  },
+  "524e315c3fc5ddf4": {
+   "file": "docs/integration-guide.md",
+   "risk": "verify-no-object",
+   "sentence": "| | CODE | The holder rejected the verification request."
+  },
+  "96a8b9d1254593c3": {
+   "file": "docs/integration-guide.md",
+   "risk": "prove",
+   "sentence": "| | CODE | The holder's proof of control over the credential was invalid."
+  },
+  "050b8f47ce087496": {
+   "file": "docs/integration-guide.md",
+   "risk": "verify-no-object",
+   "sentence": "The generic verifier defines more; see CODE in the swiyu-verifier documentation - [ ] A vqPS published for every verification scope you send - [ ] CODE if this "
   },
   "25fefb7d544ed86f": {
    "file": "docs/onboarding-sandbox.md",
@@ -1007,15 +1032,15 @@
    "risk": "trust-bare",
    "sentence": "Eight documents were fetched this way: the four Swiss Profiles again, CODE , and the trust-protocol-2-0, generic-verifier and base-and-trust-registry cookbooks."
   },
-  "018f74dc086b8e84": {
+  "7b8c201de7766e15": {
    "file": "docs/source-verification.md",
    "risk": "verify-no-object,trust-bare",
    "sentence": "| Question | Answer from the specification | | --- | --- | | Where the artefact sits in Trust Protocol 2.0 | CODE , Statement types: the vqPS is one of six stat"
   },
-  "d81f1d2bfae7dc05": {
+  "3549606a97edfbab": {
    "file": "docs/source-verification.md",
    "risk": "verify-no-object",
-   "sentence": "The wallet **MAY** decline a counterparty without that marker | | What the tvTM actually claims | The *type* of verification is public for third-party review."
+   "sentence": "The wallet **MAY** decline a counterparty whose evaluation does not | | What the tvTM actually claims | The *type* of verification is public for third-party rev"
   },
   "416387405f76be9e": {
    "file": "docs/source-verification.md",
@@ -1227,25 +1252,40 @@
    "risk": "trust-bare",
    "sentence": "| Concept | What it is | | --- | --- | | swiyu DID | Technical identifier within the Swiss trust infrastructure | | Swiss organisational identifier | The Swiss "
   },
-  "6ecb4b8937b95346": {
+  "fa24ba1b2af5b001": {
    "file": "flows/F-01-actor-onboarding.md",
-   "risk": "verify-no-object,identity",
-   "sentence": "Identity verified → viTM."
+   "risk": "verify-no-object",
+   "sentence": "See the reference diagram. ## Sequence The identity verification service publishes the applicable identity statement for this DID."
   },
-  "7c2b5f23b42066f1": {
+  "5b2ed19071e5439e": {
    "file": "flows/F-01-actor-onboarding.md",
-   "risk": "verify-no-object,identity",
+   "risk": "trust-bare",
+   "sentence": "A trust marker is the result an evaluating actor derives from the applicable valid statements and the Trust Protocol rules, for one trust relationship or intera"
+  },
+  "fe977c317a025cbd": {
+   "file": "flows/F-01-actor-onboarding.md",
+   "risk": "identity",
    "sentence": "| | --- | --- | --- | | Organisation | An ePortal account, a business partner, API access | **Yes**, self-service, chargeable per DID | | Identity | A CODE on t"
   },
-  "1b898d492515cfb9": {
+  "ad0fd56d3dc678c0": {
    "file": "flows/F-01-actor-onboarding.md",
-   "risk": "verify-no-object",
-   "sentence": "- **The right to issue and the right to verify are separate grants.** A pharmacy that may verify a prescription does not thereby gain the right to issue one."
+   "risk": "verify-no-object,identity",
+   "sentence": "An identity statement is published, from which an evaluating actor can derive CODE | **Yes**, self-service | | Transparency | A Verification Query Public Statem"
   },
-  "dea04beb32f29ac6": {
+  "d62729deb35acd5c": {
+   "file": "flows/F-01-actor-onboarding.md",
+   "risk": "trust-bare",
+   "sentence": "It is not Trust Protocol role vocabulary, and the role identifier is not a Trust Protocol claim or marker."
+  },
+  "072f38e54e8d6a82": {
    "file": "flows/F-01-actor-onboarding.md",
    "risk": "verify-no-object",
-   "sentence": "- **Revocation of a role must propagate.** When an authorisation to practise is withdrawn, the trust statement has to be withdrawn too, or credentials issued af"
+   "sentence": "- **The authorisation to issue and the authorisation to verify are separate.** A pharmacy that may verify a prescription does not thereby become able to issue o"
+  },
+  "309125d9715ac905": {
+   "file": "flows/F-01-actor-onboarding.md",
+   "risk": "verify-no-object,trust-bare",
+   "sentence": "Trust Protocol 2.0 keeps these in different statement types, a Protected Issuance Authorization Trust Statement ( CODE ) and a Protected Verification Authorizat"
   },
   "69a748182d50fac0": {
    "file": "flows/F-01-actor-onboarding.md",
@@ -1397,15 +1437,10 @@
    "risk": "verify-no-object,absolute",
    "sentence": "CODE §6.1 states that CODE is NOT SUPPORTED and adds that \"only a single credential can be used in a verification\", which is not explicit about this case."
   },
-  "0463e7c20a5701e4": {
+  "652455fd2664d08f": {
    "file": "flows/F-04-practice-check-in.md",
    "risk": "absolute",
-   "sentence": "This flow uses only claims in that subset, so it does not change in 2026 when the e-ID replaces the Beta-ID."
-  },
-  "ee26e1e4a036f0a2": {
-   "file": "flows/F-04-practice-check-in.md",
-   "risk": "absolute",
-   "sentence": "Only the issuer DID and the CODE do."
+   "sentence": "This flow uses only claims in that subset."
   },
   "cf8ddb871b8c6c4e": {
    "file": "flows/F-05-prescription-redemption.md",
@@ -1607,7 +1642,7 @@
    "risk": "absolute",
    "sentence": "F-01 covers *organisational* onboarding only."
   },
-  "493405b598603aa5": {
+  "d9b154cf1a1c3348": {
    "file": "flows/trust-flow-basis.md",
    "risk": "trust-bare",
    "sentence": "# What these flows reuse from the Trust Flow Diagram Repository DIDAS maintains a Trust Flow Diagram Repository | *defines what data he will request for which p"
@@ -1637,20 +1672,25 @@
    "risk": "verify-no-object",
    "sentence": "ES256 on P-256 and the DID log carries three verification methods: two assertion keys and one authentication key, so an assertion key can be rotated without re-"
   },
-  "9a4c8be7f57566c6": {
+  "2c90ea2aa3332439": {
    "file": "flows/likec4/health-flow.likec4",
    "risk": "verify-no-object,trust-bare",
-   "sentence": "**Protocol:** swiyu Trust Registry API v1 (Trust Protocol 2.0) **Format:** JWT signed with the assertion key Yields the **Verified Identity trust marker (viTM)*"
+   "sentence": "**Protocol:** swiyu Trust Registry API v1 (Trust Protocol 2.0) **Format:** JWT signed with the assertion key The identity verification service publishes the app"
   },
-  "fc5f939b7663c03d": {
+  "260369baf4352e35": {
+   "file": "flows/likec4/health-flow.likec4",
+   "risk": "verify-no-object",
+   "sentence": "An actor that later validates that statement can derive the **Verified Identity trust marker (viTM)** for its interaction: the DID belongs to a business partner"
+  },
+  "29b36405b5c71923": {
    "file": "flows/likec4/health-flow.likec4",
    "risk": "trust-bare",
-   "sentence": "It is the same statement the reference model's Trust Authority issues."
+   "sentence": "It is the same statement the reference model's Trust Authority publishes."
   },
-  "8e70c7421afe7637": {
+  "4c30ea115f46993e": {
    "file": "flows/likec4/health-flow.likec4",
-   "risk": "trust-bare",
-   "sentence": "**Format:** Trust statement naming the role and the credential types it authorises Yields the **Governed Use Case Authorization trust marker (gucaTM)** for CODE"
+   "risk": "verify-no-object",
+   "sentence": "Trust Protocol 2.0 provides CODE for issuance authorisation and CODE for verification authorisation; it defines no health-role field, and this project does not "
   },
   "449a1603935f449d": {
    "file": "flows/likec4/health-flow.likec4",

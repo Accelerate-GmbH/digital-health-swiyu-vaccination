@@ -199,7 +199,18 @@ export interface CredentialEvaluation {
   valid?: boolean;
 }
 
-/** Trust Protocol 2.0 markers, as evaluated by the generic verifier. */
+/**
+ * Trust Protocol 2.0 markers **derived by the generic verifier for one
+ * interaction**, as returned in its evaluation response.
+ *
+ * This is an implementation object: the result of validating the applicable
+ * statements about a counterparty and applying the Trust Protocol rules to
+ * them. It is not a set of attributes the counterparty holds, and nothing here
+ * is stored on a DID or issued to an actor. A governing actor publishes
+ * statements; an evaluating actor derives markers; the relying party decides.
+ * Consume these values as the outcome of this interaction's evaluation and do
+ * not cache them as properties of the counterparty.
+ */
 export interface IssuerTrustMarker {
   trust_method?: 'TRUST_PROTOCOL_1_0' | 'TRUST_PROTOCOL_2_0' | 'TRUSTED_AUTHORITY';
   /** Overall verdict. */
