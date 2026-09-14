@@ -1,5 +1,9 @@
 # Review report
 
+> **Maintainer assurance record.** This document records the basis and limits of
+> the repository review. It is evidence for maintainers and reviewers, not a
+> description of runtime behaviour.
+
 Classification of the load-bearing statements in this repository, so a reviewer
 can tell what the current Swiss Profiles support from what this demonstrator
 implements from what it proposes the Swiss ecosystem should support next.
@@ -181,23 +185,21 @@ This table is prose and drifts like any other prose. Three checks constrain it:
   clause, and `packages/swiyu/test/conformance.test.ts` fails the build when the
   code and the recorded rule disagree.
 
-None of the three can tell whether a classification in the first table above is
-correct. That remains a reading.
+The automated checks verify consistency and traceability; they do not determine
+whether every substantive classification in the first table is correct. That
+remains an editorial and technical review decision.
 
-**What the checks do not read.** `check-articulation.mjs` covers
+**Coverage of the articulation check.** `check-articulation.mjs` covers
 `site/index.html`, `README.md`, `docs/*.md`, `docs/credentials/*.md`,
-`flows/*.md` and the LikeC4 model. `docs/credentials/` was added after this
-report first found the gap: it is generated from the credential definitions, and
-a template string that named a marker as something a counterparty "carries"
-reached three credential types through it. Generated prose is still prose.
+`flows/*.md` and the LikeC4 model. Generated credential documentation is
+included because wording generated from a template remains part of the published
+prose.
 
-The checker does not read TypeScript. Building this report found two doc comments in
-`governance.ts` that the documentation had moved past: the `statistics` role
-said a coverage survey "needs no identifying claim at all because its own
-sampling frame already supplies age and canton", which is the claim source
-verification records as not covered by the FOPH and EBPI reading and which was
-removed from the portal, the roadmap, F-11 and the model; and the `travelClinic`
-role said it "asks only whether protection exists", the framing F-03 was renamed
-away from. Both are corrected. A grep for the other watched constructions across
-`packages/` and `apps/` returned nothing further, which is weaker evidence than
-the sentence-level reading the prose gets.
+The articulation check does not inspect TypeScript source. A separate source-code
+review identified two stale comments in `governance.ts`: the `statistics`
+role claimed that the sampling frame already supplied age and canton, and the
+`travelClinic` role described the request as asking only whether protection
+exists. Both comments were aligned with the corrected public documentation.
+A search for the same watched constructions across `packages/` and `apps/`
+found no further occurrences. This is a source-code consistency check, not a
+substitute for sentence-level editorial review.
