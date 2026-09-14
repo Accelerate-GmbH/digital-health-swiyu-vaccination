@@ -81,3 +81,18 @@ The repository can establish what its code, configuration and tests do. It can
 trace profile requirements to published specifications. It cannot establish
 legal applicability, clinical suitability, production behaviour outside the
 demonstrator, or governance decisions that no competent body has made.
+
+## Further work
+
+Further work should be organised around concrete use cases. Healthcare actors,
+regulators, patient representatives and implementers need to examine the
+benefits, risks and governance questions in the context in which a flow would
+actually be used, and to test proposed mechanisms before treating them as
+settled. Results from those experiments can then be used to refine the
+technical and governance model iteratively.
+
+Where a proposed pilot requires a temporary deviation from rules under the
+Federal Health Insurance Act, Article 59b KVG provides a legal basis for
+approved pilot projects that can, among other objectives, strengthen quality or
+promote digitalisation. Its applicability has to be assessed for the specific
+use case; it is not a general sandbox for all health regulation.
