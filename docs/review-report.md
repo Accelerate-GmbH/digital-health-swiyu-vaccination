@@ -34,11 +34,11 @@ Swiss Profiles:
 
 - SD-JWT VC as the credential format;
 - the pre-authorized issuance flow;
-- signed JAR requests for verification and `direct_post.jwt`;
-- DID-based trusted-authority constraints;
+- signed JAR requests carrying OpenID4VP authorization requests, with `response_mode=direct_post.jwt`;
+- DID-based authority constraints in DCQL;
 - Token Status List status resolution;
-- trust statements and Trust Markers under Trust Protocol 2.0;
-- authorisation for protected fields under the Swiss Profile Trust.
+- Trust Protocol 2.0 statement validation and derivation of `viTM`, `caTM`, `tvTM`, `gucTM` and `gucaTM`;
+- the protected-field authorisation requirement defined in `swiss-profile-trust:1.0`.
 
 The exact clauses and project enforcement are listed in
 [spec-conformance.md](spec-conformance.md).
@@ -69,8 +69,8 @@ The detailed register is maintained in
 - richer lifecycle and status semantics;
 - credential supersession and replacement;
 - predicate or derived-attribute presentation;
-- structural unlinkability;
-- cross-domain and cross-border trust evaluation.
+- correlation surfaces across repeated presentations;
+- cross-domain and cross-border recognition of organisational authority.
 
 The register states the requirement and the current limitation. It does not
 claim that a proposed solution has been selected, implemented or endorsed.
