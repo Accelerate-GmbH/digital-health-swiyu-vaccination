@@ -26,11 +26,7 @@ Start wherever your question is.
 | [**Integration guide**](integration-guide.md) | For a practice, pharmacy or insurer system: the two management APIs to call, and the constraints most likely to cause problems in practice. |
 | [**Swiss Profile conformance**](spec-conformance.md) | The rules this project enforces, each mapped to the clause it comes from, with project policy labelled separately. |
 | [**eHealth Suisse alignment**](ehealth-suisse-alignment.md) | The Swiss identifiers, exchange formats and CH VACD mechanisms this project reuses, the three it repurposes for its own open questions and where it diverges. |
-| [**Review report**](review-report.md) | Every load-bearing statement classified: current Swiss Profile, DIDAS implementation choice, DIDAS governance choice, beyond current Swiss Profile, or unresolved, each with its source and its remaining caveat. |
 | [**Swiss Profile gaps**](swiss-profile-gaps.md) | Capabilities this demonstrator requires that Swiss Profiles 1.0 and Trust Protocol 2.0 do not define, GP-01 to GP-10, each referenced from the flows that need it. GP-10 covers cross-border trust evaluation and the LEI/vLEI organisational bridge. |
-| [**Source verification**](source-verification.md) | What was checked against a primary source, what rests on a secondary one and which assertions are unverified, the legal citations in particular. |
-| [**Writing standard**](writing-standard.md) | The standing rule for prose in this repository: say what the component does, name the actor and the mechanism, preserve the distinctions that matter, and use strong words only where a specification, a law or an enforced constraint supports them. |
-| [**Articulation pass**](articulation-pass.md) | The 2026-09-13 precision pass: what changed file by file, which assertions remain strong and on what basis, and which statements depend on unresolved swiyu behaviour or governance. |
 
 ## What the credentials are
 
@@ -45,6 +41,20 @@ Start wherever your question is.
 | --- | --- |
 | [**Sandbox onboarding**](onboarding-sandbox.md) | Business partner, DIDs, trust onboarding, vqPS, hosting. What only a person can do and what `scripts/onboard.sh` automates. |
 | [**Glossary**](glossary.md) | Swiss administrative, verifiable-credential and clinical-informatics vocabulary in one place. |
+
+## Assurance and maintenance
+
+These records document how claims, sources and wording are maintained. They are
+useful for review and contribution, but are not part of the architecture or
+runtime model.
+
+| | |
+| --- | --- |
+| [**Source verification**](source-verification.md) | Primary and secondary sources used for factual claims, plus assertions that remain unverified. |
+| [**Review report**](review-report.md) | Classification of load-bearing statements by specification status, project choice and unresolved dependency. |
+| [**Writing standard**](writing-standard.md) | Editorial rules for actor, mechanism, scope and evidentiary precision. |
+| [**Articulation pass**](articulation-pass.md) | Record of the 2026-09-13 precision pass and the automated regression check that followed it. |
+| [**Editorial and claims audit**](editorial-audit.md) | Historical file-by-file audit showing which findings were corrected and which required verification. |
 
 ## What is generated and what is argued
 
