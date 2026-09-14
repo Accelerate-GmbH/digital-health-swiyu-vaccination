@@ -1,12 +1,15 @@
 # Editorial and claims audit
 
+> **Historical maintainer record.** This file documents the repository-wide
+> editorial and claims audit completed in September 2026. The findings remain
+> useful for provenance and review, but they are not product documentation.
+
 A file-by-file classification of every textual file in this repository, against
 two standards: the register expected of DIDAS material, and the evidentiary
 standard that each claim should be able to meet.
 
-The audit was produced from a full local checkout, not from the GitHub web
-interface, so the coverage below is complete rather than partial: 118 tracked
-files, of which 84 carry prose.
+The audit covered the full tracked repository at the time of review: 118 files,
+of which 84 contained prose.
 
 ## Classification scheme
 
@@ -75,7 +78,7 @@ those are questions of evidence rather than of editing.
 | `docs/architecture.md` | Edit | "The one-sentence version" collapses the layering; "Health records live in the patient's wallet" overstates what the demonstrator holds | **done** — mock limitations stated explicitly; "models without a repository" heading replaced |
 | `docs/public-health.md` | Verify | Epidemiological claims about coverage measurement and outbreak response need sourcing | **done as far as possible** — `bag.admin.ch`, `ebpi.uzh.ch` and the literature databases are blocked here, so the survey description now carries a sourcing note marking it reported rather than established, and the section heading no longer states the conclusion as fact |
 | `docs/ehealth-suisse-alignment.md` | Verify | Alignment claims against eHealth Suisse exchange formats need confirmation by someone who can read the current specifications | **done** — `hl7ch/ch-vacd` clones from this environment; every profile id, extension name, cardinality and quoted definition checked against the FSH source at `7.0.0-ballot` and matched. The IG version is now recorded in the document |
-| `docs/source-verification.md` | OK | This file exists to carry the evidentiary record and does so | — |
+| `docs/source-verification.md` | OK | Provides the evidentiary record for factual and legal claims | — |
 | `docs/README.md` | Edit | Index page; minor register | **done** |
 | `docs/credentials/*.md` | Generated | 6 files, produced by `scripts/generate-docs.ts`; CI fails if they drift | Fix the generator |
 
