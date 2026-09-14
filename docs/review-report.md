@@ -38,7 +38,7 @@ Swiss Profiles:
 - DID-based authority constraints in DCQL;
 - Token Status List status resolution;
 - Trust Protocol 2.0 statement validation and derivation of `viTM`, `caTM`, `tvTM`, `gucTM` and `gucaTM`;
-- the protected-field authorisation requirement defined in `swiss-profile-trust:1.0`.
+- the authorisation requirement for protected fields defined in `swiss-profile-trust:1.0`.
 
 The exact clauses and project enforcement are listed in
 [spec-conformance.md](spec-conformance.md).
