@@ -185,7 +185,7 @@ This table is prose and drifts like any other prose. Three checks constrain it:
   clause, and `packages/swiyu/test/conformance.test.ts` fails the build when the
   code and the recorded rule disagree.
 
-The automated checks verify consistency and traceability; they do not determine
+The automated checks test consistency and traceability; they do not determine
 whether every substantive classification in the first table is correct. That
 remains an editorial and technical review decision.
 
@@ -198,8 +198,7 @@ prose.
 The articulation check does not inspect TypeScript source. A separate source-code
 review identified two stale comments in `governance.ts`: the `statistics`
 role claimed that the sampling frame already supplied age and canton, and the
-`travelClinic` role described the request as asking only whether protection
-exists. Both comments were aligned with the corrected public documentation.
+`travelClinic` role described the request as a binary clinical-outcome check. Both comments were aligned with the corrected public documentation.
 A search for the same watched constructions across `packages/` and `apps/`
 found no further occurrences. This is a source-code consistency check, not a
 substitute for sentence-level editorial review.
