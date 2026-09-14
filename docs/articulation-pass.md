@@ -105,7 +105,7 @@ Coverage includes visible strings in `site/index.html`, generated credential
 documentation, LikeC4 note blocks and Mermaid labels. This matters because those
 strings are rendered to readers even when they originate inside source or
 generated files. Extending coverage to these surfaces identified stale wording,
-including a sampling-frame claim and a wallet step labelled "Consent".
+including a sampling-frame claim and a wallet step whose label implied legal consent.
 
 The watched words are `prove`, `verify`, `valid`, `trust`, `identity`,
 `anonymous`, `unlinkable`, `linkable`, `private`, `privacy`, `consent`,
