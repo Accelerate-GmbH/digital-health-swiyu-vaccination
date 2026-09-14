@@ -1,5 +1,9 @@
 # Articulation pass, 2026-09-13
 
+> **Maintainer assurance record.** This document records a completed editorial
+> precision pass and the regression controls introduced with it. It is not part
+> of the runtime architecture.
+
 A pass over the public-facing text with one rule: every statement should identify
 the object or data under discussion, the actor performing the action, the
 technical mechanism producing the result, what conclusion follows and what
@@ -84,58 +88,36 @@ byte-identical to the committed versions, because this pass changed prose and no
 credential definition. The `issuerBasis` and retention strings were changed in
 the definitions by the preceding change and are already reflected there.
 
-## 1b · The sweep, and how it stays done
+## 1b · Automated regression check
 
-The pass above rewrote the sentences that made a claim. The sweep behind it read
-every sentence in the public prose that uses one of the watched words, 288 of
-them across twenty files, and decided each one.
+Following the editorial pass, all public prose containing the watched terms was
+reviewed. Most occurrences were retained because they name a component, quote a
+specification, state a mechanism-level invariant, or already identify the object
+being evaluated.
 
-Most were kept as written, for four reasons that recur:
+[`scripts/check-articulation.mjs`](../scripts/check-articulation.mjs) flags new
+or changed sentences that use watched terms without the surrounding precision.
+Previously reviewed sentences and their categories are recorded in
+`scripts/articulation-accepted.json`. A sentence that is neither rewritten nor
+recorded causes `npm run verify` to fail.
 
-| Kept because | Example |
-| --- | --- |
-| The word names a component | "trust registry", "trust marker", "the verifier" |
-| The sentence quotes the specification | The `tvTM` and `vqPS` passages in the governance framework |
-| The absolute is true of the mechanism | "Only the issuer can revoke", "the journal records claim names and no values" |
-| The object is already named | "verified against the CH VACD FSH source" |
-
-[`scripts/check-articulation.mjs`](../scripts/check-articulation.mjs) keeps the
-sweep from decaying. It finds the sentences that use a watched word without the
-surrounding precision, and compares them against
-`scripts/articulation-accepted.json`, which records the ones already read and the
-category each was accepted under.
-
-Two files the first version of the check could not see have since been brought
-in. The page's script blocks are reduced to their string literals, because the
-disclosure explorer renders its copy from those literals while the code around
-them states nothing about the system. The LikeC4 model is read through its note
-blocks, which carry the step commentary the diagrams and the flow documents both
-draw on. Adding the model surfaced seven statements the earlier tranches had not
-reached, among them the sampling-frame claim in the sample-drawing note, which
-contradicted the invitation-credential note directly below it. A sentence that is neither rewritten nor
-recorded fails `npm run verify`, so new prose gets the same reading. Accepting
-is a judgement rather than a suppression: `--accept` rewrites the file from the
-current state, so a reviewer sees in the diff exactly which new sentences an
-author decided were fine.
+Coverage includes visible strings in `site/index.html`, generated credential
+documentation, LikeC4 note blocks and Mermaid labels. This matters because those
+strings are rendered to readers even when they originate inside source or
+generated files. Extending coverage to these surfaces identified stale wording,
+including a sampling-frame claim and a wallet step labelled "Consent".
 
 The watched words are `prove`, `verify`, `valid`, `trust`, `identity`,
 `anonymous`, `unlinkable`, `linkable`, `private`, `privacy`, `consent`,
 `authorised`, `entitled`, `protected`, `secure`, `only`, `never`, `always`,
 `guarantee`, `nothing else` and `the same person`.
 
-Four categories from [the writing standard](writing-standard.md) were added
-afterwards, each mechanical enough to catch by pattern: promotional adjectives
-(rule 3), an agentless subject where an actor should be named (rule 4),
-pedagogical filler (rule 7), and words asserting a normative or absolute source
-outside a sentence that names the specification, the law or the enforced
-constraint behind them (rule 9). The remaining rules are judgements and stay
-with the reader, which is what the per-sentence record in
-`articulation-accepted.json` is for.
-
-A third blind spot closed with them: a fenced `mermaid` block renders as a
-picture, so its node labels and notes are prose, and the check was dropping them
-with the rest of the fenced code. Reading them found three labels to rewrite,
-including a wallet step still labelled "Consent".
+The check also covers four pattern-detectable rules from the
+[writing standard](writing-standard.md): promotional adjectives, missing actors,
+pedagogical filler, and unsupported normative or absolute wording. The remaining
+rules require editorial judgement. An accepted sentence is therefore an explicit
+review decision, not a suppression; `--accept` regenerates the acceptance
+record so the change remains visible in review.
 
 ## 2 · Strong assertions that remain, and their basis
 
