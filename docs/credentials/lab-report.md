@@ -26,7 +26,7 @@ Laboratory findings from a medical consultation.
 
 Modelled here on the basis of authorisation under the KVG analysis list, or the treating practice issuing on its behalf; either way the issuing DID must carry the authorization marker for this credential type. Legal review is required before deployment
 
-This is a **governed** credential type: an actor must decline any interaction where the counterparty carries the Governed Use Case Trust Marker without the matching authorization marker.
+This is a **governed** credential type: an actor must decline any interaction for which the Trust Protocol evaluation derives the Governed Use Case Trust Marker without the matching Governed Use Case Authorization Trust Marker.
 
 ### Who may request it
 

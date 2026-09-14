@@ -132,8 +132,8 @@ function governanceSection(definition: CredentialDefinition): string {
     '',
     governance.governed
       ? 'This is a **governed** credential type: an actor must decline any interaction ' +
-        'where the counterparty carries the Governed Use Case Trust Marker without the ' +
-        'matching authorization marker.'
+        'for which the Trust Protocol evaluation derives the Governed Use Case Trust Marker ' +
+        'without the matching Governed Use Case Authorization Trust Marker.'
       : 'This credential type is not marked as governed.',
     '',
     '### Who may request it',
@@ -321,7 +321,8 @@ function indexPage(): string {
     '## Who may ask for what',
     '',
     'The whole governance model in one place. A request for a claim marked `·` is',
-    'refused when the query is built, so the claim is never transmitted.',
+    'rejected while the query is built, so no request for it is sent and the claim',
+    'is not included in any presentation this policy layer produces.',
     '',
     ...CREDENTIAL_DEFINITIONS.map(disclosureMatrix),
     '## Registered verification queries',

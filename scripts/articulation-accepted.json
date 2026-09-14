@@ -887,6 +887,101 @@
    "risk": "verify-no-object",
    "sentence": "The survey method, the CH VACD value sets and the SSPH+ structure were checked against published sources; see source verification for how the repository separat"
   },
+  "2a0c1ebb82073ffd": {
+   "file": "docs/review-report.md",
+   "risk": "verify-no-object",
+   "sentence": "Nothing in this repository has run against production swiyu. ## 1 · Statement classification ### Cryptography and formats | File | Statement or mechanism | Clas"
+  },
+  "c83710f1452860a7": {
+   "file": "docs/review-report.md",
+   "risk": "verify-no-object",
+   "sentence": "W3C VCDM and ISO mdoc are NOT SUPPORTED | Current Swiss Profile | CODE §3.3.1 | — | | CODE , CODE | Predicate proofs are not available in this profile | Current"
+  },
+  "80d3be5a614ae91b": {
+   "file": "docs/review-report.md",
+   "risk": "verify-no-object,absolute",
+   "sentence": "CODE MUST be CODE | Current Swiss Profile | CODE §5, §5.2, §8 | Generic verifier behaviour, unexercised in mock mode | | CODE , CODE | DCQL CODE is NOT SUPPORTE"
+  },
+  "e80599a886e8c06c": {
+   "file": "docs/review-report.md",
+   "risk": "verify-no-object,trust-bare,absolute",
+   "sentence": "Not evidence of normative profile behaviour | | CODE | Trusted authorities MUST use the CODE type | Current Swiss Profile | CODE §6.1.1 | The DCQL trusted-autho"
+  },
+  "3d16d7aafcacc53e": {
+   "file": "docs/review-report.md",
+   "risk": "trust-bare",
+   "sentence": "**Unresolved** in fact | Trust Protocol 2.0 defines the statement types; the Trust Registry publishes and serves them | No health-domain governance body exists,"
+  },
+  "45dcafd487f39733": {
+   "file": "docs/review-report.md",
+   "risk": "prove,verify-no-object",
+   "sentence": "Where this repository names an implementation object a marker, as CODE does, it is the generic verifier's response for one interaction and says so | | CODE | CO"
+  },
+  "3736940084dc5fd8": {
+   "file": "docs/review-report.md",
+   "risk": "absolute",
+   "sentence": "DIDAS implementation choice for the flow | Token Status List Draft 20 via CODE | Three distinct things. \"The credential is invalid\" is not used as shorthand for"
+  },
+  "42bb4434b26fe4d4": {
+   "file": "docs/review-report.md",
+   "risk": "verify-no-object",
+   "sentence": "**Unresolved** in observation | The profile requires a verifier to resolve status | This repository cannot observe whether every deployed verifier does | | F-06"
+  },
+  "38ff7150926a8f4b": {
+   "file": "docs/review-report.md",
+   "risk": "verify-no-object",
+   "sentence": "One known non-conformance is recorded | | CODE | CODE sets CODE and CODE to CODE | External standard | CH Core, read from CODE | Verified against the FSH source"
+  },
+  "3bc31606b85ccd39": {
+   "file": "docs/review-report.md",
+   "risk": "anonymous",
+   "sentence": "DIDAS governance choice for which four | SD-JWT (RFC 9901) via CODE ; the entitlement is in CODE | Selective disclosure is not anonymity and not unlinkability |"
+  },
+  "ff7739f535c35026": {
+   "file": "docs/review-report.md",
+   "risk": "trust-bare",
+   "sentence": "The requirement stands whichever way the multi-query question resolves | | F-08 | Provenance from a verified presentation into an assembled IPS Bundle | **Beyon"
+  },
+  "f6928d73f49c3047": {
+   "file": "docs/review-report.md",
+   "risk": "verify-no-object,absolute",
+   "sentence": "Corrected: an earlier citation named only part of the applicable law | The authorisation model should be verified for the intended issuer population | | CODE | "
+  },
+  "11e62e025003c014": {
+   "file": "docs/review-report.md",
+   "risk": "verify-no-object",
+   "sentence": "OR Art. 958f, ten years, where the record falls within the accounting-law obligation | External law, read against Fedlex | Fedlex, 2026-09-13 | Whether a given "
+  },
+  "4445c167c95bdab8": {
+   "file": "docs/review-report.md",
+   "risk": "verify-no-object",
+   "sentence": "**No date is asserted and the production credential is not assumed to be a drop-in replacement** | | CODE | No FHIR server and no clinical data repository are o"
+  },
+  "eb459df35f84baf9": {
+   "file": "docs/review-report.md",
+   "risk": "verify-no-object,identity",
+   "sentence": "Human Research Act as the distinct legal layer | | GP-04 | Standing authorisation and continuous disclosure | F-10 | Each presentation is a discrete, separately"
+  },
+  "9b1fed272cf84a95": {
+   "file": "docs/review-report.md",
+   "risk": "trust-bare",
+   "sentence": "Swiss Profile Issuance | specification | Batch issuance, pairwise identifiers, key rotation; none prescribed before the model exists | | GP-10 | Cross-domain an"
+  },
+  "8938f1efb5203db4": {
+   "file": "docs/review-report.md",
+   "risk": "identity",
+   "sentence": "Trust Protocol; organisational-identity governance | specification, governance, legal/policy | **LEI (ISO 17442); vLEI within the GLEIF ecosystem governance fra"
+  },
+  "170c97275ea9cc3e": {
+   "file": "docs/review-report.md",
+   "risk": "trust-bare,identity",
+   "sentence": "Trust Protocol 2.0; sector-specific authorisation** | ### GP-10a · what each part of the bridge answers | Component | Answers | Does not answer | | --- | --- | "
+  },
+  "33cdd9fc1a8d926e": {
+   "file": "docs/review-report.md",
+   "risk": "absolute,protected",
+   "sentence": "Building this report found two doc comments in CODE that the documentation had moved past: the CODE role said a coverage survey \"needs no identifying claim at a"
+  },
   "bda415eb00c94917": {
    "file": "docs/roadmap.md",
    "risk": "verify-no-object,trust-bare",
@@ -1251,6 +1346,116 @@
    "file": "docs/swiss-profile-gaps.md",
    "risk": "trust-bare",
    "sentence": "| Concept | What it is | | --- | --- | | swiyu DID | Technical identifier within the Swiss trust infrastructure | | Swiss organisational identifier | The Swiss "
+  },
+  "74649a2ca705d000": {
+   "file": "docs/credentials/README.md",
+   "risk": "verify-no-object,absolute",
+   "sentence": "| Credential | CODE | Issued by | Claims | | --- | --- | --- | --- | | Immunization Record | CODE | CODE | 18 | | Swiss Health Insurance Card | CODE | CODE | 11"
+  },
+  "455adaff1a1d440a": {
+   "file": "docs/credentials/README.md",
+   "risk": "verify-no-object,absolute",
+   "sentence": "A request for a claim marked CODE is rejected while the query is built, so no request for it is sent and the claim is not included in any presentation this poli"
+  },
+  "2d825010c27e4cd3": {
+   "file": "docs/credentials/beta-id.md",
+   "risk": "absolute",
+   "sentence": "See the issuing authority. ## Claims Under CODE §3.2.2.4 an SD-JWT VC may carry only selectively disclosable claims, apart from the registered JWT claims that §"
+  },
+  "377ec3d4e120d968": {
+   "file": "docs/credentials/beta-id.md",
+   "risk": "secure",
+   "sentence": "| Claim | Label | Type | Constraint | Semantic binding | Notes | | --- | --- | --- | --- | --- | --- | | CODE | Given name(s) | Text | string | n/a | n/a | | CO"
+  },
+  "2b2e74b1aeb8be9e": {
+   "file": "docs/credentials/immunization.md",
+   "risk": "prove",
+   "sentence": "# Immunization Record Proof of one administered vaccination, issued by the administering party."
+  },
+  "2a33a7f26249b17e": {
+   "file": "docs/credentials/immunization.md",
+   "risk": "prove",
+   "sentence": "| | CODE | Immunization | Proof of one administered vaccination, issued by the administering party."
+  },
+  "5ae6ce88c77e8296": {
+   "file": "docs/credentials/immunization.md",
+   "risk": "verify-no-object",
+   "sentence": "In a deployed ecosystem the governing actor would publish an authorisation statement naming this credential type, from which a verifier evaluation can derive th"
+  },
+  "bb5e6f7bde58bcb4": {
+   "file": "docs/credentials/immunization.md",
+   "risk": "trust-bare,consent",
+   "sentence": "This is a **governed** credential type: an actor must decline any interaction for which the Trust Protocol evaluation derives the Governed Use Case Trust Marker"
+  },
+  "405e571ac8cd3f21": {
+   "file": "docs/credentials/immunization.md",
+   "risk": "absolute",
+   "sentence": "**Revocation.** Only the issuer may revoke and only to correct a recording error, never to withdraw a vaccination that took place."
+  },
+  "1f024b5481451e31": {
+   "file": "docs/credentials/immunization.md",
+   "risk": "absolute",
+   "sentence": "| Standard | Type | Profile / archetype | | --- | --- | --- | | HL7 FHIR | CODE | CODE | | openEHR | CODE | CODE | ## Claims Under CODE §3.2.2.4 an SD-JWT VC ma"
+  },
+  "98ab8f46358ba47f": {
+   "file": "docs/credentials/immunization.md",
+   "risk": "protected",
+   "sentence": "| Claim | Label | Type | Constraint | Semantic binding | Notes | | --- | --- | --- | --- | --- | --- | | CODE | Record number | Text | string, ≤ 64 chars | FHIR"
+  },
+  "e27fb47695fc31b7": {
+   "file": "docs/credentials/insurance-card.md",
+   "risk": "trust-bare",
+   "sentence": "Modelled here on the basis of KVG/LAMal Art. 42a, under which the insurer issues the insurance card; legal review is required before deployment This is a **gove"
+  },
+  "5428311f2b3bc9c9": {
+   "file": "docs/credentials/insurance-card.md",
+   "risk": "absolute",
+   "sentence": "A pharmacy keeps it only for the duration of the dispensation. ## Clinical models The models are reused; the repository is not."
+  },
+  "8b82d6aa1bd8e7a8": {
+   "file": "docs/credentials/insurance-card.md",
+   "risk": "absolute",
+   "sentence": "| Standard | Type | Profile / archetype | | --- | --- | --- | | HL7 FHIR | CODE | CODE | ## Claims Under CODE §3.2.2.4 an SD-JWT VC may carry only selectively d"
+  },
+  "4ea1c0c95d08e4c6": {
+   "file": "docs/credentials/insurance-card.md",
+   "risk": "secure",
+   "sentence": "| Claim | Label | Type | Constraint | Semantic binding | Notes | | --- | --- | --- | --- | --- | --- | | CODE | Given name(s) | Text | string, ≤ 200 chars | n/a"
+  },
+  "0ff39c9334937b86": {
+   "file": "docs/credentials/lab-report.md",
+   "risk": "trust-bare,consent",
+   "sentence": "Legal review is required before deployment This is a **governed** credential type: an actor must decline any interaction for which the Trust Protocol evaluation"
+  },
+  "5424d753964da2da": {
+   "file": "docs/credentials/lab-report.md",
+   "risk": "verify-no-object",
+   "sentence": "The patient keeps the superseded credential in the wallet but it no longer verifies, which is the behaviour a corrected finding needs."
+  },
+  "c4d1fec2e55dbf9e": {
+   "file": "docs/credentials/lab-report.md",
+   "risk": "verify-no-object,absolute,consent",
+   "sentence": "**Retention.** A verifying practice may retain the findings in the treatment record; a research recipient may retain only what the consent covers and never the "
+  },
+  "28df7d6522628783": {
+   "file": "docs/credentials/lab-report.md",
+   "risk": "absolute",
+   "sentence": "| Standard | Type | Profile / archetype | | --- | --- | --- | | HL7 FHIR | CODE | CODE | | openEHR | CODE | CODE | ## Claims Under CODE §3.2.2.4 an SD-JWT VC ma"
+  },
+  "eb39b84027cdc3ad": {
+   "file": "docs/credentials/prescription.md",
+   "risk": "verify-no-object",
+   "sentence": "The authorisation model should be verified for the intended issuer population before deployment."
+  },
+  "aaa936ffcf56a79b": {
+   "file": "docs/credentials/prescription.md",
+   "risk": "trust-bare",
+   "sentence": "In a deployed ecosystem the governing actor would publish an authorisation statement naming this credential type for the practice, from which a verifier evaluat"
+  },
+  "b3a568fc07a46c47": {
+   "file": "docs/credentials/prescription.md",
+   "risk": "absolute",
+   "sentence": "| Standard | Type | Profile / archetype | | --- | --- | --- | | HL7 FHIR | CODE | CODE | | openEHR | CODE | CODE | ## Claims Under CODE §3.2.2.4 an SD-JWT VC ma"
   },
   "fa24ba1b2af5b001": {
    "file": "flows/F-01-actor-onboarding.md",

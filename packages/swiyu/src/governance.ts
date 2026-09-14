@@ -34,14 +34,15 @@ export const ROLE = {
   laboratory: 'ch.didas.health.role.laboratory',
   /** A practice, pharmacy or occupational health service authorised to vaccinate. */
   vaccinator: 'ch.didas.health.role.vaccinator',
-  /** Asks only whether protection exists, never how it came about. */
+  /** Requests claims about doses administered against a named disease. */
   travelClinic: 'ch.didas.health.role.travel-clinic',
   research: 'ch.didas.health.role.research',
   /**
    * Official statistics. Distinct from `research`: a coverage survey runs
-   * under a statistical mandate rather than the Human Research Act, samples
-   * rather than recruits and needs no identifying claim at all because its
-   * own sampling frame already supplies age and canton.
+   * under a statistical mandate rather than the Human Research Act and samples
+   * rather than recruits. The stratum the analysis needs arrives inside the
+   * invitation credential the survey issues, so the presentation request names
+   * no person identifier.
    */
   statistics: 'ch.didas.health.role.statistics',
 } as const;

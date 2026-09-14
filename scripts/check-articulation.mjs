@@ -68,6 +68,12 @@ const FILES = [
   // bans, so it is the one document the rule cannot be applied to.
   ...readdirSync(join(ROOT, 'docs')).filter((f) => f.endsWith('.md') && f !== 'writing-standard.md')
     .sort().map((f) => `docs/${f}`),
+  // docs/credentials/ is generated from the credential definitions, and generated
+  // prose is still prose: a template or an issuerBasis string reaches a reader
+  // through it. Reading it here means a defect in the generator is caught in the
+  // output it produces rather than only where someone happens to look.
+  ...readdirSync(join(ROOT, 'docs', 'credentials')).filter((f) => f.endsWith('.md')).sort()
+    .map((f) => `docs/credentials/${f}`),
   ...readdirSync(join(ROOT, 'flows')).filter((f) => f.endsWith('.md')).sort().map((f) => `flows/${f}`),
   // The LikeC4 model carries the step notes that the rendered diagrams and the
   // flow documents both draw on, so the notes are public prose under a file

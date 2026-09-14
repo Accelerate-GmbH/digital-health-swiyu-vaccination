@@ -90,9 +90,10 @@ export const IMMUNIZATION: CredentialDefinition = {
       'vaccination framework, together with the professional, therapeutic-products and ' +
       'cantonal law that decides whether a given professional or organisation may ' +
       'administer a vaccination; legal review is required before deployment. A practice, a pharmacy with a ' +
-      'vaccination permit, or a company medical service. The issuing DID must carry a Governed ' +
-      'Use Case Authorization Trust Marker naming this credential type, because "who is allowed ' +
-      'to say that a vaccination happened" is precisely what a verifier needs to check.',
+      'vaccination permit, or a company medical service. In a deployed ecosystem the governing ' +
+      'actor would publish an authorisation statement naming this credential type, from which a ' +
+      'verifier evaluation can derive the Governed Use Case Authorization Trust Marker, because ' +
+      '"who is allowed to say that a vaccination happened" is precisely what a verifier needs to check.',
     governed: true,
     revocation:
       'Only the issuer may revoke and only to correct a recording error, never to withdraw a ' +

@@ -147,8 +147,9 @@ export const INSURANCE_CARD: CredentialDefinition = {
       /**
        * The AHV/AVS number. swiss-profile-trust 1.0 lists
        * `personal_administrative_number` as a **protected field**: a verifier
-       * needs a Governed Use Case Authorization Trust Marker to request it,
-       * whatever credential type carries it. Treating the Swiss social security
+       * needs the applicable authorisation to request it, whatever credential
+       * type carries it, and a Trust Protocol evaluation has to derive the
+       * Governed Use Case Authorization Trust Marker for the interaction. Treating the Swiss social security
        * number this way is the whole point of the protected-field mechanism, so
        * the demo uses the profile's claim name.
        */
