@@ -54,7 +54,7 @@ runtime model.
 | [**Review report**](review-report.md) | Classification of load-bearing statements by specification status, project choice and unresolved dependency. |
 | [**Writing standard**](writing-standard.md) | Editorial rules for actor, mechanism, scope and evidentiary precision. |
 | [**Articulation pass**](articulation-pass.md) | Record of the 2026-09-13 precision pass and the automated regression check that followed it. |
-| [**Editorial and claims audit**](editorial-audit.md) | Historical file-by-file audit showing which findings were corrected and which required verification. |
+| [**Editorial and claims audit**](editorial-audit.md) | Historical file-by-file audit showing which findings were corrected and which required source checking. |
 
 ## What is generated and what is argued
 
