@@ -42,19 +42,13 @@ Start wherever your question is.
 | [**Sandbox onboarding**](onboarding-sandbox.md) | Business partner, DIDs, trust onboarding, vqPS, hosting. What only a person can do and what `scripts/onboard.sh` automates. |
 | [**Glossary**](glossary.md) | Swiss administrative, verifiable-credential and clinical-informatics vocabulary in one place. |
 
-## Assurance and maintenance
-
-These records document how claims, sources and wording are maintained. They are
-useful for review and contribution, but are not part of the architecture or
-runtime model.
+## Review and sources
 
 | | |
 | --- | --- |
+| [**Review status**](review-report.md) | What comes from the current Swiss Profiles, what is a project choice, and what remains unresolved or beyond the current profiles. |
 | [**Source verification**](source-verification.md) | Primary and secondary sources used for factual claims, plus assertions that remain unverified. |
-| [**Review report**](review-report.md) | Classification of load-bearing statements by specification status, project choice and unresolved dependency. |
 | [**Writing standard**](writing-standard.md) | Editorial rules for actor, mechanism, scope and evidentiary precision. |
-| [**Articulation pass**](articulation-pass.md) | Record of the 2026-09-13 precision pass and the automated regression check that followed it. |
-| [**Editorial and claims audit**](editorial-audit.md) | Historical file-by-file audit showing which findings were corrected and which required source checking. |
 
 ## What is generated and what is argued
 
